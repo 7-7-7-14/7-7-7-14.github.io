@@ -1,19 +1,22 @@
-<div style="width:640px;height:480px;max-width:100%;">
-    <div id="game"></div>
-</div>
-
-<script type="text/javascript">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GT2</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+    #game { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="game"></div>
+  <script>
     EJS_player = '#game';
-    EJS_core = 'psx'; // PlayStation 1 core
-    
-    // Optional: BIOS URL — only needed if the emulator requires it externally
-    EJS_biosUrl = ''; // Leave blank if your loader includes BIOS
-
-    // Game ROM URL (must be a .zip of a PS1 .bin/.cue or .iso)
-    EJS_gameUrl = 'https://nexus-sub.netlify.app/pages/roms/gt2/gt2.zip'; // Replace with actual URL
-
-    // Path to the emulator data (e.g., loader.js, cores, etc.)
+    EJS_core = 'psx';
+    EJS_biosUrl = '';
+    EJS_gameUrl = 'https://nexus-sub.netlify.app/pages/roms/gt2/gt2.zip';
     EJS_pathtodata = '/emujs/data/';
-</script>
-
-<script src="/emujs/data/loader.js"></script>
+  </script>
+  <script src="/emujs/data/loader.js"></script>
+</body>
+</html>
