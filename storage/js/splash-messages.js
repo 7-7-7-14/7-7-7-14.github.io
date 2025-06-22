@@ -154,6 +154,9 @@ const phrases = [
     `🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ`,
     `click on the cloud for roms ☁`,
     `you can play fh5 on gfn!`,
+    `have you heard the rumor about the pencil, nevermind its pointless 🥀😭`,
+    `tried to make a belt of watches, it was a waist of time 😭🥀`,
+ 
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
