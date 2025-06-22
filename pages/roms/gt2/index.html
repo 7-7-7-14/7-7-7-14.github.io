@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -17,6 +16,12 @@
     EJS_gameUrl = 'https://nexus-sub.netlify.app/pages/roms/gt2/gt2.zip';
     EJS_pathtodata = '/emujs/data/';
     EJS_startOnLoad = true;
+
+    window.addEventListener('load', () => {
+      if (typeof EJS_startEmulator === 'function') {
+        EJS_startEmulator();
+      }
+    });
   </script>
   <script src="/emujs/data/loader.js"></script>
 </body>
