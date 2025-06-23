@@ -9,7 +9,9 @@
 </head>
 <body>
   <div id="game"></div>
+
   <script>
+    // EmulatorJS configuration
     EJS_player = '#game';
     EJS_core = 'psx';
     EJS_biosUrl = '';
@@ -17,12 +19,28 @@
     EJS_pathtodata = '/emujs/data/';
     EJS_startOnLoad = true;
 
+    // Custom function to run when the game starts
+    window.EJS_onGameStart = function () {
+      console.log("🎮 Game has started!");
+      // You can add custom things here like:
+      // document.querySelector("#loading").style.display = "none";
+    };
+
     window.addEventListener('load', () => {
       if (typeof EJS_startEmulator === 'function') {
         EJS_startEmulator();
+
+        // Wait until the emulator object is available
+        const waitForEmulator = setInterval(() => {
+          if (window.EJS_emulator) {
+            clearInterval(waitForEmulator);
+            window.EJS_emulator.on("start", window.EJS_onGameStart);
+          }
+        }, 50);
       }
-    }); 
+    });
   </script>
+
   <script src="/emujs/data/loader.js"></script>
 </body>
 </html>
