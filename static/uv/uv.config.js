@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'aHR0cHM6Ly92MjIwMjQxMjI0NjQwNDMwNDM1Mi5tZWdhc3J2LmRlL2JhcmUv',
+    bare:'https://v2202412246404304352.megasrv.de/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
