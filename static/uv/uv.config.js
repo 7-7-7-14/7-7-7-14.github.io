@@ -9,4 +9,4 @@ self.__uv$config = {
     sw: '/static/uv/uv.sw.js',
 }
 
-// uv config free bare ig
+/* https://void.radio.fm/bare/ */
