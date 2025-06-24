@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Run 3 - Ruffle</title>
   <script src="https://nexus-sub.netlify.app/ruffle-nightly/ruffle.js"></script>
   <style>
@@ -14,13 +14,24 @@
       align-items: center;
       height: 100vh;
     }
-    .swf-embed {
+    #ruffle-container {
       width: 800px;
       height: 600px;
     }
   </style>
 </head>
 <body>
-  <div class="swf-embed" data-swf="run.swf"></div>
+  <div id="ruffle-container"></div>
+
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.addEventListener("DOMContentLoaded", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const container = document.getElementById("ruffle-container");
+      const player = ruffle.createPlayer();
+      container.appendChild(player);
+      player.load("run.swf");
+    });
+  </script>
 </body>
 </html>
