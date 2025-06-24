@@ -12,3 +12,4 @@ self.__uv$config = {
 // https://void.radio.fm/bare/
 // https://backend.infrared.bomberfish.ca/
 // https://infrared.zrhe2016.workers.dev/
+// https://math.cinevez.lol/bare/
