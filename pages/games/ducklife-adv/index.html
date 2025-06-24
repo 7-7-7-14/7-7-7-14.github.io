@@ -1,0 +1,1364 @@
+<html lang="en-us" style="height:100%"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Wix Games | Adventure</title>
+    <script src="Build/UnityLoader.js"></script>
+
+    <style type="text/css">
+        .wixlogo {
+            width: 140px;
+            height: 173px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-size: cover;
+            background-image: url("data:image/gif;base64,R0lGODlhGAFaAff/AOHg4P7+/v39/SUgIfz8/CYhIiciI/v7+ycjIykkJfz7/CgjJPr6+vX09fn5+ff39+/v793d3TArLPHx8SwnKDMuLy0oKTEsLfT09Ojn5zw4OPj4+CsmJy0pKi8qK+zs7DQvMOrq6uno6O/u7jcyMzk0NVtXWERAQDItLtnY2c/Ozuvr60dDRPb29tva2uXl5crJyefm59/e3zYxMlFNTenp6dzc3M7NzUM/P9DPz5eVlTo1NkhERcTDxObm5trZ2Ts3OE1JSktHR19bW0A8PcrJyszLy2JeX2tpadHQ0VxYWWRgYT86O6qoqFdTVHp4eLu6upORkoiGhllVVZGPj15aW+Df4EZBQvLy8uLh4VRQUVhUVMXExLGwsLOyspqYmbWztG9rbOTk5OPi4klFRkpGRj04OTUxMX15erKxsc3MzJGPkHJwcGBcXGxqalpWV9bW1t7e3mtnaKSioqalpUE9PpWTk0xHSHh0da6srVZSU7Cur3l3d2xoaayrq8fGxq2srHt5eXNxccPCwnh2d2llZpKQkX97fMnIyJaUlIKAgNjX2HRycndzdKCen5mXmHFtbsjHx5+dnn99foyKi5yamoyIiX56e7e1tv///yQfIColJkA7PPb19dzb2+Pj405KSy4qKu3t7TQwMfPz80VAQVBMTTgzNLSzs1lVVsPCw/Dw8D45Ory6uzo2N9DQ0MbFxdfX121ra9TT009LTL27vNLR0oB+foOBgYWBglJOTnJub2FdXmZkZLe2tp6cnH58fVVRUpiWl6qpqcvKy3BsbWVhYkdCQ0I+P4uJipCOjrCvr2BcXU1ISba0tXZyc1NOT2NfYO7t7r69vV1ZWtXU1KSjo2hkZY+NjcLBwdPS0mZiYtbV1a+trpuZmoeFhXNvcLi3t52bm4aEhWVjY6uqqp6dnY2LjL28vYF/f8HAwKelpomHh2pmZ3l1dlNPUKGfoISCg6imp7++vrm4uLq5uaWkpKKgoYqIiJeWlqOhocC/v4WDhKmnqI6MjAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/wtYTVAgRGF0YVhNUDw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQwIDc5LjE2MDQ1MSwgMjAxNy8wNS8wNi0wMTowODoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo2NjU3YmYwYS02MzUyLTQzMjEtOWJlZi1hYzM1ZTE1NTA2OTgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUQ3MTFEN0FCQUUzMTFFQUEzNDJDMUI1MTNFNENDQTkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUQ3MTFENzlCQUUzMTFFQUEzNDJDMUI1MTNFNENDQTkiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6YTYyZGI0NTYtYzUyZi00M2JlLWIwMTYtNTk0MTZjNDg2N2EwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjY2NTdiZjBhLTYzNTItNDMyMS05YmVmLWFjMzVlMTU1MDY5OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWE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")
+        }
+
+        .progress {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 18px;
+            width: 141px;
+            margin-top: 90px;
+        }
+
+        .empty {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI0AAAASCAYAAABmbl0zAAAACXBIWXMAAAsSAAALEgHS3X78AAAATUlEQVRo3u3aIQ4AIAwEQUr4/5cPiyMVBDOj0M2mCKgkGdAwjYCudZzLOLiITYPrCdEgGkSDaEA0iAbRIBpEA6JBNHx1vnL7V4NNwxsbCNMGI3YImu0AAAAASUVORK5CYII=");
+            background-size: cover;
+            float: right;
+            width: 0%;
+            height: 100%;
+            display: inline-block;
+            background-position: right center;
+            background-repeat: no-repeat no-repeat;
+        }
+
+        .full {
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI0AAAASCAYAAABmbl0zAAAACXBIWXMAAAsSAAALEgHS3X78AAAAO0lEQVRo3u3SQREAAAjDMMC/56EB3omEXjtJCg5GAkyDaTANpsE0YBpMg2kwDaYB02AaTINpMA2Yhr8FO18EIBpZMeQAAAAASUVORK5CYII=");
+            background-size: cover;
+            float: left;
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            background-position: left center;
+            background-repeat: no-repeat no-repeat;
+        }
+
+    </style>
+
+    <script>
+        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/WebGL Build.json", {
+            onProgress: UnityProgress
+        });
+
+
+        function UnityProgress(unityInstance, progress) {
+            if (!unityInstance.Module)
+                return;
+            if (!unityInstance.logo) {
+                unityInstance.logo = document.createElement("div");
+                unityInstance.logo.className = "wixlogo";
+                unityInstance.container.appendChild(unityInstance.logo);
+            }
+            if (!unityInstance.progress) {
+                unityInstance.progress = document.createElement("div");
+                unityInstance.progress.className = "progress";
+                unityInstance.progress.empty = document.createElement("div");
+                unityInstance.progress.empty.className = "empty";
+                unityInstance.progress.appendChild(unityInstance.progress.empty);
+                unityInstance.progress.full = document.createElement("div");
+                unityInstance.progress.full.className = "full";
+                unityInstance.progress.appendChild(unityInstance.progress.full);
+                unityInstance.container.appendChild(unityInstance.progress);
+            }
+            unityInstance.progress.full.style.width = (100 * progress) + "%";
+            unityInstance.progress.empty.style.width = (100 * (1 - progress)) + "%";
+            if (progress == 1)
+                unityInstance.logo.style.display = unityInstance.progress.style.display = "none";
+        }
+
+    </script>
+<style>/* stylelint-disable */
+/* stylelint-enable */
+/** Buttons
+---------------------------------------------------------*/
+:root {
+  --transparent: rgba(255, 255, 255, 0);
+  --white: hsl(0, 0%, 100%);
+  --th-white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --th-black: hsl(0, 0%, 0%);
+  --lightGrey: hsl(0, 0%, 94%);
+  --th-grey-white: hsl(210, 10%, 97%);
+  --th-grey-light: hsl(210, 10%, 94.8%);
+  --th-grey-medium: hsl(212, 10%, 94%);
+  --th-grey: hsl(216, 22%, 91%);
+  --th-grey-dark: hsl(221, 20%, 78%);
+  --th-slate: hsl(221, 20%, 33%);
+  --th-slate-light: hsl(222, 20%, 45%);
+  --th-slate-dark: hsl(222, 22%, 18%);
+  --th-slate-alt: #333F57;
+  --th-slate-hover:#3E4A62;
+  --th-slate-dark-hover800:hsl(220, 22%, 24%);
+  --th-slate-dark-active800:hsl(219, 24%, 26%);
+  --th-slate-dark-hover600:hsl(222, 22%, 21%);
+  --th-slate-dark-active600:hsl(221, 24%, 23%);
+  --th-cool-grey-600: hsl(203, 16%, 44%);
+  --th-cool-grey-700: hsl(204, 18%, 30%);
+  --th-cool-grey-750: hsl(203, 18%, 32%);
+  --th-cool-grey-800: hsl(209, 20%, 25%);
+  --th-cool-grey-850: hsl(209, 20%, 21%);
+  --th-cool-grey-900: hsl(210, 24%, 16%);
+  --fontColorDark: var( --th-slate-dark);
+  --fontColorWhite: hsl(0, 0%, 100%);
+  --list-item-hover:hsl(225, 20%, 96%);
+  --list-item-light-hover: hsl(210, 20%, 98%);
+  --list-item-hover-dark:hsla(222, 22%, 18%, 0.50);
+  --list-item-light-hover-dark: hsla(222, 20%, 33%, 0.50);
+  --greyTransparent: hsla(222, 22%, 18%, 0.12);
+  --whiteTransparent: hsla(0, 0%, 100%, 0.12);
+  --defaultColor: hsl(220, 20%, 91%);
+  --defaultColorHover: hsl(220, 19%, 78%);
+  --defaultColorActive: hsl(220, 19%, 68%);
+  --defaultColorSelected: hsl(221, 20%, 75%);
+  --buttonBorderColor: 2px solid hsl(220, 20%, 91%);
+  --buttonBorderColorHover: 2px solid hsl(220, 19%, 78%);
+  --buttonBorderColorActive: 2px solid hsl(220, 19%, 68%);
+  --buttonBorderColorSelected: 2px solid hsl(221, 20%, 75%);
+  --iconFillColor: var( --th-slate-dark );
+  --primaryColor: hsl(211, 100%, 45%);
+  --primaryColorHover: hsl(211, 100%, 35%);
+  --primaryColorActive: hsl(211, 100%, 25%);
+  --primaryButtonBorder: 2px solid hsl(211, 100%, 45%);
+  --primaryButtonBorderHover: 2px solid hsl(211, 100%, 35%);
+  --primaryButtonBorderActive: 2px solid hsl(211, 100%, 25%);
+  --secondaryColor: var(--th-slate);
+  --secondaryColorHover: hsl(221, 20%, 23%);
+  --secondaryColorActive: hsl(221, 20%, 13%);
+  --secondaryButtonBorderColor: 2px solid var(--th-slate);
+  --secondaryButtonBorderColorHover: 2px solid hsl(221, 20%, 23%);
+  --secondaryButtonBorderColorActive: 2px solid hsl(221, 20%, 13%);
+  --disabledColor: hsl(0, 0%, 50%);
+  --disabledBackgroundColor: hsl(0, 0%, 95%);
+  --brandColorGreen: hsl(76, 60%, 52%);
+  --brandColorGreenActive: hsl(76, 62%, 40%);
+  --primaryColorGreen: hsl(79, 100%, 24%);
+  --primaryColorGreenHover: hsl(79, 100%, 14%);
+  --primaryColorGreenActive: hsl(79, 100%, 4%);
+  --buttonBorderGreen: 2px solid hsl(79, 100%, 24%);
+  --buttonBorderGreenHover: 2px solid hsl(79, 100%, 14%);
+  --buttonBorderGreenActive: 2px solid hsl(79, 100%, 4%);
+  --brandColorPink: hsl(344, 98%, 59%);
+  --primaryColorPink: #e12362;
+  --primaryColorPinkHover: hsl(340, 76%, 41%);
+  --primaryColorPinkActive: hsl(340, 76%, 31%);
+  --buttonBorderPink: 2px solid hsl(340, 76%, 51%);
+  --buttonBorderPinkHover: 2px solid hsl(340, 76%, 41%);
+  --buttonBorderPinkActive: 2px solid hsl(340, 76%, 31%);
+  --brandColorTeal: hsl(180, 85%, 34%);
+  --primaryColorTeal: hsl(184, 50%, 35%);
+  --primaryColorTealHover: hsl(184, 50%, 25%);
+  --primaryColorTealActive: hsl(184, 50%, 15%);
+  --buttonBorderTeal: 2px solid hsl(184, 50%, 35%);
+  --buttonBorderTealHover: 2px solid hsl(184, 50%, 25%);
+  --buttonBorderTealActive: 2px solid hsl(184, 50%, 15%);
+  --brandColorPurple: hsl(264, 100%, 68%);
+  --primaryColorPurple: hsl(264, 83%, 62%);
+  --primaryColorPurpleHover: hsl(264, 83%, 52%);
+  --primaryColorPurpleActive: hsl(264, 83%, 42%);
+  --buttonBorderPurple: 2px solid hsl(264, 83%, 62%);
+  --buttonBorderPurpleHover: 2px solid hsl(264, 83%, 52%);
+  --buttonBorderPurpleActive: 2px solid hsl(264, 83%, 42%);
+  --brandColorOrange: hsl(33, 94%, 48%);
+  --primaryColorOrange: hsl(15, 79%, 45%);
+  --primaryColorOrangeHover: hsl(15, 80%, 35%);
+  --primaryColorOrangeActive: hsl(15, 80%, 25%);
+  --buttonBorderOrange: 2px solid hsl(15, 79%, 45%);
+  --buttonBorderOrangeHover: 2px solid hsl(15, 80%, 35%);
+  --buttonBorderOrangeActive: 2px solid hsl(15, 80%, 25%);
+  --brandColorBlue: hsl(197, 100%, 50%);
+  --brandColorBlueActive: hsl(197, 100%, 39%);
+  --brandColorBlueWCAG: hsl(197, 100%, 42%);
+  --primaryColorBlue: hsl(201, 100%, 37%);
+  --primaryColorBlueHover: hsl(201, 100%, 27%);
+  --primaryColorBlueActive: hsl(201, 100%, 17%);
+  --buttonBorderBlue: 2px solid hsl(201, 100%, 37%);
+  --buttonBorderBlueHover: 2px solid hsl(201, 100%, 27%);
+  --buttonBorderBlueActive: 2px solid hsl(201, 100%, 17%);
+  --BrandcolorYellow: hsl(41, 90%, 61%);
+  --primaryColorReachDeck: hsl(209, 100%, 39%);
+  --primaryColorReachDeckHover: hsl(209, 100%, 29%);
+  --primaryColorReachDeckActive: hsl(209, 100%, 19%);
+  --buttonBorderReachDeck: 2px solid hsl(209, 100%, 39%);
+  --buttonBorderReachDeckHover: 2px solid hsl(209, 100%, 29%);
+  --buttonBorderReachDeckActive: 2px solid hsl(209, 100%, 19%);
+  --reachDeckEditorColor: hsl(112, 100%, 26%);
+  --launchpadButtonLight: hsl(210, 10%, 96%);
+  --launchpadButtonLightHover: hsl(220, 8%, 92%);
+  --launchpadButtonLightActive:hsl(0, 0%, 90%);
+  --ContrastPinkOrbitNoteHover: hsl(343, 81%, 48%);
+  --ContrastPinkOrbitNoteActive: hsl(345, 96%, 42%);
+  --ContrastButtonBorderPink: hsl(345, 96%, 42%);
+  --primaryColorClaroNavy: hsl(207, 74%, 27%);
+  --primaryColorClaroNavyHover: hsl(206, 83%, 21%);
+  --primaryColorClaroNavyActive: hsl(206, 89%, 17%);
+  --buttonBorderClaro: 2px solid hsl(207, 74%, 27%);
+  --buttonBorderClaroHover: 2px solid hsl(206, 83%, 21%);
+  --buttonBorderClaroActive: 2px solid hsl(206, 89%, 17%);
+  --primaryColorClaroBlue: hsl(201, 100%, 37%);
+  --primaryColorClaroBlueHover: hsl(201, 100%, 31%);
+  --primaryColorClaroBlueActive: hsl(201, 100%, 27%);
+  --claroDark: hsl(218, 54%, 20%);
+  --claroGrey: hsl(217, 31%, 68%);
+  --claroBlue: hsl(191, 88%, 40%);
+  --claroBlueAlt: hsl(188, 78%, 50%);
+  --claroGreen: hsl(75, 63%, 51%);
+  --altColor: var(--claroGreen);
+  --altColorHover: hsl(75, 70%, 40%);
+  --altColorActive: hsl(75, 77%, 33%);
+  --altButtonBorderColor: 2px solid var(--claroGreen);
+  --altButtonBorderColorHover: 2px solid hsl(75, 70%, 40%);
+  --altButtonBorderColorActive: 2px solid hsl(75, 77%, 33%);
+  --brandColorLingdys: hsl(0, 82%, 49%);
+  --primaryColorLingdys: hsl(217, 34%, 38%);
+  --primaryColorLingdysHover: hsl(217, 37%, 24%);
+  --primaryColorLingdysActive: hsl(217, 39%, 18%);
+  --buttonBorderLingdys: 2px solid hsl(217, 34%, 38%);
+  --buttonBorderLingdysHover: 2px solid hsl(217, 37%, 24%);
+  --buttonBorderLingdysActive: 2px solid hsl(217, 39%, 18%);
+  --brandColorAppWriter: #F70790;
+  --primaryColorAppWriter: #D8087F;
+  --primaryColorAppWriterHover:#B40669;
+  --primaryColorAppWriterActive: #9F055C;
+  --buttonBorderAppwriter: 2px solid #D8087F;
+  --buttonBorderAppwriterHover: 2px solid #B40669;
+  --buttonBorderAppWriterActive: 2px solid #9F055C;
+  --iconToggleFillOrbitNote: hsl(196, 99%, 50%);
+  --textColor: var( --th-slate-dark );
+  --textColorLight: var( --th-white );
+  --border: 1px solid var( --th-grey );
+  --borderDark: 1px solid var( --th-grey-dark );
+  --infoColor: hsl(194, 77%, 24%);
+  --successColor: hsla(134, 71%, 43%, 0.584);
+  --errorColor: hsl(0, 71%, 51%);
+  --warningColor: hsl(45, 97%, 51%);
+  --infoBackgroundColor: hsl(180, 100%, 99%);
+  --successBackgroundColor: hsl(78, 100%, 98%);
+  --errorBackgroundColor: hsl(0, 100%, 98%);
+  --warningBackgroundColor: hsl(35, 100%, 98%);
+  --notificationDarkModeBackground: hsl(218, 22%, 37%);
+  --infoBorderColor: hsl(191, 44%, 82%);
+  --successBorderColor: hsl(100, 28%, 69%);
+  --errorBorderColor: hsl(0, 37%, 73%);
+  --warningBorderColor: hsl(41, 30%, 71%);
+  --notificationDarkModeBorder: hsl(217, 19%, 41%);
+  --infoTitleColor: hsl(194, 77%, 24%);
+  --successTitleColor: hsl(121, 48%, 23%);
+  --errorTitleColor: hsl(1, 47%, 40%);
+  --warningTitleColor: hsl(37, 92%, 25%);
+  --infoWarningColor: hsl(194, 77%, 24%);
+  --successWarningColor: hsla(121, 48%, 23%, 0.8);
+  --errorWarningColor: hsla(1, 47%, 40%, 0.8);
+  --warningWarningColor: hsla(37, 92%, 25%, 0.8);
+  --line-height-base: 1.5;
+  --zindex-modal: 1050;
+  --modal-dialog-margin: 2rem;
+  --modal-content-border-radius: 1px;
+  --buttonBorderRadius: 30px;
+  --buttonRoundness: 30px;
+  --buttonLinkTextColor: var( --primaryColor)!important;
+  --buttonLinkIconColor: var( --primaryColor)!important;
+  --buttonNoBackgroundTextColor: var( --th-slate-dark);
+  --buttonNoBackgroundIconColor: var( --th-slate-dark);
+  --buttonNoBackgroundColor: transparent;
+  --buttonNoBackgroundColorHover: var(--icon-button-background-hover-color);
+  --buttonNoBackgroundColorActive: var(--icon-button-background-active-color);
+  --buttonNoBackgroundBorder: 2px solid transparent;
+  --buttonNoBackgroundBorderHover: 2px solid transparent;
+  --buttonNoBackgroundBorderActive: 2px solid transparent;
+  --activeDotColor: inherit;
+  --themeColorDefault: var(--defaultColor);
+  --themeColorGroundworks: var(--primaryColor);
+  --themeColorReadWrite: var(--primaryColorPurple);
+  --themeColorEquatio: var(--primaryColorBlue);
+  --themeColorBrowsealoud: var(--primaryColorOrange);
+  --themeColorWriq: var(--primaryColorTeal);
+  --themeColorFluencyTutor: var(--primaryColorGreen);
+  --themeColorSnapVerter: var(--primaryColorGreen);
+  --themeColorSpeechStream: var(--primaryColorPink);
+  --themeColorTexthelp: var(--primaryColorTeal);
+  --themeColorReachDeck: var(--primaryColorReachDeck);
+  --themeColorPdfReader: var(--primaryColorBlue);
+  --uniloginBackgroundColor: #F7F7F7;
+  --uniloginWindowBackgroundColor: var(--primaryColorBlue);
+  --line-height-base: 1.5;
+  --zindex-modal: 1050;
+  --modal-dialog-margin: 2em;
+  --modal-content-border-radius: 1px;
+  --modal-inner-padding: 1.5em;
+  --modal-title-padding: 1.5em;
+  --modal-title-line-height: var(--line-height-base);
+  --modal-content-bg: #fff;
+  --modal-content-border-color: rgba(0, 0, 0, .2);
+  --modal-content-fallback-border-color: #999;
+  --modal-backdrop-bg: #000;
+  --modal-backdrop-opacity: .5;
+  --modal-header-border-color: #e5e5e5;
+  --modal-footer-border-color: var(--modal-header-border-color);
+  --modal-header-background-color: #f5f5f5;
+  --select-border: 1px solid #DADADA;
+  --select-background: hsl(0, 0%, 100%);
+  --select-background-color: #efefef;
+  --select-background-color-hover: hsl(0, 0%, 97%);
+  --input-border: 1px solid #DADADA;
+  --input-background-color: #ffffff;
+  --settings-title-color: var(--primaryColor);
+  --settings-item-background-color: var(--th-white);
+  --settings-item-background-hover-color: var(--th-grey-medium);
+  --settings-item-background-active-color: var(--th-grey);
+  --list-group-background-color: transparent;
+  --list-group-item-background-color: var(--th-white);
+  --list-group-item-background-hover-color: var(--th-grey-light);
+  --list-group-item-background-active-color: var(--th-grey);
+  --list-group-item-icon-color: var(--th-slate-dark);
+  --ListGroupSearchItemColor: var(--th-white);
+  --ListGroupSearchItemColorHover: #f9fafb;
+  --ListGroupSearchItemTextColor: var(--th-slate);
+  --ListGroupSearchItemBorderColor: hsla(0, 0%, 0%, 0.15);
+  --ListGroupSearchItemAsideColor: hsl(0, 0%, 95%);
+  --ListGroupSearchItemAsideTextColor: #000;
+  --toolbar-button-disabled: hsl(0, 0%, 96.1%);
+  --toolbar-button-background: hsl(0, 0%, 96.1%);
+  --toolbar-button-hover-background: hsl(0, 0%, 80%);
+  --toolbar-button-color: hsl(0, 0%, 0%);
+  --toolbar-button-hover-active-background: hsl(0, 0%, 70.2%);
+  --toolbar-button-default-size: 43px;
+  --toolbar-button-focus-color: hsl(213, 71.3%, 60.4%);
+  --toolbar-button-svg-color: hsl(0, 0%, 29%);
+  --toolbar-button-toggle-color: hsl(264, 100%, 68%);
+  --panel-inner-padding: .7em;
+  --icon-button-background-default-color: hsla(0, 0%, 0%, 0.077);
+  --icon-button-background-hover-color: hsla(0, 0%, 0%, 0.125);
+  --icon-button-background-active-color: hsla(0, 0%, 0%, 0.187);
+  --icon-button-background-default-color-dark: rgba(255, 255, 255, 0.077);
+  --icon-button-background-hover-color-dark: rgba(255, 255, 255, 0.146);
+  --icon-button-background-active-color-dark: rgba(255, 255, 255, 0.221);
+  --icon-button-border-color: solid 2px transparent;
+  --menuIconFillColor: var(--th-slate);
+  --cardIconFillColor: var(--th-slate);
+  --default-menu-notify-background-colour: hsl(264, 100%, 68%);
+  --toolbarButtonBackgroundColor: var( --defaultColor);
+  --toolbarButtonBackgroundHoverColor: var( --icon-button-background-hover-color);
+  --toolbarButtonBackgroundActiveColor: var( --icon-button-background-active-color);
+  --toolbarIconHoverFill: var( --th-slate);
+  --toolbarIconToggleFill: var( --primaryColor);
+  --dashboardContentBackgroundColor: #fff;
+  --dashboardHeaderBackgroundColor: #fff;
+  --dashboardSidebarBorderTopColor: var( --lightGrey);
+  --dashboardTextColor: var(--th-slate);
+  --dashboardTitleTextColor: var(--fontColorDark);
+  --dashboardSubTitleTextColor: var(--th-slate-light);
+  --dashboardCardBackgroundColor: var(--white);
+  --dashboardCardBackgroundHoverColor: var(--th-grey-light);
+  --dashboardCardBackgroundActiveColor: var(--lightGrey);
+  --dashboardCardHighlightColor: var(--primaryColor);
+  --dashboardCardBorderColor: var(--lightGrey);
+  --dashboardCardFooterLinkColor: var(--primaryColor);
+  --dashboardCardAuditorColor: hsl(208, 100%, 43%);
+  --dashboardCardAuditorLabelColor: hsl(208, 100%, 43%);
+  --dashboardCardEditorLabelColor: var(--reachDeckEditorColor);
+  --dashboardCardToolbarColor: var(--primaryColorOrange);
+  --dashboardCardToolbarLabelColor: var(--primaryColorOrange);
+  --dashboardPaneBackgroundColor: #fcfcfc;
+  --dashboardPaneBorderColor: rgba(92, 106, 138, 0.4);
+  --dashboardPaneDashedBorderColor: var(--dashboardDashedBorderLight);
+  --dashboardDashedBorderLight: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%235C6A8ACC' stroke-width='2' stroke-dasharray='4%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  --dashboardDashedBorderDark: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23323E52FF' stroke-width='2' stroke-dasharray='4%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  --icon-opacity: 1;
+  --accordionBackgroundColor: #fff;
+  --accordionTextColor: #484848;
+  --accordionTextBottomColor: #484848;
+  --accordionIconColor: var(--toolbarWhite);
+  --accordionBackgroundColorHover: #f9fafb;
+  --tableBackgroundColor: none;
+  --tableBackgroundHeaderColor: #F9FAFB;
+  --tableBackgroundAltColor: #f7f7f7;
+  --tableBackgroundHoverColor: hsl(210, 20%, 98%);
+  --tableBorderColor: #E2E2E3;
+  --tableTextColor: #484848;
+}
+
+/* stylelint-disable */
+/* stylelint-enable */
+.th-wq,
+.th-th {
+  --toolbarBackgroundColor: var(--defaultColor);
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorWriq);
+  --themeColorSecondary: var(--secondaryColor);
+  --dashboardTopColor: var(--brandColorTeal);
+  --dashboardTitleColor: var(--themeColorWriq);
+  --iconFillColor: var(--white);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorTeal);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorTealHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorTealActive);
+  --primaryButtonBorderActive: var(--buttonBorderTealActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderTeal);
+  --primaryButtonBorderHover: var(--buttonBorderTealHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+}
+
+.th-rw,
+.th-wa {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorReadWrite);
+  --themeColorSecondary: var(--secondaryColor);
+  --toolbarBackgroundColor: var(--defaultColor);
+  --toolbarIconFill: var(--th-slate);
+  --toolbarIconHoverFill: var(--th-slate);
+  --toolbarIconActiveFill: var(--th-slate);
+  --toolbarIconToggledHoverFill: var(--primaryColorPurple);
+  --toolbarIconToggleFill: var(--primaryColorPurple);
+  --toolbarIconToggleHoverFill: var(--primaryColorPurple);
+  --dashboardTopColor: var(--brandColorPurple);
+  --dashboardTitleColor: var(--themeColorReadWrite);
+  --iconFillColor: var(--th-slate-dark);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderActive: var(--buttonBorderColorActive);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorPurple);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorPurpleHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorPurpleActive);
+  --primaryButtonBorderActive: var(--buttonBorderPurpleActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderPurple);
+  --primaryButtonBorderHover: var(--buttonBorderPurpleHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+  --menuNotifyBackgroundColour: var(--brandColorPurple);
+  --uniloginBackgroundColor: #FAF7FF;
+  --uniloginWindowBackgroundColor: var(--primaryColorPurple);
+}
+
+.th-pr {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorPdfReader);
+  --themeColorSecondary: var(--secondaryColor);
+  --primaryButtonBackgroundColor: var(--primaryColorBlue);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorBlueHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorBlueActive);
+  --primaryButtonBorderActive: var(--buttonBorderBlueActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderBlue);
+  --primaryButtonBorderHover: var(--buttonBorderBlueHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --toolbarBackgroundColor: var(--th-grey);
+  --toolbarButtonBackgroundColor: var(--th-grey);
+  --toolbarButtonBackgroundHoverColor: var(--ContrastPinkOrbitNoteHover);
+  --toolbarButtonBackgroundActiveColor: var(--ContrastPinkOrbitNoteActive);
+  --toolbarButtonBorderActive: var(--ContrastButtonBorderPink);
+  --toolbarIconFill: var(--th-slate);
+  --toolbarIconHoverFill: var(--white);
+  --toolbarIconActiveFill: var(--white);
+  --toolbarIconToggleFill: var(--ContrastPinkOrbitNoteActive);
+  --toolbarIconToggleHoverFill: var(--white);
+  --toolbarIconToggledHoverFill: var(--white);
+  --iconButtonBackgroundDefaultColor: var(--icon-button-background-default-color);
+  --iconButtonBackgroundHoverColor: var(--icon-button-background-hover-color);
+  --iconButtonBackgroundActiveColor: var(--icon-button-background-active-color);
+  --iconButtonBorderColor: 2px solid transparent;
+  --iconFillColor: var(--th-slate);
+  --panelBackgroundColor: var(--th-grey-light);
+  --panelBackgroundColorLight: var(--white);
+  --panelBackgroundColorDark: var(--th-grey);
+  --fontColor: var(--th-slate-dark);
+  --borderColor: 1px solid var(--th-grey-dark);
+  --settingsTitleColor: var(--themeColorPrimary);
+  --menuNotifyBackgroundColour: var(--brandColorPink);
+  --dashboardTopColor: var(--primaryColorBlue);
+  --dashboardTitleColor: var(--themeColorEquatio);
+  --cardIconFillColor: var(--primaryColorBlue);
+}
+
+.th-eq {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorEquatio);
+  --themeColorSecondary: var(--secondaryColor);
+  --dashboardTopColor: var(--brandColorBlue);
+  --dashboardTitleColor: var(--themeColorEquatio);
+  --iconFillColor: var(--th-slate-dark);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorBlue);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorBlueHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorBlueActive);
+  --primaryButtonBorderActive: var(--buttonBorderBlueActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderBlue);
+  --primaryButtonBorderHover: var(--buttonBorderBlueHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+  --uniloginBackgroundColor: #F2F9FF;
+  --uniloginWindowBackgroundColor: var(--brandColorBlueWCAG);
+}
+
+.th-ba {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorBrowsealoud);
+  --themeColorSecondary: var(--secondaryColor);
+  --toolbarBackgroundColor: var(--th-grey);
+  --toolbarIconButtonFillColor: var(--th-slate);
+  --toolbarButtonBackgroundColor: var(--th-grey);
+  --toolbarButtonBackgroundHoverColor: var(--primaryColorOrangeHover);
+  --toolbarButtonBackgroundActiveColor: var(--primaryColorOrangeActive);
+  --toolbarButtonBorderActive: var(--buttonBorderOrange);
+  --toolbarIconFill: var(--th-slate);
+  --toolbarIconHoverFill: var(--th-slate);
+  --toolbarIconActiveFill: var(--primaryColorBlue);
+  --toolbarIconToggleFill: var(--primaryColorBlue);
+  --toolbarIconToggleHoverFill: var(--white);
+  --dashboardTopColor: var(--brandColorOrange);
+  --dashboardTitleColor: var(--themeColorBrowsealoud);
+  --iconFillColor: var(--white);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorOrange);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorOrangeHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorOrangeActive);
+  --primaryButtonBorderActive: var(--buttonBorderOrangeActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderOrange);
+  --primaryButtonBorderHover: var(--buttonBorderOrangeHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+  --menuNotifyBackgroundColour: var(--white);
+}
+.th-ba .gw-menu-notification--inline {
+  --menuNotifyBackgroundColour: var(--themeColorBrowsealoud);
+}
+
+.th-at {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorReachDeck);
+  --themeColorSecondary: var(--secondaryColor);
+  --toolbarBackgroundColor: var(--defaultColor);
+  --toolbarIconFill: var(--th-slate);
+  --toolbarIconHoverFill: var(--th-slate);
+  --toolbarIconActiveFill: var(--th-slate);
+  --toolbarIconToggledHoverFill: var(--primaryColorBlue);
+  --toolbarIconToggleFill: var(--primaryColorBlue);
+  --toolbarIconToggleHoverFill: var(--primaryColorBlue);
+  --dashboardTopColor: var(--th-grey);
+  --dashboardTitleColor: var(--th-slate-dark);
+  --iconFillColor: var(--th-slate-dark);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorReachDeck);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorReachDeckHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorReachDeckActive);
+  --primaryButtonBorderActive: var(--buttonBorderReachDeckActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderReachDeck);
+  --primaryButtonBorderHover: var(--buttonBorderReachDeckHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --dashboardTopColor: #E12362;
+  --dashboardContentBackgroundColor: #F2F5F9;
+  --tableBackgroundHeaderColor: #DFE1E5;
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+}
+
+.th-rd {
+  font-size: 10px;
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorReachDeck);
+  --themeColorSecondary: var(--secondaryColor);
+  --toolbarBackgroundColor: var(--defaultColor);
+  --toolbarIconFill: var(--th-slate);
+  --toolbarIconHoverFill: var(--th-slate);
+  --toolbarIconActiveFill: var(--th-slate);
+  --toolbarIconToggledHoverFill: var(--primaryColorBlue);
+  --toolbarIconToggleFill: var(--primaryColorBlue);
+  --toolbarIconToggleHoverFill: var(--primaryColorBlue);
+  --dashboardTopColor: var(--th-grey);
+  --dashboardTitleColor: var(--th-slate-dark);
+  --iconFillColor: var(--th-slate-dark);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorReachDeck);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorReachDeckHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorReachDeckActive);
+  --primaryButtonBorderActive: var(--buttonBorderReachDeckActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderReachDeck);
+  --primaryButtonBorderHover: var(--buttonBorderReachDeckHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+}
+
+.th-ss {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorSpeechStream);
+  --themeColorSecondary: var(--secondaryColor);
+  --dashboardTopColor: var(--brandColorPink);
+  --dashboardTitleColor: var(--themeColorSpeechStream);
+  --iconFillColor: var(--th-slate-dark);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--themeColorSpeechStream);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorPinkHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorPinkActive);
+  --primaryButtonBorderActive: var(--buttonBorderPinkActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderPink);
+  --primaryButtonBorderHover: var(--buttonBorderPinkHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+}
+
+.th-st {
+  --uniloginBackgroundColor: #F2F9FF;
+  --uniloginWindowBackgroundColor: #2A3953;
+}
+
+.th-sv,
+.th-ft {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--themeColorFluencyTutor);
+  --themeColorSecondary: var(--secondaryColor);
+  --dashboardTopColor: var(--brandColorGreen);
+  --dashboardTitleColor: var(--themeColorFluencyTutor);
+  --iconFillColor: var(--th-slate-dark);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--themeColorFluencyTutor);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorGreenHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorGreenActive);
+  --primaryButtonBorderActive: var(--buttonBorderGreenActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderGreen);
+  --primaryButtonBorderHover: var(--buttonBorderGreenHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --secondaryButtonBackgroundColor: var(--secondaryColor);
+  --secondaryButtonBackgroundHoverColor: var(--secondaryColorHover);
+  --secondaryButtonBackgroundActiveColor: var(--secondaryColorActive);
+  --secondaryButtonTextColor: var(--fontColorWhite);
+  --secondaryButtonTextHoverColor: var(--fontColorWhite);
+  --secondaryButtonTextActiveColor: var(--fontColorWhite);
+  --secondaryButtonTextVisitedColor: var(--fontColorWhite);
+  --secondaryButtonBorder: var(--secondaryButtonBorder);
+  --secondaryButtonBorderHover: var(--secondaryButtonBorderColorHover);
+  --secondaryButtonBorderRadius: var(--buttonRoundness);
+  --secondaryButtonIconFillColor: var(--white);
+  --table-hover-item: var(--list-item-light-hover);
+  --settingsTitleColor: var(--themeColorPrimary);
+}
+
+.th-cr {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--primaryColorClaroNavy);
+  --themeColorSecondary: var(--secondaryColor);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorClaroNavy);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorClaroNavyHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorClaroNavyActive);
+  --primaryButtonBorderActive: var(--buttonBorderClaroActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderClaro);
+  --primaryButtonBorderHover: var(--buttonBorderClaroHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --altButtonBackgroundColor: var(--altColor);
+  --altButtonBackgroundHoverColor: var(--altColorHover);
+  --altButtonBackgroundActiveColor: var(--altColorActive);
+  --altButtonTextColor: var(--fontColorWhite);
+  --altButtonTextHoverColor: var(--fontColorWhite);
+  --altButtonTextActiveColor: var(--fontColorWhite);
+  --altButtonTextVisitedColor: var(--fontColorWhite);
+  --altButtonBorder: var(--altButtonBorder);
+  --altButtonBorderHover: var(--altButtonBorderColorHover);
+  --altButtonBorderRadius: var(--buttonRoundness);
+  --altButtonIconFillColor: var(--white);
+  --uniloginBackgroundColor: #F2F9FF;
+  --uniloginWindowBackgroundColor: var(--themeColorPrimary);
+}
+
+.th-wh {
+  background: #F6F6F6;
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--primaryColorClaroNavy);
+  --themeColorSecondary: var(--secondaryColor);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorClaroBlue);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorClaroBlueHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorClaroBlueActive);
+  --primaryButtonBorderActive: var(--buttonBorderClaroActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--primaryColorClaroBlue);
+  --primaryButtonBorderHover: var(--primaryColorClaroBlueHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --altButtonBackgroundColor: var(--altColor);
+  --altButtonBackgroundHoverColor: var(--altColorHover);
+  --altButtonBackgroundActiveColor: var(--altColorActive);
+  --altButtonTextColor: var(--fontColorWhite);
+  --altButtonTextHoverColor: var(--fontColorWhite);
+  --altButtonTextActiveColor: var(--fontColorWhite);
+  --altButtonTextVisitedColor: var(--fontColorWhite);
+  --altButtonBorder: var(--altButtonBorder);
+  --altButtonBorderHover: var(--altButtonBorderColorHover);
+  --altButtonBorderRadius: var(--buttonRoundness);
+  --altButtonIconFillColor: var(--white);
+  --uniloginBackgroundColor: #F2F9FF;
+  --uniloginWindowBackgroundColor: var(--primaryColorClaroNavy);
+}
+
+.th-lds {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--primaryColorLingdys);
+  --themeColorSecondary: var(--secondaryColor);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorLingdys);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorLingdysHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorLingdysActive);
+  --primaryButtonBorderActive: var(--buttonBorderLingdysActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderLingdys);
+  --primaryButtonBorderHover: var(--buttonBorderLingdysHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --altButtonBackgroundColor: var(--altColor);
+  --altButtonBackgroundHoverColor: var(--altColorHover);
+  --altButtonBackgroundActiveColor: var(--altColorActive);
+  --altButtonTextColor: var(--fontColorWhite);
+  --altButtonTextHoverColor: var(--fontColorWhite);
+  --altButtonTextActiveColor: var(--fontColorWhite);
+  --altButtonTextVisitedColor: var(--fontColorWhite);
+  --altButtonBorder: var(--altButtonBorder);
+  --altButtonBorderHover: var(--altButtonBorderColorHover);
+  --altButtonBorderRadius: var(--buttonRoundness);
+  --altButtonIconFillColor: var(--white);
+  --uniloginBackgroundColor: #F2F9FF;
+  --uniloginWindowBackgroundColor: var(--themeColorPrimary);
+}
+
+.th-aw {
+  --themeColorDefault: var(--defaultColor);
+  --themeColorPrimary: var(--primaryColorClaroNavy);
+  --themeColorSecondary: var(--secondaryColor);
+  --buttonBackgroundColor: var(--defaultColor);
+  --buttonBackgroundHoverColor: var(--defaultColorHover);
+  --buttonBackgroundActiveColor: var(--defaultColorActive);
+  --buttonTextColor: var(--fontColorDark);
+  --buttonTextHoverColor: var(--fontColorDark);
+  --buttonTextActiveColor: var(--fontColorDark);
+  --buttonTextVisitedColor: var(--fontColorDark);
+  --buttonBorder: var(--buttonBorder);
+  --buttonBorderHover: var(--buttonBorderColorHover);
+  --buttonBorderRadius: var(--buttonRoundness);
+  --buttonBorderIconFillColor: var(--black);
+  --primaryButtonBackgroundColor: var(--primaryColorAppWriter);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorAppWriterHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorAppWriterActive);
+  --primaryButtonBorderActive: var(--buttonBorderAppWriterActive);
+  --primaryButtonTextColor: var(--fontColorWhite);
+  --primaryButtonTextHoverColor: var(--fontColorWhite);
+  --primaryButtonTextActiveColor: var(--fontColorWhite);
+  --primaryButtonTextVisitedColor: var(--fontColorWhite);
+  --primaryButtonBorder: var(--buttonBorderAppWriter);
+  --primaryButtonBorderHover: var(--buttonBorderAppWriterHover);
+  --primaryButtonBorderRadius: var(--buttonRoundness);
+  --primaryButtonIconFillColor: var(--white);
+  --altButtonBackgroundColor: var(--altColor);
+  --altButtonBackgroundHoverColor: var(--altColorHover);
+  --altButtonBackgroundActiveColor: var(--altColorActive);
+  --altButtonTextColor: var(--fontColorWhite);
+  --altButtonTextHoverColor: var(--fontColorWhite);
+  --altButtonTextActiveColor: var(--fontColorWhite);
+  --altButtonTextVisitedColor: var(--fontColorWhite);
+  --altButtonBorder: var(--altButtonBorder);
+  --altButtonBorderHover: var(--altButtonBorderColorHover);
+  --altButtonBorderRadius: var(--buttonRoundness);
+  --altButtonIconFillColor: var(--white);
+  --uniloginBackgroundColor: #F7F7F7;
+  --uniloginWindowBackgroundColor: var(--primaryColorAppWriter);
+}
+
+.dark-mode {
+  --toolbarBackgroundColor: var(--th-slate-dark);
+  --toolbarButtonBackgroundColor: var(--th-slate-dark);
+  --toolbarButtonBackgroundHoverColor: var(--icon-button-background-hover-color-dark);
+  --toolbarButtonBackgroundActiveColor: var(--icon-button-background-active-color-dark);
+  --toolbarButtonBorderActive: var(--buttonBorderPink);
+  --toolbarIconFill: var(--white);
+  --toolbarIconHoverFill: var(--white);
+  --toolbarIconActiveFill: var(--white);
+  --dashboardHeaderBackgroundColor: var(--th-slate-dark);
+  --dashboardSidebarBorderTopColor: var(--th-slate);
+  --dashboardSidebarBackgroundColor: var(--th-slate-dark);
+  --dashboardContentBackgroundColor: var(--th-slate);
+  --dashboardCardBackgroundColor: var(--th-slate-dark);
+  --dashboardCardBackgroundHoverColor: var(--th-slate-dark-hover600);
+  --dashboardCardBackgroundActiveColor: var(--th-slate-dark-active600);
+  --dashboardCardHighlightColor: var(--brandColorBlue);
+  --dashboardTextColor: var(--th-white);
+  --dashboardTitleTextColor: var(--th-white);
+  --dashboardSubTitleTextColor: var(--th-white);
+  --menuIconFillColor: var(--white);
+  --iconButtonBackgroundDefaultColor: var(--icon-button-background-default-color-dark);
+  --iconButtonBackgroundHoverColor: var(--icon-button-background-hover-color-dark);
+  --iconButtonBackgroundActiveColor: var(--icon-button-background-active-color-dark);
+  --iconButtonBorderColor: 2px solid transparent;
+  --iconFillColor: var(--white);
+  --buttonLinkTextColor: var(--white);
+  --buttonLinkIconColor: var(--white);
+  --buttonNoBackgroundTextColor: var(--white);
+  --buttonNoBackgroundIconColor: var(--white);
+  --buttonNoBackgroundColor: transparent;
+  --buttonNoBackgroundColorHover: var(--icon-button-background-hover-color-dark);
+  --buttonNoBackgroundColorActive: var(--icon-button-background-active-color-dark);
+  --buttonNoBackgroundBorder: 2px solid transparent;
+  --buttonNoBackgroundBorderHover: 2px solid transparent;
+  --buttonNoBackgroundBorderActive: 2px solid transparent;
+  --panelBackgroundColor: var(--th-slate);
+  --panelBackgroundColorLight: var(--th-slate-light);
+  --panelBackgroundColorDark: var(--th-slate-dark);
+  --fontColor: var(--textColorLight);
+  --borderColor: 1px solid var(--th-slate-light);
+  --infoBackgroundColor: var(--notificationDarkModeBackground);
+  --successBackgroundColor: var(--notificationDarkModeBackground);
+  --errorBackgroundColor: var(--notificationDarkModeBackground);
+  --warningBackgroundColor: var(--notificationDarkModeBackground);
+  --infoBorderColor: var(--notificationDarkModeBorder);
+  --successBorderColor: var(--notificationDarkModeBorder);
+  --errorBorderColor: var(--notificationDarkModeBorder);
+  --warningBorderColor: var(--notificationDarkModeBorder);
+  --infoWarningColor: #fff;
+  --successWarningColor: #fff;
+  --errorWarningColor: #fff;
+  --warningWarningColor: #fff;
+  --infoTitleColor: #fff;
+  --successTitleColor: #fff;
+  --errorTitleColor: #fff;
+  --warningTitleColor: #fff;
+  --accordionBackgroundColor: var(--th-slate-dark);
+  --accordionTextColor: #fff;
+  --accordionTextBottomColor: #f5f5f5;
+  --accordionIconColor: var(--toolbarWhite);
+  --accordionBackgroundColorHover: var(--th-slate-dark-hover600);
+  --tableBackgroundColor: var(--th-slate);
+  --tableBackgroundHeaderColor: var(--th-slate-alt);
+  --tableBackgroundAltColor: var(--th-slate-alt);
+  --tableBackgroundHoverColor: var(--th-slate-hover);
+  --tableBorderColor: var(--th-slate-dark);
+  --tableTextColor: #fff;
+  --ListGroupSearchItemColor: var(--th-slate-dark);
+  --ListGroupSearchItemColorHover: var(--th-slate-dark-hover800);
+  --ListGroupSearchItemTextColor: var(--th-white);
+  --ListGroupSearchItemBorderColor:rgba(0, 0, 0, 0.225);
+  --ListGroupSearchItemAsideColor: var(--th-slate-dark);
+  --ListGroupSearchItemAsideTextColor: #fff;
+  --inputBorder: 1px solid var(--th-slate);
+  --inputTextColor: var( --th-white);
+  --inputBackgroundColor: var(--th-cool-grey-800);
+  --modalHeaderBackgroundColor: var(--th-cool-grey-800);
+  --modalContentBackgroundColor: var(--th-cool-grey-700);
+  --modalContentBorderColorHeader: var(--th-cool-grey-700);
+  --modalContentBorderColorFooter: var(--th-cool-grey-700);
+  --modalTextColor: var(--th-white);
+  --settingsDialogBackgroundColor: var(--th-cool-grey-700);
+  --settingsDialogMenuBackgroundColor: var(--th-cool-grey-800);
+  --settingsDialogItemSelectedBackgroundColor: var(--th-slate-dark);
+  --settingsDialogItemBackgroundColorHover: var(--th-cool-grey-700);
+  --settingsDialogItemBackgroundColorActive: var(--th-cool-grey-600);
+  --settingsTitleColor: #fff;
+  --selectBorder: 1px solid var( --slate-light);
+  --selectBackgroundColor: var( --th-slate);
+  --selectBackgroundColorHover: rgba(255, 255, 255, 0.146);
+  --selectBackgroundColorActive: rgba(255, 255, 255, 0.221);
+  --listGroupBackgroundColor: transparent;
+  --listGroupItemTextColor: var(--th-white);
+  --listGroupItemBackgroundColor: var(--th-cool-grey-800);
+  --listGroupItemActionsBackgroundColor: var(--th-cool-grey-850);
+  --listGroupItemBackgroundColorHover: var(--th-cool-grey-700);
+  --listGroupItemBackgroundColorActive: var(--th-cool-grey-600);
+  --listGroupItemIconColor: var(--th-white);
+  --listGroupItemArrowColor: var(--th-cool-grey-800);
+}
+.dark-mode.th-rw {
+  --toolbarIconActiveFill: var(--white);
+  --toolbarIconToggledHoverFill: var(--brandColorPurple);
+  --toolbarIconToggleFill: var(--brandColorPurple);
+  --toolbarIconToggleHoverFill: var(--brandColorPurple);
+}
+.dark-mode.th-pr {
+  --toolbarButtonBackgroundHoverColor: var(--primaryColorBlue);
+  --toolbarButtonBackgroundActiveColor: var(--primaryColorBlueHover);
+  --toolbarButtonBorderActive: var(--buttonBorderBlueActive);
+  --toolbarIconToggleFill: var(--iconToggleFillOrbitNote);
+  --textColor: var(--textColorLight);
+  --cardIconFillColor: var(--brandColorBlue);
+  --primaryButtonBackgroundColor: var(--primaryColor);
+  --primaryButtonBackgroundHoverColor: var(--primaryColorHover);
+  --primaryButtonBackgroundActiveColor: var(--primaryColorActive);
+  --primaryButtonBorderActive: var(--primaryButtonBorderActive);
+  --primaryButtonBorder: var(--primaryButtonBorder);
+  --primaryButtonBorderHover: var(--primaryButtonBorderHover);
+  --dashboardTopColor: var(--primaryColorBlue);
+  --dashboardTitleColor: var(--themeColorEquatio);
+  --dashboardPaneBackgroundColor: var(--th-slate-dark);
+  --dashboardPaneBorderColor: var(--th-slate-dark);
+  --dashboardPaneDashedBorderColor: var(--dashboardDashedBorderDark);
+  --listGroupItemBackgroundColor: var(--th-slate-dark);
+  --listGroupItemBackgroundColorHover: var(--th-slate-dark-hover800);
+  --listGroupItemBackgroundColorActive: var(--th-slate-dark-active800);
+  --listGroupTileBackgroundColorActive: var(--th-slate-dark-active800);
+  --list-item-hover: var(--listGroupItemBackgroundColorHover);
+}
+.dark-mode.th-rd {
+  --toolbarIconToggledHoverFill: var(--brandColorBlue);
+  --toolbarIconToggleFill: var(--brandColorBlue);
+  --toolbarIconToggleHoverFill: var(--brandColorBlue);
+  --dashboardTopColor: var(--th-slate);
+  --dashboardCardAuditorColor: var(--primaryColorBlue);
+  --dashboardCardAuditorLabelColor: var(--th-grey);
+  --dashboardCardEditorColor: var(--reachDeckEditorColor);
+  --dashboardCardEditorLabelColor: var(--th-grey);
+  --dashboardCardToolbarColor: var(--primaryColorOrange);
+  --dashboardCardToolbarLabelColor: var(--th-grey);
+  --dashboardCardBorderColor: var(--th-slate-light);
+  --dashboardCardFooterLinkColor: hsl(197, 100%, 50%);
+  --icon-opacity: .9;
+  --cardIconFillColor: var(--th-white);
+  --listGroupItemBackgroundColor: var(--th-slate-dark);
+  --listGroupItemBackgroundColorHover: var(--th-slate-dark-hover800);
+  --listGroupItemBackgroundColorActive: var(--th-slate-dark-active800);
+  --listGroupTileBackgroundColorActive: var(--th-slate-dark-active800);
+  --list-item-hover: var(--listGroupItemBackgroundColorHover);
+}
+.dark-mode .gw-select {
+  background: transparent url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='22px' width='22px' viewBox='0 0 18 18'>%3Cpath d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z' fill='%23fff'/%3E%3Cpath d='M0-.75h24v24H0z' fill='none'/%3E</svg>") no-repeat;
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.9em top 40%, 0 0;
+  background-color: #434e65 transparent;
+  border: 1px solid #fff;
+  background-size: 1.3em auto, 100%;
+  color: #fff;
+}
+.dark-mode .gw-select > option {
+  background: #434e65;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root .day.dark-scheme {
+    background: #333;
+    color: white;
+  }
+  :root .night.dark-scheme {
+    background: black;
+    color: #ddd;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root .day.light-scheme {
+    background: white;
+    color: #555;
+  }
+  :root .night.light-scheme {
+    background: #eee;
+    color: black;
+  }
+}.th-rw {
+  --listGroupItemBackgroundColorActive: white;
+  --squareButtonBackgroundHover: #f5f5f5;
+  --squareButtonIconFillColor: rgb(36, 42, 56);
+  --squareButtonActiveBackGroundColor: #EFEFEF;
+  --squareButtonIconTickColor: #506C7E ;
+}
+
+.dark-mode {
+  --listGroupItemBackgroundColorFocus: rgb(63, 79, 90);
+  --modalTextColorFocus: white;
+  --listGroupItemBackgroundColorActive: rgb(36, 45, 51);
+  --modalTextColorActive: white;
+  --squareButtonBackgroundHover: rgb(56, 71, 81);
+  --squareButtonIconFillColor: white;
+  --squareButtonActiveBackGroundColor: #24323E;
+  --squareButtonIconTickColor: #FFF ;
+}
+
+.dark-mode.th-rw {
+  --toolbarIconButtonFillColor: var(--white);
+}
+
+.gw-toolbar--s1 {
+  --fontSize: 5px;
+}
+
+.gw-toolbar--s2 {
+  --fontSize: 10px;
+}
+
+.gw-toolbar--s3 {
+  --fontSize: 15px;
+}
+
+.gw-toolbar--s4 {
+  --fontSize: 20px;
+}
+
+.gw-listitem-fontsize-s10 {
+  --gw-listitem-fontsize: 10px !important;
+}
+
+.gw-listitem-fontsize-s11 {
+  --gw-listitem-fontsize: 11px !important;
+}
+
+.gw-listitem-fontsize-s12 {
+  --gw-listitem-fontsize: 12px !important;
+}
+
+.gw-listitem-fontsize-s13 {
+  --gw-listitem-fontsize: 13px !important;
+}
+
+.gw-listitem-fontsize-s14 {
+  --gw-listitem-fontsize: 14px !important;
+}
+
+.gw-listitem-fontsize-s15 {
+  --gw-listitem-fontsize: 15px !important;
+}
+
+.gw-listitem-fontsize-s16 {
+  --gw-listitem-fontsize: 16px !important;
+}
+
+.gw-listitem-fontsize-s17 {
+  --gw-listitem-fontsize: 17px !important;
+}
+
+.gw-listitem-fontsize-s18 {
+  --gw-listitem-fontsize: 18px !important;
+}
+
+.gw-listitem-fontsize-s19 {
+  --gw-listitem-fontsize: 19px !important;
+}
+
+.gw-listitem-fontsize-s20 {
+  --gw-listitem-fontsize: 20px !important;
+}
+
+.gw-listitem-fontsize-s21 {
+  --gw-listitem-fontsize: 21px !important;
+}
+
+.gw-listitem-fontsize-s22 {
+  --gw-listitem-fontsize: 22px !important;
+}
+
+.gw-listitem-fontsize-s23 {
+  --gw-listitem-fontsize: 23px !important;
+}
+
+.gw-listitem-fontsize-s24 {
+  --gw-listitem-fontsize: 24px !important;
+}
+
+:root {
+  --fontSize: 10px;
+}
+
+.gw-info {
+  --notification-bg-color: var(--infoBackgroundColor);
+  --notification-border-color: var(--infoBorderColor);
+  --notification-color: var(--infoTitleColor);
+}
+
+.gw-success {
+  --notification-bg-color: var(--successBackgroundColor);
+  --notification-border-color: var(--successBorderColor);
+  --notification-color: var(--successTitleColor);
+}
+
+.gw-error {
+  --notification-bg-color: var(--errorBackgroundColor);
+  --notification-border-color: var(--errorBorderColor);
+  --notification-color: var(--errorTitleColor);
+}
+
+.gw-warning {
+  --notification-bg-color: var(--warningBackgroundColor);
+  --notification-border-color: var(--warningBorderColor);
+  --notification-color: var(--warningTitleColor);
+}
+
+.th-rw {
+  --toolbarIconToggleFill: var(--primaryColorPurple);
+  --toolbarIconToggleHoverFill: var(--primaryColorPurple);
+}
+
+.gw-toolbar--undocked {
+  --toolbarWidth: fit-content;
+  --toolbarDisplay: block;
+  --toolbarPosition: fixed;
+}
+
+.gw-ul--small {
+  --liWidth: 150px;
+}
+
+.gw-ul--medium {
+  --liWidth: 300px;
+}
+
+.gw-ul--large {
+  --liWidth: 450px;
+}</style><style></style></head>
+
+<body style="width:100%; height:100%; margin:0; overflow: hidden">
+    <div id="gameContainer" style="width: 100%; height: 100%; padding: 0px; margin: 0px; border: 0px; position: relative; background: rgb(35, 31, 32);"><canvas id="#canvas" style="width: 100%; height: 100%; cursor: default;" width="1920" height="614"></canvas><div class="wixlogo" style="display: none;"></div><div class="progress" style="display: none;"><div class="empty" style="width: 0%;"></div><div class="full" style="width: 100%;"></div></div></div>
+
+
+
+<script src="blob:https://game323520.konggames.com/b95f3a8c-0a8f-4901-a07c-522cb64a6f6a" id="1aa7a45de4dda4494a520c77398d61b6"></script></body></html>
