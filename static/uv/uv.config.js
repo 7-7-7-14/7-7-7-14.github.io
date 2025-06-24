@@ -9,4 +9,5 @@ self.__uv$config = {
     sw: '/static/uv/uv.sw.js',
 }
 
-/* https://void.radio.fm/bare/ */
+// https://void.radio.fm/bare/
+// https://backend.infrared.bomberfish.ca/
