@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://backend.infrared.bomberfish.ca/',
+    bare:'https://math.cinevez.lol/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
