@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta property="og:title" content="US4 | Data Manager">
+    <meta property="og:title" content="Nexus | Data Manager">
     <meta property="og:description" content="Import or export your data to retain data throughout our many links!">
     <meta property="og:image" content="/storage/images/logo.png">
     <meta charset="UTF-8">
@@ -49,7 +49,7 @@
         const link = document.createElement('a');
         const date = new Date().toISOString().split('T')[0];
         link.href = url;
-        link.download = `us4-data.${date}.save`;
+        link.download = `nexus-data.${date}.save`;
         link.click();
         URL.revokeObjectURL(url);
       });
