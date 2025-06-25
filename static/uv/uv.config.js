@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://infrared.zrhe2016.workers.dev/',
+    bare:'https://backend.infrared.bomberfish.ca/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
@@ -11,4 +11,4 @@ self.__uv$config = {
 
 // https://void.radio.fm/bare/
 // https://backend.infrared.bomberfish.ca/
-// https://infrared.zrhe2016.workers.dev/
+// https://infrared.zrhe2016.workers.dev/ - works w geforce
