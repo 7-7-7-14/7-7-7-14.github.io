@@ -14,4 +14,5 @@ self.__uv$config = {
 // https://infrared.zrhe2016.workers.dev/ - gf doesnt load
 // https://incog.dev/bare/ - fast, blocked by CORS
 // https://bare.commander.whimsy.me/ - doenst load gf assets
-// https://parallel-daphene-ijuslostmydooohg-021a963b.koyeb.app/fq/
+// https://parallel-daphene-ijuslostmydooohg-021a963b.koyeb.app/fq/ - no connect to gfnow servers
+
