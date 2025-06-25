@@ -7,7 +7,7 @@
   
   <script>
     self.__uv$config = {
-      prefix: '/static/load/',
+      prefix: '/static/embed/',
       bare: 'https://infrared.zrhe2016.workers.dev/',
       encodeUrl: Ultraviolet.codec.xor.encode,
       decodeUrl: Ultraviolet.codec.xor.decode,
@@ -18,16 +18,12 @@
     };
   </script>
 
-  <script src="/static/uv/uv.bundle.js" defer></script>
+  <script src="/static/uv/uv.bundle2.js" defer></script>
 </head>
 <body style="margin:0; height:100vh; display:flex; flex-direction:column;">
-  <header style="background:#222; color:#eee; padding:10px; text-align:center;">
-    <h1>GeForce Now Embedded via UV Bare Proxy</h1>
-  </header>
-
   <main style="flex-grow:1;">
     <iframe
-      src="/static/embed?=https://play.geforcenow.com"
+      src="/static/embed?p=https://play.geforcenow.com"
       style="border:none; width:100%; height:100%;"
       allowfullscreen
       allow="autoplay; fullscreen"
