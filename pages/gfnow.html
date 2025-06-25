@@ -6,7 +6,6 @@
   <title>GeForce Now via Ultraviolet Proxy</title>
   
   <script>
-    // Ultraviolet config for bare proxy backend
     self.__uv$config = {
       prefix: '/static/load/',
       bare: 'https://infrared.zrhe2016.workers.dev/',
@@ -19,7 +18,6 @@
     };
   </script>
 
-  <!-- Load UV proxy bundle -->
   <script src="/static/uv/uv.bundle.js" defer></script>
 </head>
 <body style="margin:0; height:100vh; display:flex; flex-direction:column;">
@@ -29,13 +27,12 @@
 
   <main style="flex-grow:1;">
     <iframe
-      src="/static/embed?p=https://play.geforcenow.com"
+      src="/static/embed?=https://play.geforcenow.com"
       style="border:none; width:100%; height:100%;"
       allowfullscreen
       allow="autoplay; fullscreen"
       sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-      >
-    </iframe>
+    ></iframe>
   </main>
 </body>
 </html>
