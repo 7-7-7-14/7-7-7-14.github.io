@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GeForce Now via Ultraviolet Proxy</title>
+  
+  <script>
+    // Ultraviolet config for bare proxy backend
+    self.__uv$config = {
+      prefix: '/static/load/',
+      bare: 'https://infrared.zrhe2016.workers.dev/',
+      encodeUrl: Ultraviolet.codec.xor.encode,
+      decodeUrl: Ultraviolet.codec.xor.decode,
+      handler: '/static/uv/uv.handler.js',
+      bundle: '/static/uv/uv.bundle.js',
+      config: '/static/uv/uv.config.js',
+      sw: '/static/uv/uv.sw.js',
+    };
+  </script>
+
+  <!-- Load UV proxy bundle -->
+  <script src="/static/uv/uv.bundle.js" defer></script>
+</head>
+<body style="margin:0; height:100vh; display:flex; flex-direction:column;">
+  <header style="background:#222; color:#eee; padding:10px; text-align:center;">
+    <h1>GeForce Now Embedded via UV Bare Proxy</h1>
+  </header>
+
+  <main style="flex-grow:1;">
+    <iframe
+      src="/static/embed?p=https://play.geforcenow.com"
+      style="border:none; width:100%; height:100%;"
+      allowfullscreen
+      allow="autoplay; fullscreen"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+      >
+    </iframe>
+  </main>
+</body>
+</html>
