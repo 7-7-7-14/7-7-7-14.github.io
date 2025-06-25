@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://incog.dev/bare/',
+    bare:'https://infrared.zrhe2016.workers.dev/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
@@ -12,4 +12,4 @@ self.__uv$config = {
 // https://void.radio.fm/bare/
 // https://backend.infrared.bomberfish.ca/
 // https://infrared.zrhe2016.workers.dev/ - works w geforce
-// https://incog.dev/bare/ - may be blocked by CORS
+// https://incog.dev/bare/ - fast, blocked by CORS
