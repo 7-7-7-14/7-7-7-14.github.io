@@ -15,4 +15,5 @@ self.__uv$config = {
 // https://incog.dev/bare/ - fast, blocked by CORS
 // https://bare.commander.whimsy.me/ - doenst load gf assets
 // https://parallel-daphene-ijuslostmydooohg-021a963b.koyeb.app/fq/ - no connect to gfnow servers
-
+// https://dm-unbl0cker-bare-server-dusky.vercel.app/
+// https://bare-2wn.pages.dev/
