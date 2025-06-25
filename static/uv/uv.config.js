@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://backend.infrared.bomberfish.ca/',
+    bare:'https://parallel-daphene-ijuslostmydooohg-021a963b.koyeb.app/fq/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
@@ -14,3 +14,4 @@ self.__uv$config = {
 // https://infrared.zrhe2016.workers.dev/ - gf doesnt load
 // https://incog.dev/bare/ - fast, blocked by CORS
 // https://bare.commander.whimsy.me/ - doenst load gf assets
+// https://parallel-daphene-ijuslostmydooohg-021a963b.koyeb.app/fq/
