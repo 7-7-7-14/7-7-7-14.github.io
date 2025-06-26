@@ -1,0 +1,46 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>(PS) Gran Turismo 2</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+    #game { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="game"></div>
+
+  <script>
+    // EmulatorJS configuration
+    EJS_player = '#game';
+    EJS_core = 'nds';
+    EJS_biosUrl = '';
+    EJS_gameUrl = 'https://nexus-sub.netlify.app/pages/roms/bowsers-inside-story/bis.zip';
+    EJS_pathtodata = '/emujs/data/';
+    EJS_startOnLoad = true;
+
+    // Custom function to run when the game starts
+    window.EJS_onGameStart = function () {
+      console.log("🎮 Game has started!");
+      // You can add custom things here like:
+      // document.querySelector("#loading").style.display = "none";
+    };
+
+    window.addEventListener('load', () => {
+      if (typeof EJS_startEmulator === 'function') {
+        EJS_startEmulator();
+
+        // Wait until the emulator object is available
+        const waitForEmulator = setInterval(() => {
+          if (window.EJS_emulator) {
+            clearInterval(waitForEmulator);
+            window.EJS_emulator.on("start", window.EJS_onGameStart);
+          }
+        }, 50);
+      }
+    });
+  </script>
+
+  <script src="/emujs/data/loader.js"></script>
+</body>
+</html>
