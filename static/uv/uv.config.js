@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://backend.infrared.bomberfish.ca/',
+    bare:'https://koyeb.koyeb.app/fq/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
@@ -17,3 +17,4 @@ self.__uv$config = {
 // https://parallel-daphene-ijuslostmydooohg-021a963b.koyeb.app/fq/ - no connect to gfnow servers
 // https://dm-unbl0cker-bare-server-dusky.vercel.app/
 // https://bare-2wn.pages.dev/
+// https://koyeb.koyeb.app/fq/ may be awsome
