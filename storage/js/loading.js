@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.head.appendChild(fontLink);
 
   const loadingMessages = [
-    'made with love from the meximath team <3',
+    'made with love from the nexus team <3 (just me)',
     'are the 19:36?',
     'boiiii what u say about ajh phonk',
     'are you sure?',
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function removeOverlay() {
     overlay.style.transition = 'opacity 0.5s';
     overlay.style.opacity = '0';
-    setTimeout(() => overlay.remove(), 500);
+    setTimeout(() => overlay.remove(), 700);
   }
 
   const skipTimeout = setTimeout(() => {
