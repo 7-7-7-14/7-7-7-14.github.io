@@ -67,7 +67,7 @@ const phrases = [
     `hey all nexus users`,
     `https://youtube.com/watch?v=dQw4w9WgXcQ`,
     `whoa is this a splash text`,
-    `this is ur ip: {ip} dont believe me, hit ctrl + shift + i and click on console`,
+    `this is ur ip: {ip}, if u dont believe me, hit ctrl + shift + i and click on console`,
     `teacher gave us too much homework 😭`,
     `downloading your passwords...`,
     `the wifi went out... again 💀`,
@@ -106,7 +106,7 @@ const phrases = [
     `hello, this is microsoft tech support`,
     `press ctrl+shift+q+q for free money`,
     `doot doot`,
-    `{ip}`,
+    `{ip} ← defo not ur ip 🤷‍♂️🥀`,
     `◉_◉`,
     `heres a free bare: https://www.tomp.app/ (defo works)`,
     `the school can’t stop me now 😎 (100% certified as tuff 💪)`,
@@ -156,7 +156,8 @@ const phrases = [
     `you can play fh5 on gfn!`,
     `have you heard the rumor about the pencil, nevermind its pointless 🥀😭`,
     `tried to make a belt of watches, it was a waist of time 😭🥀`,
- 
+    `today i learnt what syfm means 😭`,
+    `SMYM 👅👅`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
