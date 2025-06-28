@@ -214,7 +214,7 @@ window.onload = async () => {
     const res = await fetch('https://api.ipify.org?format=json');
     const data = await res.json();
     userIP = data.ip;
-    console.log("Internet protocol fetched:", userIP);
+    console.log("internet protocol fetched:", userIP);
   } catch (e) {
     console.error("Failed to get IP", e);
   }
