@@ -62,20 +62,19 @@ body {
 }
 .overlay-text {
   position: absolute;
-  bottom: 0; /* start from the bottom */
-  left: 50%;
-  transform: translateX(-50%); /* center horizontally */
   color: white;
-  font-family: "sans-serif", sans-serif;
-  font-size: 15px; /* 3px smaller than original */
+  font-family: "Comfortaa", sans-serif;
+  font-size: 18px;
   text-align: center;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 1;
   width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
 .game-button:hover .overlay-text {
   opacity: 1;
 }
