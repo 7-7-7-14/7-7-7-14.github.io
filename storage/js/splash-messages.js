@@ -160,6 +160,7 @@ const phrases = [
     `SMYM 👅👅`,
     `     __\n    /  \\__\n   (     @\\___\n   /         O\n  /   (_____/\n /_____/   U\n`,
     `we all know who has a chopped chin`,
+    `"brainrot is bad", 💀 what a loser`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
