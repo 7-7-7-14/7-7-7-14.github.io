@@ -192,17 +192,20 @@ function changeText() {
   currentPhrase = randomPhrase;
 
   if (typeof randomPhrase === "string") {
-    if (randomPhrase.includes("{ip}")) {
-      randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
-    }
-    paragraph.textContent = randomPhrase;
+  if (randomPhrase.includes("{ip}")) {
+    randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
+  }
+  randomPhrase = randomPhrase.replace(/\\n/g, "\n");
+  randomPhrase = randomPhrase.replace(/\\\\/g, "\\");
+  randomPhrase = randomPhrase.split('\n').map(line => '  ' + line).join('\n');
+  paragraph.textContent = randomPhrase;
 
-    if (randomPhrase === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
-      setFlip(true);
-    } else if (flipped) {
-      // If page is flipped but phrase isn't flip phrase, reset flip
-      setFlip(false);
-    }
+  if (randomPhrase.trim() === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
+    setFlip(true);
+  } else if (flipped) {
+    setFlip(false);
+  }
+}
   } else if (randomPhrase.type === "image") {
     paragraph.innerHTML = `<img src="${randomPhrase.src}" alt="Splash Image" style="max-width: ${randomPhrase.width};">`;
     if (flipped) setFlip(false); // reset flip if currently flipped
