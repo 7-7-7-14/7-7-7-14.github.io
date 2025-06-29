@@ -59,16 +59,27 @@
         const inputRaw = document.getElementById("uv-address").value.trim();
         if (!inputRaw) return;
 
-       const blockedTerms = ["adult","adultfriendfinder","adultfriendfinder.com","amateurporn","boobs","breast","p0rn","br3ast","camgirl","camsoda","camsoda.com","chaturbate","chaturbate.com","cum","erotic","escortservice","fuck","gangbang","gambling","gambling.com","hentai","hentaimovie","hardcore","jizz","marijuana","meth","milf","nudity","onlyfans","onlyfans.com","ome","ome.tv","porn","porno","pussy","redtube","redtube.com","sex","sex.com","sexshop","sexworker","slut","stripchat","tits","tube8","tube8.com","webcam","weed","williamhill.com","xhamster","xhamster.com","xnx","xnxx","xvideo","xxx","xxxvideo","youjizz","youjizz.com","bet365.com","bongacams","bongacams.com","block-access","pokerstars.com"];
+    const blockedTerms = new Set([
+      "adult", "adultfriendfinder", "adultfriendfinder.com", "amateurporn", "boobs",
+      "breast", "p0rn", "br3ast", "camgirl", "camsoda", "camsoda.com", "chaturbate",
+      "chaturbate.com", "cum", "erotic", "escortservice", "fuck", "gangbang",
+      "gambling", "gambling.com", "hentai", "hentaimovie", "hardcore", "jizz",
+      "marijuana", "meth", "milf", "nudity", "onlyfans", "onlyfans.com", "ome",
+      "ome.tv", "porn", "porno", "pussy", "redtube", "redtube.com", "sex",
+      "sex.com", "sexshop", "sexworker", "slut", "stripchat", "tits", "tube8",
+      "tube8.com", "webcam", "weed", "williamhill.com", "xhamster", "xhamster.com",
+      "xnx", "xnxx", "xvideo", "xxx", "xxxvideo", "youjizz", "youjizz.com",
+      "bet365.com", "bongacams", "bongacams.com", "block-access", "pokerstars.com"
+    ]);
+        
+    const lowerInput = inputRaw.toLowerCase();
 
-        const lowerInput = inputRaw.toLowerCase();
-
-        for (const term of blockedTerms) {
-          if (lowerInput.includes(term)) {
-            window.location.href = "/pages/blocked.html";
-            return;
-          }
-        }
+    for (const word of lowerInput.split(/[^a-z0-9.]+/)) {
+      if (blockedTerms.has(word)) {
+         window.location.href = "/pages/blocked.html";
+         return;
+      }
+    }
 
         const hasProtocol = /^https?:\/\//i.test(inputRaw);
         const looksLikeURL = /\.[a-z]{2,}(\/|$)/i.test(inputRaw);
