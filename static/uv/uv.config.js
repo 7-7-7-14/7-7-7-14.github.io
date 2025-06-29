@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://mexi.rest/bare/',
+    bare:'https://searchequinox.com/bare/',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
@@ -19,3 +19,4 @@ self.__uv$config = {
 // https://bare-2wn.pages.dev/ - blocked in school
 // https://koyeb.koyeb.app/fq/ laggy ah geforce 100ms ping better than nothing
 // https://mexi.rest/bare/ ts so slow 🥀
+// https://searchequinox.com/bare/ testing rn
