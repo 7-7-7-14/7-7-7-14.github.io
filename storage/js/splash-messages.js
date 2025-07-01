@@ -157,7 +157,7 @@ const phrases = [
     `have you heard the rumor about the pencil, nevermind its pointless 🥀😭`,
     `tried to make a belt of watches, it was a waist of time 😭🥀`,
     `today i learnt what syfm means 😭`,
-    `SMYM 👅👅`,
+    `SMYW 👅👅`,
     `subscribe to zboychad!!!`,
     `cruz was here..`,
     `we all know who has a chopped chin`,
