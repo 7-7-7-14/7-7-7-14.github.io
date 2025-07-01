@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,11 +21,11 @@
     }
 
     .container {
+      position: relative;
+      width: 100vw;
       height: 100vh;
-      /*width: calc(100% - 50px);*/
-    width: 100vw;
-      overflow: hidden;
-    }
+      z-index: 1000;
+     }
 
     .content {
       height: 100%;
@@ -34,10 +33,13 @@
     }
 
     .game-iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 1001;
+
     }
   </style>
 </head>
