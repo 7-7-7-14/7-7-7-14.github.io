@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://bare.lbss.dev.tc/', // https://infrared.zrhe2016.workers.dev, https://bare.lbss.dev.tc/, https://skibidi.cfd/bare/
+    bare:'https://infrared.zrhe2016.workers.dev', // https://infrared.zrhe2016.workers.dev/, https://skibidi.cfd/bare/
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
