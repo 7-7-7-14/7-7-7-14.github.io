@@ -11,3 +11,4 @@ self.__uv$config = {
 
 // https://skibidi.cfd/bare/
 // https://infrared.zrhe2016.workers.dev
+// https://bare.lbss.dev.tc/
