@@ -162,6 +162,7 @@ const phrases = [
     `cruz was here..`,
     `we all know who has a chopped chin`,
     `"brainrot is bad", 💀 what a loser`,
+    `phonk on top`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
