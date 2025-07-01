@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://nomorelinewize.promathclass.com/bare/', // https://infrared.zrhe2016.workers.dev/, https://skibidi.cfd/bare/, https://zc.fishoho.com/bare/
+    bare:'https://infrared.zrhe2016.workers.dev/', // https://infrared.zrhe2016.workers.dev/, https://skibidi.cfd/bare/, https://zc.fishoho.com/bare/
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
