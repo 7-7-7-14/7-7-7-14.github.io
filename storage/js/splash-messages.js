@@ -4,7 +4,6 @@ const phrases = [
     `dont type this on your keyboard: up, up, down, down, left, right, left, right, B, A, enter`,
     `im going to put bleach in your eyes`,
     `im in your walls`,
-    /*{ other: 'loop', width: '200px', type: "video", src: `https://media.tenor.com/SIpmtvnEsDIAAAPo/rotating-chips.mp4` },*/
     { type: "image", width: '100%', src: `/storage/images/splash1.png` },
     { type: "image", width: '45%', src: `/storage/images/splash2.png` },
     { type: "image", width: '35%', src: `/storage/images/splash3.png` },
@@ -163,6 +162,8 @@ const phrases = [
     `we all know who has a chopped chin`,
     `"brainrot is bad", 💀 what a loser`,
     `phonk on top`,
+    `how does no one know where the games are 😭🙏`,
+    `what u gonna search? u know who u are`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
