@@ -169,6 +169,7 @@ const phrases = [
     `how does no one know where the games are 😭🙏`,
     `no ads!`,
     `i spent like 3 months making this site, your welcome for all my hard work`,
+    `👈(ﾟヮﾟ👈)`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
