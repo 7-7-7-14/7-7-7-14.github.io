@@ -34,7 +34,7 @@
         <button onclick="window.open('https://discord.gg/VDA8Ngx38Z', '_blank')">Join our Discord</button>
         <button onclick="window.open('https://www.google.com/search?q=site:https://nexus-sub.netlify.app', '_blank')">Boost our site on google</button>
         <button onclick="window.location.href='/pages/extra/data-use'">How we use your data</button>
-        <button onclick="document.getElementById('buttonSound').play();">Click Me</button>
+        <button onclick="playSoundThenRedirect()">Click Me</button>
         <div class="tip">
             tip: you can go to <a href="/cloak" target="_blank" style="color: #DDD;">/cloak</a> to automatically open nexus in about:blank.
         </div>
@@ -42,7 +42,7 @@
     <script type="text/javascript" src="/storage/js/settings.js"></script>
     <script type="text/javascript" src="/storage/js/background.js"></script>
     <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
-    <audio id="buttonSound" src="/storage/mp3/mario.mp3" preload="auto"></audio>
+    <audio id="buttonSound" src="/storage/mp3/secret.mp3" preload="auto"></audio>
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
@@ -51,6 +51,17 @@
   if (updParam === null) {
     window.location.href = '/';
   }
+</script>
+
+<script>
+function playSoundThenRedirect() {
+  const audio = document.getElementById('buttonSound');
+  audio.play();
+
+  audio.onended = () => {
+    window.location.href = '/pages/secret/';
+  };
+}
 </script>
 
 </body>
