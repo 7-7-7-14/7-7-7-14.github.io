@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://infrared.zrhe2016.workers.dev/', // https://infrared.zrhe2016.workers.dev/, https://zc.fishoho.com/bare/, https://ojojojojojoj.vercel.app/bare/
+    bare:'https://r2fh2387hv2b2rfbiz.site/', // https://infrared.zrhe2016.workers.dev/, https://zc.fishoho.com/bare/, https://ojojojojojoj.vercel.app/bare/
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
