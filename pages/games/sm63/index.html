@@ -12,14 +12,13 @@
       height: 100%;
       width: 100%;
       background-color: rgb(30, 30, 30);
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
     }
 
     .game-wrapper {
-      position: relative;
       width: 100vw;
       height: 100vh;
       display: flex;
@@ -28,34 +27,22 @@
       background-color: black;
     }
 
-    .game-scaler {
-      width: 100%;
-      height: 100%;
-      max-width: calc(100vh * (4 / 3)); /* Keep 4:3 aspect ratio */
-      max-height: calc(100vw * (3 / 4));
-      aspect-ratio: 4 / 3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: black;
-    }
-
-    .game-scaler embed {
-      width: 100%;
-      height: 100%;
+    .game-wrapper embed {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       display: block;
     }
   </style>
 </head>
 <body>
   <div class="game-wrapper">
-    <div class="game-scaler">
-      <embed 
-        src="supermario63.swf" 
-        type="application/x-shockwave-flash"
-        scale="showall"
-      ></embed>
-    </div>
+    <embed 
+      src="supermario63.swf" 
+      type="application/x-shockwave-flash"
+      scale="showall"
+    ></embed>
   </div>
 
   <script src="/ruffle-nightly/ruffle.js"></script>
