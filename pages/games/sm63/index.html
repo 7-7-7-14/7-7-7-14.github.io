@@ -12,40 +12,44 @@
       height: 100%;
       width: 100%;
       background-color: rgb(30, 30, 30);
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
-    .aspect-wrapper {
+    .game-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+    }
+
+    .game-scaler {
       width: 100%;
       height: 100%;
+      max-width: calc(100vh * (4 / 3)); /* Keep 4:3 aspect ratio */
+      max-height: calc(100vw * (3 / 4));
+      aspect-ratio: 4 / 3;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: black;
     }
 
-    .game {
-      aspect-ratio: 4 / 3; /* Original aspect ratio (adjust if needed) */
-      width: 100%;
-      max-width: 100vw;
-      max-height: 100vh;
-      background-color: black;
-    }
-
-    .game embed {
+    .game-scaler embed {
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: contain;
     }
   </style>
 </head>
 <body>
-  <div class="aspect-wrapper">
-    <div class="game">
+  <div class="game-wrapper">
+    <div class="game-scaler">
       <embed 
         src="supermario63.swf" 
         type="application/x-shockwave-flash"
