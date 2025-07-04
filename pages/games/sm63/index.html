@@ -22,28 +22,32 @@
     }
 
     .game-wrapper {
+      background: black;
       width: 100vw;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: black;
     }
 
-    ruffle-embed {
-      width: 100%;
-      height: 100%;
+    embed, ruffle-embed {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain;
-      background-color: black;
+      width: auto;
+      height: auto;
+      background: black;
       display: block;
+      object-fit: contain; /* extra safeguard */
     }
   </style>
 </head>
 <body>
   <div class="game-wrapper">
-    <ruffle-embed src="supermario63.swf"></ruffle-embed>
+    <embed 
+      src="supermario63.swf" 
+      type="application/x-shockwave-flash"
+      scale="showall"
+    >
   </div>
 </body>
 </html>
