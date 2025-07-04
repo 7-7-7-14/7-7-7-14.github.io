@@ -25,21 +25,28 @@
       height: 100vh;
       background-color: black;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: center; /* horizontal center */
+      align-items: center;     /* vertical center */
     }
 
     .game-inner {
-      aspect-ratio: 16 / 9;  /* Changed here to widescreen */
+      aspect-ratio: 16 / 9;  /* or any ratio you want */
       width: 100%;
-      max-height: 100%;
       max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
     }
 
     .game-inner embed {
       width: 100%;
       height: 100%;
       display: block;
+      margin: 0;  /* remove default margins */
+      padding: 0; /* remove default padding */
+      border: none; /* remove any borders */
     }
   </style>
 </head>
