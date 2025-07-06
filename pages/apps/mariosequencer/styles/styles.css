@@ -108,7 +108,6 @@ html, body {
   flex-direction: column;
   justify-content: center; /* vertical center */
   align-items: center;     /* horizontal center */
-  background: inherit;     /* keep existing bg */
 }
 
 #console {
