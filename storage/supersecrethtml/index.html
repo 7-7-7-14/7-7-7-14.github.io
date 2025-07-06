@@ -119,7 +119,7 @@
           }, 1000);
         } else if (trimmed === "cowsay") {
           appendOutput("bash: cowsay: missing operand");
-          appendOutput("Try 'cowsay [text]' for more information.");
+          appendOutput("Try 'cowsay [text]'");
         } else if (trimmed.startsWith("cowsay ")) {
           const args = trimmed.split(" ");
           const noWrap = args.includes("-n");
