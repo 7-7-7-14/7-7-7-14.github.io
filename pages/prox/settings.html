@@ -134,7 +134,7 @@
 
       // Apply particle theme
       function applyParticleTheme(theme) {
-        const configPath = `/storage/particles/${theme}.json`;
+        const configPath = `/storage/json/${theme}.json`;
         if (window.particlesJS) {
           particlesJS.load('particles-js', configPath, function() { console.log('Theme applied:', theme); });
         }
