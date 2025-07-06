@@ -14471,8 +14471,7 @@ window.onload=function()
 	
 	if (!Game.ready)
 	{
-		if (top!=self) Game.ErrorFrame();
-		else
+		Game.Load();
 		{
 			console.log('[=== '+choose([
 				'Oh, hello!',
