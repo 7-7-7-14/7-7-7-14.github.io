@@ -93,12 +93,18 @@ document.addEventListener('keydown', async e => {
   } else if (e.key === 'Enter') {
     appendOutput('$ ' + command);
     const trimmed = command.trim();
+
     if (trimmed === 'curl parrot.live') {
       await runParrot();
     } else if (trimmed === 'npm install') {
       await runNpmInstall();
     } else if (trimmed === 'help') {
       showHelp();
+    } else if (trimmed === 'exit') {
+      appendOutput('Exiting terminal...');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000); // 1 second delay before redirecting
     } else {
       appendOutput(`bash: ${trimmed.split(' ')[0]}: command not found`);
     }
@@ -112,6 +118,7 @@ function showHelp() {
   appendOutput("  help              Show this help message");
   appendOutput("  curl parrot.live  Watch the party parrot");
   appendOutput("  npm install       Simulate package installation");
+  appendOutput("  exit              Return to main homepage");
 }
 
 async function runParrot() {
