@@ -12,10 +12,10 @@ const intros = [
 ]
 
 const actions = [
-    { shortcut: "t", action: "Set tempo", amount: true, name: "speed", image: "assets/action_speed.png", default: 300, set: [10, 10000], add: [-10000, 10000], multiply: [0.01, 1000, 0.1] },
-    { shortcut: "v", action: "Set volume", amount: true, name: "volume", image: "assets/action_volume.png", default: 100, set: [0, 600, 1, "%"], add: [-600, 600, 1, "%"], multiply: [0.01, 1000, 0.1] },
+    { shortcut: "t", action: "Set tempo", amount: true, name: "speed", image: "assets/action_speed.png", default: 300, set: [10, 10000], add: [-10000, 10000], multiply: [0.01, 1000, 0.1], divide: [0.1, 100, 0.1] },
+    { shortcut: "v", action: "Set volume", amount: true, name: "volume", image: "assets/action_volume.png", default: 100, set: [0, 600, 1, "%"], add: [-600, 600, 1, "%"], multiply: [0.01, 1000, 0.1], divide: [0.1, 100, 0.1] },
     { shortcut: "p", action: "Pause for duration", amount: true, name: "stop", image: "assets/action_stop.png", default: 4, set: [0, 1000] },
-    { shortcut: "m", action: "Transpose", amount: true, name: "transpose", image: "assets/action_transpose.png", default: 1, set: [-60, 60], add: [-60, 60], multiply: [0.01, 100, 0.1]  },
+    { shortcut: "m", action: "Transpose", amount: true, name: "transpose", image: "assets/action_transpose.png", default: 1, set: [-60, 60], add: [-60, 60] },
  
     { shortcut: "l", action: "Loop", amount: true, name: "loopmany", image: "assets/action_loopmany.png", default: 4, set: [1, 1000] },
     { shortcut: "r", action: "Loop once", name: "loop", image: "assets/action_loop.png" },
@@ -35,7 +35,7 @@ const actions = [
 actions.forEach(x => { $('#actions').append(`<div class="action" action="${x.name}" info="${x.action}" key="${x.shortcut.toUpperCase()}"><img action="${x.name}" alt="${x.action}" src="${x.image}">${x.amount ? "<p>+</p>" : ""}</div>`) })
 
 let soundList = []
-fetch("./sounds.json?v=1").then(x => x.json()).then(list => {
+fetch("./sounds.json?v=6").then(x => x.json()).then(list => {
     soundList = list
     $('#iconboxLoading').hide()
     $('#icons').removeClass('loadingIcons')
@@ -43,14 +43,15 @@ fetch("./sounds.json?v=1").then(x => x.json()).then(list => {
         let imageLink = (!x.emoji && x.id.match(/[a-z0-9]/i)) ? `icons/${x.img || x.id}.png` : `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${(x.emoji || x.id).codePointAt(0).toString(16)}.svg`
         $('#icons').append(`<div class="sound" soundName="${x.name}" soundOrigin="${x.source || ""}" sound="sounds/${x.id}.wav" str="${x.id}" ${(x.tags || []).map(x => "tag_" + x).join(" ")}><img alt="${x.name}" src="${imageLink}"></div>`)
         lastGroup = x.group
-
-        if (settings.proMode) {
-            $('.hotbarTab').first().trigger('click')
-            $('#proHotbar').show()
-            $('#extraPadding').show()
-            buildHotbar()
-        }
     })
+
+    if (settings.proMode) {
+        $('.hotbarTab').first().trigger('click')
+        $('#proHotbar').show()
+        $('#extraPadding').show()
+        buildHotbar()
+    }
+
 }).catch((e) => {
     console.error(e)
     $('#icons img').hide()
@@ -109,6 +110,7 @@ $('#sequence').sortable({
         ui.placeholder.html(ui.item.html())
     },
     stop: function(event, ui) {
+        setUnsavedChanges(true)
         if (cloneSort) {
             ui.item.clone().insertAfter(ui.item);
             $(this).sortable('cancel');
@@ -214,7 +216,7 @@ $(document).on('click contextmenu', '#icons div, #hotbarNotes div.sound', functi
     added.removeAttr("soundorigin")
     added.removeAttr("soundname")
     updateRecent(soundID);
-    addToSequence(added)
+    addToSequence(added);
 })
 
 $(document).on('click contextmenu', '#actions div, #hotbarNotes div.action', function (event) {
@@ -269,7 +271,11 @@ $(document).on('click contextmenu', '#actions div, #hotbarNotes div.action', fun
 })
 
 function getPrefix(num, amt) {
-    return num == "plus" ? (amt >= 0 ? "+" : "") : num == "add" ? "+" : num == "multiply" ? "â¨¯" : ""
+    return num == "plus" ? (amt >= 0 ? "+" : "")
+    : num == "add" ? "+"
+    : num == "multiply" ? "⨯"
+    : num == "divide" ? "/"
+    : ""
 }
 
 function addToSequence(element, noPrepend, copyGroup) {
@@ -285,6 +291,7 @@ function addToSequence(element, noPrepend, copyGroup) {
     }
     prependMode ? container.prepend(element) : appendToSection(container, element)
     if (element.attr("action") == "divider") syncSections()
+    setUnsavedChanges(true)
 }
 
 // add to end, or second last if it ends with a divider
@@ -293,6 +300,7 @@ function appendToSection(container, element) {
     let hasDivider = (lastChild.attr("action") == "divider")
     if (hasDivider) element.insertBefore(lastChild)
     else container.append(element)
+    setUnsavedChanges(true)
 }
 
 function addAction(action, input, num="set", element=stash, dontAppend=false) {
@@ -300,9 +308,12 @@ function addAction(action, input, num="set", element=stash, dontAppend=false) {
     if (!element || isNaN(input)) return
     let amount = Number(Number(input).toFixed(3)) // tofixed converts to string lmao
     let foundAction = actions.find(x => x.name == action)
+    if (!foundAction) return
     let actionData = foundAction[num]
+    if (num && !actionData) { num = "set"; actionData = foundAction.set }
 
     amount = clamp(amount, actionData[0], actionData[1])
+    if (num == "multiply" && altHeld) num = "divide"
     let prefix = getPrefix(num, amount)
     let amountStr = prefix + String(amount) + (actionData[3] || "")
     //element.attr("min", actionData[0]).attr("max", actionData[1])
@@ -318,6 +329,7 @@ function addAction(action, input, num="set", element=stash, dontAppend=false) {
     updateRecent("." + action)
     if (stash) stash = null
     $('.popup').hide()
+    setUnsavedChanges(true)
 }
 
 // eh i'm just gonna make a new function for this
@@ -333,7 +345,7 @@ function addAdvancedAction(action, inputs, element=stash, dontAppend=false) {
 
     element.attr("advanced", true).attr("val1", cleanInputs[0]).attr("val2", cleanInputs[1])
 
-    if (foundAction.colorMode) element.find('p').html(`<span style="color: ${cleanInputs[0]}; margin-right: 2.5px">â¬¤</span> <span>${cleanInputs[1]}<span>`)
+    if (foundAction.colorMode) element.find('p').html(`<span style="color: ${cleanInputs[0]}; margin-right: 2.5px">⬤</span> <span>${cleanInputs[1]}<span>`)
     else element.find('p').text(`${cleanInputs[0]}, ${cleanInputs[1]}`)
 
     if (replaceAction) editAction(element)
@@ -341,12 +353,14 @@ function addAdvancedAction(action, inputs, element=stash, dontAppend=false) {
     else return element
     if (stash) stash = null
     $('.popup').hide()
+    setUnsavedChanges(true)
 }
 
 function editAction(element) {
     replaceAction.replaceWith(element)
     replaceAction.runAnimation('placed')
     replaceAction = null
+    setUnsavedChanges(true)
 }
 
 function syncSections() {
@@ -371,6 +385,7 @@ function syncSections() {
         }
     })
     $('#sequence').html(noteGroups.map((x, y) => `<section class="${y == selectedDivider ? 'selectedDivider' : ''} ${collapsedSections.includes(y) ? "sectionHidden" : ""}" group="${y}">${x}</section>`).join(""))
+    setUnsavedChanges(true)
     if (dividerIndex > 0) $('#sectionSettings').show()
     else $('#sectionSettings').hide()
 }
@@ -459,6 +474,7 @@ $(document).on('click', '#sequence div', function () {
         deselectSection()
         syncSections()
     }
+    setUnsavedChanges(true)
 })
 
 $(document).on('contextmenu', '#sequence div', function () {
@@ -568,6 +584,7 @@ $(document).on('wheel touchmove', '#sequence div', function(event) {
             el.attr("vol", shift)
             playSound(el.attr("sound"), { pitch: getPitch(el), volume: shift / 100 / 2, stopPrevious: true })
         }
+        setUnsavedChanges(true)
     }
     else if (el.attr("action") && el.attr("amount")) {
         let bounds = foundAction[el.attr("num") || "set"]
@@ -579,6 +596,7 @@ $(document).on('wheel touchmove', '#sequence div', function(event) {
         shift = clamp(shift, bounds[0], bounds[1] || 999)
         el.attr("amount", shift)
         el.find("p").text(getPrefix(el.attr("num"), shift) + shift + (bounds[3] || ""))
+        setUnsavedChanges(true)
     }
     else if (foundAction && el.attr("advanced")) {
         let scrollInfo = foundAction.scroll
@@ -593,6 +611,7 @@ $(document).on('wheel touchmove', '#sequence div', function(event) {
         el.attr(valStr, scrollVal)
         if (foundAction.colorMode) el.find("p").children().last().text(el.attr("val2"))
         else el.find("p").text(`${el.attr("val1")}, ${el.attr("val2")}`)
+        setUnsavedChanges(true)
     }
 })
 
@@ -650,8 +669,19 @@ function stopIntro() {
     activeIntro = null
 }
 
-document.addEventListener('scroll', function (event) { if ($(event.target).is("#sequence div")) $(event.target).scrollTop(200) }, true);
-$('#sequence').on('DOMSubtreeModified', function(event) { $('#sequence div').scrollTop(200) });
+// stolen from tempooptimizer who fixed scrolling years ago and never told me, LMAO
+// code prevents scrolling on icons from scrolling the whole page
+// i could not tell you how this works. i didnt even know javascript had fucking "void"
+const sequenceDiv = document.getElementById("sequence");
+$(sequenceDiv).off("DOMSubtreeModified");
+sequenceDiv.addEventListener("wheel", (ev) => {
+    var amogus;
+    if (ev.target instanceof HTMLElement &&
+        (ev.target.classList.contains("sound") || ev.target.classList.contains("action") ||
+            ((amogus = ev.target.parentElement) === null || amogus === void 0 ? void 0 : (amogus.classList.contains("sound") || amogus.classList.contains("action"))))) {
+        ev.preventDefault();
+    }
+});
 
 // https://stackoverflow.com/a/45036752
 $.fn.runAnimation = function(className) {
@@ -826,6 +856,7 @@ $('#clearsounds').click(function() {
     $('#saveName').val('');
     $('#sectionSettings').hide()
     $('.popup').hide();
+    setUnsavedChanges(false)
     filename = "sequence"
     saveLocation = null
 })
@@ -947,7 +978,7 @@ $('.colorTextbox').on('input', function() {
 
 let settings = {}
 try {
-    settings = localStorage["ðŸ—¿"] ? JSON.parse(localStorage["ðŸ—¿"]) : {}
+    settings = localStorage["🗿"] ? JSON.parse(localStorage["🗿"]) : {}
     $('.settingBox[setting]').each(function() {
         let setting = $(this).attr('setting')
         let foundSetting = settings[setting]
@@ -966,7 +997,7 @@ $(document).on('change click', '.settingBox', function() {
     if ($(this).attr('inverted')) val = !val
     if (!val) delete settings[settingName]
     else settings[settingName] = val
-    localStorage["ðŸ—¿"] = JSON.stringify(settings)
+    localStorage["🗿"] = JSON.stringify(settings)
 
     if (settingName == "oldSaving") {
         if (val) disableNewSaving()

@@ -30,6 +30,7 @@ function modifyNumber(num, newNum, operator) {
     switch (operator) {
         case "add": return num + newNum
         case "multiply": return num * newNum
+        case "divide": return (newNum <= 0 ? num : num / newNum)
         default: return newNum
     }
 }
@@ -122,21 +123,21 @@ function preloadSequence(sequence=getSequenceData()) {
             // do something different for each action
             switch (x.action) {
 
-                // â© change BPM
+                // ⏩ change BPM
                 case "speed":
                     bpm = modifyNumber(bpm, val, x.operator)
                     bpm = Number(clamp(bpm, 5, MAX_BPM_LIMIT).toFixed(4))
                     actionObj.bpm = bpm
                     break;
 
-                // ðŸ”Š change volume
+                // 🔊 change volume
                 case "volume":
                     volume = modifyNumber(volume, val, x.operator)
                     volume = Number(clamp(volume, 0, 600).toFixed(4))
                     actionObj.volume = volume
                     break;
 
-                // â¸ pause for duration
+                // ⏸ pause for duration
                 case "stop":
                     let beatsRemaining = isNaN(x.remaining) ? val : x.remaining // i could have used ?? but i'm sure theres a browser out there that doesnt support it. fuck webdev
                     if (!scrubbing && beatsRemaining > 0) {
@@ -157,7 +158,7 @@ function preloadSequence(sequence=getSequenceData()) {
                     }
                     break;
 
-                // ðŸ” multiple loops
+                // 🔁 multiple loops
                 case "loopmany":
                     let loopsRemaining = isNaN(x.remaining) ? val : x.remaining
                     if (!scrubbing && loopsRemaining > 0) {
@@ -174,7 +175,7 @@ function preloadSequence(sequence=getSequenceData()) {
                     else actionObj.skip = true;
                     break;
 
-                // ðŸ”‚ single loop
+                // 🔂 single loop
                 case "loop":
                     if (!x.triggered) {
                         sequence[index].triggered = true
@@ -186,25 +187,25 @@ function preloadSequence(sequence=getSequenceData()) {
                     else actionObj.skip = true;
                     break;
 
-                // â—‡ loop target
+                // ◇ loop target
                 case "looptarget":
                     loopTarget = index
                     break;
 
-                // âŽ stop sounds
+                // ❎ stop sounds
                 case "cut":
                     break; // nothing, actually
 
-                // ðŸ“ startpos
+                // 📍 startpos
                 case "startpos":
                     break; // handled earlier 
 
-                // â†” combine
+                // ↔ combine
                 case "combine":
                     if (scrubbing) actionObj.skip = true
                     break; // combining is checked for sounds
 
-                // âº go to target
+                // ⏺ go to target
                 case "jump":
                     if (!x.triggered) {
                         let foundTarget = sequence.findIndex(e => e.action == "target" && !e.triggered && e.amount == x.amount)
@@ -220,23 +221,23 @@ function preloadSequence(sequence=getSequenceData()) {
                     else actionObj.skip = true;
                     break;
 
-                // â­• target
+                // ⭕ target
                 case "target":
                     actionObj.trigger = false
                     actionObj.pulse = false
                     break; // handled by jump action
 
-                // ðŸ”¼ raise or lower pitch of all future sounds
+                // 🔼 raise or lower pitch of all future sounds
                 case "transpose":
                     transposition = modifyNumber(transposition, val, x.operator)
                     transposition = Number(clamp(transposition, -60, 60).toFixed(4))
                     break;
 
-                // âš¡ flash
+                // ⚡ flash
                 case "flash":
                     break; // nothing here, go figure
 
-                // â›¶ pulse screen
+                // ⛶ pulse screen
                 case "pulse":
                     if (scrubbing) actionObj.skip = true // disable pulse scrubbing, will fix eventually
                     else {
@@ -266,7 +267,7 @@ function preloadSequence(sequence=getSequenceData()) {
                     }
                     break;
 
-                // ðŸŽ¨ background color
+                // 🎨 background color
                 case "bg":
                     actionObj.bgColor = x.dualVal[0].match(colorRegex) ? x.dualVal[0] : defaultBG
                     actionObj.fadeTime = scrubbing ? 0.1 : clamp(Number(x.dualVal[1]).toFixed(4), 0, 200)

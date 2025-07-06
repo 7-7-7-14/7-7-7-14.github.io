@@ -1,5 +1,9 @@
 let filename = "sequence"
-let extension = ".🗿"
+let extensionList = [".🗿", ".moai"]
+
+function getExtension() {
+    return settings.altExtension ? extensionList[1] : extensionList[0]
+}
 
 function enableNewSaving() {
     sexySaving = true
@@ -49,7 +53,7 @@ function generateSequenceFile() {
             else if (x.attr('amount')) {
                 let num = x.attr('num')
                 actionStr += ("@" + Number(x.attr('amount')))
-                actionStr += (num == "add" ? "@+" : num == "multiply" ? "@x" : "")
+                actionStr += (num == "add" ? "@+" : num == "multiply" ? "@x" : num == "divide" ? "@/" : "")
             }
             toAdd = (actionStr)
         }
@@ -77,7 +81,7 @@ function classicSave(data) {
     let downloader = document.createElement('a');
     downloader.href = URL.createObjectURL(data)
     downloader.dataset.downloadurl = ['text/txt', downloader.download, downloader.href].join(':');
-    downloader.style.display = "none"; downloader.download = filename + extension
+    downloader.style.display = "none"; downloader.download = filename + getExtension()
     downloader.target = "_blank"; document.body.appendChild(downloader);
     downloader.click(); document.body.removeChild(downloader);
     setUnsavedChanges(false)
@@ -86,7 +90,7 @@ function classicSave(data) {
 
 // saving through file api, for cool browsers
 function modernSave(data) {
-    window.showSaveFilePicker({suggestedName: filename + extension})
+    window.showSaveFilePicker({suggestedName: filename + getExtension()})
     .then(selectedFile => {
         selectedFile.createWritable().then(writable => {
             setSaveLocation(selectedFile)
@@ -99,7 +103,9 @@ function modernSave(data) {
 // moai-ify the filename
 function setFilename(name) {
     filename = name
-    if (filename.endsWith(extension)) filename = filename.slice(0, extension.length * -1)
+    extensionList.forEach(e => {
+        if (filename.endsWith(e)) filename = filename.slice(0, e.length * -1)
+    })
     $('#saveName').val(filename)
 }
 
@@ -112,7 +118,7 @@ function setSaveLocation(file) {
 
 // save to last opened/saved file
 function quickSave() {
-    if (!saveLocation || saveLocation.name != filename + extension) return $('#downloadBtn').trigger('click') // save as
+    if (!saveLocation || !extensionList.some(e => saveLocation.name == filename + e)) return $('#downloadBtn').trigger('click') // save as
     let saveData = generateSequenceFile()
     if (!saveData.length) return
     if (ctrlHeld && altHeld) return openSequencePreview(new Blob([saveData], {type: 'text/txt;charset=UTF-8'}))
@@ -174,6 +180,7 @@ function loadSequence(data) {
                     if (actionData.isTarget && !pitch) pitch = 1 
                     if (!element.find("p").length) element.append("<p></p>")
                     if (num == "x") num = "multiply"
+                    else if (num == "/") num = "divide"
                     else if (num == "+") num = "add"
                     for (let i=0; i<(count || 1); i++) sequenceData += addAction(main, +pitch, num, element, true).prop('outerHTML');
                     return
@@ -257,7 +264,7 @@ function setUnsavedChanges(unsaved) {
 
 // exit confirmation
 let unsavedChanges = false
-$('#sequence').on('DOMSubtreeModified', function() { setUnsavedChanges(true) });
+
 window.onbeforeunload = function(e) {
     if (unsavedChanges && $('#sequence').children().length && settings.exitConfirmation) {
         e.returnValue = "🗿";
