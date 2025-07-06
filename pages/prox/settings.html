@@ -182,7 +182,7 @@
         document.title = title;
         if (title !== 'Settings') localStorage.setItem('siteTitle', title); else localStorage.removeItem('siteTitle');
       });
-
+ 
       siteLogoInput.addEventListener('change', () => {
         const file = siteLogoInput.files[0]; if (!file) return;
         const reader = new FileReader();
