@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Mario Sequencer | yell0wsuit</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="./styles/styles.css" />
+        <link rel="icon" type="image/png" href="./favicon.png">
+        <meta name="description" content="Mario Sequencer - Web Edition. Fork of minghai/MarioSequencer with quality-of-life improvements. Compose, edit, and play Mario Paint-style music in your browser." />
+        <meta name="author" content="yell0wsuit, minghai, Nintendo" />
+        <meta property="og:title" content="Mario Sequencer | yell0wsuit" />
+        <meta property="og:description" content="Web-based Mario Paint music sequencer with quality-of-life improvements. Compose, edit, and play Mario Paint-style music in your browser." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yell0wsuit.github.io/MarioSequencer/" />
+        <meta property="og:image" content="https://yell0wsuit.github.io/MarioSequencer/thumbImg.jpg" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Mario Sequencer | yell0wsuit" />
+        <meta name="twitter:description" content="Web-based Mario Paint music sequencer with quality-of-life improvements. Compose, edit, and play Mario Paint-style music in your browser." />
+        <meta name="twitter:image" content="https://yell0wsuit.github.io/MarioSequencer/thumbImg.jpg" />
+    </head>
+    <body>
+        <div id="console">
+            <canvas id="layer1" class="game"></canvas>
+            <canvas id="layer2" class="game"></canvas>
+            <img id="spinner" src="./images/loading_transparent_.gif" alt="Loading spinner" title="Loading spinner" />
+        </div>
+        <div id="btncontrols">
+            <button type="button" id="downloadBtn">Download song</button>
+            <button type="button" id="helpBtn">Help</button>
+        </div>
+        <script type="module" src="./js/main.js"></script>
+    </body>
+</html>
