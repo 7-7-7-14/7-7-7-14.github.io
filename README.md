@@ -5,6 +5,3 @@
 US4 is an unblоcked site created by Voucan.
 _______________________________________________________________________________________
 This is a forked and modified copy. There may be errors in code directory. If you find any errors you may not do anything because I have no discord server 😔
-
-new site sneak peak ![image](https://github.com/user-attachments/assets/a83e89ad-1ea9-43c8-8342-8a1b24334557)
-
