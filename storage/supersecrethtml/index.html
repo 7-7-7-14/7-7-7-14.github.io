@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <title>Tuff?</title>
 <style>
-body {
-  background: #000;
-  color: #33ff33;
-  font-family: monospace;
-  margin: 0;
-  height: 100vh;
+  body {
+    background: #000;
+    color: #33ff33;
+    font-family: monospace;
+    margin: 0;
+    height: 100vh;
     display: flex;
-    align-items: center;      /* changed from flex-start */
-  justify-content: center;
-  padding: 10px;
-  overflow: hidden;
-}
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    overflow: hidden;
+  }
 
   #terminal {
     background: #000;
@@ -24,16 +24,19 @@ body {
     max-width: 800px;
     height: 500px;
     padding: 10px;
-    overflow: hidden;
+    overflow: auto;
     white-space: pre-wrap;
   }
+
   #input-line {
     display: inline;
   }
+
   #cursor {
     display: inline;
     animation: blink 1s step-start infinite;
   }
+
   @keyframes blink {
     50% { opacity: 0; }
   }
@@ -41,7 +44,7 @@ body {
 </head>
 <body>
 <div id="terminal">
-  <div>Welcome to the Nexus Terminal! Type <code>curl parrot.live</code> to see the party parrot.</div>
+  <div>Welcome to the Nexus Terminal! Type <code>help</code> for a list of commands. Type curl parrot.live</div>
   <div id="output"></div>
   <div id="input-line">$ <span id="input"></span><span id="cursor">█</span></div>
 </div>
@@ -70,6 +73,7 @@ function appendOutput(text) {
   const line = document.createElement('div');
   line.textContent = text;
   output.appendChild(line);
+  terminal.scrollTop = terminal.scrollHeight;
 }
 
 document.addEventListener('keydown', async e => {
@@ -77,7 +81,7 @@ document.addEventListener('keydown', async e => {
     clearInterval(timer);
     running = false;
     if (lastFrameElement) lastFrameElement.remove();
-    appendOutput('Parrot stopped.');
+    appendOutput('Process stopped.');
     return;
   }
   if (running) return;
@@ -88,15 +92,27 @@ document.addEventListener('keydown', async e => {
     command += e.key;
   } else if (e.key === 'Enter') {
     appendOutput('$ ' + command);
-    if (command.trim() === 'curl parrot.live') {
+    const trimmed = command.trim();
+    if (trimmed === 'curl parrot.live') {
       await runParrot();
+    } else if (trimmed === 'npm install') {
+      await runNpmInstall();
+    } else if (trimmed === 'help') {
+      showHelp();
     } else {
-      appendOutput(`bash: ${command.trim().split(' ')[0]}: command not found`);
+      appendOutput(`bash: ${trimmed.split(' ')[0]}: command not found`);
     }
     command = '';
   }
   input.textContent = command;
 });
+
+function showHelp() {
+  appendOutput("Available commands:");
+  appendOutput("  help              Show this help message");
+  appendOutput("  curl parrot.live  Watch the party parrot");
+  appendOutput("  npm install       Simulate package installation");
+}
 
 async function runParrot() {
   appendOutput('Starting parrot... (press Enter to stop)');
@@ -117,6 +133,35 @@ async function runParrot() {
 
   draw();
   timer = setInterval(draw, 70);
+}
+
+async function runNpmInstall() {
+  input.textContent = '';
+  command = '';
+  running = true;
+
+  appendOutput('Installing packages...');
+  const progressBar = document.createElement('div');
+  output.appendChild(progressBar);
+
+  const totalSteps = 20;
+  for (let i = 0; i <= totalSteps; i++) {
+    const percent = Math.floor((i / totalSteps) * 100);
+    const blocks = Math.floor((i / totalSteps) * 20);
+    const bar = '='.repeat(blocks) + ' '.repeat(20 - blocks);
+    progressBar.textContent = `Downloading [${bar}] ${percent}%`;
+    await new Promise(resolve => setTimeout(resolve, 200));
+  }
+
+  appendOutput('Extracting...');
+  await new Promise(resolve => setTimeout(resolve, 500));
+  appendOutput('Linking dependencies...');
+  await new Promise(resolve => setTimeout(resolve, 500));
+  appendOutput('Building modules...');
+  await new Promise(resolve => setTimeout(resolve, 500));
+  appendOutput('Done. Installed 204 packages.');
+
+  running = false;
 }
 </script>
 </body>
