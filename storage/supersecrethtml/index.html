@@ -60,7 +60,7 @@ let lastFrameElement = null;
 async function loadFrames() {
   const framePromises = [];
   for (let i = 0; i < 10; i++) {
-    framePromises.push(fetch(`./${i}.txt`).then(res => res.text()));
+    framePromises.push(fetch(`./frames/${i}.txt`).then(res => res.text()));
   }
   frames = await Promise.all(framePromises);
 }
