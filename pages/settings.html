@@ -4,21 +4,14 @@
     <meta property="og:title" content="US4 | Settings">
     <meta property="og:description" content="Edit your website settings here!">
     <meta property="og:image" content="/storage/images/logo.png">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link
-      rel="icon"
-      href="../storage/images/googleclassroom.png"
-      type="image/png"
-      id="favicon"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link href="/storage/css/settings.css" rel="stylesheet" />
-    <link href="/storage/css/style.css" rel="stylesheet" />
+    <!-- Favicon link with id for easy update -->
+    <link rel="icon" href="../storage/images/googleclassroom.png" type="image/png" id="favicon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/storage/css/settings.css" rel="stylesheet">
+    <link href="/storage/css/style.css" rel="stylesheet">
   </head>
   <body>
     <script src="/particles.js"></script>
@@ -27,275 +20,223 @@
     <div class="navbar">
       <div class="left-side">
         <a href="/">
-          <img src="/storage/images/logo.png" alt="logo" />
+          <img src="/storage/images/logo.png" alt="logo">
         </a>
       </div>
       <div class="right-side">
-        <script type="text/javascript" src="/storage/js/nav.js"></script>
+        <script src="/storage/js/nav.js"></script>
       </div>
     </div>
 
     <div class="settings-container">
       <h1>Settings</h1>
-      <label for="backgroundColorPicker">Select Background Color:</label>
-      <input type="color" id="backgroundColorPicker" />
-      <div class="checkbox-container">
-        <label for="themeSelector">Select Particle Theme:</label>
-        <select id="themeSelector">
-          <option value="theme1">Classic White</option>
-          <option value="theme2">Neon Triangles</option>
-          <option value="theme3">Dark Dust</option>
-        </select>
 
+      <!-- Background color picker -->
+      <label for="backgroundColorPicker">Select Background Color:</label>
+      <input type="color" id="backgroundColorPicker">
+
+      <!-- Particle theme selector -->
+      <label for="themeSelector">Select Particle Theme:</label>
+      <select id="themeSelector">
+        <option value="theme1">Classic White</option>
+        <option value="theme2">Neon Triangles</option>
+        <option value="theme3">Dark Dust</option>
+      </select>
+
+      <div class="checkbox-container">
         <div>
           <label for="beforeUnloadToggle">Anti-Close</label>
-          <input type="checkbox" id="beforeUnloadToggle" />
+          <input type="checkbox" id="beforeUnloadToggle">
         </div>
         <div>
           <label for="autocloakToggle">Auto-about:blank</label>
-          <input type="checkbox" id="autocloakToggle" />
+          <input type="checkbox" id="autocloakToggle">
         </div>
       </div>
-      <hr />
+      <hr>
+
+      <!-- Site title and favicon -->
       <label for="siteTitle">Set Site Title:</label>
-      <input type="text" id="siteTitle" placeholder="Enter site title" />
+      <input type="text" id="siteTitle" placeholder="Enter site title">
       <label for="siteLogo">Set Site Favicon:</label>
-      <input type="file" id="siteLogo" accept="image/*" />
+      <input type="file" id="siteLogo" accept="image/*">
       <button id="saveSettings">Save Title & Favicon</button>
-      <hr />
+      <hr>
+
+      <!-- Panic button settings -->
       <label for="panicKey">Set Panic Button Key:</label>
-      <input type="text" id="panicKey" placeholder="Enter key (e.g., F1)" />
+      <input type="text" id="panicKey" placeholder="Enter key (e.g., F1)">
       <label for="panicUrl">Set Panic Button URL:</label>
-      <input
-        type="text"
-        id="panicUrl"
-        placeholder="Enter URL to redirect to"
-      />
+      <input type="text" id="panicUrl" placeholder="Enter URL to redirect to">
       <button id="savePanicButtonSettings">Save Panic Button Settings</button>
-      <hr />
-      <button id="resetSettings" class="reset-button">
-        Reset Tab Name and Icon
-      </button>
-      <button id="resetPanicButtonSettings" class="reset-button">
-        Reset Panic Button Settings
-      </button>
+      <hr>
+
+      <!-- Reset buttons -->
+      <button id="resetSettings" class="reset-button">Reset Tab Name and Icon</button>
+      <button id="resetPanicButtonSettings" class="reset-button">Reset Panic Button Settings</button>
     </div>
 
     <script>
-      // Elements
-      const beforeUnloadToggle = document.getElementById("beforeUnloadToggle");
-      const autocloakToggle = document.getElementById("autocloakToggle");
-      const siteTitleInput = document.getElementById("siteTitle");
-      const siteLogoInput = document.getElementById("siteLogo");
-      const panicKeyInput = document.getElementById("panicKey");
-      const panicUrlInput = document.getElementById("panicUrl");
-      const saveSettingsButton = document.getElementById("saveSettings");
-      const savePanicButtonSettingsButton = document.getElementById(
-        "savePanicButtonSettings"
-      );
-      const resetSettingsButton = document.getElementById("resetSettings");
-      const resetPanicButtonSettingsButton = document.getElementById(
-        "resetPanicButtonSettings"
-      );
-      const backgroundColorPicker = document.getElementById(
-        "backgroundColorPicker"
-      );
-      const themeSelector = document.getElementById("themeSelector");
+      // Element references
+      const backgroundColorPicker = document.getElementById('backgroundColorPicker');
+      const themeSelector = document.getElementById('themeSelector');
+      const beforeUnloadToggle = document.getElementById('beforeUnloadToggle');
+      const autocloakToggle = document.getElementById('autocloakToggle');
+      const siteTitleInput = document.getElementById('siteTitle');
+      const siteLogoInput = document.getElementById('siteLogo');
+      const saveSettingsButton = document.getElementById('saveSettings');
+      const panicKeyInput = document.getElementById('panicKey');
+      const panicUrlInput = document.getElementById('panicUrl');
+      const savePanicButtonSettingsButton = document.getElementById('savePanicButtonSettings');
+      const resetSettingsButton = document.getElementById('resetSettings');
+      const resetPanicButtonSettingsButton = document.getElementById('resetPanicButtonSettings');
+      const faviconLink = document.getElementById('favicon');
 
-      // Restore settings on page load
+      // Load stored settings
       function restoreSettings() {
-        // Title
-        const savedTitle = localStorage.getItem("siteTitle");
+        // Background color
+        const storedColor = localStorage.getItem('backgroundColor') || 'black';
+        document.body.style.backgroundColor = storedColor;
+        backgroundColorPicker.value = storedColor;
+
+        // Particle theme
+        const storedTheme = localStorage.getItem('particlesTheme') || 'theme1';
+        themeSelector.value = storedTheme;
+        applyParticleTheme(storedTheme);
+
+        // Before unload toggle
+        const beforeUnloadEnabled = localStorage.getItem('beforeUnloadEnabled') === 'true';
+        beforeUnloadToggle.checked = beforeUnloadEnabled;
+        if (beforeUnloadEnabled) window.addEventListener('beforeunload', beforeUnloadHandler);
+
+        // Autocloak toggle
+        autocloakToggle.checked = localStorage.getItem('autocloakEnabled') === 'true';
+
+        // Site title
+        const savedTitle = localStorage.getItem('siteTitle');
         if (savedTitle) {
           document.title = savedTitle;
           siteTitleInput.value = savedTitle;
         }
 
         // Favicon
-        const savedFavicon = localStorage.getItem("siteLogo");
-        if (savedFavicon) {
-          let favicon = document.querySelector('link[rel="icon"]');
-          if (!favicon) {
-            favicon = document.createElement("link");
-            favicon.rel = "icon";
-            document.head.appendChild(favicon);
-          }
-          favicon.href = savedFavicon;
-        }
+        const savedFavicon = localStorage.getItem('siteLogo');
+        if (savedFavicon) faviconLink.href = savedFavicon;
 
-        // Panic button settings
-        panicKeyInput.value = localStorage.getItem("panicKey") || "";
-        panicUrlInput.value = localStorage.getItem("panicUrl") || "";
-
-        // Toggles
-        beforeUnloadToggle.checked =
-          localStorage.getItem("beforeUnloadEnabled") === "true";
-        autocloakToggle.checked =
-          localStorage.getItem("autocloakEnabled") === "true";
-
-        // Background color
-        const storedColor = localStorage.getItem("backgroundColor") || "black";
-        document.body.style.backgroundColor = storedColor;
-        backgroundColorPicker.value = storedColor;
-
-        // Particle theme
-        const savedTheme = localStorage.getItem("particleTheme") || "theme1";
-        themeSelector.value = savedTheme;
-        applyParticleTheme(savedTheme);
+        // Panic settings
+        panicKeyInput.value = localStorage.getItem('panicKey') || '';
+        panicUrlInput.value = localStorage.getItem('panicUrl') || '';
       }
 
-      // Save favicon and title
-      saveSettingsButton.addEventListener("click", () => {
-        const siteTitle = siteTitleInput.value;
-        const siteLogoFile = siteLogoInput.files[0];
-
-        if (siteTitle) {
-          localStorage.setItem("siteTitle", siteTitle);
-          document.title = siteTitle;
-        }
-
-        if (siteLogoFile) {
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            const logoUrl = event.target.result;
-            localStorage.setItem("siteLogo", logoUrl);
-            let favicon = document.querySelector('link[rel="icon"]');
-            if (!favicon) {
-              favicon = document.createElement("link");
-              favicon.rel = "icon";
-              document.head.appendChild(favicon);
-            }
-            favicon.href = logoUrl;
-          };
-          reader.readAsDataURL(siteLogoFile);
-        }
-      });
-
-      // Save panic button settings
-      savePanicButtonSettingsButton.addEventListener("click", () => {
-        const panicKey = panicKeyInput.value;
-        const panicUrl = panicUrlInput.value;
-
-        if (panicKey) {
-          localStorage.setItem("panicKey", panicKey);
-        }
-        if (panicUrl) {
-          localStorage.setItem("panicUrl", panicUrl);
-        }
-      });
-
-      // Reset site title & favicon
-      resetSettingsButton.addEventListener("click", () => {
-        localStorage.removeItem("siteTitle");
-        localStorage.removeItem("siteLogo");
-        document.title = "Home";
-
-        const favicon = document.querySelector('link[rel="icon"]');
-        if (favicon) {
-          favicon.href =
-            "https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png";
-        }
-        siteTitleInput.value = "";
-        siteLogoInput.value = "";
-      });
-
-      // Reset panic button settings
-      resetPanicButtonSettingsButton.addEventListener("click", () => {
-        localStorage.removeItem("panicKey");
-        localStorage.removeItem("panicUrl");
-        panicKeyInput.value = "";
-        panicUrlInput.value = "";
-      });
-
-      // Handle beforeUnload toggle
+      // Handlers
       function beforeUnloadHandler(e) {
         e.preventDefault();
-        e.returnValue = "";
-      }
-      beforeUnloadToggle.addEventListener("change", () => {
-        localStorage.setItem("beforeUnloadEnabled", beforeUnloadToggle.checked);
-        if (beforeUnloadToggle.checked) {
-          window.addEventListener("beforeunload", beforeUnloadHandler);
-        } else {
-          window.removeEventListener("beforeunload", beforeUnloadHandler);
-        }
-      });
-      // Set initial beforeUnload handler if enabled
-      if (beforeUnloadToggle.checked) {
-        window.addEventListener("beforeunload", beforeUnloadHandler);
+        e.returnValue = '';
       }
 
-      // Handle autocloak toggle
-      autocloakToggle.addEventListener("change", () => {
-        localStorage.setItem("autocloakEnabled", autocloakToggle.checked);
-        if (autocloakToggle.checked) {
-          const newTab = window.open("about:blank", "_blank");
-          if (newTab) {
-            const iframe = document.createElement("iframe");
-            iframe.src = "/";
-            iframe.style.width = "100vw";
-            iframe.style.height = "100vh";
-            iframe.style.border = "none";
-            newTab.document.body.style.margin = "0";
-            newTab.document.body.appendChild(iframe);
-          }
-          const panicUrl = localStorage.getItem("panicUrl") || "https://classroom.google.com";
-          window.location.href = panicUrl;
-        }
-      });
-
-      // Background color picker change
-      backgroundColorPicker.addEventListener("input", () => {
-        document.body.style.backgroundColor = backgroundColorPicker.value;
-        localStorage.setItem("backgroundColor", backgroundColorPicker.value);
-      });
-
-      // Panic button key shortcut
-      window.addEventListener("keydown", (event) => {
-        const panicKey = localStorage.getItem("panicKey");
-        const panicUrl = localStorage.getItem("panicUrl");
-        if (event.key === panicKey && panicUrl) {
-          window.location.href = panicUrl;
-        }
-      });
-
-      // Particle theme selection and applying
       function applyParticleTheme(theme) {
-        // Example: change particles.js config based on theme
-        // You need to create config files or objects named 'particles-config-theme1.json' etc.
-        const configUrl = `/particles-config-${theme}.json`;
+        const configPath = `/storage/particles/${theme}.json`;
         if (window.particlesJS) {
-          window.particlesJS.load("particles-js", configUrl, function () {
-            console.log(`Particles.js loaded with ${theme}`);
+          window.particlesJS.load('particles-js', configPath, () => {
+            console.log('Applied theme:', theme);
           });
         }
       }
-      // When user changes theme selector, save and apply it
-      themeSelector.addEventListener("change", () => {
-        const selectedTheme = themeSelector.value;
-        localStorage.setItem("particleTheme", selectedTheme);
-        applyParticleTheme(selectedTheme);
+
+      // Event listeners
+      backgroundColorPicker.addEventListener('input', () => {
+        document.body.style.backgroundColor = backgroundColorPicker.value;
+        localStorage.setItem('backgroundColor', backgroundColorPicker.value);
       });
 
-      // On page load, restore everything
+      themeSelector.addEventListener('change', () => {
+        const theme = themeSelector.value;
+        localStorage.setItem('particlesTheme', theme);
+        applyParticleTheme(theme);
+      });
+
+      beforeUnloadToggle.addEventListener('change', () => {
+        const enabled = beforeUnloadToggle.checked;
+        localStorage.setItem('beforeUnloadEnabled', enabled);
+        if (enabled) window.addEventListener('beforeunload', beforeUnloadHandler);
+        else window.removeEventListener('beforeunload', beforeUnloadHandler);
+      });
+
+      autocloakToggle.addEventListener('change', () => {
+        const enabled = autocloakToggle.checked;
+        localStorage.setItem('autocloakEnabled', enabled);
+        if (enabled) {
+          const newTab = window.open('about:blank', '_blank');
+          if (newTab) {
+            const iframe = document.createElement('iframe');
+            iframe.src = '/';
+            iframe.style.width = '100vw';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            newTab.document.body.style.margin = '0';
+            newTab.document.body.appendChild(iframe);
+          }
+          const panicUrl = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
+          window.location.href = panicUrl;
+        }
+      });
+
+      siteTitleInput.addEventListener('input', () => {
+        const title = siteTitleInput.value.trim() || 'Home';
+        document.title = title;
+        if (title !== 'Home') localStorage.setItem('siteTitle', title);
+        else localStorage.removeItem('siteTitle');
+      });
+
+      siteLogoInput.addEventListener('change', () => {
+        const file = siteLogoInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+          const dataUrl = e.target.result;
+          faviconLink.href = dataUrl;
+          localStorage.setItem('siteLogo', dataUrl);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      savePanicButtonSettingsButton.addEventListener('click', () => {
+        const key = panicKeyInput.value;
+        const url = panicUrlInput.value;
+        if (key) localStorage.setItem('panicKey', key);
+        if (url) localStorage.setItem('panicUrl', url);
+      });
+
+      resetSettingsButton.addEventListener('click', () => {
+        localStorage.removeItem('siteTitle');
+        localStorage.removeItem('siteLogo');
+        document.title = 'Home';
+        faviconLink.href = '../storage/images/googleclassroom.png';
+        siteTitleInput.value = '';
+        siteLogoInput.value = '';
+      });
+
+      resetPanicButtonSettingsButton.addEventListener('click', () => {
+        localStorage.removeItem('panicKey');
+        localStorage.removeItem('panicUrl');
+        panicKeyInput.value = '';
+        panicUrlInput.value = '';
+      });
+
+      window.addEventListener('keydown', e => {
+        const panicKey = localStorage.getItem('panicKey');
+        const panicUrl = localStorage.getItem('panicUrl');
+        if (e.key === panicKey && panicUrl) window.location.href = panicUrl;
+      });
+
+      // Initialize on load
       restoreSettings();
     </script>
 
-    <script
-      type="text/javascript"
-      src="/storage/js/notify.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/storage/js/background.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/storage/js/cheese-algorithm.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/storage/js/settings.js"
-    ></script>
+    <!-- Additional scripts -->
+    <script src="/storage/js/notify.js"></script>
+    <script src="/storage/js/background.js"></script>
+    <script src="/storage/js/cheese-algorithm.js"></script>
+    <script src="/storage/js/settings.js"></script>
   </body>
 </html>
