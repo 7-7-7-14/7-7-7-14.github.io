@@ -5,38 +5,45 @@
 <title>Tuff?</title>
 <style>
 body {
+body {
   background: #000;
   color: #33ff33;
   font-family: monospace;
   margin: 0;
   height: 100vh;
-    display: flex;
-    align-items: center;      /* changed from flex-start */
+  display: flex;
+  align-items: center;      /* changed from flex-start */
   justify-content: center;
   padding: 10px;
   overflow: hidden;
 }
 
-  #terminal {
-    background: #000;
-    border: 2px solid #33ff33;
-    width: 90vw;
-    max-width: 800px;
-    height: 500px;
-    padding: 10px;
-    overflow: hidden;
-    white-space: pre-wrap;
+#terminal {
+  background: #000;
+  border: 2px solid #33ff33;
+  width: 90vw;
+  max-width: 800px;
+  height: 500px;
+  padding: 10px;
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+
+#input-line {
+  display: inline;
+}
+
+#cursor {
+  display: inline;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
-  #input-line {
-    display: inline;
-  }
-  #cursor {
-    display: inline;
-    animation: blink 1s step-start infinite;
-  }
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
+}
+
 </style>
 </head>
 <body>
@@ -116,7 +123,7 @@ async function runParrot() {
   };
 
   draw();
-  timer = setInterval(draw, 120);
+  timer = setInterval(draw, 40);
 }
 </script>
 </body>
