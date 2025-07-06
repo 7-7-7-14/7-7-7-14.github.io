@@ -108,6 +108,43 @@
 
         if (trimmed === "curl parrot.live") {
           await runParrot();
+        } else if (trimmed === "npm") {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          appendOutput(`Usage:
+
+npm install        install all the dependencies in your project
+npm install <foo>  add the <foo> dependency to your project
+npm test           run this project's tests
+npm run <foo>      run the script named <foo>
+npm <command> -h   quick help on <command>
+npm -l             display usage info for all commands
+npm help <term>    search for help on <term> (in a browser)
+npm help npm       more involved overview (in a browser)
+
+All commands:
+
+    access, adduser, audit, bugs, cache, ci, completion,
+    config, dedupe, deprecate, diff, dist-tag, docs, doctor,
+    edit, exec, explain, explore, find-dupes, fund, get, help,
+    help-search, init, install, install-ci-test, install-test,
+    link, ll, login, logout, ls, org, outdated, owner, pack,
+    ping, pkg, prefix, profile, prune, publish, query, rebuild,
+    repo, restart, root, run, sbom, search, set, shrinkwrap,
+    star, stars, start, stop, team, test, token, undeprecate,
+    uninstall, unpublish, unstar, update, version, view, whoami
+
+Specify configs in the ini-formatted file:
+    \\Netlify\\Storage\\npm\\.npmrc 
+or on the command line via: npm <command> --key=value
+
+More configuration info: npm help config
+Configuration fields: npm help 7 config
+
+npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
+`);
+        } else if (trimmed === "npm help npm") {
+          window.open("npm.html", "_blank");
+          appendOutput("Opening npm help page in a new tab...");
         } else if (trimmed === "npm install") {
           await runNpmInstall();
         } else if (trimmed === "help") {
@@ -123,9 +160,7 @@
         } else if (trimmed.startsWith("cowsay ")) {
           const args = trimmed.split(" ");
           const noWrap = args.includes("-n");
-          // Filter out "cowsay" and "-n"
-          const filteredArgs = args.filter(arg => arg !== "cowsay" && arg !== "-n");
-          const sayText = filteredArgs.join(" ").trim();
+          const sayText = trimmed.substring(trimmed.indexOf(" ") + 1).replace("-n", "").trim();
 
           if (!sayText) {
             appendOutput("bash: cowsay: missing operand");
@@ -170,6 +205,7 @@
       appendOutput("Available commands:");
       appendOutput("  help              Show this help message");
       appendOutput("  curl parrot.live  Watch the party parrot");
+      appendOutput("  npm               Show npm usage info");
       appendOutput("  npm install       Simulate package installation");
       appendOutput("  exit              Return to main homepage");
       appendOutput("  cowsay [text]     Show ASCII cow saying text");
