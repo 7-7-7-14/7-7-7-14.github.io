@@ -14,6 +14,7 @@
     align-items: flex-start;
     justify-content: center;
     padding: 10px;
+    overflow: hidden;
   }
   #terminal {
     background: #000;
@@ -22,7 +23,7 @@
     max-width: 800px;
     height: 500px;
     padding: 10px;
-    overflow-y: auto;
+    overflow: hidden;
     white-space: pre-wrap;
   }
   #input-line {
@@ -68,7 +69,6 @@ function appendOutput(text) {
   const line = document.createElement('div');
   line.textContent = text;
   output.appendChild(line);
-  terminal.scrollTop = terminal.scrollHeight;
 }
 
 document.addEventListener('keydown', async e => {
@@ -112,7 +112,6 @@ async function runParrot() {
   const draw = () => {
     lastFrameElement.textContent = frames[idx];
     idx = (idx + 1) % frames.length;
-    terminal.scrollTop = terminal.scrollHeight;
   };
 
   draw();
