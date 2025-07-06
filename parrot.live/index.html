@@ -53,6 +53,7 @@ let running = false;
 let idx = 0;
 let timer;
 let frames = [];
+let lastFrameElement = null;
 
 // Load frames from 0.txt to 9.txt in the same folder
 async function loadFrames() {
@@ -64,7 +65,9 @@ async function loadFrames() {
 }
 
 function appendOutput(text) {
-  output.innerText += text + '\n';
+  const line = document.createElement('div');
+  line.textContent = text;
+  output.appendChild(line);
   terminal.scrollTop = terminal.scrollHeight;
 }
 
@@ -72,6 +75,7 @@ document.addEventListener('keydown', async e => {
   if (running && e.key === 'Enter') {
     clearInterval(timer);
     running = false;
+    if (lastFrameElement) lastFrameElement.remove();
     appendOutput('Parrot stopped.');
     return;
   }
@@ -102,8 +106,11 @@ async function runParrot() {
 
   if (frames.length === 0) await loadFrames();
 
+  lastFrameElement = document.createElement('div');
+  output.appendChild(lastFrameElement);
+
   const draw = () => {
-    output.innerText += frames[idx] + '\n';
+    lastFrameElement.textContent = frames[idx];
     idx = (idx + 1) % frames.length;
     terminal.scrollTop = terminal.scrollHeight;
   };
