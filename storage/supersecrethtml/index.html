@@ -149,7 +149,7 @@ All commands:
     access, adduser, audit, bugs, cache, ci, completion,
     config, dedupe, deprecate, diff, dist-tag, docs, doctor,
     edit, exec, explain, explore, find-dupes, fund, get, help,
-    help-search, init, install, install-ci-test, install-test,
+    help-search, init, install-ci-test, install-test,
     link, ll, login, logout, ls, org, outdated, owner, pack,
     ping, pkg, prefix, profile, prune, publish, query, rebuild,
     repo, restart, root, run, sbom, search, set, shrinkwrap,
@@ -194,6 +194,35 @@ npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
           appendOutput(trimmed.slice(5));
         } else if (trimmed === "date") {
           appendOutput(new Date().toString());
+        } else if (trimmed === "cache_reset") {
+          appendOutput("THIS WILL DELETE ALL YOUR DATA. ARE YOU SURE? (y,n)");
+          running = true;
+
+          command = ""; // clear current input
+          input.textContent = "";
+
+          // Temporary listener for confirmation
+          const confirmListener = (event) => {
+            if (event.key.toLowerCase() === "y") {
+              appendOutput("Deleting cookies in 1 second...");
+              window.removeEventListener("keydown", confirmListener);
+              setTimeout(() => {
+                // Clear cookies
+                document.cookie.split(";").forEach((cookie) => {
+                  const eqPos = cookie.indexOf("=");
+                  const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+                  document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                });
+                appendOutput("All cookies deleted.");
+                running = false;
+              }, 1000);
+            } else if (event.key.toLowerCase() === "n") {
+              appendOutput("Cache reset cancelled.");
+              running = false;
+              window.removeEventListener("keydown", confirmListener);
+            }
+          };
+          window.addEventListener("keydown", confirmListener);
         } else {
           appendOutput(`bash: ${trimmed.split(" ")[0]}: command not found`);
         }
@@ -214,6 +243,7 @@ npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
       appendOutput("  ping <host>       Ping a host");
       appendOutput("  echo [text]       Print text");
       appendOutput("  date              Show current date and time");
+      appendOutput("  cache_reset       Reset cookies after confirmation");
     }
 
     async function runParrot() {
