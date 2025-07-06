@@ -27,13 +27,11 @@
     overflow: auto;
     white-space: pre-wrap;
 
-    /* Invisible scrollbar styles */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE 10+ */
-    scrollbar-color: transparent transparent; /* Firefox */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-color: transparent transparent;
   }
 
-  /* WebKit browsers scrollbar */
   #terminal::-webkit-scrollbar {
     width: 0;
     height: 0;
@@ -88,6 +86,29 @@
       terminal.scrollTop = terminal.scrollHeight;
     }
 
+    function isValidHostname(hostname) {
+      const re = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.[A-Za-z]{2,6})+$/;
+      return re.test(hostname);
+    }
+
+    async function pingHost(host) {
+      if (!isValidHostname(host)) {
+        appendOutput(`ping: cannot resolve ${host}: Unknown host`);
+        return;
+      }
+      const fakeIP = "172.217.169.46";
+      appendOutput(`Pinging ${host} [${fakeIP}] with 32 bytes of data:`);
+      for (let i = 0; i < 4; i++) {
+        const time = 9 + Math.floor(Math.random() * 3);
+        appendOutput(`Reply from ${fakeIP}: bytes=32 time=${time}ms TTL=116`);
+        await new Promise(r => setTimeout(r, 500));
+      }
+      appendOutput("\nPing statistics for " + fakeIP + ":");
+      appendOutput("    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),");
+      appendOutput("Approximate round trip times in milli-seconds:");
+      appendOutput("    Minimum = 9ms, Maximum = 11ms, Average = 10ms");
+    }
+
     document.addEventListener("keydown", async (e) => {
       if (running && e.key === "Enter") {
         clearInterval(timer);
@@ -108,9 +129,11 @@
 
         if (trimmed === "curl parrot.live") {
           await runParrot();
+        } else if (trimmed === "npm install") {
+          await runNpmInstall();
         } else if (trimmed === "npm") {
-          await new Promise(resolve => setTimeout(resolve, 1000));
-          appendOutput(`Usage:
+          setTimeout(() => {
+            appendOutput(`Usage:
 
 npm install        install all the dependencies in your project
 npm install <foo>  add the <foo> dependency to your project
@@ -142,57 +165,35 @@ Configuration fields: npm help 7 config
 
 npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
 `);
+          }, 1000);
         } else if (trimmed === "npm help npm") {
           window.open("npm.html", "_blank");
-          appendOutput("Opening npm help page in a new tab...");
-        } else if (trimmed === "npm install") {
-          await runNpmInstall();
         } else if (trimmed === "help") {
           showHelp();
         } else if (trimmed === "exit") {
           appendOutput("Exiting terminal...");
           setTimeout(() => {
-            window.top.location.reload();
+            window.location.reload();
           }, 1000);
-        } else if (trimmed === "cowsay") {
-          appendOutput("bash: cowsay: missing operand");
-          appendOutput("Try 'cowsay [text]'");
-        } else if (trimmed.startsWith("cowsay ")) {
-          const args = trimmed.split(" ");
-          const noWrap = args.includes("-n");
-          const sayText = trimmed.substring(trimmed.indexOf(" ") + 1).replace("-n", "").trim();
-
-          if (!sayText) {
-            appendOutput("bash: cowsay: missing operand");
-            appendOutput("Try 'cowsay [text]'");
+        } else if (trimmed === "clear") {
+          output.innerHTML = "";
+        } else if (trimmed === "ping") {
+          appendOutput("ping: usage error: Destination address required");
+        } else if (trimmed.startsWith("ping ")) {
+          const host = trimmed.slice(5).trim();
+          if (!host) {
+            appendOutput("ping: usage error: Destination address required");
           } else {
-            let lines;
-            if (noWrap) {
-              lines = [sayText];
-            } else {
-              lines = [];
-              for (let i = 0; i < sayText.length; i += 40) {
-                lines.push(sayText.substring(i, i + 40));
-              }
-            }
-
-            const maxLength = Math.max(...lines.map(line => line.length));
-            const top = " " + "_".repeat(maxLength + 2);
-            const bottom = " " + "-".repeat(maxLength + 2);
-
-            appendOutput(top);
-            lines.forEach(line => {
-              appendOutput("< " + line.padEnd(maxLength, " ") + " >");
-            });
-            appendOutput(bottom);
-            appendOutput(`
-\\   ^__^
- \\  (oo)\\_______
-    (__)\\       )\\/\\
-        ||----w |
-        ||     ||
-            `);
+            running = true;
+            await pingHost(host);
+            running = false;
           }
+        } else if (trimmed === "echo") {
+          appendOutput("echo: missing argument");
+        } else if (trimmed.startsWith("echo ")) {
+          appendOutput(trimmed.slice(5));
+        } else if (trimmed === "date") {
+          appendOutput(new Date().toString());
         } else {
           appendOutput(`bash: ${trimmed.split(" ")[0]}: command not found`);
         }
@@ -205,10 +206,14 @@ npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
       appendOutput("Available commands:");
       appendOutput("  help              Show this help message");
       appendOutput("  curl parrot.live  Watch the party parrot");
-      appendOutput("  npm               Show npm usage info");
       appendOutput("  npm install       Simulate package installation");
+      appendOutput("  npm               Show npm usage");
+      appendOutput("  npm help npm      Open npm help in browser");
       appendOutput("  exit              Return to main homepage");
-      appendOutput("  cowsay [text]     Show ASCII cow saying text");
+      appendOutput("  clear             Clear the terminal");
+      appendOutput("  ping <host>       Ping a host");
+      appendOutput("  echo [text]       Print text");
+      appendOutput("  date              Show current date and time");
     }
 
     async function runParrot() {
