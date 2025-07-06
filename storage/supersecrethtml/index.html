@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Tuff?</title>
 <style>
   body {
@@ -26,6 +26,17 @@
     padding: 10px;
     overflow: auto;
     white-space: pre-wrap;
+
+    /* Invisible scrollbar styles */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+    scrollbar-color: transparent transparent; /* Firefox */
+  }
+
+  /* WebKit browsers scrollbar */
+  #terminal::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 
   #input-line {
@@ -38,138 +49,181 @@
   }
 
   @keyframes blink {
-    50% { opacity: 0; }
+    50% {
+      opacity: 0;
+    }
   }
 </style>
 </head>
 <body>
-<div id="terminal">
-  <div>Welcome to the Nexus Terminal! Type <code>help</code> for a list of commands.</div>
-  <div id="output"></div>
-  <div id="input-line">$ <span id="input"></span><span id="cursor">█</span></div>
-</div>
-<script>
-const terminal = document.getElementById('terminal');
-const output = document.getElementById('output');
-const input = document.getElementById('input');
+  <div id="terminal">
+    <div>Welcome to the Nexus Terminal! Type <code>help</code> for a list of commands.</div>
+    <div id="output"></div>
+    <div id="input-line">$ <span id="input"></span><span id="cursor">█</span></div>
+  </div>
+  <script>
+    const terminal = document.getElementById("terminal");
+    const output = document.getElementById("output");
+    const input = document.getElementById("input");
 
-let command = '';
-let running = false;
-let idx = 0;
-let timer;
-let frames = [];
-let lastFrameElement = null;
+    let command = "";
+    let running = false;
+    let idx = 0;
+    let timer;
+    let frames = [];
+    let lastFrameElement = null;
 
-// Load frames from 0.txt to 9.txt in the same folder
-async function loadFrames() {
-  const framePromises = [];
-  for (let i = 0; i < 10; i++) {
-    framePromises.push(fetch(`./frames/${i}.txt`).then(res => res.text()));
-  }
-  frames = await Promise.all(framePromises);
-}
-
-function appendOutput(text) {
-  const line = document.createElement('div');
-  line.textContent = text;
-  output.appendChild(line);
-  terminal.scrollTop = terminal.scrollHeight;
-}
-
-document.addEventListener('keydown', async e => {
-  if (running && e.key === 'Enter') {
-    clearInterval(timer);
-    running = false;
-    if (lastFrameElement) lastFrameElement.remove();
-    appendOutput('Process stopped.');
-    return;
-  }
-  if (running) return;
-
-  if (e.key === 'Backspace') {
-    command = command.slice(0, -1);
-  } else if (e.key.length === 1) {
-    command += e.key;
-  } else if (e.key === 'Enter') {
-    appendOutput('$ ' + command);
-    const trimmed = command.trim();
-
-    if (trimmed === 'curl parrot.live') {
-      await runParrot();
-    } else if (trimmed === 'npm install') {
-      await runNpmInstall();
-    } else if (trimmed === 'help') {
-      showHelp();
-    } else if (trimmed === 'exit') {
-      appendOutput('Exiting terminal...');
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000); // 1 second delay before redirecting
-    } else {
-      appendOutput(`bash: ${trimmed.split(' ')[0]}: command not found`);
+    async function loadFrames() {
+      const framePromises = [];
+      for (let i = 0; i < 10; i++) {
+        framePromises.push(fetch(`./frames/${i}.txt`).then((res) => res.text()));
+      }
+      frames = await Promise.all(framePromises);
     }
-    command = '';
-  }
-  input.textContent = command;
-});
 
-function showHelp() {
-  appendOutput("Available commands:");
-  appendOutput("  help              Show this help message");
-  appendOutput("  curl parrot.live  Watch the party parrot");
-  appendOutput("  npm install       Simulate package installation");
-  appendOutput("  exit              Return to main homepage");
-}
+    function appendOutput(text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      output.appendChild(line);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
 
-async function runParrot() {
-  appendOutput('Starting parrot... (press Enter to stop)');
-  input.textContent = '';
-  command = '';
-  running = true;
-  idx = 0;
+    document.addEventListener("keydown", async (e) => {
+      if (running && e.key === "Enter") {
+        clearInterval(timer);
+        running = false;
+        if (lastFrameElement) lastFrameElement.remove();
+        appendOutput("Process stopped.");
+        return;
+      }
+      if (running) return;
 
-  if (frames.length === 0) await loadFrames();
+      if (e.key === "Backspace") {
+        command = command.slice(0, -1);
+      } else if (e.key.length === 1) {
+        command += e.key;
+      } else if (e.key === "Enter") {
+        appendOutput("$ " + command);
+        const trimmed = command.trim();
 
-  lastFrameElement = document.createElement('div');
-  output.appendChild(lastFrameElement);
+        if (trimmed === "curl parrot.live") {
+          await runParrot();
+        } else if (trimmed === "npm install") {
+          await runNpmInstall();
+        } else if (trimmed === "help") {
+          showHelp();
+        } else if (trimmed === "exit") {
+          appendOutput("Exiting terminal...");
+          setTimeout(() => {
+            window.location.href = "/static/";
+          }, 1000);
+        } else if (trimmed === "cowsay") {
+          appendOutput("bash: cowsay: missing operand");
+          appendOutput("Try 'cowsay [text]' for more information.");
+        } else if (trimmed.startsWith("cowsay ")) {
+          const args = trimmed.split(" ");
+          const noWrap = args.includes("-n");
+          // Filter out "cowsay" and "-n"
+          const filteredArgs = args.filter(arg => arg !== "cowsay" && arg !== "-n");
+          const sayText = filteredArgs.join(" ").trim();
 
-  const draw = () => {
-    lastFrameElement.textContent = frames[idx];
-    idx = (idx + 1) % frames.length;
-  };
+          if (!sayText) {
+            appendOutput("bash: cowsay: missing operand");
+            appendOutput("Try 'cowsay [text]'");
+          } else {
+            let lines;
+            if (noWrap) {
+              lines = [sayText];
+            } else {
+              lines = [];
+              for (let i = 0; i < sayText.length; i += 40) {
+                lines.push(sayText.substring(i, i + 40));
+              }
+            }
 
-  draw();
-  timer = setInterval(draw, 70);
-}
+            const maxLength = Math.max(...lines.map(line => line.length));
+            const top = " " + "_".repeat(maxLength + 2);
+            const bottom = " " + "-".repeat(maxLength + 2);
 
-async function runNpmInstall() {
-  input.textContent = '';
-  command = '';
-  running = true;
+            appendOutput(top);
+            lines.forEach(line => {
+              appendOutput("< " + line.padEnd(maxLength, " ") + " >");
+            });
+            appendOutput(bottom);
+            appendOutput(`
+\\   ^__^
+ \\  (oo)\\_______
+    (__)\\       )\\/\\
+        ||----w |
+        ||     ||
+            `);
+          }
+        } else {
+          appendOutput(`bash: ${trimmed.split(" ")[0]}: command not found`);
+        }
+        command = "";
+      }
+      input.textContent = command;
+    });
 
-  appendOutput('Installing packages...');
-  const progressBar = document.createElement('div');
-  output.appendChild(progressBar);
+    function showHelp() {
+      appendOutput("Available commands:");
+      appendOutput("  help              Show this help message");
+      appendOutput("  curl parrot.live  Watch the party parrot");
+      appendOutput("  npm install       Simulate package installation");
+      appendOutput("  exit              Return to main homepage");
+      appendOutput("  cowsay [text]     Show ASCII cow saying text");
+    }
 
-  const totalSteps = 20;
-  for (let i = 0; i <= totalSteps; i++) {
-    const percent = Math.floor((i / totalSteps) * 100);
-    const blocks = Math.floor((i / totalSteps) * 20);
-    const bar = '='.repeat(blocks) + ' '.repeat(20 - blocks);
-    progressBar.textContent = `Downloading [${bar}] ${percent}%`;
-    await new Promise(resolve => setTimeout(resolve, 200));
-  }
+    async function runParrot() {
+      appendOutput("Starting parrot... (press Enter to stop)");
+      input.textContent = "";
+      command = "";
+      running = true;
+      idx = 0;
 
-  appendOutput('Extracting...');
-  await new Promise(resolve => setTimeout(resolve, 500));
-  appendOutput('Linking dependencies...');
-  await new Promise(resolve => setTimeout(resolve, 500));
-  appendOutput('Building modules...');
-  await new Promise(resolve => setTimeout(resolve, 500));
-  appendOutput('Done. Installed 204 packages.');
+      if (frames.length === 0) await loadFrames();
 
-  running = false;
-}
-</script>
+      lastFrameElement = document.createElement("div");
+      output.appendChild(lastFrameElement);
+
+      const draw = () => {
+        lastFrameElement.textContent = frames[idx];
+        idx = (idx + 1) % frames.length;
+      };
+
+      draw();
+      timer = setInterval(draw, 70);
+    }
+
+    async function runNpmInstall() {
+      input.textContent = "";
+      command = "";
+      running = true;
+
+      appendOutput("Installing packages...");
+      const progressBar = document.createElement("div");
+      output.appendChild(progressBar);
+
+      const totalSteps = 20;
+      for (let i = 0; i <= totalSteps; i++) {
+        const percent = Math.floor((i / totalSteps) * 100);
+        const blocks = Math.floor((i / totalSteps) * 20);
+        const bar = "=".repeat(blocks) + " ".repeat(20 - blocks);
+        progressBar.textContent = `Downloading [${bar}] ${percent}%`;
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      }
+
+      appendOutput("Extracting...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      appendOutput("Linking dependencies...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      appendOutput("Building modules...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      appendOutput("Done. Installed 204 packages.");
+
+      running = false;
+    }
+  </script>
 </body>
 </html>
