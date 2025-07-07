@@ -209,8 +209,8 @@ npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
           appendOutput(trimmed.slice(5));
         } else if (trimmed === "date") {
           appendOutput(new Date().toString());
-        } else if (trimmed === "cache_reset") {
-          appendOutput("THIS WILL DELETE ALL YOUR DATA. ARE YOU SURE? (y,n)");
+        } else if (trimmed === "reset_data") {
+          appendOutput("THIS WILL DELETE ALL YOUR DATA & SETTINGS, ARE YOU SURE? (y,n)");
           command = "";
           input.textContent = "";
 
@@ -253,7 +253,7 @@ npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
       appendOutput("  ping <host>       Ping a host");
       appendOutput("  echo [text]       Print text");
       appendOutput("  date              Show current date and time");
-      appendOutput("  cache_reset       Reset all stored data (cookies, localStorage, sessionStorage)");
+      appendOutput("  reset_data       Reset all stored data (cookies, localStorage, sessionStorage)");
     }
 
     async function runParrot() {
