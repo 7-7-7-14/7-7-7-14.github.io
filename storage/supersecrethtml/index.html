@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Tuff?</title>
+<style>
+  body {
+    background: #000;
+    color: #33ff33;
+    font-family: monospace;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  #terminal {
+    background: #000;
+    border: 2px solid #33ff33;
+    width: 90vw;
+    max-width: 800px;
+    height: 500px;
+    padding: 10px;
+    overflow: auto;
+    white-space: pre-wrap;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-color: transparent transparent;
+  }
+
+  #terminal::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  #input-line {
+    display: inline;
+  }
+
+  #cursor {
+    display: inline;
+    animation: blink 1s step-start infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="terminal">
+    <div>Welcome to the Nexus Terminal! Type <code>help</code> for a list of commands.</div>
+    <div id="output"></div>
+    <div id="input-line">$ <span id="input"></span><span id="cursor">█</span></div>
+  </div>
+  <script>
+    const terminal = document.getElementById("terminal");
+    const output = document.getElementById("output");
+    const input = document.getElementById("input");
+
+    let command = "";
+    let running = false;
+    let idx = 0;
+    let timer;
+    let frames = [];
+    let lastFrameElement = null;
+
+    async function loadFrames() {
+      const framePromises = [];
+      for (let i = 0; i < 10; i++) {
+        framePromises.push(fetch(`./frames/${i}.txt`).then((res) => res.text()));
+      }
+      frames = await Promise.all(framePromises);
+    }
+
+    function appendOutput(text) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      output.appendChild(line);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function isValidHostname(hostname) {
+      const re = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.[A-Za-z]{2,6})+$/;
+      return re.test(hostname);
+    }
+
+    async function pingHost(host) {
+      if (!isValidHostname(host)) {
+        appendOutput(`ping: cannot resolve ${host}: Unknown host`);
+        return;
+      }
+      const fakeIP = "172.217.169.46";
+      appendOutput(`Pinging ${host} [${fakeIP}] with 32 bytes of data:`);
+      for (let i = 0; i < 4; i++) {
+        const time = 9 + Math.floor(Math.random() * 3);
+        appendOutput(`Reply from ${fakeIP}: bytes=32 time=${time}ms TTL=116`);
+        await new Promise(r => setTimeout(r, 500));
+      }
+      appendOutput("\nPing statistics for " + fakeIP + ":");
+      appendOutput("    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),");
+      appendOutput("Approximate round trip times in milli-seconds:");
+      appendOutput("    Minimum = 9ms, Maximum = 11ms, Average = 10ms");
+    }
+
+    function clearData() {
+      // Clear cookies
+      document.cookie.split(";").forEach(cookie => {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+      });
+
+      // Clear localStorage
+      localStorage.clear();
+
+      // Clear sessionStorage
+      sessionStorage.clear();
+    }
+
+    document.addEventListener("keydown", async (e) => {
+      if (running && e.key === "Enter") {
+        clearInterval(timer);
+        running = false;
+        if (lastFrameElement) lastFrameElement.remove();
+        appendOutput("Process stopped.");
+        return;
+      }
+      if (running) return;
+
+      if (e.key === "Backspace") {
+        command = command.slice(0, -1);
+      } else if (e.key.length === 1) {
+        command += e.key;
+      } else if (e.key === "Enter") {
+        appendOutput("$ " + command);
+        const trimmed = command.trim();
+
+        if (trimmed === "curl parrot.live") {
+          await runParrot();
+        } else if (trimmed === "npm install") {
+          await runNpmInstall();
+        } else if (trimmed === "npm") {
+          setTimeout(() => {
+            appendOutput(`Usage:
+
+npm install        install all the dependencies in your project
+npm install <foo>  add the <foo> dependency to your project
+npm test           run this project's tests
+npm run <foo>      run the script named <foo>
+npm <command> -h   quick help on <command>
+npm -l             display usage info for all commands
+npm help <term>    search for help on <term> (in a browser)
+npm help npm       more involved overview (in a browser)
+
+All commands:
+
+    access, adduser, audit, bugs, cache, ci, completion,
+    config, dedupe, deprecate, diff, dist-tag, docs, doctor,
+    edit, exec, explain, explore, find-dupes, fund, get, help,
+    help-search, init, install, install-ci-test, install-test,
+    link, ll, login, logout, ls, org, outdated, owner, pack,
+    ping, pkg, prefix, profile, prune, publish, query, rebuild,
+    repo, restart, root, run, sbom, search, set, shrinkwrap,
+    star, stars, start, stop, team, test, token, undeprecate,
+    uninstall, unpublish, unstar, update, version, view, whoami
+
+Specify configs in the ini-formatted file:
+    \\Netlify\\Storage\\npm\\.npmrc 
+or on the command line via: npm <command> --key=value
+
+More configuration info: npm help config
+Configuration fields: npm help 7 config
+
+npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
+`);
+          }, 1000);
+        } else if (trimmed === "npm help npm") {
+          window.open("npm.html", "_blank");
+        } else if (trimmed === "help") {
+          showHelp();
+        } else if (trimmed === "exit") {
+          appendOutput("Exiting terminal...");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else if (trimmed === "clear") {
+          output.innerHTML = "";
+        } else if (trimmed === "ping") {
+          appendOutput("ping: usage error: Destination address required");
+        } else if (trimmed.startsWith("ping ")) {
+          const host = trimmed.slice(5).trim();
+          if (!host) {
+            appendOutput("ping: usage error: Destination address required");
+          } else {
+            running = true;
+            await pingHost(host);
+            running = false;
+          }
+        } else if (trimmed === "echo") {
+          appendOutput("echo: missing argument");
+        } else if (trimmed.startsWith("echo ")) {
+          appendOutput(trimmed.slice(5));
+        } else if (trimmed === "date") {
+          appendOutput(new Date().toString());
+        } else if (trimmed === "reset_data") {
+          appendOutput("THIS WILL DELETE ALL YOUR DATA & SETTINGS, ARE YOU SURE? (y,n)");
+          command = "";
+          input.textContent = "";
+
+          running = true;
+
+          function confirmReset(e) {
+            if (e.key.toLowerCase() === "y") {
+              appendOutput("Resetting data in 1 second...");
+              setTimeout(() => {
+                clearData();
+                appendOutput("All data reset.");
+                running = false;
+                document.removeEventListener("keydown", confirmReset);
+              }, 1000);
+            } else if (e.key.toLowerCase() === "n") {
+              appendOutput("Cancelled.");
+              running = false;
+              document.removeEventListener("keydown", confirmReset);
+            }
+          }
+
+          document.addEventListener("keydown", confirmReset);
+        } else {
+          appendOutput(`bash: ${trimmed.split(" ")[0]}: command not found`);
+        }
+        command = "";
+      }
+      input.textContent = command;
+    });
+
+    function showHelp() {
+      appendOutput("Available commands:");
+      appendOutput("  help              Show this help message");
+      appendOutput("  curl parrot.live  Watch the party parrot");
+      appendOutput("  npm install       Simulate package installation");
+      appendOutput("  npm               Show npm usage");
+      appendOutput("  exit              Return to main homepage");
+      appendOutput("  clear             Clear the terminal");
+      appendOutput("  ping <host>       Ping a host");
+      appendOutput("  echo [text]       Print text");
+      appendOutput("  date              Show current date and time");
+      appendOutput("  reset_data        Reset all stored data (cookies, localStorage, sessionStorage)");
+    }
+
+    async function runParrot() {
+      appendOutput("Starting parrot... (press Enter to stop)");
+      input.textContent = "";
+      command = "";
+      running = true;
+      idx = 0;
+
+      if (frames.length === 0) await loadFrames();
+
+      lastFrameElement = document.createElement("div");
+      output.appendChild(lastFrameElement);
+
+      const draw = () => {
+        lastFrameElement.textContent = frames[idx];
+        idx = (idx + 1) % frames.length;
+      };
+
+      draw();
+      timer = setInterval(draw, 70);
+    }
+
+    async function runNpmInstall() {
+      input.textContent = "";
+      command = "";
+      running = true;
+
+      appendOutput("Installing packages...");
+      const progressBar = document.createElement("div");
+      output.appendChild(progressBar);
+
+      const totalSteps = 20;
+      for (let i = 0; i <= totalSteps; i++) {
+        const percent = Math.floor((i / totalSteps) * 100);
+        const blocks = Math.floor((i / totalSteps) * 20);
+        const bar = "=".repeat(blocks) + " ".repeat(20 - blocks);
+        progressBar.textContent = `Downloading [${bar}] ${percent}%`;
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      }
+
+      appendOutput("Extracting...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      appendOutput("Linking dependencies...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      appendOutput("Building modules...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      appendOutput("Done. Installed 204 packages.");
+
+      running = false;
+    }
+  </script>
+</body>
+</html>

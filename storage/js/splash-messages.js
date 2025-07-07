@@ -8,6 +8,7 @@ const phrases = [
     { type: "image", width: '45%', src: `/storage/images/splash2.png` },
     { type: "image", width: '35%', src: `/storage/images/splash3.png` },
     { type: "image", width: '40%', src: `/storage/images/splash4.gif` },
+    { type: "image", width: '99%', src: `/storage/images/splash5.gif` },
     `i accidentally muted the teacher`,
     `my homework ate my dog`,
     `late to class again`,
