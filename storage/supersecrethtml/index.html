@@ -144,7 +144,7 @@
 
         if (trimmed === "curl parrot.live") {
           await runParrot();
-        } else if (trimmed === "npm install") {
+        } else if (trimmed === "npm install" || trimmed === "npm i") {
           await runNpmInstall();
         } else if (trimmed === "npm") {
           setTimeout(() => {
@@ -183,12 +183,31 @@ npm@11.4.2 \\Netlify\\Storage\\npm\\node_modules\\npm
           }, 1000);
         } else if (trimmed === "npm help npm") {
           window.open("npm.html", "_blank");
+        } else if (trimmed === "npm test") {
+          running = true;
+          appendOutput("Running tests...");
+          setTimeout(() => {
+            appendOutput(`npm ERR! code ENOENT
+npm ERR! syscall open
+npm ERR! path C:\\PortableGit\\package.json
+npm ERR! errno -4058
+npm ERR! enoent Could not read package.json: Error: ENOENT: no such file or directory, open '\\Netlify\\npm\\package.json' 
+npm ERR! enoent This is related to npm not being able to find a file.
+npm ERR! enoent
+npm ERR! A complete log of this run can be found in:
+npm ERR!     \\Netlify\\npm-cache\\_logs\\2025-07-07T02_35_54_854Z-debug-0.log`);
+            running = false;
+          }, 1000);
         } else if (trimmed === "help") {
           showHelp();
         } else if (trimmed === "exit") {
           appendOutput("Exiting terminal...");
           setTimeout(() => {
-            window.location.reload();
+            if (window.top !== window.self) {
+              window.top.location.href = "index.html";
+            } else {
+              window.location.href = "index.html";
+            }
           }, 1000);
         } else if (trimmed === "clear") {
           output.innerHTML = "";
