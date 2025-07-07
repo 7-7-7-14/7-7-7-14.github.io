@@ -204,9 +204,9 @@ npm ERR!     \\Netlify\\npm-cache\\_logs\\2025-07-07T02_35_54_854Z-debug-0.log`)
           appendOutput("Exiting terminal...");
           setTimeout(() => {
             if (window.top !== window.self) {
-              window.top.location.href = "index.html";
+              window.top.location.href = "/";
             } else {
-              window.location.href = "index.html";
+              window.location.href = "/";
             }
           }, 1000);
         } else if (trimmed === "clear") {
