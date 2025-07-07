@@ -326,6 +326,7 @@
         newTab.innerHTML = `New Tab 
 													
 													
+													
 													<span class="close-button" onclick="closeTab(event)">×</span>`;
         newTab.addEventListener("click", () => selectTab(newTab));
         tabsContainer.insertBefore(newTab, document.querySelector('.add-tab-button'));
@@ -432,6 +433,7 @@
         const newTab = document.createElement('div');
         newTab.classList.add('tab');
         newTab.innerHTML = `Settings 
+													
 													
 													
 													<span class="close-button" onclick="closeTab(event)">×</span>`;
@@ -554,7 +556,7 @@
               try {
                 host = new URL(__uv$config.decodeUrl(path));
               } catch {
-                host = new URL("https://voucan-nexus.github.io");
+                host = new URL("https://voucan-us4.github.io");
               }
               const faviconUrl = `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${host.hostname}&size=24`;
               let title = '';
@@ -569,7 +571,9 @@
               tab.innerHTML = `
 													
 													
+													
 													<img src="${faviconUrl}" alt="favicon" style="width:24px;height:24px;margin-right:6px;">${title} 
+														
 														
 														
 														<span class="close-button" onclick="closeTab(event)">×</span> `;
@@ -623,6 +627,7 @@
         const newTab = document.createElement('div');
         newTab.classList.add('tab');
         newTab.innerHTML = `${name} 
+														
 														
 														
 														<span class="close-button" onclick="closeTab(event)">×</span>`;
