@@ -1,21 +1,27 @@
-// Check if particles should be disabled
-const particlesToggle = document.getElementById('particlesToggle');
-const particlesContainer = document.getElementById('particles-js');
-
-// Apply stored setting on load
-const particlesDisabled = localStorage.getItem('particlesDisabled') === 'true';
-if (particlesDisabled && particlesContainer) {
-  particlesContainer.style.display = 'none';
-  if (particlesToggle) particlesToggle.checked = true;
-}
-
-// Handle toggle changes
-if (particlesToggle) {
-  particlesToggle.addEventListener('change', () => {
-    const isDisabled = particlesToggle.checked;
-    localStorage.setItem('particlesDisabled', isDisabled);
-    if (particlesContainer) {
-      particlesContainer.style.display = isDisabled ? 'none' : 'block';
+// Check if particles are disabled in localStorage, and hide the particles div if so
+if (localStorage.getItem('particlesDisabled') === 'true') {
+  const checkAndHide = () => {
+    const particlesDiv = document.getElementById('particles-js');
+    if (particlesDiv) {
+      particlesDiv.style.display = 'none';
+    } else {
+      // If the element isn't loaded yet, try again after 100ms
+      setTimeout(checkAndHide, 100);
     }
-  });
+  };
+  checkAndHide();
 }
+
+// Listen for changes in localStorage (from other tabs/pages)
+window.addEventListener('storage', (event) => {
+  if (event.key === 'particlesDisabled') {
+    const particlesDiv = document.getElementById('particles-js');
+    if (!particlesDiv) return;
+    
+    if (event.newValue === 'true') {
+      particlesDiv.style.display = 'none';
+    } else {
+      particlesDiv.style.display = '';
+    }
+  }
+});
