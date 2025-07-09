@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://nebulaservices.org/en_US/bare/', // https://infrared.zrhe2016.workers.dev/, https://zc.fishoho.com/bare/, https://ojojojojojoj.vercel.app/bare/, https://bare.cbgames.org/, https://r2fh2387hv2b2rfbiz.site/
+    bare:'https://r2fh2387hv2b2rfbiz.site',
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
