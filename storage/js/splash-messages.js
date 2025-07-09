@@ -4,7 +4,7 @@ const phrases = [
     `dont type this on your keyboard: up, up, down, down, left, right, left, right, B, A, enter`,
     `im going to put bleach in your eyes`,
     `im in your walls`,
-    { type: "image", width: '99%', src: `/storage/images/splash1.jpeg` },
+    { type: "image", width: '40%', src: `/storage/images/splash1.jpeg` },
     { type: "image", width: '45%', src: `/storage/images/splash2.png` },
     { type: "image", width: '35%', src: `/storage/images/splash3.png` },
     { type: "image", width: '40%', src: `/storage/images/splash4.gif` },
