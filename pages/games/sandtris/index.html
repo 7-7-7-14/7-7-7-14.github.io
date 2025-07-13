@@ -2,89 +2,62 @@
 <html lang="en">
   <head>
     <title>SANDTRIS</title>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/x-icon" href="favicon.png" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="hammer.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
     <style>
       html, body {
         margin: 0;
         padding: 0;
         overflow: hidden;
-        width: 100vw;
-        height: 100vh;
-        background-color: #000;
-        font-family: monospace;
+        background: #000;
+        font-family: sans-serif;
         color: white;
       }
 
-      #main {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        width: 100vw;
+      table#main2 {
+        margin: auto;
       }
 
       .ads2 {
-        width: 120px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #111;
-      }
-
-      .ads2 ins {
-        display: inline-block;
-        width: 120px !important;
-        height: 240px !important;
+        width: 200px;
+        height: 640px;
+        overflow: hidden;
       }
 
       #cnv {
-        flex-grow: 1;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      canvas {
-        max-width: 100%;
-        max-height: 100%;
-        display: block;
+        position: relative;
       }
 
       dialog.page {
-        background: #222;
+        background-color: #111;
         color: white;
         border: none;
-        padding: 10px;
         border-radius: 10px;
+        padding: 20px;
+      }
+
+      .logo span {
+        font-weight: bold;
+        font-size: 24px;
+        margin: 0 2px;
       }
 
       .box {
         text-align: center;
       }
-
-      .logo span {
-        display: inline-block;
-        animation: bounce 1s infinite alternate;
-        margin: 0 1px;
-      }
-
-      @keyframes bounce {
-        to { transform: translateY(-10px); }
-      }
     </style>
   </head>
   <body>
     <script src="sketch.js"></script>
-
     <center>
+      <br/>
+      <h1>SANDTRIS</h1>
+
+      <!-- About Page -->
       <dialog id="aboutpage" class="page" close>
         <div class="box">
           <br/>
@@ -92,7 +65,9 @@
             <span>S</span><span>A</span><span>N</span><span>D</span><span>T</span><span>R</span><span>I</span><span>S</span>
           </div>
           <p>MADE BY <a href="https://francomiranda.com/" target="_blank">FRANCO MIRANDA</a> USING P5.JS</p>
-          <p>INSPIRED BY <a href="https://itch.io/profile/mslivo" target="_blank">MSLIVO</a></p>
+          <p>INSPIRED BY SETRIS BY 
+            <a href="https://itch.io/profile/mslivo" target="_blank">MSLIVO</a>
+          </p>
           <br/>
           <u>CONTROLS</u>
           <p>Move Block: Left/Right Arrows</p>
@@ -108,6 +83,7 @@
         </div>
       </dialog>
 
+      <!-- Start Page -->
       <dialog id="startpage" class="page" open>
         <div class="box">
           <br/>
@@ -131,6 +107,7 @@
         </div>
       </dialog>
 
+      <!-- Pause Page -->
       <dialog id="pausepage" class="page" close>
         <div class="box">
           <br/>
@@ -148,6 +125,7 @@
         </div>
       </dialog>
 
+      <!-- Game Over Page -->
       <dialog id="gameoverpage" class="page" close>
         <div class="box">
           <br/>
@@ -159,30 +137,37 @@
           <button type="button" class="sharebutton" onClick="shareText()">share</button>
         </div>
       </dialog>
+
+      <!-- Game Canvas + Ads -->
+      <table id="main2" cellpadding="10">
+        <tr>
+          <td>
+            <div class="ads2">
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9200311124038960" crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                style="display:inline-block;width:200px;height:640px"
+                data-ad-client="ca-pub-9200311124038960"
+                data-ad-slot="1316725130"></ins>
+              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+          </td>
+          <td>
+            <div id="cnv">
+              <div id="p5_loading">LOADING</div>
+            </div>
+          </td>
+          <td>
+            <div class="ads2">
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9200311124038960" crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                style="display:inline-block;width:200px;height:640px"
+                data-ad-client="ca-pub-9200311124038960"
+                data-ad-slot="4677385647"></ins>
+              <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+          </td>
+        </tr>
+      </table>
     </center>
-
-    <div id="main">
-      <div class="ads2">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:120px;height:240px"
-             data-ad-client="ca-pub-9200311124038960"
-             data-ad-slot="1316725130"></ins>
-      </div>
-      <div id="cnv">
-        <div id="p5_loading">LOADING</div>
-      </div>
-      <div class="ads2">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:120px;height:240px"
-             data-ad-client="ca-pub-9200311124038960"
-             data-ad-slot="4677385647"></ins>
-      </div>
-    </div>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9200311124038960" crossorigin="anonymous"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
   </body>
 </html>
