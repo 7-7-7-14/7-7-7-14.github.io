@@ -76,7 +76,7 @@ const phrases = [
     `hello`,
     `NUKE INCOMING!`,
     `i spent way too much time making these`,
-    `bottom text`,
+    `middle text`,
     `w h a t`,
     `my phone passcode is 563543 btw`,
     `reload the page NOW!`,
