@@ -75,6 +75,6 @@ function createNotification(message) {
 }
 
 window.onload = () => {
-    const message = `Nexus V3 will be releasing in the 2025-2026 school year. Info: Proxy is not working, fixing soon`;
+    const message = `Nexus V3 will be releasing in the 2025-2026 school year. Info: Bare has been changed`;
     createNotification(message);
 };
