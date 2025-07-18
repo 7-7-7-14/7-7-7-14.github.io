@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://v2202412246404304352.megasrv.de/bare/', // https://dogeub-v4-53xc.vercel.app/seal/, https://r2fh2387hv2b2rfbiz.site, https://v2202412246404304352.megasrv.de/bare/,
+    bare:'https://r2fh2387hv2b2rfbiz.site/', // https://dogeub-v4-53xc.vercel.app/seal/, https://r2fh2387hv2b2rfbiz.site, https://v2202412246404304352.megasrv.de/bare/,
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
