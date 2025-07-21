@@ -1,96 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charSet="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charSet="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <!-- Stylesheets in same folder -->
-    <link rel="stylesheet" href="5db28d5bd153cf72.css" data-precedence="next" />
-    <link rel="stylesheet" href="aa7d349f03e0e3e9.css" data-precedence="next" />
+  <!-- Stylesheets in same folder -->
+  <link rel="stylesheet" href="5db28d5bd153cf72.css" data-precedence="next"/>
+  <link rel="stylesheet" href="aa7d349f03e0e3e9.css" data-precedence="next"/>
 
-    <!-- Preload & Scripts in same folder -->
-    <link rel="preload" href="webpack-c1a628ae9e35459b.js" as="script" fetchPriority="low" />
-    <script src="fd9d1056-fcf9def1c9d24e73.js" async></script>
-    <script src="596-7165d61afbccc79e.js" async></script>
-    <script src="main-app-e9cf00330e3abcd1.js" async></script>
+  <!-- Preload & Scripts in same folder -->
+  <link rel="preload" href="webpack-c1a628ae9e35459b.js" as="script" fetchPriority="low"/>
+  <script src="fd9d1056-fcf9def1c9d24e73.js" async></script>
+  <script src="596-7165d61afbccc79e.js" async></script>
+  <script src="main-app-e9cf00330e3abcd1.js" async></script>
 
-    <title>QuirkyLock</title>
-    <meta name="description" content="Lock your deepest secrets with the ultimate password" />
+  <title>QuirkyLock</title>
+  <meta name="description" content="Lock your deepest secrets with the ultimate password"/>
 
-    <!-- Favicon & Fonts -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
+  <!-- Favicon & Fonts -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" sizes="16x16"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"/>
 
-    <!-- Polyfills script (local copy) -->
-    <script src="polyfills-78c92fac7aa8fdd8.js" noModule></script>
-  </head>
-
-  <body>
-    <div class="page_container__jZF7q">
-      <div class="page_title__po7na">
-        <!-- image file in same folder -->
-        <img
-          alt=""
-          loading="lazy"
-          width="55"
-          height="55"
-          decoding="async"
-          src="quirkylock_purple.png"
-        />
-        <div class="page_title_text___QER_">QuirkyLock</div>
-      </div>
-
-      <div class="pswdbox_label">
-        Choose a password <span class="psswd_len">0</span>
-      </div>
-      <textarea
-        id="pswdbox"
-        class="pswdbox"
-        rows="1"
-        style="resize:none;width:100%;overflow-y:hidden"
-        spellcheck="false"
-      ></textarea>
-      <div>
-        level: <!-- -->0
-      </div>
+  <!-- Polyfills (local copy) -->
+  <script src="polyfills-78c92fac7aa8fdd8.js" noModule></script>
+</head>
+<body>
+  <div class="page_container__jZF7q">
+    <div class="page_title__po7na">
+      <img
+        alt=""
+        loading="lazy"
+        width="55"
+        height="55"
+        decoding="async"
+        src="quirkylock_purple.png"
+      />
+      <div class="page_title_text___QER_">QuirkyLock</div>
     </div>
 
-    <footer class="page_footer__F3MD0">
-      Check out the
-      <a href="https://github.com/sayantanDs/quirkylock" target="_blank">GitHub</a>
-      for this project. <br />
-      This site is heavily inspired by
-      <a href="https://neal.fun/password-game/" target="_blank">The Password Game</a>
-      by
-      <a href="https://twitter.com/nealagarwal" target="_blank">Neal</a>
-    </footer>
+    <div class="pswdbox_label">
+      Choose a password <span class="psswd_len">0</span>
+    </div>
+    <textarea
+      id="pswdbox"
+      class="pswdbox"
+      rows="1"
+      style="resize:none;width:100%;overflow-y:hidden"
+      spellcheck="false"
+    ></textarea>
+    <div>level: <!-- -->0</div>
+  </div>
 
-    <!-- Duplicate webpack loader in same folder -->
-    <script src="webpack-c1a628ae9e35459b.js" async></script>
+  <footer class="page_footer__F3MD0">
+    Check out the
+    <a href="https://github.com/sayantanDs/quirkylock" target="_blank">GitHub</a>
+    for this project.<br/>
+    This site is heavily inspired by
+    <a href="https://neal.fun/password-game/" target="_blank">The Password Game</a>
+    by
+    <a href="https://twitter.com/nealagarwal" target="_blank">Neal</a>
+  </footer>
 
-    <!-- Next.js loader queue (pointing at local files) -->
-    <script>
-      (self.__next_f = self.__next_f || []).push([0]);
-    </script>
-    <script>
-      self.__next_f.push([
-        1,
-        '1:HL["5db28d5bd153cf72.css",{"as":"style"}]\n0:"$L2"\n'
-      ]);
-    </script>
-    <script>
-      self.__next_f.push([
-        1,
-        '3:HL["aa7d349f03e0e3e9.css",{"as":"style"}]\n'
-      ]);
-    </script>
-    <!-- Additional __next_f pushes referencing filenames only -->
-    <script>
-      self.__next_f.push([1, '4:I{"id":7948,"chunks":["webpack-c1a628ae9e35459b.js","fd9d1056-fcf9def1c9d24e73.js","596-7165d61afbccc79e.js"],"name":"default","async":false}']);
-    </script>
-    <script>
-      self.__next_f.push([1, '6:I{"id":6628,"chunks":["webpack-c1a628ae9e35459b.js","fd9d1056-fcf9def1c9d24e73.js","596-7165d61afbccc79e.js"],"name":"","async":false}']);
-    </script>
-    <!-- ...repeat as needed for all chunks -->
-  </body>
+  <!-- Repeat webpack loader -->
+  <script src="webpack-c1a628ae9e35459b.js" async></script>
+
+  <!-- Next.js loader queue (all filenames only) -->
+  <script>
+    (self.__next_f = self.__next_f || []).push([0]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "1:HL[\"5db28d5bd153cf72.css\",{\"as\":\"style\"}]\n0:\"$L2\"\n"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "3:HL[\"aa7d349f03e0e3e9.css\",{\"as\":\"style\"}]\n"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "4:I{\"id\":7948,\"chunks\":[\"272:webpack-c1a628ae9e35459b.js\",\"971:fd9d1056-fcf9def1c9d24e73.js\",\"596:596-7165d61afbccc79e.js\"],\"name\":\"default\",\"async\":false}"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "6:I{\"id\":6628,\"chunks\":[\"272:webpack-c1a628ae9e35459b.js\",\"971:fd9d1056-fcf9def1c9d24e73.js\",\"596:596-7165d61afbccc79e.js\"],\"name\":\"\",\"async\":false}"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "7:I{\"id\":7767,\"chunks\":[\"272:webpack-c1a628ae9e35459b.js\",\"971:fd9d1056-fcf9def1c9d24e73.js\",\"596:596-7165d61afbccc79e.js\"],\"name\":\"default\",\"async\":false}"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "8:I{\"id\":7920,\"chunks\":[\"272:webpack-c1a628ae9e35459b.js\",\"971:fd9d1056-fcf9def1c9d24e73.js\",\"596:596-7165d61afbccc79e.js\"],\"name\":\"default\",\"async\":false}"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "a:I{\"id\":4839,\"chunks\":[\"272:webpack-c1a628ae9e35459b.js\",\"971:fd9d1056-fcf9def1c9d24e73.js\",\"596:596-7165d61afbccc79e.js\"],\"name\":\"default\",\"async\":false}"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "b:I{\"id\":7033,\"chunks\":[\"986:another-chunk-e2507bd724b63f68.js\"],\"name\":\"\",\"async\":false}"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "2:[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"5db28d5bd153cf72.css\",\"precedence\":\"next\"}]],[[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"aa7d349f03e0e3e9.css\",\"precedence\":\"next\"}]]]"
+    ]);
+  </script>
+  <script>
+    self.__next_f.push([
+      1,
+      "5:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"1\",{\"children\":\"QuirkyLock\"}],[\"$\",\"meta\",\"2\",{\"name\":\"description\",\"content\":\"Lock your deepest secrets with the ultimate password\"}],[\"$\",\"meta\",\"3\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"link\",\"4\",{\"rel\":\"icon\",\"href\":\"favicon.ico\",\"type\":\"image/x-icon\",\"sizes\":\"16x16\"}]]"
+    ]);
+  </script>
+</body>
 </html>
