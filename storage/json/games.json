@@ -119,6 +119,12 @@
     "alt": "Chrome Dino",
     "title": "Chrome Dino"
   },
+    {
+    "url": "/pages/games-frame?url=/pages/games/clusterrush",
+    "img": "/pages/images/clusterrush.png",
+    "alt": "Cluster Rush",
+    "title": "Cluster Rush"
+  },
   {
     "url": "/pages/games-frame?url=/pages/games/cookie-clicker/",
     "img": "/pages/images/cck.webp",
