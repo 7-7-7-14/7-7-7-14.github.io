@@ -438,6 +438,12 @@
     "title": "Subway Surfers"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/super-mario-construct/",
+    "img": "/pages/images/smc.png",
+    "alt": "Super Mario Construct",
+    "title": "Super Mario Construct"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/sm63/",
     "img": "/pages/images/63flash.png",
     "alt": "Super Mario 63 (Flash)",
