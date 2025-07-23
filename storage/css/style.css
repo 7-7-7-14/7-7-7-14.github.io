@@ -142,6 +142,33 @@ a {
   border-color: rgba(255, 255, 255, 0.5);
   background: rgba(0, 0, 0, 0.5);
 }
+#random-button {
+    padding: 10px;
+    border: none;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+#random-button::placeholder {
+    color: rgba(255, 255, 255, 0.7)
+}
+
+#random-button:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+}
 .content {
   display: flex;
   justify-content: center;
