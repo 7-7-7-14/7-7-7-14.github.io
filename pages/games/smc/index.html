@@ -1,88 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Super Mario Construct</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    
-    <!-- Made with Construct, the game and app creator :: https://www.construct.net -->
-    <meta name="generator" content="Scirra Construct">
+  <meta charset="UTF-8" />
+  <title>Super Mario Construct</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
-    <meta name="author" content="Level Share Square Games">
-    <meta name="description" content="Super Mario themed level designer for browser &amp; desktop. Fan project without commercial intend.">
+  <!-- Made with Construct, the game and app creator :: https://www.construct.net -->
+  <meta name="generator" content="Scirra Construct" />
+  <meta name="author" content="Level Share Square Games" />
+  <meta name="description" content="Super Mario themed level designer for browser &amp; desktop. Fan project without commercial intend." />
 
-    <link rel="manifest" href="appmanifest.json">
-    <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-    <link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
-    <link rel="icon" type="image/png" href="icons/icon-512.png">
+  <link rel="manifest" href="appmanifest.json" />
+  <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png" />
+  <link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png" />
+  <link rel="icon" type="image/png" href="icons/icon-512.png" />
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="extra.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="extra.css" />
 
-    <style>
-        #levelsLink {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            font-family: sans-serif;
-            font-size: 16px;
-            background: #fff;
-            color: #000;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-        }
+  <style>
+    /* Styles for the Levels link */
+#levelsLink {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: black;         /* black text */
+  background: none;     /* no background */
+  text-decoration: none; /* no underline */
+  padding: 6px 12px;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  transition: text-decoration 0.2s ease;
+}
 
-        #levelsLink:hover {
-            background: #eee;
-        }
-    </style>
-</head> 
+#levelsLink:hover {
+  text-decoration: underline; /* underline on hover */
+  color: black;               /* keep black text on hover */
+  background: none;           /* no background on hover */
+}
+
+    /* Container for iframe tabs */
+    #tabsContainer {
+      position: fixed;
+      top: 50px; /* below the link */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top: 1px solid #ccc;
+      background: #fff;
+    }
+
+    /* Iframe styling */
+    #tabsContainer iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
 
 <body>
+  <!-- Link to open levels in iframe tab -->
+  <a href="#" id="levelsLink">Levels →</a>
 
-    <a href="about:blank" target="_blank" id="levelsLink">Levels →</a>
+  <!-- Container where iframes will load -->
+  <div id="tabsContainer"></div>
 
-    <script>
-        document.getElementById("levelsLink").addEventListener("click", function (e) {
-            e.preventDefault();
-            const win = window.open("about:blank", "_blank");
-            if (win) {
-                win.location.href = "/pages/games/smc/levels.html";
-            }
-        });
+  <script>
+    document.getElementById("levelsLink").addEventListener("click", function (e) {
+      e.preventDefault();
 
-        if (location.protocol.substr(0, 4) === "file") {
-            alert("Web exports won't work until you upload them. (When running on the file: protocol, browsers block many features from working for security reasons.)");
+      const tabsContainer = document.getElementById("tabsContainer");
+
+      // Clear any existing iframe(s)
+      tabsContainer.innerHTML = "";
+
+      // Create new iframe for levels page
+      const iframe = document.createElement("iframe");
+      iframe.src = "/pages/games/smc/levels.html";
+
+      tabsContainer.appendChild(iframe);
+    });
+
+    if (location.protocol.substr(0, 4) === "file") {
+      alert(
+        "Web exports won't work until you upload them. (When running on the file: protocol, browsers block many features from working for security reasons.)"
+      );
+    }
+
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
         }
-    </script>
+      },
+      false
+    );
 
-    <noscript>
-        <div id="notSupportedWrap">
-            <h2 id="notSupportedTitle">This content requires JavaScript</h2>
-            <p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
-        </div>
-    </noscript>
+    document.addEventListener(
+      "wheel",
+      function (event) {
+        event.preventDefault();
+      },
+      { passive: false }
+    );
+  </script>
 
-    <script src="scripts/modernjscheck.js"></script>
-    <script src="scripts/supportcheck.js"></script>
-    <script src="scripts/offlineclient.js" type="module"></script>
-    <script src="scripts/main.js" type="module"></script>
-    <script src="scripts/register-sw.js" type="module"></script>
-    <script>
-        window.addEventListener("keydown", function(e) {
-            if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                e.preventDefault();
-            }
-        }, false);
+  <noscript>
+    <div id="notSupportedWrap">
+      <h2 id="notSupportedTitle">This content requires JavaScript</h2>
+      <p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+    </div>
+  </noscript>
 
-        document.addEventListener("wheel", function(event){
-            event.preventDefault();
-        }, { passive: false });
-    </script>
-
-</body> 
+  <script src="scripts/modernjscheck.js"></script>
+  <script src="scripts/supportcheck.js"></script>
+  <script src="scripts/offlineclient.js" type="module"></script>
+  <script src="scripts/main.js" type="module"></script>
+  <script src="scripts/register-sw.js" type="module"></script>
+</body>
 </html>
