@@ -22,7 +22,7 @@ function createNotification(data) {
     // Save this message+timestamp to localStorage so it won't show again
     localStorage.setItem('msg', data.message + " and " + data.timestamp);
 
-    const userBgColor = '#000000';
+    const userBgColor = '#0d0d0d';
 
     const overlay = document.createElement('div');
     overlay.style.position = 'fixed';
