@@ -78,6 +78,19 @@
     "title": "Bloons TD 3"
   },
   {
+  {
+    "url": "/pages/games-frame?url=/pages/games/bloonstd4/",
+    "img": "/pages/images/btd4.jpg",
+    "alt": "Bloons TD 4",
+    "title": "Bloons TD 4"
+  },
+  {
+    "url": "/pages/games-frame?url=/pages/games/bloonstd5/",
+    "img": "/pages/images/btd5.png",
+    "alt": "Bloons TD 5",
+    "title": "Bloons TD 5"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/bottle-flip3d/",
     "img": "/pages/images/flip.webp",
     "alt": "Bottle Flip 3D",
