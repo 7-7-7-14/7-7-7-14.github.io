@@ -1,19 +1,35 @@
 const Notify = true;
 
-function createNotification(message) {
-    if (!Notify) return;
+async function getmjson() {
+    try {
+        const response = await fetch('/storage/json/messages.json', { cache: "no-store" });
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        return data || null;
+    } catch (error) {
+        console.error('Failed to fetch message:', error);
+        return null;
+    }
+}
 
-    const savedMessage = localStorage.getItem('readMessage');
-    if (savedMessage === message) return; // Don't show if already shown
+function createNotification(data) {
+    if (!Notify || !data || !data.message) return;
 
-    localStorage.setItem('readMessage', message); // Save that we showed it
+    // Check if this exact message + timestamp was already shown
+    const saved = localStorage.getItem('msg');
+    if (saved === data.message + " and " + data.timestamp) return;
+
+    // Save this message+timestamp to localStorage so it won't show again
+    localStorage.setItem('msg', data.message + " and " + data.timestamp);
+
+    const userBgColor = localStorage.getItem('backgroundColor') || '#11165a';
 
     const overlay = document.createElement('div');
     overlay.style.position = 'fixed';
     overlay.style.top = 0;
     overlay.style.left = 0;
     overlay.style.width = '100%';
-    overlay.style.height = '100%';
+    overlay.style.height = '100%'; 
     overlay.style.background = 'rgba(0, 0, 0, 0.5)';
     overlay.style.backdropFilter = 'blur(5px)';
     overlay.style.display = 'flex';
@@ -22,7 +38,7 @@ function createNotification(message) {
     overlay.style.zIndex = '2000';
 
     const notification = document.createElement('div');
-    notification.style.background = '#1d1d1d';
+    notification.style.background = userBgColor;
     notification.style.color = 'white';
     notification.style.padding = '30px 40px';
     notification.style.borderRadius = '20px';
@@ -30,51 +46,88 @@ function createNotification(message) {
     notification.style.fontFamily = "'Comfortaa', sans-serif";
     notification.style.fontSize = '16px';
     notification.style.textAlign = 'center';
-    notification.style.maxWidth = '400px';
+    notification.style.maxWidth = '600px';
     notification.style.width = '90%';
     notification.style.position = 'relative';
+    notification.style.display = 'flex';
+    notification.style.flexDirection = 'column';
+    notification.style.gap = '10px';
 
-    const header = document.createElement('h2');
-    header.textContent = 'Updates';
-    header.style.marginBottom = '15px';
-    header.style.fontSize = '22px';
-    header.style.letterSpacing = '1px';
-    header.style.color = 'white';
-    header.style.textShadow = '0 0 5px rgba(255,255,255,0.2)';
-    notification.appendChild(header);
+    const byebyebtn = document.createElement('button');
+    byebyebtn.textContent = '×';
+    byebyebtn.style.position = 'absolute';
+    byebyebtn.style.top = '10px';
+    byebyebtn.style.right = '15px';
+    byebyebtn.style.fontSize = '24px';
+    byebyebtn.style.background = 'transparent';
+    byebyebtn.style.border = 'none';
+    byebyebtn.style.color = 'white';
+    byebyebtn.style.cursor = 'pointer';
+    byebyebtn.style.transition = 'opacity 0.2s';
+    byebyebtn.style.textShadow = '0 0 0.8px black';
 
-    const messageSpan = document.createElement('div');
-    messageSpan.textContent = message;
-    messageSpan.style.marginBottom = '20px';
-    notification.appendChild(messageSpan);
-
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Close';
-    closeButton.style.padding = '10px 20px';
-    closeButton.style.border = 'none';
-    closeButton.style.borderRadius = '70px';
-    closeButton.style.background = 'rgba(255, 255, 255, 0.2)';
-    closeButton.style.color = 'white';
-    closeButton.style.cursor = 'pointer';
-    closeButton.style.transition = 'background-color 0.3s';
-
-    closeButton.addEventListener('mouseenter', () => {
-        closeButton.style.background = 'rgba(255, 255, 255, 0.4)';
+    byebyebtn.addEventListener('mouseenter', () => {
+        byebyebtn.style.opacity = '0.6';
     });
-    closeButton.addEventListener('mouseleave', () => {
-        closeButton.style.background = 'rgba(255, 255, 255, 0.2)';
+    byebyebtn.addEventListener('mouseleave', () => {
+        byebyebtn.style.opacity = '1';
     });
-
-    closeButton.addEventListener('click', () => {
+    byebyebtn.addEventListener('click', () => {
         document.body.removeChild(overlay);
     });
 
-    notification.appendChild(closeButton);
+    const toptext = document.createElement('h2');
+    toptext.textContent = 'Announcements';
+    toptext.style.marginBottom = '5px';
+    toptext.style.fontSize = '22px';
+    toptext.style.letterSpacing = '1px';
+    toptext.style.color = 'white';
+
+    const message = document.createElement('div');
+    message.textContent = data.message;
+    message.style.marginBottom = '10px';
+
+    const infostuff = document.createElement('div');
+    infostuff.style.fontSize = '13px';
+    infostuff.style.opacity = '0.85';
+    infostuff.style.marginTop = '10px';
+    infostuff.style.display = 'flex';
+    infostuff.style.alignItems = 'center';
+    infostuff.style.justifyContent = 'center';
+    infostuff.style.gap = '10px';
+    infostuff.style.flexWrap = 'nowrap';
+    infostuff.style.whiteSpace = 'nowrap';
+
+    const avatar = document.createElement('img');
+    avatar.src = data.avatarUrl || '/storage/png/profile.png';
+    avatar.alt = 'avatar';
+    avatar.style.width = '24px';
+    avatar.style.height = '24px';
+    avatar.style.borderRadius = '50%';
+    avatar.style.flexShrink = '0';
+
+    const formattedDate = new Date(data.timestamp).toLocaleString();
+
+    const infoText = document.createElement('span');
+    infoText.innerHTML = `<strong>${data.authorDisplayName}</strong> (${data.authorUsername}) · ${formattedDate}`;
+
+    infostuff.appendChild(avatar);
+    infostuff.appendChild(infoText);
+
+    notification.appendChild(byebyebtn);
+    notification.appendChild(toptext);
+    notification.appendChild(message);
+    notification.appendChild(infostuff);
     overlay.appendChild(notification);
     document.body.appendChild(overlay);
 }
 
+async function check() {
+    const data = await getmjson();
+    createNotification(data);
+}
+
 window.onload = () => {
-    const message = `im not making a new site, mb guys, im gonna add lots of games tho`;
-    createNotification(message);
+    check();
+    setInterval(check, 15000);  // check every 15 seconds for new messages
 };
