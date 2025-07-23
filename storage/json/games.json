@@ -312,10 +312,16 @@
     "title": "OvO"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/pacman",
+    "url": "/pages/games-frame?url=/pages/games/pacman/",
     "img": "/pages/images/pacman.png",
     "alt": "Pacman",
     "title": "Pacman"
+  },
+  {
+    "url": "/static/embed?p=https://pakohighway.online/",
+    "img": "/pages/images/pako-highway.png",
+    "alt": "Pako Highway",
+    "title": "Pako Highway"
   },
   {
     "url": "/pages/games-frame?url=/pages/games/polytrack-0.4.1/",
