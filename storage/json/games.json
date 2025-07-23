@@ -1,0 +1,242 @@
+[
+  {
+    "title": "2048",
+    "image": "images/2048.png",
+    "url": "/pages/games-frame?url=/pages/games/2048/"
+  },
+  {
+    "title": "Among Us",
+    "image": "images/amongus.png",
+    "url": "/pages/games-frame?url=/pages/games/among-us/"
+  },
+  {
+    "title": "Animator vs. Animation",
+    "image": "images/avsa.png",
+    "url": "/pages/games-frame?url=/pages/games/animator-vs-animation/"
+  },
+  {
+    "title": "1v1.lol",
+    "image": "/storage/images/games/1v1.lol.png",
+    "url": "/static/embed.html?p=https://1v1.lol"
+  },
+  {
+    "title": "osu",
+    "image": "/storage/images/games/osu.png",
+    "url": "/pages/games-frame.html?url=/pages/games/osu/index.html"
+  },
+  {
+    "title": "Smash Karts",
+    "image": "/storage/images/games/smash-karts.webp",
+    "url": "/static/embed.html?p=https://smashkarts.io/"
+  },
+  {
+    "title": "Idle Breakout",
+    "image": "/pages/games/idle-breakout/img/favicon.png",
+    "url": "/pages/games-frame.html?url=/pages/games/idle-breakout/index.html"
+  },
+  {
+    "title": "Cookie Clicker",
+    "image": "/pages/games/cookie-clicker/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/cookie-clicker/index.html"
+  },
+  {
+    "title": "SANDTRIS",
+    "image": "/pages/games/sandtris/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/sandtris/index.html"
+  },
+  {
+    "title": "Flood Runner 2",
+    "image": "/pages/games/flood-runner-2/download.jpg",
+    "url": "/pages/games-frame.html?url=/pages/games/flood-runner-2/index.html"
+  },
+  {
+    "title": "Doodle Jump",
+    "image": "/pages/games/doodle-jump/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/doodle-jump/index.html"
+  },
+  {
+    "title": "Infinite Craft",
+    "image": "/storage/images/games/infinite-craft.png",
+    "url": "/static/embed.html?p=https://infinite-craft.org/"
+  },
+  {
+    "title": "Tiny Fishing",
+    "image": "/pages/games/tiny-fishing/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/tiny-fishing/index.html"
+  },
+  {
+    "title": "Getaway Shootout",
+    "image": "/pages/games/getaway-shootout/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/getaway-shootout/index.html"
+  },
+  {
+    "title": "Rooftop Snipers",
+    "image": "/pages/games/rooftop-snipers/img/thumb.png",
+    "url": "/pages/games-frame.html?url=/pages/games/rooftop-snipers/index.html"
+  },
+  {
+    "title": "Bacon May Die",
+    "image": "/pages/games/bacon-may-die/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/bacon-may-die/index.html"
+  },
+  {
+    "title": "Cluster Rush",
+    "image": "/pages/games/cluster-rush/clusterrush.png",
+    "url": "/pages/games-frame.html?url=/pages/games/cluster-rush/index.html"
+  },
+  {
+    "title": "Bitlife",
+    "image": "/pages/games/bitlife/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/bitlife/index.html"
+  },
+  {
+    "title": "2048",
+    "image": "/pages/games/2048/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/2048/index.html"
+  },
+  {
+    "title": "Snow Rider 3D",
+    "image": "/pages/games/snow-rider-3d/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/snow-rider-3d/index.html"
+  },
+  {
+    "title": "Run 3",
+    "image": "/pages/games/run-3/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/run-3/index.html"
+  },
+  {
+    "title": "Basketball Legends",
+    "image": "/pages/games/basketball-legends/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/basketball-legends/index.html"
+  },
+  {
+    "title": "Sandboxels",
+    "image": "/pages/games/sandboxels/icons/icon.png",
+    "url": "/pages/games-frame.html?url=/pages/games/sandboxels/index.html"
+  },
+  {
+    "title": "Basket Random",
+    "image": "/pages/games/basket-random/splash.jpeg",
+    "url": "/pages/games-frame.html?url=/pages/games/basket-random/index.html"
+  },
+  {
+    "title": "Volley Random",
+    "image": "/pages/games/volley-random/volleyrandom.jfif",
+    "url": "/pages/games-frame.html?url=/pages/games/volley-random/index.html"
+  },
+  {
+    "title": "Subway Surfers",
+    "image": "/storage/images/games/subway.jfif",
+    "url": "/pages/games-frame.html?url=/pages/games/subway-surfers/index.html"
+  },
+  {
+    "title": "Boxing Random",
+    "image": "/pages/games/boxing-random/boxingrandom.jfif",
+    "url": "/pages/games-frame.html?url=/pages/games/boxing-random/index.html"
+  },
+  {
+    "title": "Block Blast",
+    "image": "/pages/games/block-blast/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/block-blast/index.html"
+  },
+  {
+    "title": "Chrome Dino",
+    "image": "/pages/games/chrome-dino/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/chrome-dino/index.html"
+  },
+  {
+    "title": "Knife Hit",
+    "image": "/pages/games/knife-hit/icon.png",
+    "url": "/pages/games-frame.html?url=/pages/games/knife-hit/index.html"
+  },
+    {
+    "title": "OvO",
+    "image": "/pages/games/ovo/images/icon-256.png",
+    "url": "/pages/games-frame.html?url=/pages/games/ovo/index.html"
+  },
+    {
+    "title": "Pacman",
+    "image": "/pages/games/pacman/pacman.jpg",
+    "url": "/pages/games-frame.html?url=/pages/games/pacman/index.html"
+  },
+    {
+    "title": "Google Snake",
+    "image": "/pages/games/google-snake/img/snake.png",
+    "url": "/pages/games-frame.html?url=/pages/games/google-snake/index.html"
+  },
+    {
+    "title": "Pool",
+    "image": "/pages/games/pool/icon.png",
+    "url": "/pages/games-frame.html?url=/pages/games/pool/index.html"
+  },
+    {
+    "title": "Minesweeper",
+    "image": "/pages/games/minesweeper/img/minesweeper.png",
+    "url": "/pages/games-frame.html?url=/pages/games/minesweeper/index.html"
+  },
+    {
+    "title": "Chess",
+    "image": "/pages/games/chess/icon.png",
+    "url": "/pages/games-frame.html?url=/pages/games/chess/index.html"
+  },
+  {
+    "title": "This is the Only Level",
+    "image": "/pages/games/this-is-the-only-level/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/this-is-the-only-level/index.html"
+  },
+  {
+    "title": "Impossible Quiz",
+    "image": "/pages/games/impossible-quiz/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/impossible-quiz/index.html"
+  },
+  {
+    "title": "Tomb of the Mask",
+    "image": "/pages/games/tomb-of-the-mask/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/tomb-of-the-mask/index.html"
+  },
+  {
+    "title": "10 Minutes Till Dawn",
+    "image": "/pages/games/10-minutes-till-dawn/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/10-minutes-till-dawn/index.html"
+  },
+  {
+    "title": "Doom",
+    "image": "/pages/games/doom/doom.png",
+    "url": "/pages/games-frame.html?url=/pages/games/doom/index.html"
+  },
+  {
+    "title": "Flappy Bird",
+    "image": "/pages/games/flappy-bird/flap.png",
+    "url": "/pages/games-frame.html?url=/pages/games/flappy-bird/index.html"
+  },
+  {
+    "title": "Slope",
+    "image": "/pages/games/slope/slope.png",
+    "url": "/pages/games-frame.html?url=/pages/games/slope/index.html"
+  },
+  {
+    "title": "Crazy Cattle 3D",
+    "image": "/pages/games/crazy-cattle-3d/CrazyCattle3D.icon.png",
+    "url": "/pages/games-frame.html?url=/pages/games/crazy-cattle-3d/index.html"
+  },
+  {
+    "title": "circloO",
+    "image": "/pages/games/circloo/img/download.png",
+    "url": "/pages/games-frame.html?url=/pages/games/circloo/index.html"
+  },
+  {
+    "title": "Super Mario 64",
+    "image": "/pages/games/super-mario-64/logo.png",
+    "url": "/pages/games-frame.html?url=/pages/games/super-mario-64/index.html"
+  },
+  {
+    "title": "Super Mario Bros",
+    "image": "/pages/games/super-mario-bros/smb.jpg",
+    "url": "/pages/games-frame.html?url=/pages/games/super-mario-bros/index.html"
+  },
+  {
+    "title": "Galaga",
+    "image": "/pages/games/galaga/galaga.png",
+    "url": "/pages/games-frame.html?url=/pages/games/galaga/index.html"
+  }
+]
