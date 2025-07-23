@@ -1,26 +1,64 @@
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bloons TD | 3kh0</title>
-    <link rel="icon" type="image/x-icon" href="bloonstd.jpg" />
-    <link rel="shortcut icon" type="image/x-icon" href="bloonstd.jpg" />
-  </head>
-  <body>
-    <script src="/js/main.js"></script>
-    <div id="ruffle" width="100%" height="100%"></div>
-    <script src="ruffle.js"></script>
-    <script>
-      window.RufflePlayer = window.RufflePlayer || {};
-      window.addEventListener("load", (event) => {
-        const ruffle = window.RufflePlayer.newest();
-        const player = ruffle.createPlayer();
-        const container = document.getElementById("ruffle");
-        player.id = "player";
-        player.style.width = "100%";
-        player.style.height = "100%";
-        container.appendChild(player);
-        player.load("game.swf");
-      });
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home</title>
+  <link rel="icon" href="https://ssl.gstatic.com/classroom/ic_product_classroom_96.png" />
+  <script src="/ruffle-nightly/ruffle.js"></script>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgb(30, 30, 30);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-wrapper {
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .game-inner {
+      aspect-ratio: 16 / 9;  /* Change ratio here */
+      width: 100vw;
+      height: auto;
+      max-height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-inner embed {
+      width: 100%;
+      height: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-wrapper">
+    <div class="game-inner">
+      <embed 
+        src="game.swf" 
+        type="application/x-shockwave-flash"
+        scale="showall"
+      ></embed>
+    </div>
+  </div>
+</body>
 </html>
