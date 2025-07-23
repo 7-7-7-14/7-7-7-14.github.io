@@ -22,7 +22,7 @@ function createNotification(data) {
     // Save this message+timestamp to localStorage so it won't show again
     localStorage.setItem('msg', data.message + " and " + data.timestamp);
 
-    const userBgColor = localStorage.getItem('backgroundColor') || '#11165a';
+    const userBgColor = '#000000';
 
     const overlay = document.createElement('div');
     overlay.style.position = 'fixed';
@@ -99,7 +99,7 @@ function createNotification(data) {
     infostuff.style.whiteSpace = 'nowrap';
 
     const avatar = document.createElement('img');
-    avatar.src = data.avatarUrl || '/storage/png/profile.png';
+    avatar.src = data.avatarUrl || '/storage/images/profile.png';
     avatar.alt = 'avatar';
     avatar.style.width = '24px';
     avatar.style.height = '24px';
