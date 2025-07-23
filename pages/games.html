@@ -497,6 +497,20 @@
     </div>
 
     <script>
+window.onload = () => {
+  const gameLinks = document.querySelectorAll('.game-button a');
+  const games = Array.from(gameLinks).map(link => ({
+    url: link.getAttribute('href'),
+    img: link.querySelector('img')?.getAttribute('src') || '',
+    alt: link.querySelector('img')?.getAttribute('alt') || '',
+    title: link.querySelector('.overlay-text')?.textContent.trim() || ''
+  }));
+  console.log(JSON.stringify(games, null, 2));
+};
+</script>
+
+
+    <script>
         function filterGames() {
             const searchInput = document.getElementById('gameSearch').value.toLowerCase();
             const games = document.querySelectorAll('.game-button');
