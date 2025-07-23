@@ -1,287 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta property="og:title" content="Nexus | Apps and More"> 
-    <meta property="og:description" content="Use different apps, unblocking methods, and more">
-    <meta property="og:image" content="/storage/images/logo.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="icon" href="../storage/images/googleclassroom.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../storage/css/anotherstyle.css">
-    <link rel="stylesheet" href="../storage/css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <meta property="og:title" content="Nexus | Apps and More"> 
+  <meta property="og:description" content="Use different apps, unblocking methods, and more">
+  <meta property="og:image" content="/storage/images/logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="icon" href="../storage/images/googleclassroom.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../storage/css/anotherstyle.css" />
+  <link rel="stylesheet" href="../storage/css/style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-
-<script src="/particles.js"></script>
+  <script src="/particles.js"></script>
   <script src="/app.js"></script>
-<div id="particles-js"></div>
-
-<div class="navbar">
+  <div id="particles-js"></div>
+  <div class="navbar">
     <div class="left-side">
-        <a href="/">
-            <img src="/storage/images/logo.png" alt="logo">
-        </a>
+      <a href="/">
+      </a>
     </div>
-<div class="right-side">
-     <script type="text/javascript" src="/storage/js/nav.js"></script>
-</div>
-</div>
-    <div class="game-title">Apps</div>
-
-    <div class="search-bar-container">
-        <input type="text" id="gameSearch" class="search-bar" placeholder="Search for an app" oninput="filterGames()">
+    <div class="right-side">
+      <script type="text/javascript" src="/storage/js/nav.js"></script>
     </div>
+  </div>
+  <div class="game-title">Apps</div>
+  <div class="apps-title">Search for an app</div>
+  <div class="search-bar-container">
+    <input
+      type="text"
+      id="gameSearch"
+      class="search-bar"
+      placeholder="Search for a game..."
+      oninput="filterApps()"
+    />
+    <button id="random-button">Let us pick</button>
+  </div>
+  <div class="game-grid" id="gameGrid"></div>
 
-    <div class="game-grid" id="gameGrid">
-        <div class="game-button">
-            <a href="/static/embed?p=https://discord.com/">
-                <img src="/pages/apps/images/discord.png" alt="Discord">
-                <div class="overlay-text">Discord</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/30$w/">
-                <img src="/pages/apps/images/dollar.png" alt="Thirty Dollar Website">
-                <div class="overlay-text">Thirty Dollar Website</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://inv.nadeko.net/">
-                <img src="/pages/apps/images/invid.png" alt="Youtube (Invidious)">
-                <div class="overlay-text">Youtube (Invidious)</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://soundbuttonsworld.com/">
-                <img src="/pages/apps/images/sound-button.png" alt="Sound Buttons World">
-                <div class="overlay-text">Sound Buttons World</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/emujs/">
-                <img src="/pages/apps/images/emulatorjs.png" alt="Emulator JS">
-                <div class="overlay-text">Emulator JS</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/soundboard/">
-                <img src="/pages/apps/images/button.png" alt="Soundboard - Genizy">
-                <div class="overlay-text">Soundboard - Genizy</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://soundcloud.com/">
-                <img src="/pages/apps/images/soundcloud.png" alt="Soundcloud">
-                <div class="overlay-text">Soundcloud</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/sleepycat/">
-                <img src="/pages/apps/images/sleepycat.png" alt="Sleepy Cat">
-                <div class="overlay-text">Sleepy Cat</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/v86/">
-                <img src="/pages/apps/images/v86.png" alt="copy.sh - v86">
-                <div class="overlay-text">copy.sh - v86</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/txtmoji/">
-                <img src="/pages/apps/images/txtmoji.avif" alt="Txtmoji">
-                <div class="overlay-text">Txtmoji</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://play.geforcenow.com/mall/#/loginwall">
-                <img src="/pages/apps/images/geforce.png" alt="Geforce">
-                <div class="overlay-text">Geforce NOW</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://gauthmath.com/">
-                <img src="/pages/apps/images/gauth.png" alt="Gauth Math">
-                <div class="overlay-text">Gauth Math</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/javascript-executor">
-                <img src="/pages/apps/images/script.webp" alt="Javascript Executor">
-                <div class="overlay-text">Javascript Executor</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://www.xbox.com/en-us/play">
-                <img src="/pages/apps/images/xbox.png" alt="Xbox Cloud Gaming">
-                <div class="overlay-text">Xbox Cloud Gaming</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/gradecalc">
-                <img src="/pages/apps/images/gradecalc.png" alt="Grade Calculator">
-                <div class="overlay-text">Grade Calculator</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/mariosequencer/">
-                <img src="/pages/apps/images/marioseq.jpg" alt="Mario Sequencer">
-                <div class="overlay-text">Mario Sequencer</div>
-            </a>
-        </div>
-        <div class="game-button">
-              <a href="/pages/apps-frame?url=/pages/apps/engine-sim/">
-                <img src="/pages/apps/images/engine.png" alt="Engine Simulator">
-                <div class="overlay-text">Engine Simulator</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://desmos.com">
-                <img src="/pages/apps/images/desmos.png" alt="Desmos">
-                <div class="overlay-text">Desmos</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/kahoot">
-                <img src="/pages/apps/images/kahoot.png" alt="Kahoot (Hacked)">
-                <div class="overlay-text">Kahoot (Hacked)</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/print3r">
-                <img src="/pages/apps/images/print.png" alt="ExtPrint3r">
-                <div class="overlay-text">ExtPrint3r</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/securly">
-                <img src="/pages/apps/images/securly.png" alt="Securly Checker">
-                <div class="overlay-text">Securly Checker</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://blooketbot.glitch.me/">
-                <img src="/pages/apps/images/bb.png" alt="Blooket Bot">
-                <div class="overlay-text">Blooket Bot</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/apps-frame?url=/pages/apps/webfluids/">
-                <img src="/pages/apps/webfluids/logo.png" alt="WebGL Fluid Simulation">
-                <div class="overlay-text">WebGL Fluid Simulation</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://google.com/">
-                <img src="/pages/apps/images/google.jpg" alt="Google">
-                <div class="overlay-text">Google</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://start.duckduckgo.com/">
-                <img src="/pages/apps/images/ddg.png" alt="DuckDuckGo">
-                <div class="overlay-text">DuckDuckGo</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://tiktok.com">
-                <img src="/pages/apps/images/tt.png" alt="TikTok">
-                <div class="overlay-text">TikTok</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/static/embed?p=https://duck.ai">
-                <img src="/pages/apps/images/ddgai.png" alt="duck.ai">
-                <div class="overlay-text">duck.ai</div>
-            </a>
-        </div>
-    </div>
+  <script>
+    const CACHE_KEY = "apps-cache";
+    const CACHE_TIME_KEY = "apps-cache-time";
+    const JSON_PATH = "/storage/json/apps.json";
 
-    <script>
-window.onload = () => {
-  const gameLinks = document.querySelectorAll('.game-button a');
-  const games = Array.from(gameLinks).map(link => ({
-    url: link.getAttribute('href'),
-    img: link.querySelector('img')?.getAttribute('src') || '',
-    alt: link.querySelector('img')?.getAttribute('alt') || '',
-    title: link.querySelector('.overlay-text')?.textContent.trim() || ''
-  }));
-  console.log(JSON.stringify(games, null, 2));
-};
-</script>
+    async function loadApps() {
+      const gameGrid = document.getElementById("gameGrid");
+      const cached = localStorage.getItem(CACHE_KEY);
 
-    <script>
-        function checkGridAlignment() {
-            const gameGrid = document.getElementById('gameGrid');
-            const buttons = document.querySelectorAll('.game-button');
-            const pageWidth = window.innerWidth;
-            
-            buttons.forEach(button => {
-                const rect = button.getBoundingClientRect();
-                const distanceToRightEdge = pageWidth - rect.right;
-                
-             
-                if (distanceToRightEdge < 75) {
-                    button.style.clear = 'both';
-                } else {
-                    button.style.clear = 'none';
-                }
-            });
+      if (cached) {
+        try {
+          const apps = JSON.parse(cached);
+          renderApps(apps);
+        } catch (e) {
+          console.warn("Failed to parse cached apps:", e);
         }
-        window.addEventListener('resize', checkGridAlignment);
-        window.addEventListener('load', checkGridAlignment);
-    </script>
+      }
 
-    <script type="text/javascript" src="../storage/js/settings-1.js"></script>
-
-    <script>
-        function filterGames() {
-            const searchInput = document.getElementById('gameSearch').value.toLowerCase();
-            const games = document.querySelectorAll('.game-button');
-
-            games.forEach(game => {
-                const gameTitle = game.querySelector('.overlay-text').textContent.toLowerCase();
-                if (gameTitle.includes(searchInput)) {
-                    game.style.display = 'block';
-                } else {
-                    game.style.display = 'none';
-                }
-            });
+      try {
+        const res = await fetch(JSON_PATH, { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch JSON");
+        const freshApps = await res.json();
+        const freshString = JSON.stringify(freshApps);
+        if (freshString !== cached) {
+          localStorage.setItem(CACHE_KEY, freshString);
+          localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+          renderApps(freshApps);
         }
-    </script>
-    <script type="text/javascript" src="/storage/js/background.js"></script>
-    <script type="text/javascript" src="/storage/js/resort.js"></script>
-    <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
-
-<!-- Ultraviolet -->
-    <script src="/static/uv/uv.bundle.js" defer></script>
-    <script src="/static/uv/uv.config.js" defer></script>
-    <script src="/static/register-sw.js" defer></script>
-    <script src="/static/search.js" defer></script>
-    <script src="/static/index.js" defer></script>
-
-    <script>
-    async function regsw(){
-        await navigator.serviceWorker.register("/static/uv-sw.js", {
-            scope: "/static/",
-        });
+      } catch (err) {
+        console.error(`Failed to fetch latest apps.json:`, err);
+      }
     }
 
+    function renderApps(apps) {
+      const gameGrid = document.getElementById("gameGrid");
+      gameGrid.innerHTML = "";
+      for (const game of apps) {
+        const div = document.createElement("div");
+        div.className = "game-button";
+        div.innerHTML = `
+          <a href="${game.url}">
+            <img src="${game.img}" alt="${game.alt || game.title}" onerror="this.onerror=null;this.src='/storage/images/404.png';" />
+            <div class="overlay-text">${game.title}</div>
+          </a>
+        `;
+        gameGrid.appendChild(div);
+      }
+      sortGameButtons();
+      checkGridAlignment();
+    }
+
+    function filterApps() {
+      const searchInput = document.getElementById("gameSearch").value.toLowerCase();
+      const apps = document.querySelectorAll(".game-button");
+      apps.forEach((game) => {
+        const title = game.querySelector(".overlay-text").textContent.toLowerCase();
+        game.style.display = title.includes(searchInput) ? "block" : "none";
+      });
+    }
+
+    function checkGridAlignment() {
+      const buttons = document.querySelectorAll(".game-button");
+      const pageWidth = window.innerWidth;
+      buttons.forEach((button) => {
+        const rect = button.getBoundingClientRect();
+        const distanceToRightEdge = pageWidth - rect.right;
+        button.style.clear = distanceToRightEdge < 75 ? "both" : "none";
+      });
+    }
+
+    window.addEventListener("resize", checkGridAlignment);
+    window.addEventListener("load", () => {
+      loadApps();
+      checkGridAlignment();
+    });
+
+    document.getElementById("random-button").addEventListener("click", () => {
+      const apps = Array.from(document.querySelectorAll(".game-button a"));
+      if (apps.length === 0) return;
+      const randomIndex = Math.floor(Math.random() * apps.length);
+      const randomGame = apps[randomIndex];
+      window.location.href = randomGame.href;
+    });
+  </script>
+
+  <script type="text/javascript" src="/storage/js/settings.js"></script>
+  <script type="text/javascript" src="/storage/js/background.js"></script>
+  <script type="text/javascript" src="/storage/js/resort.js"></script>
+  <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
+  <script src="/static/uv/uv.bundle.js" defer></script>
+  <script src="/static/uv/uv.config.js" defer></script>
+  <script src="/static/register-sw.js" defer></script>
+  <script src="/static/search.js" defer></script>
+  <script src="/static/index.js" defer></script>
+  <script>
+    async function regsw() {
+      await navigator.serviceWorker.register("/static/uv-sw.js", {
+        scope: "/static/",
+      });
+    }
     regsw();
-    </script>
-<!-- Ultraviolet -->
-
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const updParam = urlParams.get('upd');
-
-  if (updParam === null) {
-    window.location.href = '/';
-  }
-</script>
-
+  </script>
 </body>
 </html>
