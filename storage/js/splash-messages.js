@@ -55,7 +55,7 @@ const phrases = [
     `ts ste lwk pmo ngl lke icl ts ste is so bns ddss nt gnna us ts 🥀`,
     `:D`,
     `best static website for the unemployed`,
-    `nexusv2.netlify.app ay 🗣️🗣️🔥🔥`,
+    `{hostname} ay 🗣️🗣️🔥🔥`,
     `ヽ༼ ಠ益ಠ ༽ﾉ`,
     `i swear I'm paying attention`,
     `am i not the only one with 481178:44:26 hours on minecraft`,
@@ -202,10 +202,14 @@ function changeText() {
   let randomPhrase = getRandomPhrase();
   currentPhrase = randomPhrase;
 
-  if (typeof randomPhrase === "string") {
-    if (randomPhrase.includes("{ip}")) {
-      randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
-    }
+if (typeof randomPhrase === "string") {
+  if (randomPhrase.includes("{ip}")) {
+    randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
+  }
+  if (randomPhrase.includes("{hostname}")) {
+    randomPhrase = randomPhrase.replace("{hostname}", location.hostname);
+  }
+      
     paragraph.textContent = randomPhrase;
 
     if (randomPhrase === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
