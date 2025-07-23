@@ -171,7 +171,7 @@ const phrases = [
     `no ads!`,
     `i spent like 3 months making this site, your welcome for all my hard work`,
     `👈(ﾟヮﾟ👈)`,
-    `The LORD is my shepherd. He leads me in paths of righteousness. I will fear no evil. I will dwell in the house of the LORD forever. - Pslam 23`,
+    `God is our refuge and strength, an ever-present help in trouble - Psalm 46:1`,
     `pls stop telling me to fix the movies 😭 (it depends on another sever which i cant control)`
     `Why did the AI break up with the toaster? - Because it was giving major NPC vibes and couldn't handle the rizz overload. 💀`,
     `What did the TikTok say to the YouTube Short? - “Stay in your lane, boomer.” 📱😤`,
