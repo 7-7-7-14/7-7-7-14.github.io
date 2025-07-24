@@ -6,6 +6,36 @@
   <script src="Build/UnityLoader.js"></script>
   <script>
     var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Bad Piggies.json");
+
+    // Optional: If your existing fullscreen button calls this function
+    function toggleFullscreen() {
+      const elem = document.getElementById("gameContainer");
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        }
+      }
+    }
+
+    // Ensure game resizes properly when fullscreen changes
+    document.addEventListener("fullscreenchange", resizeGame);
+    document.addEventListener("webkitfullscreenchange", resizeGame);
+    document.addEventListener("mozfullscreenchange", resizeGame);
+    document.addEventListener("MSFullscreenChange", resizeGame);
+
+    function resizeGame() {
+      const container = document.getElementById("gameContainer");
+      container.style.width = "100vw";
+      container.style.height = "100vh";
+    }
   </script>
   <style>
     html, body {
@@ -19,6 +49,7 @@
     #gameContainer {
       width: 100vw;
       height: 100vh;
+      background: #000;
     }
   </style>
 </head>
