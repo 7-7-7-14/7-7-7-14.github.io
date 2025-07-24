@@ -1,55 +1,34 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/ruffle-nightly/ruffle.js"></script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/ic_product_classroom_96.png" />
-  <style>
-    html, body {
-      margin: 0; padding: 0;
-      height: 100vh; width: 100vw;
-      overflow: hidden;
-      background-color: rgb(30, 30, 30);
-    }
-    .container {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      background-color: rgb(30, 30, 30);
-    }
-    .content {
-      height: 100%;
-      width: 100%;
-      background-color: rgb(30, 30, 30);
-    }
-    .swf-embed {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: fill;
-    }
-    /* Remove blue focus outline and border */
-    .swf-embed:focus {
-      outline: none;
-      border: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="content">
-      <embed 
-        class="swf-embed"
-        pluginspage="http://www.macromedia.com/go/getflashplayer" 
-        src="/pages/games/learntofly/game.swf"  
-        type="application/x-shockwave-flash"
-        scale="showall"
-      >
-      </embed>
-    </div>
-  </div>
-</body>
+<html>
+  <head>
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+    <script type="text/javascript">
+      aclib.runInPagePush({
+          zoneId: '8175794',
+          refreshRate: 60,
+          maxAds: 2,
+      });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learn to fly | Jeo</title>
+    <link rel="icon" type="image/x-icon" href="learntofly.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="learntofly.png" />
+  </head>
+  <body>
+    <script src="/js/main.js"></script>
+    <div id="ruffle" width="100%" height="100%"></div>
+    <script src="/ruffle-nightly/ruffle.js"></script>
+    <script>
+      window.RufflePlayer = window.RufflePlayer || {};
+      window.addEventListener("load", (event) => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("ruffle");
+        player.id = "player";
+        player.style.width = "100%";
+        player.style.height = "100%";
+        container.appendChild(player);
+        player.load("game.swf");
+      });
+    </script>
+  </body>
 </html>
