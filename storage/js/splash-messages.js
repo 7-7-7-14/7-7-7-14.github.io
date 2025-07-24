@@ -179,6 +179,7 @@ const phrases = [
     `60+ games!`,
     `somehow still w no ads`,
     `should i add ads?, lmk`,
+    `funny guy, am i right 💀☠️☠️`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
