@@ -166,7 +166,7 @@ const phrases = [
     `is this tuff in chindia 🥀😭`,
     `yoo wsg josh`,
     `tip: ps1 games crash chromebooks.. unless you have a Ryzen 7 9800X3D, Nvidia GeForce RTX 5070, MSI MAG A550BN and 3.9L twin-turbo V8, then your good.`,
-    `tip: use nexus-sub.netlify.app/cloak, it doesent show on your history!`,
+    `tip: use {hostname}/cloak, it doesent show on your history!`,
     `how does no one know where the games are 😭🙏`,
     `no ads!`,
     `i spent like 3 months making this site, your welcome for all my hard work`,
