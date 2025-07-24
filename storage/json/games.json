@@ -252,6 +252,12 @@
     "title": "Fancy Pants 3"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/getaway-shootout/",
+    "img": "/pages/images/shootout.jpg",
+    "alt": "Getaway Shootout",
+    "title": "Getaway Shootout"
+  },
+  {
     "url": "/static/embed?p=https://infinite-craft.org/",
     "img": "/pages/images/infcraft.png",
     "alt": "Infinite Craft",
