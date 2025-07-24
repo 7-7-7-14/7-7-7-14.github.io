@@ -1,6 +1,6 @@
 self.__uv$config = {
     prefix: '/static/load/',
-    bare:'https://when.casaye.com/bare/', // https://astroid.wtf/bare/, https://r2fh2387hv2b2rfbiz.site, https://when.casaye.com/bare/, https://bare.koyeb.app/
+    bare:'https://bare2.mysticmath.workers.dev', // https://astroid.wtf/bare/, https://r2fh2387hv2b2rfbiz.site, https://when.casaye.com/bare/, https://bare.koyeb.app/
     encodeUrl: Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
     handler: '/static/uv/uv.handler.js',
