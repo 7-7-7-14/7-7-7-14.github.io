@@ -391,7 +391,6 @@
               return setIframe('/pages/extra/data-use', 'Data Usage');
             case 'nexus://secret':
               return setIframe('/pages/secret', 'super-secret');
-			  
           }
         } catch (e) {
           console.error('internal page failed:', e);
@@ -407,7 +406,7 @@
         if (typeof mapped === 'function') {
           mapped();
         } else {
-          const isInternal = mapped === '/static/index.html' || mapped === '/pages/settings.html';
+          const isInternal = mapped === '/static/' || mapped === '/pages/prox/settings';
           let finalURL = mapped;
           if (!isInternal) {
             const hasProtocol = /^https?:\/\//i.test(mapped);
@@ -420,14 +419,13 @@
               finalURL = `https://duckduckgo.com/?q=${encodeURIComponent(mapped)}`;
             }
           }
-          iframe.src = isInternal ? mapped : `/static/embed.html?p=${finalURL}`;
+          iframe.src = isInternal ? mapped : `/static/embed?p=${finalURL}`;
           iframe.onload = () => {
             updateSearchBar(iframe);
             updateTabName(iframe);
           };
         }
       }
-
 
       function settings() {
         tabCount++;
