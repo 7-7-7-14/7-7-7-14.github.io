@@ -1,1 +1,168 @@
-"use strict";const OFFLINE_DATA_FILE="offline.json",CACHE_NAME_PREFIX="c3offline",BROADCASTCHANNEL_NAME="offline",CONSOLE_PREFIX="[SW] ",LAZYLOAD_KEYNAME="",broadcastChannel="undefined"==typeof BroadcastChannel?null:new BroadcastChannel("offline");class PromiseThrottle{constructor(e){this._maxParallel=e,this._queue=[],this._activeCount=0}Add(e){return new Promise(((t,a)=>{this._queue.push({func:e,resolve:t,reject:a}),this._MaybeStartNext()}))}async _MaybeStartNext(){if(!this._queue.length||this._activeCount>=this._maxParallel)return;this._activeCount++;const e=this._queue.shift();try{const t=await e.func();e.resolve(t)}catch(t){e.reject(t)}this._activeCount--,this._MaybeStartNext()}}const networkThrottle=new PromiseThrottle(20);function PostBroadcastMessage(e){broadcastChannel&&setTimeout((()=>broadcastChannel.postMessage(e)),3e3)}function Broadcast(e){PostBroadcastMessage({"type":e})}function BroadcastDownloadingUpdate(e){PostBroadcastMessage({"type":"downloading-update","version":e})}function BroadcastUpdateReady(e){PostBroadcastMessage({"type":"update-ready","version":e})}function IsUrlInLazyLoadList(e,t){if(!t)return!1;try{for(const a of t)if(new RegExp(a).test(e))return!0}catch(e){console.error("[SW] Error matching in lazy-load list: ",e)}return!1}function WriteLazyLoadListToStorage(e){return"undefined"==typeof localforage?Promise.resolve():localforage.setItem("",e)}function ReadLazyLoadListFromStorage(){return"undefined"==typeof localforage?Promise.resolve([]):localforage.getItem("")}function GetCacheBaseName(){return"c3offline-"+self.registration.scope}function GetCacheVersionName(e){return GetCacheBaseName()+"-v"+e}async function GetAvailableCacheNames(){const e=await caches.keys(),t=GetCacheBaseName();return e.filter((e=>e.startsWith(t)))}async function IsUpdatePending(){return(await GetAvailableCacheNames()).length>=2}async function GetMainPageUrl(){const e=await clients.matchAll({includeUncontrolled:!0,type:"window"});for(const t of e){let e=t.url;if(e.startsWith(self.registration.scope)&&(e=e.substring(self.registration.scope.length)),e&&"/"!==e)return e.startsWith("?")&&(e="/"+e),e}return""}function fetchWithBypass(e,t){return"string"==typeof e&&(e=new Request(e)),t?fetch(e.url,{headers:e.headers,mode:e.mode,credentials:e.credentials,redirect:e.redirect,cache:"no-store"}):fetch(e)}async function CreateCacheFromFileList(e,t,a){const n=await Promise.all(t.map((e=>networkThrottle.Add((()=>fetchWithBypass(e,a))))));let o=!0;for(const e of n)e.ok||(o=!1,console.error("[SW] Error fetching '"+e.url+"' ("+e.status+" "+e.statusText+")"));if(!o)throw new Error("not all resources were fetched successfully");const s=await caches.open(e);try{return await Promise.all(n.map(((e,a)=>s.put(t[a],e))))}catch(t){throw console.error("[SW] Error writing cache entries: ",t),caches.delete(e),t}}async function UpdateCheck(e){try{const t=await fetchWithBypass("offline.json",!0);if(!t.ok)throw new Error("offline.json responded with "+t.status+" "+t.statusText);const a=await t.json(),n=a.version,o=a.fileList,s=a.lazyLoad,r=GetCacheVersionName(n);if(await caches.has(r)){return void(await IsUpdatePending()?(console.log("[SW] Update pending"),Broadcast("update-pending")):(console.log("[SW] Up to date"),Broadcast("up-to-date")))}const i=await GetMainPageUrl();o.unshift("./"),i&&-1===o.indexOf(i)&&o.unshift(i),console.log("[SW] Caching "+o.length+" files for offline use"),e?Broadcast("downloading"):BroadcastDownloadingUpdate(n),s&&await WriteLazyLoadListToStorage(s),await CreateCacheFromFileList(r,o,!e);await IsUpdatePending()?(console.log("[SW] All resources saved, update ready"),BroadcastUpdateReady(n)):(console.log("[SW] All resources saved, offline support ready"),Broadcast("offline-ready"))}catch(e){console.warn("[SW] Update check failed: ",e)}}async function GetCacheNameToUse(e,t){if(1===e.length||!t)return e[0];if((await clients.matchAll()).length>1)return e[0];const a=e[e.length-1];return console.log("[SW] Updating to new version"),await Promise.all(e.slice(0,-1).map((e=>caches.delete(e)))),a}async function HandleFetch(e,t){const a=await GetAvailableCacheNames();if(!a.length)return fetch(e.request);const n=await GetCacheNameToUse(a,t),o=await caches.open(n),s=await o.match(e.request);if(s)return s;const r=await Promise.all([fetch(e.request),ReadLazyLoadListFromStorage()]),i=r[0],c=r[1];if(IsUrlInLazyLoadList(e.request.url,c))try{await o.put(e.request,i.clone())}catch(t){console.warn("[SW] Error caching '"+e.request.url+"': ",t)}return i}self.addEventListener("install",(e=>{e.waitUntil(UpdateCheck(!0).catch((()=>null)))})),self.addEventListener("fetch",(e=>{if(new URL(e.request.url).origin!==location.origin)return;const t="navigate"===e.request.mode,a=HandleFetch(e,t);t&&e.waitUntil(a.then((()=>UpdateCheck(!1)))),e.respondWith(a)}));
+"use strict";
+
+// === CONFIGURATION ===
+const CACHE_NAME_PREFIX = "c3offline";
+const OFFLINE_DATA_FILE = "offline.json";
+const BROADCASTCHANNEL_NAME = "offline";
+
+// === GLOBALS ===
+const broadcastChannel = typeof BroadcastChannel !== "undefined" ? new BroadcastChannel(BROADCASTCHANNEL_NAME) : null;
+
+// === UTILITIES ===
+const log = (...args) => console.log("[SW]", ...args);
+const error = (...args) => console.error("[SW]", ...args);
+const delayBroadcast = (type, data = {}) => {
+  if (broadcastChannel) broadcastChannel.postMessage({ type, ...data });
+};
+
+// === PARALLEL FETCH THROTTLE ===
+class PromiseThrottle {
+  constructor(max) {
+    this._maxParallel = max;
+    this._queue = [];
+    this._activeCount = 0;
+  }
+  Add(fn) {
+    return new Promise((resolve, reject) => {
+      this._queue.push({ fn, resolve, reject });
+      this._next();
+    });
+  }
+  async _next() {
+    if (!this._queue.length || this._activeCount >= this._maxParallel) return;
+    this._activeCount++;
+    const task = this._queue.shift();
+    try {
+      const result = await task.fn();
+      task.resolve(result);
+    } catch (err) {
+      task.reject(err);
+    }
+    this._activeCount--;
+    this._next();
+  }
+}
+const networkThrottle = new PromiseThrottle(20);
+
+// === CACHE NAMES ===
+const getBaseCacheName = () => `${CACHE_NAME_PREFIX}-${self.registration.scope}`;
+const getCacheVersionName = v => `${getBaseCacheName()}-v${v}`;
+const getAvailableCacheNames = async () =>
+  (await caches.keys()).filter(name => name.startsWith(getBaseCacheName()));
+
+// === FETCH WRAPPER ===
+const fetchWithBypass = (req, bypass) =>
+  fetch(typeof req === "string" ? new Request(req) : req, {
+    cache: bypass ? "no-store" : req.cache,
+    mode: req.mode,
+    credentials: req.credentials,
+    redirect: req.redirect,
+    headers: req.headers
+  });
+
+// === CACHE MANAGER ===
+async function cacheResources(cacheName, urls, bypass) {
+  const cache = await caches.open(cacheName);
+  await Promise.all(urls.map(async url => {
+    try {
+      const res = await networkThrottle.Add(() => fetchWithBypass(url, bypass));
+      if (res.ok) await cache.put(url, res.clone());
+      else error("Fetch failed:", url, res.status);
+    } catch (e) {
+      error("Error caching:", url, e);
+    }
+  }));
+}
+
+// === MAIN UPDATE CHECK ===
+async function updateCheck(isInstall) {
+  try {
+    const response = await fetchWithBypass(OFFLINE_DATA_FILE, true);
+    if (!response.ok) throw new Error("offline.json " + response.statusText);
+    const { version, fileList = [], lazyLoad = [] } = await response.json();
+    const cacheName = getCacheVersionName(version);
+    const existingCaches = await getAvailableCacheNames();
+
+    if (existingCaches.includes(cacheName)) {
+      const isPending = existingCaches.length >= 2;
+      delayBroadcast(isPending ? "update-pending" : "up-to-date");
+      return;
+    }
+
+    const mainUrl = await getMainPageUrl();
+    if (mainUrl && !fileList.includes(mainUrl)) fileList.unshift(mainUrl);
+    fileList.unshift("./");
+
+    log("Caching", fileList.length, "files");
+    delayBroadcast(isInstall ? "downloading" : "downloading-update", { version });
+    await cacheResources(cacheName, fileList, !isInstall);
+
+    const isNowPending = await isUpdatePending();
+    delayBroadcast(isNowPending ? "update-ready" : "offline-ready", { version });
+
+  } catch (err) {
+    error("Update check failed:", err);
+  }
+}
+
+async function isUpdatePending() {
+  return (await getAvailableCacheNames()).length >= 2;
+}
+
+async function getMainPageUrl() {
+  const clientsList = await clients.matchAll({ type: "window", includeUncontrolled: true });
+  for (const client of clientsList) {
+    let url = client.url;
+    if (url.startsWith(self.registration.scope)) {
+      url = url.substring(self.registration.scope.length);
+      if (url && url !== "/") return url.startsWith("?") ? "/" + url : url;
+    }
+  }
+  return "";
+}
+
+async function getCacheToUse(names, isNav) {
+  if (names.length === 1 || !isNav) return names[0];
+  if ((await clients.matchAll()).length > 1) return names[0];
+  const latest = names[names.length - 1];
+  log("Clearing old caches...");
+  await Promise.all(names.slice(0, -1).map(c => caches.delete(c)));
+  return latest;
+}
+
+async function handleFetch(event, isNavigation) {
+  const cacheNames = await getAvailableCacheNames();
+  if (!cacheNames.length) return fetch(event.request);
+
+  const cacheName = await getCacheToUse(cacheNames, isNavigation);
+  const cache = await caches.open(cacheName);
+  const match = await cache.match(event.request);
+  if (match) return match;
+
+  try {
+    const response = await fetch(event.request);
+    return response;
+  } catch {
+    return new Response("Offline", { status: 503, statusText: "Offline" });
+  }
+}
+
+// === EVENT LISTENERS ===
+self.addEventListener("install", e => {
+  self.skipWaiting();
+  e.waitUntil(updateCheck(true));
+});
+
+self.addEventListener("activate", e => {
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", e => {
+  const url = new URL(e.request.url);
+  if (url.origin !== location.origin) return;
+
+  const isNav = e.request.mode === "navigate";
+  const response = handleFetch(e, isNav);
+  if (isNav) e.waitUntil(updateCheck(false));
+  e.respondWith(response);
+});
