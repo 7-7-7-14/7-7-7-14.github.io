@@ -55,7 +55,7 @@ const phrases = [
     `ts ste lwk pmo ngl lke icl ts ste is so bns ddss nt gnna us ts 🥀`,
     `:D`,
     `best static website for the unemployed`,
-    `{hostname} ay 🗣️🗣️🔥🔥`,
+    `{hostname} ayyy 🗣️🗣️🔥🔥`,
     `ヽ༼ ಠ益ಠ ༽ﾉ`,
     `i swear I'm paying attention`,
     `am i not the only one with 481178:44:26 hours on minecraft`,
