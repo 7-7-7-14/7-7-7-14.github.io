@@ -12,6 +12,12 @@
     "title": "Among Us"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/angry-birds/",
+    "img": "/pages/images/angrybirds.webp",
+    "alt": "Angry Birds",
+    "title": "Angry Birds"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/animator-vs-animation/",
     "img": "/pages/images/avsa.png",
     "alt": "Animator vs. Animation",
