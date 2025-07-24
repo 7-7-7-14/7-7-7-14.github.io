@@ -391,41 +391,62 @@
               return setIframe('/pages/extra/data-use', 'Data Usage');
             case 'nexus://secret':
               return setIframe('/pages/secret', 'super-secret');
-          }
-        } catch (e) {
-          console.error('internal page failed:', e);
-          return url;
-        }
+			  
+  function internal(url) {
+  try {
+    // …all your existing mapping logic here…
+    // e.g. if (url === 'home') return '/static/';
+    //     if (url === 'settings') return '/pages/prox/settings';
+    //     // etc.
+  } catch (e) {
+    console.error('internal page failed:', e);
+    return url;
+  }
+  // 🔥 Make sure you return even when no cases matched:
+  return url;
+}
+
+function search() {
+  const inputRaw = document.getElementById('search-input').value.trim();
+  const iframe = document.querySelector('.tab-iframe.active');
+  if (!inputRaw || !iframe) return;
+
+  // if internal() ever returns undefined, fall back to inputRaw
+  let mapped = internal(inputRaw);
+  if (mapped == null) mapped = inputRaw;
+
+  if (typeof mapped === 'function') {
+    // custom internal handler
+    mapped();
+  } else {
+    const isInternal = mapped === '/static/' || mapped === '/pages/prox/settings';
+    let finalURL;
+
+    if (isInternal) {
+      finalURL = mapped;
+    } else {
+      const hasProtocol    = /^https?:\/\//i.test(mapped);
+      const looksLikeURL   = /\.[a-z]{2,}(\/|$)/i.test(mapped);
+
+      if (hasProtocol) {
+        finalURL = mapped;
+      } else if (looksLikeURL) {
+        finalURL = 'http://' + mapped;
+      } else {
+        finalURL = `https://duckduckgo.com/?q=${encodeURIComponent(mapped)}`;
       }
 
-      function search() {
-        const inputRaw = document.getElementById('search-input').value.trim();
-        const iframe = document.querySelector('.tab-iframe.active');
-        if (!inputRaw || !iframe) return;
-        const mapped = internal(inputRaw);
-        if (typeof mapped === 'function') {
-          mapped();
-        } else {
-          const isInternal = mapped === '/static/' || mapped === '/pages/prox/settings';
-          let finalURL = mapped;
-          if (!isInternal) {
-            const hasProtocol = /^https?:\/\//i.test(mapped);
-            const looksLikeURL = /\.[a-z]{2,}(\/|$)/i.test(mapped);
-            if (hasProtocol) {
-              finalURL = mapped;
-            } else if (looksLikeURL) {
-              finalURL = 'http://' + mapped;
-            } else {
-              finalURL = `https://duckduckgo.com/?q=${encodeURIComponent(mapped)}`;
-            }
-          }
-          iframe.src = isInternal ? mapped : `/static/embed?p=${finalURL}`;
-          iframe.onload = () => {
-            updateSearchBar(iframe);
-            updateTabName(iframe);
-          };
-        }
-      }
+      finalURL = `/static/embed?p=${finalURL}`;
+    }
+
+    iframe.src = finalURL;
+    iframe.onload = () => {
+      updateSearchBar(iframe);
+      updateTabName(iframe);
+    };
+  }
+}
+
 
       function settings() {
         tabCount++;
