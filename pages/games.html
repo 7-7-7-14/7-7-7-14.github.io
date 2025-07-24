@@ -19,15 +19,14 @@
   <div id="particles-js"></div>
   <div class="navbar">
     <div class="left-side">
-      <a href="/">
-      </a>
+      <a href="/"></a>
     </div>
     <div class="right-side">
       <script type="text/javascript" src="/storage/js/nav.js"></script>
     </div>
   </div>
   <div class="game-title">Games</div>
-  <div class="games-title">Select from a variety of games!</div>
+  <div class="games-title" id="gamesTitle">Select from 0 games!</div>
   <div class="search-bar-container">
     <input
       type="text"
@@ -46,7 +45,6 @@
     const JSON_PATH = "/storage/json/games.json";
 
     async function loadGames() {
-      const gameGrid = document.getElementById("gameGrid");
       const cached = localStorage.getItem(CACHE_KEY);
 
       if (cached) {
@@ -75,7 +73,9 @@
 
     function renderGames(games) {
       const gameGrid = document.getElementById("gameGrid");
+      const gamesTitle = document.getElementById("gamesTitle");
       gameGrid.innerHTML = "";
+
       for (const game of games) {
         const div = document.createElement("div");
         div.className = "game-button";
@@ -87,6 +87,10 @@
         `;
         gameGrid.appendChild(div);
       }
+
+      // ✅ Update game count
+      gamesTitle.textContent = `Select from ${games.length} games!`;
+
       sortGameButtons();
       checkGridAlignment();
     }
