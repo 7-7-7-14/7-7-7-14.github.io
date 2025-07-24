@@ -1,4 +1,4 @@
-const phrases = [
+window.phrases = [
     `hi guys`,
     `cheese`,
     `dont type this on your keyboard: up, up, down, down, left, right, left, right, B, A, enter`,
