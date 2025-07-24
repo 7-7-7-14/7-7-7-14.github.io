@@ -1,6 +1,5 @@
 <html>
   <head>
-    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
     <script type="text/javascript">
       aclib.runInPagePush({
           zoneId: '8175794',
@@ -24,8 +23,8 @@
         const player = ruffle.createPlayer();
         const container = document.getElementById("ruffle");
         player.id = "player";
-        player.style.width = "100%";
-        player.style.height = "100%";
+        player.style.width = "100vh";
+        player.style.height = "100vh";
         container.appendChild(player);
         player.load("game.swf");
       });
