@@ -180,6 +180,8 @@ const phrases = [
     `somehow still w no ads`,
     `should i add ads?, lmk`,
     `funny guy, am i right 💀☠️☠️`,
+    `time: {time}`,
+    `i make no money from ts 🥀`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
@@ -217,15 +219,20 @@ if (typeof randomPhrase === "string") {
   if (randomPhrase.includes("{hostname}")) {
     randomPhrase = randomPhrase.replace("{hostname}", location.hostname);
   }
-      
-    paragraph.textContent = randomPhrase;
+  if (randomPhrase.includes("{time}")) {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+    randomPhrase = randomPhrase.replace("{time}", timeString);
+  }
 
-    if (randomPhrase === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
-      setFlip(true);
-    } else if (flipped) {
-      // If page is flipped but phrase isn't flip phrase, reset flip
-      setFlip(false);
-    }
+  paragraph.textContent = randomPhrase;
+
+  if (randomPhrase === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
+    setFlip(true);
+  } else if (flipped) {
+    setFlip(false);
+  }
+}
   } else if (randomPhrase.type === "image") {
     paragraph.innerHTML = `<img src="${randomPhrase.src}" alt="Splash Image" style="max-width: ${randomPhrase.width};">`;
     if (flipped) setFlip(false); // reset flip if currently flipped
