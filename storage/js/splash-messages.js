@@ -180,8 +180,12 @@ const phrases = [
     `somehow still w no ads`,
     `should i add ads?, lmk`,
     `funny guy, am i right 💀☠️☠️`,
-    `time: {time}`,
+    `currently the time is {time}`,
     `i make no money from ts 🥀`,
+    `currently you are on: {hostname}`,
+    `hi cruz`,
+    `hi zack`.
+    `hi josh`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
