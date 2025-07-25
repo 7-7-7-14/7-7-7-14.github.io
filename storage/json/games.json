@@ -330,7 +330,7 @@
     "title": "Pacman"
   },
   {
-    "url": "/static/embed?p=https://pakohighway.online/",
+    "url": "/pages/games-frame?url=/pages/games/pako-highway/",
     "img": "/pages/images/pako-highway.png",
     "alt": "Pako Highway",
     "title": "Pako Highway"
