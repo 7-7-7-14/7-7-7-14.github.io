@@ -184,6 +184,7 @@ const phrases = [
     `i make no money from ts 🥀`,
     `currently you are on: {hostname}`,
     `what games should i add?`,
+    `you can turn off the particles in settings`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
