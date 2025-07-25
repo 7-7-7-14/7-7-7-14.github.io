@@ -183,9 +183,7 @@ const phrases = [
     `currently the time is {time}`,
     `i make no money from ts 🥀`,
     `currently you are on: {hostname}`,
-    `hi cruz`,
-    `hi zack`.
-    `hi josh`,
+    `what games should i add?`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
