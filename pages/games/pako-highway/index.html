@@ -3,32 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <title>Pako Highway Unblocked</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <style>
     body, html {
       margin: 0; padding: 0; overflow: hidden; height: 100%;
       background: black;
     }
-    #unity-container {
+    /* Make canvas fill viewport */
+    #unity-canvas {
       width: 100vw;
       height: 100vh;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div id="unity-container"></div>
+  <!-- Unity requires a canvas element here, not a div -->
+  <canvas id="unity-canvas"></canvas>
 
   <script src="Build/phhhh.loader.js"></script>
   <script>
-    createUnityInstance(document.querySelector("#unity-container"), {
+    createUnityInstance(document.querySelector("#unity-canvas"), {
       dataUrl: "Build/phhhh.data",
       frameworkUrl: "Build/phhhh.framework.js",
       codeUrl: "Build/phhhh.wasm",
       streamingAssetsUrl: "StreamingAssets",
-    }).then(function(unityInstance) {
-      console.log("Unity game loaded");
-    }).catch(function(message) {
-      alert("Failed to load Unity game: " + message);
+      // Optional: companyName, productName, productVersion
+    }).then(unityInstance => {
+      console.log("Unity loaded");
+    }).catch(error => {
+      console.error(error);
+      alert("Failed to load Unity game: " + error);
     });
   </script>
 </body>
