@@ -1,37 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Pako Highway Unblocked - ubg235 GC</title>
-<link rel="stylesheet" href="./patch/vseigru/gameloader2020.css" />
-<script src="./patch/vseigru/gameloader2020.js"></script>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="UTF-8" />
+  <title>Pako Highway Unblocked</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; overflow: hidden; height: 100%;
+      background: black;
+    }
+    #unity-container {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
 </head>
-<body style="overflow:hidden;">
-<script type="text/javascript">
-	var options = {
-		author: "Vseigru",
-		logo: "logo.gif",
-		gameName: "Шоссе Пако",
-		gameNameEu: "Pako Highway",
-		gameUrl: "35932",
-		// moreLink: ("https://vseigru.net"),
-		// allowFullscreen: true,
-		locale: "en_US",
-		loader: "unity2020",
-		loaderOptions: {
-			unityLoaderUrl: "Build/phhhh.loader.js",
-			unityConfigOptions: {
-				dataUrl: "Build/phhhh.data",
-				frameworkUrl: "Build/phhhh.framework.js",
-			    codeUrl: "Build/phhhh.wasm",
-				streamingAssetsUrl: "StreamingAssets"
-			}
-		},
-    };
-	GameInit.load(options);	  
-</script>
-  <script src="js/analytics_ubg_v1_4.js"></script>
-  <script src="js/ubg235_client_v1_2.js"></script>
+<body>
+  <div id="unity-container"></div>
+
+  <script src="Build/phhhh.loader.js"></script>
+  <script>
+    createUnityInstance(document.querySelector("#unity-container"), {
+      dataUrl: "Build/phhhh.data",
+      frameworkUrl: "Build/phhhh.framework.js",
+      codeUrl: "Build/phhhh.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+    }).then(function(unityInstance) {
+      console.log("Unity game loaded");
+    }).catch(function(message) {
+      alert("Failed to load Unity game: " + message);
+    });
+  </script>
 </body>
 </html>
