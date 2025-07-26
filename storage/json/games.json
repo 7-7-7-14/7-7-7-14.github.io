@@ -480,6 +480,12 @@
     "title": "Swingo"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/tanuki-sunset/",
+    "img": "/pages/images/tanuki.png",
+    "alt": "Tanuki Sunset",
+    "title": "Tanuki Sunset"
+  },
+  {
     "url": "/static/embed?p=https://quirkylock.netlify.app/",
     "img": "/pages/images/quirky.png",
     "alt": "The Password Game",
