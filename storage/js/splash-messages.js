@@ -304,6 +304,7 @@ const phrases = [
     `imagine if your battery was at {battery}`,
     `90 GAMES, why do you ask for more!`,
     `hi josh, what game are you gonna play`,
+    `"where do i search?", its right under my nose bud 😱`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
