@@ -11,12 +11,12 @@
     "alt": "Thirty Dollar Website",
     "title": "Thirty Dollar Website"
   },
-  {
-    "url": "/pages/rh-frame?url=https://learn2read.v0x.eu/ebbb7248f4814a1ead76053d22b8bef0/_rhs~dhWj://71w.uMeeuWj.jKe/",
-    "img": "/pages/apps/images/yt.png",
-    "alt": "Youtube",
-    "title": "Youtube"
-  },
+{
+  "url": "/static/embed?p=https://inv.nadeko.net/",
+  "img": "/pages/apps/images/invid.png",
+  "alt": "Youtube (Invidious)",
+  "title": "Youtube (Invidious)"
+},
   {
     "url": "/static/embed?p=https://soundbuttonsworld.com/",
     "img": "/pages/apps/images/sound-button.png",
