@@ -236,7 +236,9 @@ const phrases = [
     `i’m just here for the memes (there funny right? ☠️)`,
     `skull emoji in the big '25 💀`,
     `life’s too short for slow internet`,
-    `235 splash messages, 27th july`,
+    `bro stop asking for baldi's basics 😭`,
+    `if im gonna be honest SLAY! is the best phonk 😱`,
+    `imagine if the time right now was: {time}`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
@@ -286,9 +288,10 @@ function changeText() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-GB', {
                 hour: '2-digit',
-                minute: '2-digit',
-                timeZone: 'UTC'
+                minute: '2-digit'
             });
+
+            console.log(timeString);
             randomPhrase = randomPhrase.replace("{time}", timeString);
         }
 
