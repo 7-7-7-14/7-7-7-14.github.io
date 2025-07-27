@@ -311,78 +311,99 @@ let flipped = false;
 let currentPhrase = null;
 
 function setFlip(state) {
-    flipped = state;
-    const rotation = flipped ? "180deg" : "0deg";
-    ["transform", "-ms-transform", "-webkit-transform", "-o-transform", "-moz-transform"]
-    .forEach(prefix => {
-        document.body.style[prefix] = `rotate(${rotation})`;
-    });
+        flipped = state;
+        const rotation = flipped ? "180deg" : "0deg";
+        ["transform", "-ms-transform", "-webkit-transform", "-o-transform", "-moz-transform"]
+        .forEach(prefix => {
+                document.body.style[prefix] = `rotate(${rotation})`;
+        });
 }
 
 function resetFlip() {
-    if (flipped) setFlip(false);
+        if (flipped) setFlip(false);
 }
 
 function getRandomPhrase() {
-    if (phrases.length === 1) return phrases[0];
-    let phrase;
-    let attempts = 0;
-    do {
-        phrase = phrases[Math.floor(Math.random() * phrases.length)];
-        attempts++;
-        if (attempts > 10) break;
-    } while (phrase === currentPhrase);
-    return phrase;
+        if (phrases.length === 1) return phrases[0];
+        let phrase;
+        let attempts = 0;
+        do {
+                phrase = phrases[Math.floor(Math.random() * phrases.length)];
+                attempts++;
+                if (attempts > 10) break;
+        } while (phrase === currentPhrase);
+        return phrase;
 }
 
-function changeText() {
-    let randomPhrase = getRandomPhrase();
-    currentPhrase = randomPhrase;
+async function changeText() {
+        let randomPhrase = getRandomPhrase();
+        currentPhrase = randomPhrase;
 
-    if (typeof randomPhrase === "string") {
-        if (randomPhrase.includes("{ip}")) {
-            randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
-        }
-        if (randomPhrase.includes("{hostname}")) {
-            randomPhrase = randomPhrase.replace("{hostname}", location.hostname);
-        }
-        if (randomPhrase.includes("{time}")) {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-GB', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+        if (typeof randomPhrase === "string") {
+                if (randomPhrase.includes("{ip}")) {
+                        randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
+                }
 
-            console.log(timeString);
-            randomPhrase = randomPhrase.replace("{time}", timeString);
-        }
+                if (randomPhrase.includes("{hostname}")) {
+                        randomPhrase = randomPhrase.replace("{hostname}", location.hostname);
+                }
 
-        paragraph.textContent = randomPhrase;
+                if (randomPhrase.includes("{time}")) {
+                        const now = new Date();
+                        const timeString = now.toLocaleTimeString('en-GB', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                        });
+                        randomPhrase = randomPhrase.replace("{time}", timeString);
+                }
 
-        if (randomPhrase === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
-            setFlip(true);
-        } else {
-            resetFlip();
+                if (randomPhrase.includes("{battery}")) {
+                        try {
+                                const battery = await navigator.getBattery();
+                                const batteryPercent = Math.round(battery.level * 100) + "%";
+                                randomPhrase = randomPhrase.replace("{battery}", batteryPercent);
+                        }
+                        catch (e) {
+                                randomPhrase = randomPhrase.replace("{battery}", "unknown");
+                                console.error("Battery info not available", e);
+                        }
+                }
+
+                paragraph.textContent = randomPhrase;
+
+                if (randomPhrase === "🙂 dıןɟ ʎddıןɟ ɐ pıp ǝƃɐd ǝɥʇ sdooɥʍ") {
+                        setFlip(true);
+                }
+                else {
+                        resetFlip();
+                }
         }
-    } else if (randomPhrase.type === "image") {
-        paragraph.innerHTML = `<img src="${randomPhrase.src}" alt="Splash Image" style="max-width: ${randomPhrase.width}; height: auto;">`;
-        resetFlip();
-    } else if (randomPhrase.type === "video") {
-        paragraph.innerHTML = `<video ${randomPhrase.other || ''} autoplay style="max-width: ${randomPhrase.width}; height: auto;" muted><source src="${randomPhrase.src}" type="video/mp4"></video>`;
-        resetFlip();
-    }
+        else if (randomPhrase.type === "image") {
+                paragraph.innerHTML = `<img src="${randomPhrase.src}" alt="Splash Image" style="max-width: ${randomPhrase.width}; height: auto;">`;
+                resetFlip();
+        }
+        else if (randomPhrase.type === "video") {
+                paragraph.innerHTML = `<video ${randomPhrase.other || ''} autoplay style="max-width: ${randomPhrase.width}; height: auto;" muted>
+            <source src="${randomPhrase.src}" type="video/mp4">
+        </video>`;
+                resetFlip();
+        }
 }
 
 window.onload = async () => {
-    try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const data = await res.json();
-        userIP = data.ip;
-        console.log("internet protocol fetched:", userIP);
-    } catch (e) {
-        console.error("Failed to get IP", e);
-    }
-    changeText();
+        try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                userIP = data.ip;
+                console.log("internet protocol fetched:", userIP);
+        }
+        catch (e) {
+                console.error("Failed to get IP", e);
+        }
+
+        await changeText();
 };
 
-paragraph.addEventListener('click', changeText);
+paragraph.addEventListener('click', () => {
+        changeText();
+});
