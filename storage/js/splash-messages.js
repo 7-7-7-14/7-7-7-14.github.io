@@ -59,7 +59,7 @@ const phrases = [
     `ヽ༼ ಠ益ಠ ༽ﾉ`,
     `i swear I'm paying attention`,
     `am i not the only one with 481178:44:26 hours on minecraft`,
-    `i saw you got a 6 on your last test 💀`,
+    `i saw you got a U (ungraded mate) on your last test 💀`,
     `mom`,
     `(╯°□°)╯︵ ┻━┻`,
     `hehe`,
