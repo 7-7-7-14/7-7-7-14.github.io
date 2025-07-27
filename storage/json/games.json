@@ -450,6 +450,12 @@
     "title": "Speed Stars"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/stick-fighter/",
+    "img": "/pages/images/stickfighter.jpg",
+    "alt": "Stick Fighter",
+    "title": "Stick Hook"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/stickman-hook/",
     "img": "/pages/images/stickmanhook.png",
     "alt": "Stickman Hook",
