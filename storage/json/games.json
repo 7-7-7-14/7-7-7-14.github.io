@@ -234,6 +234,12 @@
     "title": "Duck Life Adventure"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/dud/",
+    "img": "/pages/images/dud.png",
+    "alt": "dud",
+    "title": "dud"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/eaglercraft/",
     "img": "/pages/images/eaglercraft.png",
     "alt": "Eaglercraft Minecraft",
