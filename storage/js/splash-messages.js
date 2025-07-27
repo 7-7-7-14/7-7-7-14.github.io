@@ -301,6 +301,9 @@ const phrases = [
     `trapped in a <span>`,
     `you’ve logged on {hostname}`,
     `your battery is at {battery}`,
+    `imagine if your battery was at {battery}`,
+    `90 GAMES, why do you ask for more!`,
+    `hi josh, what game are you gonna play`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
