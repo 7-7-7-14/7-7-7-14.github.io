@@ -120,24 +120,6 @@
     "title": "ExtPrint3r"
   },
   {
-    "url": "/pages/apps-frame?url=/pages/apps/securly",
-    "img": "/pages/apps/images/securly.png",
-    "alt": "Securly Checker",
-    "title": "Securly Checker"
-  },
-  {
-    "url": "/static/embed?p=https://blooketbot.glitch.me/",
-    "img": "/pages/apps/images/bb.png",
-    "alt": "Blooket Bot",
-    "title": "Blooket Bot"
-  },
-  {
-    "url": "/pages/apps-frame?url=/pages/apps/webfluids/",
-    "img": "/pages/apps/webfluids/logo.png",
-    "alt": "WebGL Fluid Simulation",
-    "title": "WebGL Fluid Simulation"
-  },
-  {
     "url": "/static/embed?p=https://google.com/",
     "img": "/pages/apps/images/google.jpg",
     "alt": "Google",
