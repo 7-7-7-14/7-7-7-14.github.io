@@ -189,7 +189,7 @@ const phrases = [
     `{hostname} ≫ classroom.google.com`,
     `who remembers edshed?`,
     `ts so buns bro 🥀`, 
-    `theres like over 200 splash messages, wow`,
+    `theres like over 300 splash messages, wow`,
     `why do they call it oven if you oven the cold food of out hot eat the food`,
     `shoutout to git 🎉🥳`,
     `i think you should play subway surfers`,
