@@ -140,7 +140,7 @@ const phrases = [
     `html is my coping mechanism`,
     `👻 ghost tab`,
     `skibid`,
-    `n e x u s`,
+    `↑ n e x u s ↑`,
     `hear me out: css 🤫`,
     `1 vCPU, 4 GB RAM, 20 GB Storage, dont use it all. seriously.`,
     `chrome://inducebrowsercrashforrealz`,
