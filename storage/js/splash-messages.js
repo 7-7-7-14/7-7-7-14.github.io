@@ -349,7 +349,7 @@ async function changeText() {
                 }
 
                 if (randomPhrase.includes("{hostname}")) {
-                        randomPhrase = randomPhrase.replace("{hostname}", location.hostname);
+                        randomPhrase = randomPhrase.replaceAll("{hostname}", location.hostname);
                 }
 
                 if (randomPhrase.includes("{time}")) {
