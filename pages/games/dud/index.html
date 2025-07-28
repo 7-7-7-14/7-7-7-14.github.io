@@ -19,8 +19,11 @@
 
     #canvas, #loadingCanvas {
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       display: block;
-      /* dimensions & centering will be set via JS */
     }
 
     footer {
@@ -47,18 +50,10 @@
       ];
 
       canvases.forEach(canvas => {
-        // intrinsic coordinate size (set by LÖVE/Emscripten)
-        const cw = canvas.width;
-        const ch = canvas.height;
-        // compute uniform scale to fit viewport
-        const scale = Math.min(window.innerWidth / cw, window.innerHeight / ch);
-
-        // apply scaled CSS size
-        canvas.style.width  = (cw * scale) + 'px';
-        canvas.style.height = (ch * scale) + 'px';
-        // centre horizontally & vertically
-        canvas.style.left = ((window.innerWidth  - cw * scale) / 2) + 'px';
-        canvas.style.top  = ((window.innerHeight - ch * scale) / 2) + 'px';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.left = '0';
+        canvas.style.top = '0';
       });
     }
 
@@ -75,14 +70,12 @@
       else if (canvas.mozRequestFullScreen)    canvas.mozRequestFullScreen();
     }
 
-    // prevent scrolling on arrow / space presses
     window.addEventListener("keydown", e => {
       if ([32, 37, 38, 39, 40].includes(e.keyCode)) {
         e.preventDefault();
       }
     }, false);
 
-    // loading-text draw helper
     const loadingContext = document.getElementById('loadingCanvas').getContext('2d');
     function drawLoadingText(text) {
       const canvas = loadingContext.canvas;
@@ -142,7 +135,7 @@
   </script>
 
   <script src="game.js" type="text/javascript"></script>
-  <script async src="love.js"         type="text/javascript" onload="applicationLoad()"></script>
+  <script async src="love.js" type="text/javascript" onload="applicationLoad()"></script>
 
   <footer>
     <img
