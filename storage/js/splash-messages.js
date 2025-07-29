@@ -122,6 +122,7 @@ const phrases = [
     `trust me i’m a coder 🤓`,
     `this is my villain arc`,
     `my site is faster than my grades`,
+    `ts guy called phoniex stole all my code, bruh`,
     `built with html, css, javascript and tears`,
     `what are you looking at👀`,
     `stealth mode engaged`,
