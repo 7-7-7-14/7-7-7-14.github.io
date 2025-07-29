@@ -313,6 +313,7 @@ const phrases = [
     `html4life`,
     `try blocking me now 😎`,
     `null`,
+    `{battery}`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
@@ -376,7 +377,7 @@ async function changeText() {
                                 randomPhrase = randomPhrase.replace("{battery}", batteryPercent);
                         }
                         catch (e) {
-                                randomPhrase = randomPhrase.replace("{battery}", "unknown");
+                                randomPhrase = randomPhrase.replace("{battery}", ", actually i dont know what it is.");
                                 console.error("Battery info not available", e);
                         }
                 }
