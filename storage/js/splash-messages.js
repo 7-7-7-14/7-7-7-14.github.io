@@ -49,7 +49,7 @@ const phrases = [
     `the bell just rang`,
     `calculator? more like calc-you-later! 🥀 (i didnt make this one)`,
     `forgot my pe clothes, again.`,
-    `C1?`,
+    `phonk 🗣️🗣️🔥🔥`,
     `anyone up for basketball after school?`,
     `i dont like sitting near the window during class`,
     `💀`,
@@ -210,11 +210,13 @@ const phrases = [
     `ctrl+d to save!`,
     `bro even tried to block localhost 💀`,
     `i swear i’m just researching`,
+    `use rammerhead to watch youtube gng ✌`,
     `wifi’s down, but proxy’s up`,
     `this site runs on snacks and caffeine`,
     `shoutout to netlify & fastly 🎉🥳`,
     `anyone know how to modify ios ipsw?`,
     `koyeb.global.ssl.fastly.net \u2192 new subdomain`,
+    `ispw.netlify.app \u2192 new subdomain`,
     `shoutout to github 🎉🥳`,
     `pov: you know about CORS 😱`,
     `school wifi speed: 0.01 kb/s`,
@@ -310,6 +312,7 @@ const phrases = [
     `🚫 ads, 🚫 homework, ✅ vibes`,
     `html4life`,
     `try blocking me now 😎`,
+    `null`,
 ];
 
 const paragraph = document.getElementById('dynamicParagraph');
