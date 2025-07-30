@@ -44,7 +44,7 @@
         justify-content: flex-start;
         overflow-x: auto;
         overflow-y: hidden;
-        max-height: 0px;  /* ... edit - 40px change if needed  ... */
+        max-height: 40px;
         transition: transform 0.3s ease-in-out;
       }
 
@@ -305,9 +305,10 @@
         <i class="fas fa-plus"></i>
       </button>
     </div>
+
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        console.log(`
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log(`
                                        
 
 ███╗░░██╗███████╗██╗░░██╗██╗░░░██╗░██████╗
@@ -318,130 +319,125 @@
 ╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝░╚═════╝░╚═════╝░
                                                                                                                                                
       `);
-      });
-    </script>
+ });
+  </script>
+	  
     <script>
-      let tabCount = 1;
+let tabCount = 1;
 
-      function selectTab(tab) {
-        document.querySelectorAll('.tab, .tab-iframe').forEach(el => el.classList.remove('active'));
-        tab.classList.add('active');
-        const tabIndex = Array.from(tab.parentNode.children).indexOf(tab);
-        document.querySelectorAll('.tab-iframe')[tabIndex].classList.add('active');
-        const iframe = document.querySelector('.tab-iframe.active');
-        updateSearchBar(iframe);
-        updateTabName(iframe);
-      }
+function selectTab(tab) {
+  document.querySelectorAll('.tab, .tab-iframe').forEach(el => el.classList.remove('active'));
+  tab.classList.add('active');
+  const tabIndex = Array.from(tab.parentNode.children).indexOf(tab);
+  document.querySelectorAll('.tab-iframe')[tabIndex].classList.add('active');
+  const iframe = document.querySelector('.tab-iframe.active');
+  updateSearchBar(iframe);
+  updateTabName(iframe);
+}
 
-      function addTab() {
-        tabCount++;
-        const tabsContainer = document.getElementById('tabs');
-        const newTab = document.createElement('div');
-        newTab.classList.add('tab');
-        newTab.innerHTML = `New Tab 
-												<span class="close-button" onclick="closeTab(event)">×</span>`;
-        newTab.addEventListener("click", () => selectTab(newTab));
-        tabsContainer.insertBefore(newTab, document.querySelector('.add-tab-button'));
-        const iframe = document.createElement('iframe');
-        iframe.classList.add('tab-iframe');
-        iframe.src = '/static/';
-        iframe.onload = function() {
-          updateSearchBar(iframe);
-          updateTabName(iframe);
-        };
-        document.getElementById('content-wrapper').appendChild(iframe);
-        selectTab(newTab);
-      }
+function addTab() {
+  tabCount++;
+  const tabsContainer = document.getElementById('tabs');
+  const newTab = document.createElement('div');
+  newTab.classList.add('tab');
+  newTab.innerHTML = `New Tab <span class="close-button" onclick="closeTab(event)">×</span>`;
+  newTab.addEventListener("click", () => selectTab(newTab));
+  tabsContainer.insertBefore(newTab, document.querySelector('.add-tab-button'));
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('tab-iframe');
+  iframe.src = '/static/';
+  iframe.onload = function() {
+    updateSearchBar(iframe);
+    updateTabName(iframe);
+  };
+  document.getElementById('content-wrapper').appendChild(iframe);
+  selectTab(newTab);
+}
 
-      function closeTab(event) {
-        event.stopPropagation();
-        const tab = event.target.closest('.tab');
-        const iframe = document.querySelectorAll('.tab-iframe')[Array.from(tab.parentNode.children).indexOf(tab)];
-        let previousTab = tab.previousElementSibling || tab.nextElementSibling;
-        tab.remove();
-        iframe.remove();
-        if (document.querySelectorAll('.tab').length === 0) {
-          addTab();
-        } else {
-          selectTab(previousTab);
-        }
-      }
+function closeTab(event) {
+  event.stopPropagation();
+  const tab = event.target.closest('.tab');
+  const iframe = document.querySelectorAll('.tab-iframe')[Array.from(tab.parentNode.children).indexOf(tab)];
+  let previousTab = tab.previousElementSibling || tab.nextElementSibling;
+  tab.remove();
+  iframe.remove();
+  if (document.querySelectorAll('.tab').length === 0) {
+    addTab();
+  } else {
+    selectTab(previousTab);
+  }
+}
 
-      function internal(url) {
-        try {
-          if (url.startsWith('nexus://games-frame')) {
-            const path = url.replace('nexus://', '/pages/');
-            return () => setIframe(path, 'Games');
-          }
-          if (url.startsWith('nexus://apps-frame')) {
-            const path = url.replace('nexus://', '/pages/');
-            return () => setIframe(path, 'Apps');
-          }
-          switch (url) {
-            case 'nexus://new-tab':
-              return () => setIframe('/static/?upd=', 'New Tab');
-            case 'nexus://settings':
-              return () => setIframe('/pages/prox/settings?upd=', 'Settings');
-            case 'nexus://games':
-              return () => setIframe('/pages/games?upd=', 'Games');
-            case 'nexus://media':
-              return () => setIframe('/pages/heartive?upd=', 'Media');
-            case 'nexus://apps':
-              return () => setIframe('/pages/apps?upd=', 'Apps');
-            case 'nexus://partners':
-              return () => setIframe('/pages/partners?upd=', 'Partners');
-            case 'nexus://roms':
-              return () => setIframe('/pages/roms?upd=', 'roms');
-            case 'nexus://extra':
-              return () => setIframe('/pages/extra?upd=', 'Extra');
-            case 'nexus://data':
-              return () => setIframe('/pages/data?upd=', 'Data');
-            case 'nexus://data-usage':
-              return () => setIframe('/pages/extra/data-use', 'Data Usage');
-            case 'nexus://secret':
-              return () => setIframe('/pages/secret', 'super-secret');
-            case 'home':
-              return '/static/';
-            case 'settings':
-              return '/pages/prox/settings';
-          }
-        } catch (e) {
-          console.error('internal page failed:', e);
-          return url;
-        }
-        return url;
-      }
+function internal(url) {
+  try {
+    if (url.startsWith('nexus://games-frame')) {
+      const path = url.replace('nexus://', '/pages/');
+      return () => setIframe(path, 'Games');
+    }
+    if (url.startsWith('nexus://apps-frame')) {
+      const path = url.replace('nexus://', '/pages/');
+      return () => setIframe(path, 'Apps');
+    }
+    switch (url) {
+      case 'nexus://new-tab': return () => setIframe('/static/?upd=', 'New Tab');
+      case 'nexus://settings': return () => setIframe('/pages/prox/settings?upd=', 'Settings');
+      case 'nexus://games': return () => setIframe('/pages/games?upd=', 'Games');
+      case 'nexus://media': return () => setIframe('/pages/heartive?upd=', 'Media');
+      case 'nexus://apps': return () => setIframe('/pages/apps?upd=', 'Apps');
+      case 'nexus://partners': return () => setIframe('/pages/partners?upd=', 'Partners');
+      case 'nexus://roms': return () => setIframe('/pages/roms?upd=', 'roms');
+      case 'nexus://extra': return () => setIframe('/pages/extra?upd=', 'Extra');
+      case 'nexus://data': return () => setIframe('/pages/data?upd=', 'Data');
+      case 'nexus://data-usage': return () => setIframe('/pages/extra/data-use', 'Data Usage');
+      case 'nexus://secret': return () => setIframe('/pages/secret', 'super-secret');
+      case 'home': return '/static/';
+      case 'settings': return '/pages/prox/settings';
+    }
+  } catch (e) {
+    console.error('internal page failed:', e);
+    return url;
+  }
+  return url;
+}
 
-      function search() {
-        const inputRaw = document.getElementById('search-input').value.trim();
-        const iframe = document.querySelector('.tab-iframe.active');
-        if (!inputRaw || !iframe) return;
-        let mapped = internal(inputRaw);
-        if (mapped == null) mapped = inputRaw;
-        if (typeof mapped === 'function') {
-          mapped();
-          return;
-        }
-        const isInternal = mapped === '/static/' || mapped === '/pages/prox/settings';
-        let finalURL = mapped;
-        if (!isInternal) {
-          const hasProtocol = /^https?:\/\//i.test(mapped);
-          const looksLikeURL = /\.[a-z]{2,}(\/|$)/i.test(mapped);
-          if (hasProtocol) {
-            finalURL = mapped;
-          } else if (looksLikeURL) {
-            finalURL = 'http://' + mapped;
-          } else {
-            finalURL = `https://duckduckgo.com/?q=${encodeURIComponent(mapped)}`;
-          }
-          finalURL = `/static/embed?p=${finalURL}`;
-        }
-        iframe.src = isInternal ? mapped : finalURL;
-        iframe.onload = () => {
-          updateSearchBar(iframe);
-          updateTabName(iframe);
-        };
-      }
+function search() {
+  const inputRaw = document.getElementById('search-input').value.trim();
+  const iframe = document.querySelector('.tab-iframe.active');
+  if (!inputRaw || !iframe) return;
+
+  let mapped = internal(inputRaw);
+  if (mapped == null) mapped = inputRaw;
+
+  if (typeof mapped === 'function') {
+    mapped();
+    return;
+  }
+
+  const isInternal = mapped === '/static/' || mapped === '/pages/prox/settings';
+  let finalURL = mapped;
+
+  if (!isInternal) {
+    const hasProtocol = /^https?:\/\//i.test(mapped);
+    const looksLikeURL = /\.[a-z]{2,}(\/|$)/i.test(mapped);
+
+    if (hasProtocol) {
+      finalURL = mapped;
+    } else if (looksLikeURL) {
+      finalURL = 'http://' + mapped;
+    } else {
+      finalURL = `https://duckduckgo.com/?q=${encodeURIComponent(mapped)}`;
+    }
+
+    finalURL = `/static/embed?p=${finalURL}`;
+  }
+
+  iframe.src = isInternal ? mapped : finalURL;
+  iframe.onload = () => {
+    updateSearchBar(iframe);
+    updateTabName(iframe);
+  };
+}
+
 
       function settings() {
         tabCount++;
@@ -452,8 +448,7 @@
 													
 													
 													
-													
-												<span class="close-button" onclick="closeTab(event)">×</span>`;
+													<span class="close-button" onclick="closeTab(event)">×</span>`;
         newTab.addEventListener("click", () => selectTab(newTab));
         tabsContainer.insertBefore(newTab, document.querySelector('.add-tab-button'));
         const iframe = document.createElement('iframe');
@@ -589,13 +584,11 @@
 													
 													
 													
-													
-												<img src="${faviconUrl}" alt="favicon" style="width:24px;height:24px;margin-right:6px;">${title} 
+													<img src="${faviconUrl}" alt="favicon" style="width:24px;height:24px;margin-right:6px;">${title} 
 														
 														
 														
-														
-													<span class="close-button" onclick="closeTab(event)">×</span> `;
+														<span class="close-button" onclick="closeTab(event)">×</span> `;
             }
           }
         }, 500);
@@ -649,8 +642,7 @@
 														
 														
 														
-														
-													<span class="close-button" onclick="closeTab(event)">×</span>`;
+														<span class="close-button" onclick="closeTab(event)">×</span>`;
         newTab.addEventListener("click", () => selectTab(newTab));
         const referenceTab = document.querySelectorAll('.tab')[tabIndex];
         if (referenceTab) {
@@ -743,6 +735,6 @@
     <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
     <script type="text/javascript" src="/storage/js/notify.js"></script>
     <script type="text/javascript" src="/storage/js/panic.js"></script>
-    <script type="text/javascript" src="/storage/js/background.js"></script>t
+    <script type="text/javascript" src="/storage/js/background.js"></script>
   </body>
 </html>
