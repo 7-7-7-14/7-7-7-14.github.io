@@ -365,7 +365,7 @@ async function changeText() {
 
         if (typeof randomPhrase === "string") {
                 if (randomPhrase.includes("{ip}")) {
-                        randomPhrase = randomPhrase.replace("{ip}", userIP || "fetch error");
+                        randomPhrase = randomPhrase.replaceAll("{ip}", userIP || "fetch error");
                 }
 
                 if (randomPhrase.includes("{hostname}")) {
