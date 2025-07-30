@@ -167,6 +167,7 @@ const phrases = [
     `"brainrot is bad", 💀 what a loser`,
     `is this tuff in chindia 🥀😭`,
     `yoo wsg josh`,
+    `click me, you wont`,
     `tip: ps1 games crash chromebooks.. unless you have a Ryzen 7 9800X3D, Nvidia GeForce RTX 5070, MSI MAG A550BN and 3.9L twin-turbo V8, then your good. (was that funny)`,
     `tip: use {hostname}/cloak, it doesent show on your history!`,
     `how does no one know where the games are 😭🙏`,
@@ -313,6 +314,10 @@ const phrases = [
     `🚫 ads, 🚫 homework, ✅ vibes`,
     `html4life`,
     `try blocking me now 😎`,
+    `powered by stolen wifi 🛜`,
+    `ctrl alt play`,
+    `hold my RAM`,
+    `secretly a toaster`,
     `null`,
     `{battery}`,
 ];
