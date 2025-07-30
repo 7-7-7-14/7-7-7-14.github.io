@@ -110,7 +110,7 @@ const phrases = [
     `doot doot`,
     `{ip} ← defo not ur ip 🤷‍♂️🥀`,
     `◉_◉`,
-    `heres a free bare: https://www.tomp.app/`,
+    `heres a free bare: {bare}`,
     `the school can’t stop me now 😎 (100% certified as tuff 💪)`,
     `my homework folder is suspiciously fun`,
     `this tab self-destructs in 3… 2…`,
