@@ -12,7 +12,7 @@
     "title": "Among Us"
   },
   {
-    "url": "/static/embed?p=https://gr4ys0n.github.io/public/assets/games/angry-birds/",
+    "url": "/pages/games-frame?url=/pages/games/angrybirds/",
     "img": "/pages/images/angrybirds.webp",
     "alt": "Angry Birds",
     "title": "Angry Birds"
