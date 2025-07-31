@@ -9,20 +9,6 @@
     <link rel="stylesheet" href="css/angry_birds_chrome.css" type="text/css">
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/aknpkdffaafgjchaibgeefbgmgeghloj">
     <link rel="icon" type="image/x-icon" href="/img/newlogo.png" />
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XXGG6SJL6H"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-XXGG6SJL6H");
-    </script>
     <script>
       function externalLink(type) {
         _gaq.push(['_trackEvent', 'Promo', 'Promotional Link: ' + type]);
@@ -152,16 +138,5 @@
     <noscript>
       <div class="info-noscript"> Your web browser must have JavaScript enabled in order for this application to display correctly. </div>
     </noscript>
-    <script type="text/javascript">
-      if (window.self != window.top && window.top.location.host.match("^[a-zA-Z]*\.angrybirds\.com") == null) {
-        setInterval(function() {
-          var content = document.getElementById('content');
-          content.parentNode.style.display = 'none';
-          var playn = document.getElementById('playn-root');
-          if (playn != null) playn.parentNode.removeChild(playn);
-        }, 500);
-      }
-    </script>
-    <script src="/html/settings/js/index.js"></script>
   </body>
 </html>
