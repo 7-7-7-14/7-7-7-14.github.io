@@ -58,11 +58,6 @@
 			let pathSegments = window.location.pathname.split('/');
 			config.gdGameId = pathSegments[1];
 		}
-		function isHostOnGD() {
-			let domainParts = window.location.hostname.split('.');
-			let mainDomain = domainParts.slice(-2).join('.');
-			return (mainDomain=="gamedistribution.com");
-		}
 	</script>
 	<script id="gmsoft-jssdk" src="https://games.azgame.io/lib/gmsoftsdk_v5.js"></script>
 </head>
