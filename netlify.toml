@@ -1,0 +1,5 @@
+[[headers]]
+  for = "/pages/games/angrybirds/*.js"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/javascript"
