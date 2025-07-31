@@ -27,6 +27,7 @@ const phrases = [
     `bruh`,
     `we should be able to play football ⚽`,
     `index.html`,
+    `vro 🥀`,
     `fortnite is cringe`,
     `help`,
     `ts not tuff 🥀😭`,
