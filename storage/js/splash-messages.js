@@ -32,7 +32,7 @@ const phrases = [
     `vro 🥀`,
     `fortnite is cringe`,
     `obama have dih 🥀`,
-    `i kinda put it in mbappé 🥀`,
+    `i kinda gooned to mbappé 🥀`,
     `help`,
     `ts not tuff 🥀😭`,
     `sleep is for the weak 🥀`,
