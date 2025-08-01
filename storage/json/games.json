@@ -492,6 +492,12 @@
     "title": "Super Mario 63 (Redux)"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/sm64/",
+    "img": "/pages/images/sm64.png",
+    "alt": "Super Mario 64",
+    "title": "Super Mario 64"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/smc/",
     "img": "/pages/images/smc.png",
     "alt": "Super Mario Construct",
