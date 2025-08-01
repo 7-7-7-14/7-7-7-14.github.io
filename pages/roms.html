@@ -14,6 +14,33 @@
 </head>
 <body>
 
+<script>
+  window.addEventListener('load', () => {
+    const gameButtons = document.querySelectorAll('.game-button');
+
+    if (!gameButtons.length) {
+      console.warn('⚠️ No .game-button elements found.');
+      return;
+    }
+
+    const games = Array.from(gameButtons).map(button => {
+      const a = button.querySelector('a');
+      const img = button.querySelector('img');
+      const title = button.querySelector('.overlay-text');
+
+      return {
+        title: title?.textContent.trim() || '',
+        image: img?.getAttribute('src') || '',
+        alt: img?.getAttribute('alt') || '',
+        link: a?.getAttribute('href') || ''
+      };
+    });
+
+    console.log('✅ Games JSON:', games);
+    console.log(JSON.stringify(games, null, 2));
+  });
+</script>
+
 <script src="/particles.js"></script>
   <script src="/storage/js/app.js"></script>
 <div id="particles-js"></div>
