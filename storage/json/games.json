@@ -329,6 +329,12 @@
     "alt": "Moto X3M",
     "title": "Moto X3M"
   },
+ {
+    "url": "/pages/games-frame?url=/pages/games/need-for-speed/",
+    "img": "/pages/images/nfs.jpg",
+    "alt": "Need For Speed",
+    "title": "Need For Speed"
+  },
   {
     "url": "/static/embed?p=https://webosu.online/",
     "img": "/pages/apps/images/osu.png",
@@ -498,7 +504,7 @@
     "title": "Super Mario 64"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/smc/",
+    "url": "/pages/games-frame?url=/pages/games/super-mario-construct/",
     "img": "/pages/images/smc.png",
     "alt": "Super Mario Construct",
     "title": "Super Mario Construct"
