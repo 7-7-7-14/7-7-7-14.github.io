@@ -1,92 +1,92 @@
 [
   {
     "title": "Load ROM",
-    "image": "images/loadrom.png",
+    "img": "images/loadrom.png",
     "alt": "(A) Load ROM",
-    "link": "/pages/games-frame?url=/pages/roms/load-rom/"
+    "url": "/pages/games-frame?url=/pages/roms/load-rom/"
   },
   {
     "title": "Mario Kart DS",
-    "image": "images/mariokartds.jpg",
+    "img": "images/mariokartds.jpg",
     "alt": "(DS) Mario Kart DS",
-    "link": "/pages/games-frame?url=/pages/roms/mariokart-ds/"
+    "url": "/pages/games-frame?url=/pages/roms/mariokart-ds/"
   },
   {
     "title": "Mario & Luigi Superstar Saga",
-    "image": "images/superstarsaga.webp",
+    "img": "images/superstarsaga.webp",
     "alt": "(GBA) Mario & Luigi Superstar Saga",
-    "link": "/pages/games-frame?url=/pages/roms/superstarsaga/"
+    "url": "/pages/games-frame?url=/pages/roms/superstarsaga/"
   },
   {
     "title": "Mario Party DS",
-    "image": "images/marioparty.png",
+    "img": "images/marioparty.png",
     "alt": "(DS) Mario Party DS",
-    "link": "/pages/games-frame?url=/pages/roms/marioparty/"
+    "url": "/pages/games-frame?url=/pages/roms/marioparty/"
   },
   {
     "title": "Mario Kart 64",
-    "image": "images/mk64.jpg",
+    "img": "images/mk64.jpg",
     "alt": "(N64) Mario Kart 64",
-    "link": "/pages/games-frame?url=/pages/roms/mariokart64/"
+    "url": "/pages/games-frame?url=/pages/roms/mariokart64/"
   },
   {
     "title": "Super Mario Kart",
-    "image": "images/smk.png",
+    "img": "images/smk.png",
     "alt": "(SNES) Super Mario Kart",
-    "link": "/pages/games-frame?url=/pages/roms/super-mario-kart/"
+    "url": "/pages/games-frame?url=/pages/roms/super-mario-kart/"
   },
   {
     "title": "Super Smash Bros.",
-    "image": "images/smashbros.jpg",
+    "img": "images/smashbros.jpg",
     "alt": "(N64) Super Smash Bros.",
-    "link": "/pages/games-frame?url=/pages/roms/supersmashbros/"
+    "url": "/pages/games-frame?url=/pages/roms/supersmashbros/"
   },
   {
     "title": "Sonic Advance",
-    "image": "images/sonicadv.png",
+    "img": "images/sonicadv.png",
     "alt": "(GBA) Sonic Advance",
-    "link": "/pages/games-frame?url=/pages/roms/sonic-adv/"
+    "url": "/pages/games-frame?url=/pages/roms/sonic-adv/"
   },
   {
     "title": "Kirby & The Amazing Mirror",
-    "image": "images/amazingmirror.png",
+    "img": "images/amazingmirror.png",
     "alt": "(GBA) Kirby & The Amazing Mirror",
-    "link": "/pages/games-frame?url=/pages/roms/amazing-mirror/"
+    "url": "/pages/games-frame?url=/pages/roms/amazing-mirror/"
   },
   {
     "title": "Paper Mario 64",
-    "image": "images/pm64.png",
+    "img": "images/pm64.png",
     "alt": "(N64) Paper Mario 64",
-    "link": "/pages/games-frame?url=/pages/roms/papermario-64/"
+    "url": "/pages/games-frame?url=/pages/roms/papermario-64/"
   },
   {
     "title": "Super Mario Bros.",
-    "image": "images/smbnes.png",
+    "img": "images/smbnes.png",
     "alt": "(NES) Super Mario Bros",
-    "link": "/pages/games-frame?url=/pages/roms/supermariobros/"
+    "url": "/pages/games-frame?url=/pages/roms/supermariobros/"
   },
   {
     "title": "Super Mario World",
-    "image": "images/smw.png",
+    "img": "images/smw.png",
     "alt": "(SNES) Super Mario World",
-    "link": "/pages/games-frame?url=/pages/roms/super-mario-world/"
+    "url": "/pages/games-frame?url=/pages/roms/super-mario-world/"
   },
   {
     "title": "Super Mario Bros. 3",
-    "image": "images/smb3.jpg",
+    "img": "images/smb3.jpg",
     "alt": "(NES) Super Mario Bros. 3",
-    "link": "/pages/games-frame?url=/pages/roms/supermariobros3/"
+    "url": "/pages/games-frame?url=/pages/roms/supermariobros3/"
   },
   {
     "title": "Super Mario 64",
-    "image": "images/sm64.png",
+    "img": "images/sm64.png",
     "alt": "(N64) Super Mario 64",
-    "link": "/pages/games-frame?url=/pages/roms/supermario-64/"
+    "url": "/pages/games-frame?url=/pages/roms/supermario-64/"
   },
   {
     "title": "New Super Mario Bros.",
-    "image": "images/new-smb.png",
+    "img": "images/new-smb.png",
     "alt": "(DS) New Super Mario Bros.",
-    "link": "/pages/games-frame?url=/pages/roms/new-smb/"
+    "url": "/pages/games-frame?url=/pages/roms/new-smb/"
   }
 ]
