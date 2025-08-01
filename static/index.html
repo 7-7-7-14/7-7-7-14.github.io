@@ -2,18 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>New Tab</title>
     <link rel="stylesheet" href="../storage/css/evenmorestyles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/kTcFvJ6rLUp4RZWkfS5G6dUe8ZLECu2Kkq7Q4F9+E6Y5c9GepFu3u5Kn89XXc+ZfQXYYF5cR6bw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../storage/css/static.css" />
     <style>
-      /* Error message styles */
+      /* Error message box */
       #screenerror {
-        display: none;
+        display: none; /* start hidden */
         position: fixed;
         top: 1rem;
         right: 1rem;
@@ -24,38 +27,29 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         z-index: 1000;
         font-weight: bold;
+
+        /* start off above and invisible */
+        opacity: 0;
+        transform: translateY(-50px);
+
+        /* smooth transitions */
         transition: transform 0.5s ease, opacity 0.5s ease;
       }
 
+      /* When showing, slide down and fade in */
       .error-show {
-        display: block !important;
         opacity: 1;
         transform: translateY(0);
       }
 
+      /* When hiding, slide up and fade out */
       .error-hide {
         opacity: 0;
         transform: translateY(-50px);
-        transition: transform 0.5s ease, opacity 0.5s ease;
       }
 
-      /* Your other CSS styles */
-      hr {
-        width: 84vw;
-      }
-
-      #naerror {
-        padding: 0.5rem;
-        font-size: 0.8rem;
-      }
-
-      @media only screen and (max-height: 400px) {
-        #screenerror {
-          display: block;
-        }
-      }
-
-      @media only screen and (max-width: 900px) {
+      /* Responsive forcing show error for small screens */
+      @media only screen and (max-height: 400px), only screen and (max-width: 900px) {
         #screenerror {
           display: block;
         }
@@ -116,10 +110,7 @@
         padding: 2vw 2.5vw 1vw;
       }
 
-      .headerButtons {
-        font-size: 1.2vw;
-      }
-
+      .headerButtons,
       .headerButtonSelected {
         font-size: 1.2vw;
       }
@@ -181,10 +172,7 @@
     </style>
   </head>
   <body>
-    <script src="/particles.js"></script>
-    <script src="/storage/js/app.js"></script>
     <div id="particles-js"></div>
-    <script src="/storage/js/particles-toggle.js" defer></script>
 
     <h1>NEXUS</h1>
     <p id="dynamicParagraph">(TEXT)</p>
@@ -193,8 +181,8 @@
       <form id="uv-form">
         <input
           id="uv-search-engine"
-          value="https://duckduckgo.com/?q=%s&kp=1&ia=web"
           type="hidden"
+          value="https://duckduckgo.com/?q=%s&kp=1&ia=web"
         />
         <input
           id="uv-address"
@@ -216,13 +204,18 @@
     <!-- Error message container -->
     <div id="screenerror">Please enter a search term!</div>
 
+    <!-- Scripts -->
+    <script src="/particles.js"></script>
+    <script src="/storage/js/app.js"></script>
+    <script src="/storage/js/particles-toggle.js" defer></script>
     <script src="/static/uv/uv.bundle.js" defer></script>
     <script src="/static/uv/uv.config.js" defer></script>
     <script src="/static/register-sw.js" defer></script>
-    <script type="text/javascript" src="/storage/js/background.js"></script>
+    <script src="/storage/js/background.js" type="text/javascript"></script>
     <script src="/storage/js/splash-messages.js"></script>
 
     <script>
+      // Search form submit handler
       document.getElementById("uv-form").addEventListener("submit", function (event) {
         event.preventDefault();
         search();
@@ -233,87 +226,34 @@
         const errorBox = document.getElementById("screenerror");
 
         if (!inputRaw) {
-          // Show error
+          // Show error with slide down
+          errorBox.style.display = "block";
           errorBox.classList.remove("error-hide");
           errorBox.classList.add("error-show");
 
-          // After 2 seconds, hide the error with slide up
+          // Hide error after 2 seconds with slide up
           setTimeout(() => {
             errorBox.classList.remove("error-show");
             errorBox.classList.add("error-hide");
 
-            // After transition ends, hide display completely
             setTimeout(() => {
               errorBox.style.display = "none";
-            }, 500); // match CSS transition duration
+            }, 500);
           }, 2000);
-
-          // Make sure error box is visible
-          errorBox.style.display = "block";
           return;
         }
 
+        // Blocked terms list
         const blockedTerms = new Set([
-          "adult",
-          "adultfriendfinder",
-          "adultfriendfinder.com",
-          "amateurporn",
-          "boobs",
-          "breast",
-          "p0rn",
-          "br3ast",
-          "camgirl",
-          "camsoda",
-          "camsoda.com",
-          "chaturbate",
-          "chaturbate.com",
-          "cum",
-          "erotic",
-          "escortservice",
-          "fuck",
-          "gangbang",
-          "gambling",
-          "gambling.com",
-          "hentai",
-          "hentaimovie",
-          "hardcore",
-          "jizz",
-          "marijuana",
-          "meth",
-          "milf",
-          "nudity",
-          "onlyfans",
-          "onlyfans.com",
-          "ome",
-          "ome.tv",
-          "porn",
-          "pussy",
-          "redtube",
-          "redtube.com",
-          "sex",
-          "sex.com",
-          "sexshop",
-          "sexworker",
-          "slut",
-          "stripchat",
-          "tits",
-          "tube8",
-          "tube8.com",
-          "webcam",
-          "weed",
-          "williamhill.com",
-          "xhamster",
-          "xhamster.com",
-          "xnx",
-          "xvideo",
-          "xxx",
-          "xxxvideo",
-          "youjizz",
-          "bet365.com",
-          "bongacams",
-          "bongacams.com",
-          "block-access",
-          "pokerstars.com",
+          "adult", "adultfriendfinder", "adultfriendfinder.com", "amateurporn", "boobs", "breast",
+          "p0rn", "br3ast", "camgirl", "camsoda", "camsoda.com", "chaturbate", "chaturbate.com",
+          "cum", "erotic", "escortservice", "fuck", "gangbang", "gambling", "gambling.com",
+          "hentai", "hentaimovie", "hardcore", "jizz", "marijuana", "meth", "milf", "nudity",
+          "onlyfans", "onlyfans.com", "ome", "ome.tv", "porn", "pussy", "redtube", "redtube.com",
+          "sex", "sex.com", "sexshop", "sexworker", "slut", "stripchat", "tits", "tube8",
+          "tube8.com", "webcam", "weed", "williamhill.com", "xhamster", "xhamster.com", "xnx",
+          "xvideo", "xxx", "xxxvideo", "youjizz", "bet365.com", "bongacams", "bongacams.com",
+          "block-access", "pokerstars.com",
         ]);
 
         const lowerInput = inputRaw.toLowerCase();
@@ -338,38 +278,33 @@
           finalURL = searchEngine.replace("%s", encodeURIComponent(inputRaw));
         }
 
-        window.location.href = `/static/embed?p=${finalURL}`;
+        window.location.href = `/static/embed?p=${encodeURIComponent(finalURL)}`;
       }
-    </script>
 
-    <script>
+      // Register service worker
       async function regsw() {
-        await navigator.serviceWorker.register("/static/uv-sw.js", {
-          scope: "/static/",
-        });
+        try {
+          await navigator.serviceWorker.register("/static/uv-sw.js", { scope: "/static/" });
+          console.log("Service Worker registered successfully.");
+        } catch (error) {
+          console.error("Service Worker registration failed:", error);
+        }
       }
       regsw();
-    </script>
 
-    <script>
-      const code = [
-        "ArrowUp",
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowLeft",
-        "ArrowRight",
-        "b",
-        "a",
-        "Enter",
+      // Konami code listener
+      const konamiCode = [
+        "ArrowUp", "ArrowUp",
+        "ArrowDown", "ArrowDown",
+        "ArrowLeft", "ArrowRight",
+        "ArrowLeft", "ArrowRight",
+        "b", "a", "Enter"
       ];
       let currentKeyIndex = 0;
       document.addEventListener("keydown", (event) => {
-        if (event.key === code[currentKeyIndex]) {
+        if (event.key === konamiCode[currentKeyIndex]) {
           currentKeyIndex++;
-          if (currentKeyIndex === code.length) {
+          if (currentKeyIndex === konamiCode.length) {
             window.location.href = "/pages/secret/";
             currentKeyIndex = 0;
           }
