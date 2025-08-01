@@ -15,7 +15,7 @@
   </head>
   <body>
     <script src="/storage/js/particles.js"></script>
-    <script src="/storage/js/apps.js"></script>
+    <script src="/storage/js/app.js"></script>
     <div id="particles-js"></div>
     <div class="settings-container">
       <h1>Settings</h1>
@@ -35,9 +35,6 @@
           <input type="checkbox" id="particlesToggle" />
         </div>
       </div>
-      <label for="username">Change your username</label>
-      <input type="text" id="username" placeholder="John Doe" />
-      <button id="saveusername">Save username</button>
       <hr>
       <label for="siteTitle">Set Site Title:</label>
       <input type="text" id="siteTitle" placeholder="Enter site title" />
@@ -58,14 +55,12 @@
     <script>
       const beforeUnloadToggle = document.getElementById('beforeUnloadToggle');
       const autocloakToggle = document.getElementById('autocloakToggle');
-      const particlesToggle = document.getElementById('particlesToggle'); // added from old code
+      const particlesToggle = document.getElementById('particlesToggle');
       const siteTitleInput = document.getElementById('siteTitle');
       const siteLogoInput = document.getElementById('siteLogo');
-      const usernameInput = document.getElementById('username');
       const panicKeyInput = document.getElementById('panicKey');
       const panicUrlInput = document.getElementById('panicUrl');
       const saveSettingsButton = document.getElementById('saveSettings');
-      const saveusernamebtn = document.getElementById('saveusername');
       const savePanicButtonSettingsButton = document.getElementById('savePanicButtonSettings');
       const resetSettingsButton = document.getElementById('resetSettings');
       const resetPanicButtonSettingsButton = document.getElementById('resetPanicButtonSettings');
@@ -77,7 +72,6 @@
       siteTitleInput.value = localStorage.getItem('siteTitle') || '';
       panicKeyInput.value = localStorage.getItem('panicKey') || '';
       panicUrlInput.value = localStorage.getItem('panicUrl') || '';
-      usernameInput.value = localStorage.getItem('username') || '';
 
       // Apply favicon if saved
       const savedLogo = localStorage.getItem('siteLogo');
@@ -112,13 +106,6 @@
             document.head.appendChild(faviconLink);
           };
           reader.readAsDataURL(siteLogoFile);
-        }
-      });
-
-      saveusernamebtn.addEventListener('click', function() {
-        const newUsername = usernameInput.value;
-        if (newUsername) {
-          localStorage.setItem('username', newUsername);
         }
       });
 
@@ -169,7 +156,6 @@
         }
       });
 
-      // PARTICLES TOGGLE from old code
       particlesToggle.addEventListener('change', function() {
         localStorage.setItem('particlesDisabled', particlesToggle.checked);
         document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
