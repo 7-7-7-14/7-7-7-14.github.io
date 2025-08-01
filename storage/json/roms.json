@@ -1,10 +1,10 @@
-{
+[
+  {
     "title": "Load ROM",
     "image": "images/loadrom.png",
     "alt": "(A) Load ROM",
     "link": "/pages/games-frame?url=/pages/roms/load-rom/"
-},
-[
+  },
   {
     "title": "Mario Kart DS",
     "image": "images/mariokartds.jpg",
