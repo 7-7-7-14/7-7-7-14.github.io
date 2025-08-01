@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta property="og:title" content="Nexus | Roms" />
-  <meta property="og:description" content="Play your favorite roms!" />
-  <meta property="og:image" content="/storage/images/logo.png" />
+  <meta property="og:title" content="Nexus | Roms and More"> 
+  <meta property="og:description" content="Use different roms, unblocking methods, and more">
+  <meta property="og:image" content="/storage/images/logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
@@ -17,30 +17,27 @@
   <script src="/particles.js"></script>
   <script src="/storage/js/app.js"></script>
   <div id="particles-js"></div>
-
   <div class="navbar">
     <div class="left-side">
+      <a href="/">
+      </a>
     </div>
     <div class="right-side">
       <script type="text/javascript" src="/storage/js/nav.js"></script>
     </div>
   </div>
-
-  <div class="rom-title">Roms</div>
-  <div class="roms-title" id="romsTitle">Select from 0 roms!</div>
-
+  <div class="game-title">Roms</div>
   <div class="search-bar-container">
     <input
       type="text"
-      id="romSearch"
-      autocomplete="off"
+      id="gameSearch"
       class="search-bar"
       placeholder="Search for a rom..."
+      oninput="filterRoms()"
     />
     <button id="random-button">Let us pick</button>
   </div>
-
-  <div class="rom-grid" id="romGrid"></div>
+  <div class="game-grid" id="gameGrid"></div>
 
   <script>
     const CACHE_KEY = "roms-cache";
@@ -48,7 +45,7 @@
     const JSON_PATH = "/storage/json/roms.json";
 
     async function loadRoms() {
-      console.log("Loading ROMs...");
+      const gameGrid = document.getElementById("gameGrid");
       const cached = localStorage.getItem(CACHE_KEY);
 
       if (cached) {
@@ -76,40 +73,34 @@
     }
 
     function renderRoms(roms) {
-      console.log("Rendering", roms.length, "ROMs");
-      const romGrid = document.getElementById("romGrid");
-      const romsTitle = document.getElementById("romsTitle");
-      romGrid.innerHTML = "";
-
-      for (const rom of roms) {
+      const gameGrid = document.getElementById("gameGrid");
+      gameGrid.innerHTML = "";
+      for (const game of roms) {
         const div = document.createElement("div");
-        div.className = "rom-button";
+        div.className = "game-button";
         div.innerHTML = `
-          <a href="${rom.url}">
-            <img src="${rom.img}" alt="${rom.alt || rom.title}" onerror="this.onerror=null;this.src='/storage/images/404.png';" />
-            <div class="overlay-text">${rom.title}</div>
+          <a href="${game.url}">
+            <img src="${game.img}" alt="${game.alt || game.title}" onerror="this.onerror=null;this.src='/storage/images/404.png';" />
+            <div class="overlay-text">${game.title}</div>
           </a>
         `;
-        romGrid.appendChild(div);
+        gameGrid.romendChild(div);
       }
-
-      romsTitle.textContent = `Select from ${roms.length} roms!`;
-
-      // Removed undefined sortRomButtons call
+      sortGameButtons();
       checkGridAlignment();
     }
 
     function filterRoms() {
-      const searchInput = document.getElementById("romSearch").value.toLowerCase();
-      const roms = document.querySelectorAll(".rom-button");
-      roms.forEach((rom) => {
-        const title = rom.querySelector(".overlay-text").textContent.toLowerCase();
-        rom.style.display = title.includes(searchInput) ? "block" : "none";
+      const searchInput = document.getElementById("gameSearch").value.toLowerCase();
+      const roms = document.querySelectorAll(".game-button");
+      roms.forEach((game) => {
+        const title = game.querySelector(".overlay-text").textContent.toLowerCase();
+        game.style.display = title.includes(searchInput) ? "block" : "none";
       });
     }
 
     function checkGridAlignment() {
-      const buttons = document.querySelectorAll(".rom-button");
+      const buttons = document.querySelectorAll(".game-button");
       const pageWidth = window.innerWidth;
       buttons.forEach((button) => {
         const rect = button.getBoundingClientRect();
@@ -122,15 +113,14 @@
     window.addEventListener("load", () => {
       loadRoms();
       checkGridAlignment();
-      document.getElementById("romSearch").addEventListener("input", filterRoms);
     });
 
     document.getElementById("random-button").addEventListener("click", () => {
-      const roms = Array.from(document.querySelectorAll(".rom-button a"));
+      const roms = Array.from(document.querySelectorAll(".game-button a"));
       if (roms.length === 0) return;
       const randomIndex = Math.floor(Math.random() * roms.length);
-      const randomRom = roms[randomIndex];
-      window.location.href = randomRom.href;
+      const randomGame = roms[randomIndex];
+      window.location.href = randomGame.href;
     });
   </script>
 
@@ -138,5 +128,18 @@
   <script type="text/javascript" src="/storage/js/background.js"></script>
   <script type="text/javascript" src="/storage/js/resort.js"></script>
   <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
+  <script src="/static/uv/uv.bundle.js" defer></script>
+  <script src="/static/uv/uv.config.js" defer></script>
+  <script src="/static/register-sw.js" defer></script>
+  <script src="/static/search.js" defer></script>
+  <script src="/static/index.js" defer></script>
+  <script>
+    async function regsw() {
+      await navigator.serviceWorker.register("/static/uv-sw.js", {
+        scope: "/static/",
+      });
+    }
+    regsw();
+  </script>
 </body>
 </html>
