@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Run NFS in js-dos</title>
+  <!-- js-dos style sheet -->
+  <link rel="stylesheet" href="https://v8.js-dos.com/latest/js-dos.css" />
+  <!-- js-dos script -->
+  <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
+  <style>
+    /* Full viewport width and height */
+    #dos {
+      width: 100vw;
+      height: 60vw; /* Adjust height as needed */
+      max-height: 600px;
+      margin: 0 auto;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Need for Speed in js-dos</h1>
+  <div id="dos"></div>
+
+  <script>
+    // Initialize js-dos emulator in the div with id 'dos'
+    Dos(document.getElementById("dos"), {
+      url: "./nfs.jsdos" // Replace with actual NFS bundle URL if different
+    });
+  </script>
+</body>
+</html>
