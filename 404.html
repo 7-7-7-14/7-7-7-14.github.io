@@ -7,16 +7,6 @@
 </head>
 <body>
 
-<script>
-  try {
-    if (window.top !== window.self) {
-      window.top.location = window.location.href;
-    }
-  } catch (e) {
-    // Fail silently if not allowed (e.g. due to sandboxing or cross-origin)
-  }
-</script>
-
 <script src="/particles.js"></script>
 <script src="/storage/js/app.js"></script>
 
