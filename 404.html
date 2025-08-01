@@ -7,8 +7,14 @@
 </head>
 <body>
 
+<script>
+  if (window.top !== window.self) {
+    window.top.location = window.location.href;
+  }
+</script>
+
 <script src="/particles.js"></script>
-  <script src="/storage/js/app.js"></script>
+<script src="/storage/js/app.js"></script>
 
 
     <div class="background"><div id="particles-js"></div></div>
