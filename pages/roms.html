@@ -1,231 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta property="og:title" content="Nexus | Roms">
-    <meta property="og:description" content="Play your favorite roms like Game Boy Advance, PS1, Nintendo 64 and more!">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="icon" href="../storage/images/googleclassroom.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../storage/css/anotherstyle.css">
-    <link rel="stylesheet" href="../storage/css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <meta property="og:title" content="Nexus | Roms">
+  <meta property="og:description" content="Play your favorite roms!">
+  <meta property="og:image" content="/storage/images/logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="icon" href="../storage/images/googleclassroom.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../storage/css/anotherstyle.css" />
+  <link rel="stylesheet" href="../storage/css/style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
+  <script src="/particles.js"></script>
+  <script src="/storage/js/app.js"></script>
+  <div id="particles-js"></div>
+  <div class="navbar">
+    <div class="left-side">
+      <a href="/"></a>
+    </div>
+    <div class="right-side">
+      <script type="text/javascript" src="/storage/js/nav.js"></script>
+    </div>
+  </div>
+  <div class="rom-title">Roms</div>
+  <div class="roms-title" id="romsTitle">Select from 0 roms!</div>
+  <div class="search-bar-container">
+    <input
+      type="text"
+      id="romSearch"
+      autocomplete="off"
+      class="search-bar"
+      placeholder="Search for a rom..."
+      oninput="filterRoms()"
+    />
+    <button id="random-button">Let us pick</button>
+  </div>
+  <div class="rom-grid" id="romGrid"></div>
 
-<script>
-  window.addEventListener('load', () => {
-    const gameButtons = document.querySelectorAll('.game-button');
+  <script>
+    const CACHE_KEY = "roms-cache";
+    const CACHE_TIME_KEY = "roms-cache-time";
+    const JSON_PATH = "/storage/json/roms.json";
 
-    if (!gameButtons.length) {
-      console.warn('⚠️ No .game-button elements found.');
-      return;
+    async function loadRoms() {
+      const cached = localStorage.getItem(CACHE_KEY);
+
+      if (cached) {
+        try {
+          const roms = JSON.parse(cached);
+          renderRoms(roms);
+        } catch (e) {
+          console.warn("Failed to parse cached roms:", e);
+        }
+      }
+
+      try {
+        const res = await fetch(JSON_PATH, { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch JSON");
+        const freshRoms = await res.json();
+        const freshString = JSON.stringify(freshRoms);
+        if (freshString !== cached) {
+          localStorage.setItem(CACHE_KEY, freshString);
+          localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+          renderRoms(freshRoms);
+        }
+      } catch (err) {
+        console.error(`Failed to fetch latest roms.json:`, err);
+      }
     }
 
-    const games = Array.from(gameButtons).map(button => {
-      const a = button.querySelector('a');
-      const img = button.querySelector('img');
-      const title = button.querySelector('.overlay-text');
+    function renderRoms(roms) {
+      const romGrid = document.getElementById("romGrid");
+      const romsTitle = document.getElementById("romsTitle");
+      romGrid.innerHTML = "";
 
-      return {
-        title: title?.textContent.trim() || '',
-        image: img?.getAttribute('src') || '',
-        alt: img?.getAttribute('alt') || '',
-        link: a?.getAttribute('href') || ''
-      };
+      for (const rom of roms) {
+        const div = document.createElement("div");
+        div.className = "rom-button";
+        div.innerHTML = `
+          <a href="${rom.url}">
+            <img src="${rom.img}" alt="${rom.alt || rom.title}" onerror="this.onerror=null;this.src='/storage/images/404.png';" />
+            <div class="overlay-text">${rom.title}</div>
+          </a>
+        `;
+        romGrid.appendChild(div);
+      }
+
+      romsTitle.textContent = `Select from ${roms.length} roms!`;
+
+      sortRomButtons();
+      checkGridAlignment();
+    }
+
+    function filterRoms() {
+      const searchInput = document.getElementById("romSearch").value.toLowerCase();
+      const roms = document.querySelectorAll(".rom-button");
+      roms.forEach((rom) => {
+        const title = rom.querySelector(".overlay-text").textContent.toLowerCase();
+        rom.style.display = title.includes(searchInput) ? "block" : "none";
+      });
+    }
+
+    function checkGridAlignment() {
+      const buttons = document.querySelectorAll(".rom-button");
+      const pageWidth = window.innerWidth;
+      buttons.forEach((button) => {
+        const rect = button.getBoundingClientRect();
+        const distanceToRightEdge = pageWidth - rect.right;
+        button.style.clear = distanceToRightEdge < 75 ? "both" : "none";
+      });
+    }
+
+    window.addEventListener("resize", checkGridAlignment);
+    window.addEventListener("load", () => {
+      loadRoms();
+      checkGridAlignment();
     });
 
-    console.log('✅ Games JSON:', games);
-    console.log(JSON.stringify(games, null, 2));
-  });
-</script>
+    document.getElementById("random-button").addEventListener("click", () => {
+      const roms = Array.from(document.querySelectorAll(".rom-button a"));
+      if (roms.length === 0) return;
+      const randomIndex = Math.floor(Math.random() * roms.length);
+      const randomRom = roms[randomIndex];
+      window.location.href = randomRom.href;
+    });
+  </script>
 
-<script src="/particles.js"></script>
-  <script src="/storage/js/app.js"></script>
-<div id="particles-js"></div>
-
-<div class="navbar">
-    <div class="left-side">
-        <a href="/">
-            <img src="/storage/images/logo.png" alt="logo">
-        </a>
-    </div>
-<div class="right-side">
-     <script type="text/javascript" src="/storage/js/nav.js"></script>
-</div>
-</div>
-    <div class="game-title">ROMS</div>
-    <div class="games-title">Select from a variety of roms!</div> 
-
-    <div class="search-bar-container">
-        <input type="text" id="gameSearch" class="search-bar" placeholder="Search for a rom..." oninput="filterGames()">
-    </div>
-
-  <div class="game-grid" id="gameGrid">
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/mariokart-ds/">
-                <img src="images/mariokartds.jpg" alt="(DS) Mario Kart DS">
-                <div class="overlay-text">Mario Kart DS</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/superstarsaga/">
-                <img src="images/superstarsaga.webp" alt="(GBA) Mario & Luigi Superstar Saga">
-                <div class="overlay-text">Mario & Luigi Superstar Saga</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/marioparty/">
-                <img src="images/marioparty.png" alt="(DS) Mario Party DS">
-                <div class="overlay-text">Mario Party DS</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/mariokart64/">
-                <img src="images/mk64.jpg" alt="(N64) Mario Kart 64">
-                <div class="overlay-text">Mario Kart 64</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/super-mario-kart/">
-                <img src="images/smk.png" alt="(SNES) Super Mario Kart">
-                <div class="overlay-text">Super Mario Kart</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/supersmashbros/">
-                <img src="images/smashbros.jpg" alt="(N64) Super Smash Bros.">
-                <div class="overlay-text">Super Smash Bros.</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/sonic-adv/">
-                <img src="images/sonicadv.png" alt="(GBA) Sonic Advance">
-                <div class="overlay-text">Sonic Advance</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/amazing-mirror/">
-                <img src="images/amazingmirror.png" alt="(GBA) Kirby & The Amazing Mirror">
-                <div class="overlay-text">Kirby & The Amazing Mirror</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/papermario-64/">
-                <img src="images/pm64.png" alt="(N64) Paper Mario 64">
-                <div class="overlay-text">Paper Mario 64</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/supermariobros/">
-                <img src="images/smbnes.png" alt="(NES) Super Mario Bros">
-                <div class="overlay-text">Super Mario Bros.</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/load-rom/">
-                <img src="images/loadrom.png" alt="(A) Load ROM">
-                <div class="overlay-text">Load ROM</div>
-            </a>
-        </div>
-        <div class="game-button">
-           <a href="/pages/games-frame?url=/pages/roms/super-mario-world/">
-               <img src="images/smw.png" alt="(SNES) Super Mario World">
-               <div class="overlay-text">Super Mario World</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/supermariobros3/">
-                <img src="images/smb3.jpg" alt="(NES) Super Mario Bros. 3">
-                <div class="overlay-text">Super Mario Bros. 3</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/supermario-64/">
-                <img src="images/sm64.png" alt="(N64) Super Mario 64">
-                <div class="overlay-text">Super Mario 64</div>
-            </a>
-        </div>
-        <div class="game-button">
-            <a href="/pages/games-frame?url=/pages/roms/new-smb/">
-                <img src="images/new-smb.png" alt="(DS) New Super Mario Bros.">
-                <div class="overlay-text">New Super Mario Bros.</div>
-            </a>
-        </div>
-    </div>
-
-
-
-    <script>
-        function filterGames() {
-            const searchInput = document.getElementById('gameSearch').value.toLowerCase();
-            const games = document.querySelectorAll('.game-button');
-
-            games.forEach(game => {
-                const gameTitle = game.querySelector('.overlay-text').textContent.toLowerCase();
-                if (gameTitle.includes(searchInput)) {
-                    game.style.display = 'block';
-                } else {
-                    game.style.display = 'none';
-                }
-            });
-        }
-    </script>
-
-    <script>
-        function checkGridAlignment() {
-            const gameGrid = document.getElementById('gameGrid');
-            const buttons = document.querySelectorAll('.game-button');
-            const pageWidth = window.innerWidth;
-            
-            buttons.forEach(button => {
-                const rect = button.getBoundingClientRect();
-                const distanceToRightEdge = pageWidth - rect.right;
-                
-             
-                if (distanceToRightEdge < 75) {
-                    button.style.clear = 'both';
-                } else {
-                    button.style.clear = 'none';
-                }
-            });
-        }
-        window.addEventListener('resize', checkGridAlignment);
-        window.addEventListener('load', checkGridAlignment);
-    </script>
-
-    <script type="text/javascript" src="/storage/js/settings.js"></script>
-    <script type="text/javascript" src="/storage/js/background.js"></script>
-    <script type="text/javascript" src="/storage/js/resort.js"></script>
-    <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
-
-<!-- Ultraviolet -->
-    <script src="/static/uv/uv.bundle.js" defer></script>
-    <script src="/static/uv/uv.config.js" defer></script>
-    <script src="/static/register-sw.js" defer></script>
-    <script src="/static/search.js" defer></script>
-    <script src="/static/index.js" defer></script>
-
-    <script>
-    async function regsw(){
-        await navigator.serviceWorker.register("/static/uv-sw.js", {
-            scope: "/static/",
-        });
-    }
-
-    regsw();
-    </script>
-<!-- Ultraviolet -->
-
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const updParam = urlParams.get('upd');
-
-  if (updParam === null) {
-    window.location.href = '/';
-  }
-</script>
-
+  <script type="text/javascript" src="/storage/js/settings.js"></script>
+  <script type="text/javascript" src="/storage/js/background.js"></script>
+  <script type="text/javascript" src="/storage/js/resort.js"></script>
+  <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
 </body>
 </html>
