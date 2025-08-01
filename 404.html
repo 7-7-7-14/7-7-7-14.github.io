@@ -8,8 +8,12 @@
 <body>
 
 <script>
-  if (window.top !== window.self) {
-    window.top.location = window.location.href;
+  try {
+    if (window.top !== window.self) {
+      window.top.location = window.location.href;
+    }
+  } catch (e) {
+    // Fail silently if not allowed (e.g. due to sandboxing or cross-origin)
   }
 </script>
 
