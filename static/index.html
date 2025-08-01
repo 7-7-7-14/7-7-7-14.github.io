@@ -10,8 +10,177 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="../storage/css/static.css" />
+    <style>
+      /* Error message styles */
+      #screenerror {
+        display: none;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background: #f44336;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        font-weight: bold;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+      }
+
+      .error-show {
+        display: block !important;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .error-hide {
+        opacity: 0;
+        transform: translateY(-50px);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+      }
+
+      /* Your other CSS styles */
+      hr {
+        width: 84vw;
+      }
+
+      #naerror {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      @media only screen and (max-height: 400px) {
+        #screenerror {
+          display: block;
+        }
+      }
+
+      @media only screen and (max-width: 900px) {
+        #screenerror {
+          display: block;
+        }
+      }
+
+      /* Sidebar CSS */
+      .sidebar {
+        width: 5.5vw;
+      }
+
+      .sidebarOptions {
+        height: 17.5vh;
+        margin-bottom: 1vh;
+        padding-left: 1.3vw;
+      }
+
+      .sidebarOptions.sidebarBottom {
+        height: 9vh;
+        margin-bottom: 0;
+      }
+
+      .gTabsText {
+        visibility: hidden;
+      }
+
+      #gtabs2 img,
+      #gtabs3 img,
+      #gtabs4 img {
+        width: 2.8vw;
+      }
+
+      #gtabs5 {
+        bottom: 14vh;
+        width: 4.2vw;
+      }
+
+      #gtabs6 {
+        bottom: 4vh;
+        width: 4.2vw;
+      }
+
+      #gtabs5 img,
+      #gtabs6 img {
+        width: 2.2vw;
+        padding-left: 0.4vw;
+      }
+
+      /* Header CSS */
+      .mainPage {
+        width: 94.5vw;
+      }
+
+      .currentGame {
+        font-size: 1.4vw;
+      }
+
+      .gameHeader {
+        padding: 2vw 2.5vw 1vw;
+      }
+
+      .headerButtons {
+        font-size: 1.2vw;
+      }
+
+      .headerButtonSelected {
+        font-size: 1.2vw;
+      }
+
+      /* Body CSS */
+      #game-bg {
+        width: 94.5vw;
+        height: 87vh;
+      }
+
+      #game-title {
+        margin-top: 28vh;
+      }
+
+      #gameSelection {
+        width: 94.5vw;
+      }
+
+      .dropdownSelector {
+        width: 25vw;
+        margin-left: 3vw;
+      }
+
+      .playButton {
+        width: 24.8vw;
+        height: 5.6vw;
+        left: 36%;
+      }
+
+      .username {
+        font-size: 1.5vw;
+      }
+
+      /* Installations Menu CSS */
+      #installations {
+        width: 94.5vw;
+      }
+
+      .installationOptions {
+        height: 9vh;
+        width: 84vw;
+        font-size: 1.4vw;
+      }
+
+      /* Dropdown Menu CSS */
+      .launcherVersion {
+        font-size: 1.1vw;
+      }
+
+      .dropdownOptions {
+        font-size: 1.4vw;
+        width: 25.5vw;
+        margin-left: 3vw;
+      }
+
+      .versionText {
+        font-size: 1.4vw;
+      }
+    </style>
   </head>
-  <body> 
+  <body>
     <script src="/particles.js"></script>
     <script src="/storage/js/app.js"></script>
     <div id="particles-js"></div>
@@ -19,6 +188,7 @@
 
     <h1>NEXUS</h1>
     <p id="dynamicParagraph">(TEXT)</p>
+
     <div id="search-container">
       <form id="uv-form">
         <input
@@ -33,7 +203,7 @@
           class="search-bar-home"
           placeholder="search (－ _ －) zzZ"
         />
-        <button id="search-button" onclick="search()">
+        <button id="search-button" type="submit">
           SEARCH <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
@@ -43,45 +213,117 @@
       </div>
     </div>
 
+    <!-- Error message container -->
+    <div id="screenerror">Please enter a search term!</div>
+
     <script src="/static/uv/uv.bundle.js" defer></script>
     <script src="/static/uv/uv.config.js" defer></script>
     <script src="/static/register-sw.js" defer></script>
     <script type="text/javascript" src="/storage/js/background.js"></script>
     <script src="/storage/js/splash-messages.js"></script>
-    
+
     <script>
-      document.getElementById("uv-form").addEventListener("submit", function (
-        event
-      ) {
+      document.getElementById("uv-form").addEventListener("submit", function (event) {
         event.preventDefault();
         search();
       });
 
       function search() {
         const inputRaw = document.getElementById("uv-address").value.trim();
-        if (!inputRaw) return;
+        const errorBox = document.getElementById("screenerror");
 
-       const blockedTerms = new Set([
-         "adult", "adultfriendfinder", "adultfriendfinder.com", "amateurporn", "boobs",
-         "breast", "p0rn", "br3ast", "camgirl", "camsoda", "camsoda.com", "chaturbate",
-         "chaturbate.com", "cum", "erotic", "escortservice", "fuck", "gangbang",
-         "gambling", "gambling.com", "hentai", "hentaimovie", "hardcore", "jizz",
-         "marijuana", "meth", "milf", "nudity", "onlyfans", "onlyfans.com", "ome",
-         "ome.tv", "porn", "pussy", "redtube", "redtube.com", "sex",
-         "sex.com", "sexshop", "sexworker", "slut", "stripchat", "tits", "tube8",
-         "tube8.com", "webcam", "weed", "williamhill.com", "xhamster", "xhamster.com",
-         "xnx", "xvideo", "xxx", "xxxvideo", "youjizz",
-         "bet365.com", "bongacams", "bongacams.com", "block-access", "pokerstars.com"
-       ]);
+        if (!inputRaw) {
+          // Show error
+          errorBox.classList.remove("error-hide");
+          errorBox.classList.add("error-show");
 
-       const lowerInput = inputRaw.toLowerCase();
+          // After 2 seconds, hide the error with slide up
+          setTimeout(() => {
+            errorBox.classList.remove("error-show");
+            errorBox.classList.add("error-hide");
 
-       for (const word of lowerInput.split(/[^a-z0-9.]+/)) {
-         if (blockedTerms.has(word)) {
+            // After transition ends, hide display completely
+            setTimeout(() => {
+              errorBox.style.display = "none";
+            }, 500); // match CSS transition duration
+          }, 2000);
+
+          // Make sure error box is visible
+          errorBox.style.display = "block";
+          return;
+        }
+
+        const blockedTerms = new Set([
+          "adult",
+          "adultfriendfinder",
+          "adultfriendfinder.com",
+          "amateurporn",
+          "boobs",
+          "breast",
+          "p0rn",
+          "br3ast",
+          "camgirl",
+          "camsoda",
+          "camsoda.com",
+          "chaturbate",
+          "chaturbate.com",
+          "cum",
+          "erotic",
+          "escortservice",
+          "fuck",
+          "gangbang",
+          "gambling",
+          "gambling.com",
+          "hentai",
+          "hentaimovie",
+          "hardcore",
+          "jizz",
+          "marijuana",
+          "meth",
+          "milf",
+          "nudity",
+          "onlyfans",
+          "onlyfans.com",
+          "ome",
+          "ome.tv",
+          "porn",
+          "pussy",
+          "redtube",
+          "redtube.com",
+          "sex",
+          "sex.com",
+          "sexshop",
+          "sexworker",
+          "slut",
+          "stripchat",
+          "tits",
+          "tube8",
+          "tube8.com",
+          "webcam",
+          "weed",
+          "williamhill.com",
+          "xhamster",
+          "xhamster.com",
+          "xnx",
+          "xvideo",
+          "xxx",
+          "xxxvideo",
+          "youjizz",
+          "bet365.com",
+          "bongacams",
+          "bongacams.com",
+          "block-access",
+          "pokerstars.com",
+        ]);
+
+        const lowerInput = inputRaw.toLowerCase();
+
+        for (const word of lowerInput.split(/[^a-z0-9.]+/)) {
+          if (blockedTerms.has(word)) {
             window.location.href = "/pages/blocked.html";
             return;
-         }
-       }
+          }
+        }
 
         const hasProtocol = /^https?:\/\//i.test(inputRaw);
         const looksLikeURL = /\.[a-z]{2,}(\/|$)/i.test(inputRaw);
