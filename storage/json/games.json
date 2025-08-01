@@ -306,6 +306,12 @@
     "title": "Learn To Fly 3"
   },
  {
+    "url": "/pages/games-frame?url=/pages/games/superstarsaga/",
+    "img": "/pages/images/superstarsaga.webp",
+    "alt": "Mario & Luigi: Superstar Saga",
+    "title": "Mario & Luigi: Superstar Saga"
+  },
+ {
     "url": "/pages/games-frame?url=/pages/games/learntofly3/",
     "img": "/pages/images/marioparty.png",
     "alt": "Mario Party DS",
