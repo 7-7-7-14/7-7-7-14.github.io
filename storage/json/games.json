@@ -331,7 +331,7 @@
   },
   {
     "url": "/pages/games-frame?url=/pages/games/lets-surf/",
-    "img": "/pages/images/microsoftsurf.png",
+    "img": "/pages/images/microsftsurf.png",
     "alt": "Let's Surf",
     "title": "Let's Surf"
   },
@@ -348,10 +348,16 @@
     "title": "Mario & Luigi: Superstar Saga"
   },
  {
-    "url": "/pages/games-frame?url=/pages/games/learntofly3/",
+    "url": "/pages/games-frame?url=/pages/games/mario-party/",
     "img": "/pages/images/marioparty.png",
     "alt": "Mario Party DS",
     "title": "Mario Party DS"
+  },
+ {
+    "url": "/pages/games-frame?url=/pages/games/mkds/",
+    "img": "/pages/images/mkds.png",
+    "alt": "Mario Kart DS",
+    "title": "Mario Kart DS"
   },
   {
     "url": "/pages/games-frame?url=/pages/games/monkey-mart/",
