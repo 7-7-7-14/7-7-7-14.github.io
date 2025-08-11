@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vex - Series</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #1e1e1e;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+  }
+
+  header, main, footer {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #e94e4e;
+    letter-spacing: 0.1em;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+  }
+
+  nav li {
+    /* No special style needed */
+  }
+
+  nav a {
+    display: block;
+    text-decoration: none;
+    background-color: #e94e4e;
+    color: white;
+    padding: 1rem 0;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    user-select: none;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    outline-offset: 4px;
+  }
+
+  nav a:hover,
+  nav a:focus {
+    background-color: #b93a3a;
+    transform: translateY(-3px);
+    outline: 2px solid #fff;
+  }
+
+  footer {
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: #bbb;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 400px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+    nav a {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header role="banner" aria-label="Page header">
+  <h1>Vex Unbl0cked</h1>
+</header>
+
+<main role="main">
+  <nav aria-label="Vex game versions navigation">
+    <ul>
+      <li><a href="3" role="link">Vex 3</a></li>
+      <li><a href="4" role="link">Vex 4</a></li>
+      <li><a href="5" role="link">Vex 5</a></li>
+      <li><a href="6" role="link">Vex 6</a></li>
+      <li><a href="7" role="link">Vex 7</a></li>
+      <li><a href="8" role="link">Vex 8</a></li>
+    </ul>
+  </nav>
+</main>
+
+<footer role="contentinfo">
+  <p>Play all Vex games</p>
+</footer>
+
+</body>
+</html>
