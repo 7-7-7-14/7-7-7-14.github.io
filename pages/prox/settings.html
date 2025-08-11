@@ -1,188 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
   <meta property="og:title" content="US4 | Settings">
   <meta property="og:description" content="Edit your website settings here!">
   <meta property="og:image" content="/storage/images/logo.png">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings</title>
   <link rel="icon" href="../storage/images/googleclassroom.png" type="image/png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-  <!-- Your old CSS still loads -->
+  <link href="/storage/css/settings.css" rel="stylesheet">
   <link href="/storage/css/style.css" rel="stylesheet">
-
-  <!-- Inline CSS overrides to centre everything -->
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
-      display: flex !important;         /* force flex layout */
-      justify-content: center !important;
-      align-items: center !important;
-      min-height: 100vh;
-    }
-
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .settings-container {
-      background: rgba(20, 20, 20, 0.9);
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 500px;
-      width: 100%;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-      overflow-y: auto;
-      max-height: 90vh;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    section {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ddd;
-    }
-
-    input[type="text"],
-    input[type="color"],
-    input[type="file"] {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      border: none;
-      border-radius: 6px;
-    }
-
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    .primary {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .danger {
-      background-color: #E53935;
-      color: white;
-    }
-
-    .btn + .btn {
-      margin-left: 8px;
-    }
-
-    fieldset {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 15px;
-    }
-
-    legend {
-      padding: 0 8px;
-      font-size: 14px;
-      color: #bbb;
-    }
-  </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <main class="settings-container">
-    <h1><i class="fas fa-cog"></i> Website Settings</h1>
-
-    <!-- Appearance -->
-    <section>
-      <fieldset>
-        <legend>Appearance</legend>
-        <label for="backgroundColorPicker">Background Colour:</label>
-        <input type="color" id="backgroundColorPicker">
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="particlesToggle"> Disable Particles</label>
-        </div>
-      </fieldset>
-    </section>
-
-    <!-- Behaviour -->
-    <section>
-      <fieldset>
-        <legend>Behaviour</legend>
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="beforeUnloadToggle"> Anti-Close</label>
-          <label><input type="checkbox" id="autocloakToggle"> Auto-about:blank</label>
-        </div>
-      </fieldset>
-    </section>
-
-    <!-- Site Identity -->
-    <section>
-      <fieldset>
-        <legend>Site Identity</legend>
-        <label for="siteTitle">Site Title:</label>
-        <input type="text" id="siteTitle" placeholder="Enter site title">
-        <label for="siteLogo">Site Favicon:</label>
-        <input type="file" id="siteLogo" accept="image/*">
-        <button id="saveSettings" class="btn primary"><i class="fas fa-save"></i> Save</button>
-        <button id="resetSettings" class="btn danger"><i class="fas fa-undo"></i> Reset</button>
-      </fieldset>
-    </section>
-
-    <!-- Panic Button -->
-    <section>
-      <fieldset>
-        <legend>Panic Button</legend>
-        <label for="panicKey">Shortcut Key:</label>
-        <input type="text" id="panicKey" placeholder="e.g., F1">
-        <label for="panicUrl">Redirect URL:</label>
-        <input type="text" id="panicUrl" placeholder="Enter URL">
-        <button id="savePanicButtonSettings" class="btn primary"><i class="fas fa-save"></i> Save</button>
-        <button id="resetPanicButtonSettings" class="btn danger"><i class="fas fa-undo"></i> Reset</button>
-      </fieldset>
-    </section>
-  </main>
-
-  <!-- Scripts -->
   <script src="/particles.js"></script>
   <script src="/storage/js/app.js"></script>
-  <script src="/storage/js/background.js"></script>
-  <script src="/storage/js/cheese-algorithm.js"></script>
+  <div id="particles-js"></div>
+
+  <div class="settings-container">
+    <h1>Settings</h1>
+
+    <label for="backgroundColorPicker">Select Background Color:</label>
+    <input type="color" id="backgroundColorPicker">
+
+    <div class="checkbox-container">
+      <div>
+        <label for="beforeUnloadToggle">Anti-Close</label>
+        <input type="checkbox" id="beforeUnloadToggle" />
+      </div>
+      <div>
+        <label for="autocloakToggle">Auto-about:blank</label>
+        <input type="checkbox" id="autocloakToggle" />
+      </div>
+      <div>
+        <label for="particlesToggle">Disable Particles</label>
+        <input type="checkbox" id="particlesToggle" />
+      </div>
+    </div>
+
+    <hr>
+
+    <label for="siteTitle">Set Site Title:</label>
+    <input type="text" id="siteTitle" placeholder="Enter site title" />
+
+    <label for="siteLogo">Set Site Favicon:</label>
+    <input type="file" id="siteLogo" accept="image/*" />
+    <button id="saveSettings">Save Title & Favicon</button>
+
+    <hr>
+
+    <label for="panicKey">Set Panic Button Key:</label>
+    <input type="text" id="panicKey" placeholder="Enter key (e.g., F1)" />
+
+    <label for="panicUrl">Set Panic Button URL:</label>
+    <input type="text" id="panicUrl" placeholder="Enter URL to redirect to" />
+    <button id="savePanicButtonSettings">Save Panic Button Settings</button>
+
+    <hr>
+
+    <button id="resetSettings" class="reset-button">Reset Tab Name and Icon</button>
+    <button id="resetPanicButtonSettings" class="reset-button">Reset Panic Button Settings</button>
+  </div>
+
   <script>
-    // Your original JS logic would go here
+    const beforeUnloadToggle = document.getElementById('beforeUnloadToggle');
+    const autocloakToggle = document.getElementById('autocloakToggle');
+    const particlesToggle = document.getElementById('particlesToggle');
+    const siteTitleInput = document.getElementById('siteTitle');
+    const siteLogoInput = document.getElementById('siteLogo');
+    const panicKeyInput = document.getElementById('panicKey');
+    const panicUrlInput = document.getElementById('panicUrl');
+    const saveSettingsButton = document.getElementById('saveSettings');
+    const savePanicButtonSettingsButton = document.getElementById('savePanicButtonSettings');
+    const resetSettingsButton = document.getElementById('resetSettings');
+    const resetPanicButtonSettingsButton = document.getElementById('resetPanicButtonSettings');
+
+    // Load saved settings
+    beforeUnloadToggle.checked = localStorage.getItem('beforeUnloadEnabled') === 'true';
+    autocloakToggle.checked = localStorage.getItem('autocloakEnabled') === 'true';
+    particlesToggle.checked = localStorage.getItem('particlesDisabled') === 'true';
+    siteTitleInput.value = localStorage.getItem('siteTitle') || '';
+    panicKeyInput.value = localStorage.getItem('panicKey') || '';
+    panicUrlInput.value = localStorage.getItem('panicUrl') || '';
+
+    // Apply saved title
+    if (siteTitleInput.value) {
+      document.title = siteTitleInput.value;
+    }
+
+    // Apply saved favicon
+    const savedLogo = localStorage.getItem('siteLogo');
+    if (savedLogo) {
+      const faviconLink = document.querySelector("link[rel='icon']") || document.createElement('link');
+      faviconLink.rel = 'icon';
+      faviconLink.href = savedLogo;
+      document.head.appendChild(faviconLink);
+    }
+
+    // Apply particle visibility
+    if (particlesToggle.checked) {
+      document.getElementById('particles-js').style.display = 'none';
+    }
+
+    // Save site title & favicon
+    saveSettingsButton.addEventListener('click', function () {
+      const siteTitle = siteTitleInput.value;
+      const siteLogoFile = siteLogoInput.files[0];
+      if (siteTitle) {
+        localStorage.setItem('siteTitle', siteTitle);
+        document.title = siteTitle;
+      }
+      if (siteLogoFile) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const logoUrl = event.target.result;
+          localStorage.setItem('siteLogo', logoUrl);
+          const oldFavicon = document.querySelector("link[rel='icon']");
+          if (oldFavicon) oldFavicon.remove();
+          const faviconLink = document.createElement('link');
+          faviconLink.rel = 'icon';
+          faviconLink.href = logoUrl;
+          document.head.appendChild(faviconLink);
+        };
+        reader.readAsDataURL(siteLogoFile);
+      }
+    });
+
+    // Save panic settings
+    savePanicButtonSettingsButton.addEventListener('click', function () {
+      if (panicKeyInput.value) localStorage.setItem('panicKey', panicKeyInput.value);
+      if (panicUrlInput.value) localStorage.setItem('panicUrl', panicUrlInput.value);
+    });
+
+    // Reset buttons
+    resetSettingsButton.addEventListener('click', function () {
+      localStorage.removeItem('siteTitle');
+      localStorage.removeItem('siteLogo');
+      document.title = 'Home';
+      const defaultFaviconLink = document.querySelector('link[rel="icon"]');
+      if (defaultFaviconLink) {
+        defaultFaviconLink.href = 'https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png';
+      }
+    });
+
+    resetPanicButtonSettingsButton.addEventListener('click', function () {
+      localStorage.removeItem('panicKey');
+      localStorage.removeItem('panicUrl');
+    });
+
+    // Anti-close feature
+    beforeUnloadToggle.addEventListener('change', function () {
+      localStorage.setItem('beforeUnloadEnabled', beforeUnloadToggle.checked);
+      window.onbeforeunload = beforeUnloadToggle.checked ? () => '' : null;
+    });
+
+    if (beforeUnloadToggle.checked) {
+      window.onbeforeunload = () => '';
+    }
+
+    // Auto about:blank cloak
+    autocloakToggle.addEventListener('change', function () {
+      localStorage.setItem('autocloakEnabled', autocloakToggle.checked);
+      if (autocloakToggle.checked) {
+        const newTab = window.open('about:blank', '_blank');
+        if (newTab) {
+          const iframe = document.createElement('iframe');
+          iframe.src = '/';
+          iframe.style.cssText = 'width:100vw;height:100vh;border:none;';
+          newTab.document.body.style.margin = '0';
+          newTab.document.body.appendChild(iframe);
+        }
+        window.location.href = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
+      }
+    });
+
+    // Panic key redirect
+    window.addEventListener('keydown', function (event) {
+      const panicKey = localStorage.getItem('panicKey');
+      const panicUrl = localStorage.getItem('panicUrl');
+      if (event.key === panicKey && panicUrl) {
+        window.location.href = panicUrl;
+      }
+    });
+
+    // Particles toggle
+    particlesToggle.addEventListener('change', function () {
+      localStorage.setItem('particlesDisabled', particlesToggle.checked);
+      document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
+    });
   </script>
+
+  <script>
+    // Background colour
+    const storedColor = localStorage.getItem('backgroundColor') || '#000000';
+    document.body.style.backgroundColor = storedColor;
+    const colorPicker = document.getElementById('backgroundColorPicker');
+    colorPicker.value = storedColor;
+    colorPicker.addEventListener('input', function () {
+      document.body.style.backgroundColor = colorPicker.value;
+      localStorage.setItem('backgroundColor', colorPicker.value);
+    });
+  </script>
+
+  <script type="text/javascript" src="/storage/js/background.js"></script>
+  <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
 </body>
 </html>
