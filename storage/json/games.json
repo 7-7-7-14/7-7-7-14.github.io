@@ -186,7 +186,7 @@
     "title": "Dino Bros"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/google-baseball/",
+    "url": "/pages/games-frame?url=/pages/games/doodle-baseball/",
     "img": "/pages/images/googlebaseball.jpg",
     "alt": "Doodle Baseball",
     "title": "Doodle Baseball"
@@ -210,7 +210,7 @@
     "title": "Doodle Jump"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/google-snake/",
+    "url": "/pages/games-frame?url=/pages/games/doodle-snake/",
     "img": "/pages/games/google-snake/google-snake.png",
     "alt": "Doodle Snake",
     "title": "Doodle Snake"
@@ -298,6 +298,12 @@
     "img": "/pages/images/shootout.jpg",
     "alt": "Getaway Shootout",
     "title": "Getaway Shootout"
+  },
+  {
+    "url": "/pages/games-frame?url=/pages/games/jetpack-joyride/",
+    "img": "/pages/images/jetpack.png",
+    "alt": "Jetpack Joyride",
+    "title": "Jetpack Joyride"
   },
   {
     "url": "/static/embed?p=https://infinite-craft.org/",
