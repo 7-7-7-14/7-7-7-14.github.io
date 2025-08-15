@@ -5,6 +5,7 @@ const phrases = [
     `{hostname} certified banger 💯`,
     `im in your walls`,
     `hi gng`,
+    `gng follow my tt tiktok.com/@joel.has.gyatt`,
     `iframe 0 nexus 1 👌`,
     { type: "image", width: '40%', src: `/storage/images/splash1.jpeg` },
     { type: "image", width: '45%', src: `/storage/images/splash2.png` },
