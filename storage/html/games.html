@@ -164,37 +164,32 @@ const gameGrid = document.getElementById('gameGrid');
 
 async function loadGames() {
   try {
-    // Try to get cached games from localStorage
     let games = JSON.parse(localStorage.getItem('gamesCache'));
 
     if (!games) {
-      // If no cache, fetch games.json
       const response = await fetch('./json/games.json');
       if (!response.ok) throw new Error('Failed to load games.json');
       games = await response.json();
-
-      // Save to localStorage for caching
       localStorage.setItem('gamesCache', JSON.stringify(games));
     }
 
-    // Sort games alphabetically
-    games.sort((a, b) => a.name.localeCompare(b.name));
+    // Sort alphabetically by title
+    games.sort((a, b) => a.title.localeCompare(b.title));
 
     function displayGames(filter = '') {
       gameGrid.innerHTML = '';
       const filteredGames = games.filter(game =>
-        game.name.toLowerCase().includes(filter.toLowerCase()) ||
-        game.folder.toLowerCase().includes(filter.toLowerCase())
+        game.title.toLowerCase().includes(filter.toLowerCase())
       );
 
       filteredGames.forEach(game => {
         const tile = document.createElement('a');
-        tile.href = `${game.folder}/index.html`;
+        tile.href = game.url;
         tile.className = 'game-link';
         tile.innerHTML = `
           <div class="game-tile">
-            <img src="./${game.icon}" alt="${game.name}">
-            <div class="tooltip">${game.name}</div>
+            <img src="${game.img}" alt="${game.alt}">
+            <div class="tooltip">${game.title}</div>
           </div>
         `;
         gameGrid.appendChild(tile);
@@ -214,6 +209,7 @@ async function loadGames() {
 }
 
 loadGames();
+
 </script>
 
 </body>
