@@ -8,7 +8,7 @@ const phrases = [
     `gng follow my tt tiktok.com/@joel.has.gyatt`,
     `iframe 0 nexus 1 👌`,
     { type: "image", width: '40%', src: `/storage/images/splash1.jpeg` },
-    { type: "image", width: '45%', src: `/storage/images/splash2.png` },
+    { type: "image", width: '60%', src: `/storage/images/splash2.gif` },
     { type: "image", width: '35%', src: `/storage/images/splash3.png` },
     { type: "image", width: '40%', src: `/storage/images/splash4.gif` },
     { type: "image", width: '99%', src: `/storage/images/splash5.gif` },
