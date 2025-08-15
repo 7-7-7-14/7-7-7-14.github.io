@@ -160,33 +160,50 @@
       "retina_detect": true
     });
 
-    const gameGrid = document.getElementById('gameGrid');
+  const gameGrid = document.getElementById('gameGrid');
 
-    function displayGames(filter = '') {
-      gameGrid.innerHTML = '';
-      const filteredGames = games.filter(game =>
-        game.name.toLowerCase().includes(filter.toLowerCase()) ||
-        game.folder.toLowerCase().includes(filter.toLowerCase())
-      );
-      filteredGames.forEach(game => {
-        const tile = document.createElement('a');
-        tile.href = `${game.folder}/index.html`;
-        tile.className = 'game-link';
-        tile.innerHTML = ` 
-          <div class="game-tile">
-            <img src="https://myrepo-tq8k.vercel.app/${game.icon}" alt="${game.name}">
-            <div class="tooltip">${game.name}</div>
-          </div>
-        `;
-        gameGrid.appendChild(tile);
+  async function loadGames() {
+    try {
+      const response = await fetch('./json/games.json');
+      if (!response.ok) throw new Error('Failed to load games.json');
+      const games = await response.json();
+
+      // Sort games alphabetically by name
+      games.sort((a, b) => a.name.localeCompare(b.name));
+
+      // Display games
+      function displayGames(filter = '') {
+        gameGrid.innerHTML = '';
+        const filteredGames = games.filter(game =>
+          game.name.toLowerCase().includes(filter.toLowerCase()) ||
+          game.folder.toLowerCase().includes(filter.toLowerCase())
+        );
+        filteredGames.forEach(game => {
+          const tile = document.createElement('a');
+          tile.href = `${game.folder}/index.html`;
+          tile.className = 'game-link';
+          tile.innerHTML = `
+            <div class="game-tile">
+              <img src="https://myrepo-tq8k.vercel.app/${game.icon}" alt="${game.name}">
+              <div class="tooltip">${game.name}</div>
+            </div>
+          `;
+          gameGrid.appendChild(tile);
+        });
+      }
+
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        displayGames(e.target.value);
       });
+
+      displayGames();
+    } catch (error) {
+      console.error(error);
+      gameGrid.innerHTML = '<p style="color:red;">Failed to load games.</p>';
     }
+  }
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      displayGames(e.target.value);
-    });
-
-    displayGames();
-  </script>
+  loadGames();
+</script>
 </body>
 </html>
