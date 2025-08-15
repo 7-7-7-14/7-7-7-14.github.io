@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta property="og:title" content="US4 | Settings">
+  <meta property="og:title" content="Nexus | Settings">
   <meta property="og:description" content="Edit your website settings here!">
   <meta property="og:image" content="/storage/images/logo.png">
   <meta charset="UTF-8">
@@ -62,145 +62,136 @@
     <button id="resetPanicButtonSettings" class="reset-button">Reset Panic Button Settings</button>
   </div>
 
-  <script>
-    const beforeUnloadToggle = document.getElementById('beforeUnloadToggle');
-    const autocloakToggle = document.getElementById('autocloakToggle');
-    const particlesToggle = document.getElementById('particlesToggle');
-    const siteTitleInput = document.getElementById('siteTitle');
-    const siteLogoInput = document.getElementById('siteLogo');
-    const panicKeyInput = document.getElementById('panicKey');
-    const panicUrlInput = document.getElementById('panicUrl');
-    const saveSettingsButton = document.getElementById('saveSettings');
-    const savePanicButtonSettingsButton = document.getElementById('savePanicButtonSettings');
-    const resetSettingsButton = document.getElementById('resetSettings');
-    const resetPanicButtonSettingsButton = document.getElementById('resetPanicButtonSettings');
+<script>
+const beforeUnloadToggle = document.getElementById('beforeUnloadToggle');
+const autocloakToggle = document.getElementById('autocloakToggle');
+const particlesToggle = document.getElementById('particlesToggle');
+const siteTitleInput = document.getElementById('siteTitle');
+const siteLogoInput = document.getElementById('siteLogo');
+const panicKeyInput = document.getElementById('panicKey');
+const panicUrlInput = document.getElementById('panicUrl');
+const saveSettingsButton = document.getElementById('saveSettings');
+const savePanicButtonSettingsButton = document.getElementById('savePanicButtonSettings');
+const resetSettingsButton = document.getElementById('resetSettings');
+const resetPanicButtonSettingsButton = document.getElementById('resetPanicButtonSettings');
+const colorPicker = document.getElementById('backgroundColorPicker');
 
-    // Load saved settings
-    beforeUnloadToggle.checked = localStorage.getItem('beforeUnloadEnabled') === 'true';
-    autocloakToggle.checked = localStorage.getItem('autocloakEnabled') === 'true';
-    particlesToggle.checked = localStorage.getItem('particlesDisabled') === 'true';
-    siteTitleInput.value = localStorage.getItem('siteTitle') || '';
-    panicKeyInput.value = localStorage.getItem('panicKey') || '';
-    panicUrlInput.value = localStorage.getItem('panicUrl') || '';
+// Load saved settings
+beforeUnloadToggle.checked = localStorage.getItem('beforeUnloadEnabled') === 'true';
+autocloakToggle.checked = localStorage.getItem('autocloakEnabled') === 'true';
+particlesToggle.checked = localStorage.getItem('particlesDisabled') === 'true';
+siteTitleInput.value = localStorage.getItem('siteTitle') || '';
+panicKeyInput.value = localStorage.getItem('panicKey') || '';
+panicUrlInput.value = localStorage.getItem('panicUrl') || '';
+colorPicker.value = localStorage.getItem('backgroundColor') || '#000000';
+document.body.style.backgroundColor = colorPicker.value;
 
-    // Apply saved title
-    if (siteTitleInput.value) {
-      document.title = siteTitleInput.value;
-    }
+// Apply saved title
+if (siteTitleInput.value) document.title = siteTitleInput.value;
 
-    // Apply saved favicon
-    const savedLogo = localStorage.getItem('siteLogo');
-    if (savedLogo) {
-      const faviconLink = document.querySelector("link[rel='icon']") || document.createElement('link');
-      faviconLink.rel = 'icon';
-      faviconLink.href = savedLogo;
-      document.head.appendChild(faviconLink);
-    }
+// Apply saved favicon
+const savedLogo = localStorage.getItem('siteLogo');
+if (savedLogo) {
+    const faviconLink = document.querySelector("link[rel='icon']") || document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = savedLogo;
+    document.head.appendChild(faviconLink);
+}
 
-    // Apply particle visibility
-    if (particlesToggle.checked) {
-      document.getElementById('particles-js').style.display = 'none';
-    }
+// Apply particle visibility
+document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
 
-    // Save site title & favicon
-    saveSettingsButton.addEventListener('click', function () {
-      const siteTitle = siteTitleInput.value;
-      const siteLogoFile = siteLogoInput.files[0];
-      if (siteTitle) {
+// Save site title & favicon instantly
+saveSettingsButton.addEventListener('click', function () {
+    const siteTitle = siteTitleInput.value;
+    const siteLogoFile = siteLogoInput.files[0];
+    if (siteTitle) {
         localStorage.setItem('siteTitle', siteTitle);
-        document.title = siteTitle;
-      }
-      if (siteLogoFile) {
+        document.title = siteTitle; // instant change
+    }
+    if (siteLogoFile) {
         const reader = new FileReader();
         reader.onload = function (event) {
-          const logoUrl = event.target.result;
-          localStorage.setItem('siteLogo', logoUrl);
-          const oldFavicon = document.querySelector("link[rel='icon']");
-          if (oldFavicon) oldFavicon.remove();
-          const faviconLink = document.createElement('link');
-          faviconLink.rel = 'icon';
-          faviconLink.href = logoUrl;
-          document.head.appendChild(faviconLink);
+            const logoUrl = event.target.result;
+            localStorage.setItem('siteLogo', logoUrl);
+            let faviconLink = document.querySelector("link[rel='icon']");
+            if (!faviconLink) {
+                faviconLink = document.createElement('link');
+                faviconLink.rel = 'icon';
+                document.head.appendChild(faviconLink);
+            }
+            faviconLink.href = logoUrl; // instant change
         };
         reader.readAsDataURL(siteLogoFile);
-      }
-    });
-
-    // Save panic settings
-    savePanicButtonSettingsButton.addEventListener('click', function () {
-      if (panicKeyInput.value) localStorage.setItem('panicKey', panicKeyInput.value);
-      if (panicUrlInput.value) localStorage.setItem('panicUrl', panicUrlInput.value);
-    });
-
-    // Reset buttons
-    resetSettingsButton.addEventListener('click', function () {
-      localStorage.removeItem('siteTitle');
-      localStorage.removeItem('siteLogo');
-      document.title = 'Home';
-      const defaultFaviconLink = document.querySelector('link[rel="icon"]');
-      if (defaultFaviconLink) {
-        defaultFaviconLink.href = 'https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png';
-      }
-    });
-
-    resetPanicButtonSettingsButton.addEventListener('click', function () {
-      localStorage.removeItem('panicKey');
-      localStorage.removeItem('panicUrl');
-    });
-
-    // Anti-close feature
-    beforeUnloadToggle.addEventListener('change', function () {
-      localStorage.setItem('beforeUnloadEnabled', beforeUnloadToggle.checked);
-      window.onbeforeunload = beforeUnloadToggle.checked ? () => '' : null;
-    });
-
-    if (beforeUnloadToggle.checked) {
-      window.onbeforeunload = () => '';
     }
+});
 
-    // Auto about:blank cloak
-    autocloakToggle.addEventListener('change', function () {
-      localStorage.setItem('autocloakEnabled', autocloakToggle.checked);
-      if (autocloakToggle.checked) {
+// Save panic settings instantly
+savePanicButtonSettingsButton.addEventListener('click', function () {
+    if (panicKeyInput.value) localStorage.setItem('panicKey', panicKeyInput.value);
+    if (panicUrlInput.value) localStorage.setItem('panicUrl', panicUrlInput.value);
+});
+
+// Reset buttons
+resetSettingsButton.addEventListener('click', function () {
+    localStorage.removeItem('siteTitle');
+    localStorage.removeItem('siteLogo');
+    document.title = 'Home';
+    const defaultFaviconLink = document.querySelector('link[rel="icon"]');
+    if (defaultFaviconLink) {
+        defaultFaviconLink.href = 'https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png';
+    }
+});
+
+resetPanicButtonSettingsButton.addEventListener('click', function () {
+    localStorage.removeItem('panicKey');
+    localStorage.removeItem('panicUrl');
+});
+
+// Anti-close feature instantly
+beforeUnloadToggle.addEventListener('change', function () {
+    localStorage.setItem('beforeUnloadEnabled', beforeUnloadToggle.checked);
+    window.onbeforeunload = beforeUnloadToggle.checked ? () => '' : null;
+});
+if (beforeUnloadToggle.checked) window.onbeforeunload = () => '';
+
+// Auto about:blank cloak
+autocloakToggle.addEventListener('change', function () {
+    localStorage.setItem('autocloakEnabled', autocloakToggle.checked);
+    if (autocloakToggle.checked) {
         const newTab = window.open('about:blank', '_blank');
         if (newTab) {
-          const iframe = document.createElement('iframe');
-          iframe.src = '/';
-          iframe.style.cssText = 'width:100vw;height:100vh;border:none;';
-          newTab.document.body.style.margin = '0';
-          newTab.document.body.appendChild(iframe);
+            const iframe = document.createElement('iframe');
+            iframe.src = '/';
+            iframe.style.cssText = 'width:100vw;height:100vh;border:none;';
+            newTab.document.body.style.margin = '0';
+            newTab.document.body.appendChild(iframe);
         }
         window.location.href = localStorage.getItem('panicUrl') || 'https://classroom.google.com';
-      }
-    });
+    }
+});
 
-    // Panic key redirect
-    window.addEventListener('keydown', function (event) {
-      const panicKey = localStorage.getItem('panicKey');
-      const panicUrl = localStorage.getItem('panicUrl');
-      if (event.key === panicKey && panicUrl) {
+// Panic key redirect
+window.addEventListener('keydown', function (event) {
+    const panicKey = localStorage.getItem('panicKey');
+    const panicUrl = localStorage.getItem('panicUrl');
+    if (event.key === panicKey && panicUrl) {
         window.location.href = panicUrl;
-      }
-    });
+    }
+});
 
-    // Particles toggle
-    particlesToggle.addEventListener('change', function () {
-      localStorage.setItem('particlesDisabled', particlesToggle.checked);
-      document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
-    });
-  </script>
+// Particles toggle instantly
+particlesToggle.addEventListener('change', function () {
+    localStorage.setItem('particlesDisabled', particlesToggle.checked);
+    document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
+});
 
-  <script>
-    // Background colour
-    const storedColor = localStorage.getItem('backgroundColor') || '#000000';
-    document.body.style.backgroundColor = storedColor;
-    const colorPicker = document.getElementById('backgroundColorPicker');
-    colorPicker.value = storedColor;
-    colorPicker.addEventListener('input', function () {
-      document.body.style.backgroundColor = colorPicker.value;
-      localStorage.setItem('backgroundColor', colorPicker.value);
-    });
-  </script>
+// Background colour instantly
+colorPicker.addEventListener('input', function () {
+    document.body.style.backgroundColor = colorPicker.value;
+    localStorage.setItem('backgroundColor', colorPicker.value);
+});
+</script>
 
   <script type="text/javascript" src="/storage/js/background.js"></script>
   <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
