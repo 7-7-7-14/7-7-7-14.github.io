@@ -61,7 +61,7 @@
     <button id="resetSettings" class="reset-button">Reset Tab Name and Icon</button>
     <button id="resetPanicButtonSettings" class="reset-button">Reset Panic Button Settings</button>
   </div>
-
+  
 <script>
 const beforeUnloadToggle = document.getElementById('beforeUnloadToggle');
 const autocloakToggle = document.getElementById('autocloakToggle');
@@ -76,87 +76,93 @@ const resetSettingsButton = document.getElementById('resetSettings');
 const resetPanicButtonSettingsButton = document.getElementById('resetPanicButtonSettings');
 const colorPicker = document.getElementById('backgroundColorPicker');
 
-// Load saved settings
-beforeUnloadToggle.checked = localStorage.getItem('beforeUnloadEnabled') === 'true';
-autocloakToggle.checked = localStorage.getItem('autocloakEnabled') === 'true';
-particlesToggle.checked = localStorage.getItem('particlesDisabled') === 'true';
-siteTitleInput.value = localStorage.getItem('siteTitle') || '';
-panicKeyInput.value = localStorage.getItem('panicKey') || '';
-panicUrlInput.value = localStorage.getItem('panicUrl') || '';
-colorPicker.value = localStorage.getItem('backgroundColor') || '#000000';
-document.body.style.backgroundColor = colorPicker.value;
+// ===== LOAD SETTINGS =====
+function applySettings() {
+    // Background
+    const bg = localStorage.getItem('backgroundColor') || '#000000';
+    document.body.style.backgroundColor = bg;
+    colorPicker.value = bg;
 
-// Apply saved title
-if (siteTitleInput.value) document.title = siteTitleInput.value;
+    // Title
+    const savedTitle = localStorage.getItem('siteTitle');
+    if (savedTitle) document.title = savedTitle;
 
-// Apply saved favicon
-const savedLogo = localStorage.getItem('siteLogo');
-if (savedLogo) {
-    const faviconLink = document.querySelector("link[rel='icon']") || document.createElement('link');
-    faviconLink.rel = 'icon';
-    faviconLink.href = savedLogo;
-    document.head.appendChild(faviconLink);
+    // Favicon
+    const savedLogo = localStorage.getItem('siteLogo');
+    if (savedLogo) {
+        let favicon = document.querySelector("link[rel='icon']");
+        if (!favicon) {
+            favicon = document.createElement('link');
+            favicon.rel = 'icon';
+            document.head.appendChild(favicon);
+        }
+        favicon.href = savedLogo;
+    }
+
+    // Toggles
+    beforeUnloadToggle.checked = localStorage.getItem('beforeUnloadEnabled') === 'true';
+    autocloakToggle.checked = localStorage.getItem('autocloakEnabled') === 'true';
+    particlesToggle.checked = localStorage.getItem('particlesDisabled') === 'true';
+
+    // Panic button
+    panicKeyInput.value = localStorage.getItem('panicKey') || '';
+    panicUrlInput.value = localStorage.getItem('panicUrl') || '';
+
+    // Particles display
+    document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
+
+    // Anti-close
+    window.onbeforeunload = beforeUnloadToggle.checked ? () => '' : null;
 }
+applySettings();
 
-// Apply particle visibility
-document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
+// ===== INSTANT CHANGES =====
 
-// Save site title & favicon instantly
-saveSettingsButton.addEventListener('click', function () {
-    const siteTitle = siteTitleInput.value;
-    const siteLogoFile = siteLogoInput.files[0];
-    if (siteTitle) {
-        localStorage.setItem('siteTitle', siteTitle);
-        document.title = siteTitle; // instant change
-    }
-    if (siteLogoFile) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            const logoUrl = event.target.result;
-            localStorage.setItem('siteLogo', logoUrl);
-            let faviconLink = document.querySelector("link[rel='icon']");
-            if (!faviconLink) {
-                faviconLink = document.createElement('link');
-                faviconLink.rel = 'icon';
-                document.head.appendChild(faviconLink);
-            }
-            faviconLink.href = logoUrl; // instant change
-        };
-        reader.readAsDataURL(siteLogoFile);
-    }
+// Background colour
+colorPicker.addEventListener('input', () => {
+    document.body.style.backgroundColor = colorPicker.value;
+    localStorage.setItem('backgroundColor', colorPicker.value);
 });
 
-// Save panic settings instantly
-savePanicButtonSettingsButton.addEventListener('click', function () {
-    if (panicKeyInput.value) localStorage.setItem('panicKey', panicKeyInput.value);
-    if (panicUrlInput.value) localStorage.setItem('panicUrl', panicUrlInput.value);
+// Title
+siteTitleInput.addEventListener('input', () => {
+    localStorage.setItem('siteTitle', siteTitleInput.value);
+    document.title = siteTitleInput.value;
 });
 
-// Reset buttons
-resetSettingsButton.addEventListener('click', function () {
-    localStorage.removeItem('siteTitle');
-    localStorage.removeItem('siteLogo');
-    document.title = 'Home';
-    const defaultFaviconLink = document.querySelector('link[rel="icon"]');
-    if (defaultFaviconLink) {
-        defaultFaviconLink.href = 'https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png';
-    }
+// Favicon
+siteLogoInput.addEventListener('change', () => {
+    const file = siteLogoInput.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        const logoUrl = e.target.result;
+        localStorage.setItem('siteLogo', logoUrl);
+        let favicon = document.querySelector("link[rel='icon']");
+        if (!favicon) {
+            favicon = document.createElement('link');
+            favicon.rel = 'icon';
+            document.head.appendChild(favicon);
+        }
+        favicon.href = logoUrl;
+    };
+    reader.readAsDataURL(file);
 });
 
-resetPanicButtonSettingsButton.addEventListener('click', function () {
-    localStorage.removeItem('panicKey');
-    localStorage.removeItem('panicUrl');
+// Particles toggle
+particlesToggle.addEventListener('change', () => {
+    localStorage.setItem('particlesDisabled', particlesToggle.checked);
+    document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
 });
 
-// Anti-close feature instantly
-beforeUnloadToggle.addEventListener('change', function () {
+// Anti-close toggle
+beforeUnloadToggle.addEventListener('change', () => {
     localStorage.setItem('beforeUnloadEnabled', beforeUnloadToggle.checked);
     window.onbeforeunload = beforeUnloadToggle.checked ? () => '' : null;
 });
-if (beforeUnloadToggle.checked) window.onbeforeunload = () => '';
 
-// Auto about:blank cloak
-autocloakToggle.addEventListener('change', function () {
+// Auto cloak
+autocloakToggle.addEventListener('change', () => {
     localStorage.setItem('autocloakEnabled', autocloakToggle.checked);
     if (autocloakToggle.checked) {
         const newTab = window.open('about:blank', '_blank');
@@ -171,27 +177,38 @@ autocloakToggle.addEventListener('change', function () {
     }
 });
 
-// Panic key redirect
-window.addEventListener('keydown', function (event) {
+// Panic settings
+panicKeyInput.addEventListener('input', () => {
+    localStorage.setItem('panicKey', panicKeyInput.value);
+});
+panicUrlInput.addEventListener('input', () => {
+    localStorage.setItem('panicUrl', panicUrlInput.value);
+});
+
+// Panic key trigger
+window.addEventListener('keydown', e => {
     const panicKey = localStorage.getItem('panicKey');
     const panicUrl = localStorage.getItem('panicUrl');
-    if (event.key === panicKey && panicUrl) {
+    if (e.key === panicKey && panicUrl) {
         window.location.href = panicUrl;
     }
 });
 
-// Particles toggle instantly
-particlesToggle.addEventListener('change', function () {
-    localStorage.setItem('particlesDisabled', particlesToggle.checked);
-    document.getElementById('particles-js').style.display = particlesToggle.checked ? 'none' : '';
+// Reset buttons
+resetSettingsButton.addEventListener('click', () => {
+    localStorage.removeItem('siteTitle');
+    localStorage.removeItem('siteLogo');
+    document.title = 'Home';
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (favicon) favicon.href = 'https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png';
 });
 
-// Background colour instantly
-colorPicker.addEventListener('input', function () {
-    document.body.style.backgroundColor = colorPicker.value;
-    localStorage.setItem('backgroundColor', colorPicker.value);
+resetPanicButtonSettingsButton.addEventListener('click', () => {
+    localStorage.removeItem('panicKey');
+    localStorage.removeItem('panicUrl');
 });
 </script>
+
 
   <script type="text/javascript" src="/storage/js/background.js"></script>
   <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
