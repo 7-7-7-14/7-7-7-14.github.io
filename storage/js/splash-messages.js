@@ -14,6 +14,7 @@ const phrases = [
     { type: "image", width: '99%', src: `/storage/images/splash5.gif` },
     `i accidentally muted the teacher`,
     `who remembers when i had like 4 games 😭`,
+    `window._mssdk.cacheOpts[aid] has not bee initialized yet!!!!`,
     `my homework ate my dog`,
     `late to class again`,
     `now with MORE html`,
