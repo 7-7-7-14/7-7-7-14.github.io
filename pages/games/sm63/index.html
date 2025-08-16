@@ -1,64 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home</title>
-  <link rel="icon" href="https://ssl.gstatic.com/classroom/ic_product_classroom_96.png" />
-  <script src="/ruffle-nightly/ruffle.js"></script>
-
-  <style>
-    html, body {
-      margin: 0; padding: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgb(30, 30, 30);
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .game-wrapper {
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .game-inner {
-      aspect-ratio: 16 / 9;  /* Change ratio here */
-      width: 100vw;
-      height: auto;
-      max-height: 100vh;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .game-inner embed {
-      width: 100%;
-      height: 100%;
-      display: block;
-      margin: 0;
-      padding: 0;
-      border: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="game-wrapper">
-    <div class="game-inner">
-      <embed 
-        src="supermario63.swf" 
-        type="application/x-shockwave-flash"
-        scale="showall"
-      ></embed>
-    </div>
-  </div>
-</body>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learn to fly | Jeo</title>
+    <link rel="icon" type="image/x-icon" href="learntofly.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="learntofly.png" />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center; /* horizontal centering */
+        align-items: center;     /* vertical centering */
+        overflow: hidden;        /* remove scrollbars */
+        background: #000;        /* optional background */
+      }
+      #player {
+        width: 100vw;   /* full viewport width */
+        height: 100vh;  /* full viewport height */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ruffle"></div>
+    <script src="/ruffle-nightly/ruffle.js"></script>
+    <script>
+      window.RufflePlayer = window.RufflePlayer || {};
+      window.addEventListener("load", () => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        player.id = "player";
+        document.getElementById("ruffle").appendChild(player);
+        player.load("supermario63.swf");
+      });
+    </script>
+  </body>
 </html>
