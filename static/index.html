@@ -4,27 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Tab</title>
+
     <link rel="stylesheet" href="../storage/css/evenmorestyles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="../storage/css/static.css" />
+
+    <style>
+      .ad-top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        background-color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        margin-top: 90px;
+      }
+    </style>
   </head>
-  <body> 
+
+  <body>
+    <!-- Top Banner -->
+    <div class="ad-top">
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2041198418344250"
+        crossorigin="anonymous"
+      ></script>
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-2041198418344250"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <div id="particles-js"></div>
+
     <script src="/particles.js"></script>
     <script src="/storage/js/app.js"></script>
-    <div id="particles-js"></div>
     <script src="/storage/js/particles-toggle.js" defer></script>
 
     <h1>NEXUS</h1>
     <p id="dynamicParagraph">(TEXT)</p>
+
     <div id="search-container">
       <form id="uv-form">
         <input
           id="uv-search-engine"
-          value="https://duckduckgo.com/?q=%s&kp=1&ia=web"
           type="hidden"
+          value="https://duckduckgo.com/?q=%s&kp=1&ia=web"
         />
         <input
           id="uv-address"
@@ -33,7 +75,7 @@
           class="search-bar-home"
           placeholder="search (－ _ －) zzZ"
         />
-        <button id="search-button" onclick="search()">
+        <button id="search-button" type="submit">
           SEARCH <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
@@ -46,14 +88,12 @@
     <script src="/static/uv/uv.bundle.js" defer></script>
     <script src="/static/uv/uv.config.js" defer></script>
     <script src="/static/register-sw.js" defer></script>
-    <script type="text/javascript" src="/storage/js/background.js"></script>
+    <script src="/storage/js/background.js"></script>
     <script src="/storage/js/splash-messages.js"></script>
-    
+
     <script>
-      document.getElementById("uv-form").addEventListener("submit", function (
-        event
-      ) {
-        event.preventDefault();
+      document.getElementById("uv-form").addEventListener("submit", function (e) {
+        e.preventDefault();
         search();
       });
 
@@ -61,27 +101,27 @@
         const inputRaw = document.getElementById("uv-address").value.trim();
         if (!inputRaw) return;
 
-       const blockedTerms = new Set([
-         "adult", "adultfriendfinder", "adultfriendfinder.com", "amateurporn", "boobs",
-         "breast", "p0rn", "br3ast", "camgirl", "camsoda", "camsoda.com", "chaturbate",
-         "chaturbate.com", "cum", "erotic", "escortservice", "fuck", "gangbang",
-         "gambling", "gambling.com", "hentai", "hentaimovie", "hardcore", "jizz",
-         "marijuana", "meth", "milf", "nudity", "onlyfans", "onlyfans.com", "ome",
-         "ome.tv", "porn", "pussy", "redtube", "boob", "sex",
-         "sex.com", "sexshop", "sexworker", "slut", "stripchat", "tits", "tube8",
-         "tube8.com", "webcam", "weed", "williamhill.com", "xhamster", "xhamster.com",
-         "xnx", "xvideo", "xxx", "xxxvideo", "youjizz",
-         "bet365.com", "bongacams", "bongacams.com", "block-access", "pokerstars.com"
-       ]);
+        const blockedTerms = new Set([
+          "adult", "adultfriendfinder", "adultfriendfinder.com", "amateurporn", "boobs",
+          "breast", "p0rn", "br3ast", "camgirl", "camsoda", "camsoda.com", "chaturbate",
+          "chaturbate.com", "cum", "erotic", "escortservice", "fuck", "gangbang",
+          "gambling", "gambling.com", "hentai", "hentaimovie", "hardcore", "jizz",
+          "marijuana", "meth", "milf", "nudity", "onlyfans", "onlyfans.com", "ome",
+          "ome.tv", "porn", "pussy", "redtube", "boob", "sex",
+          "sex.com", "sexshop", "sexworker", "slut", "stripchat", "tits", "tube8",
+          "tube8.com", "webcam", "weed", "williamhill.com", "xhamster", "xhamster.com",
+          "xnx", "xvideo", "xxx", "xxxvideo", "youjizz",
+          "bet365.com", "bongacams", "bongacams.com", "block-access", "pokerstars.com"
+        ]);
 
-       const lowerInput = inputRaw.toLowerCase();
+        const lowerInput = inputRaw.toLowerCase();
 
-       for (const word of lowerInput.split(/[^a-z0-9.]+/)) {
-         if (blockedTerms.has(word)) {
+        for (const word of lowerInput.split(/[^a-z0-9.]+/)) {
+          if (blockedTerms.has(word)) {
             window.location.href = "/pages/apps-frame?url=/pages/blocked.html";
             return;
-         }
-       }
+          }
+        }
 
         const hasProtocol = /^https?:\/\//i.test(inputRaw);
         const looksLikeURL = /\.[a-z]{2,}(\/|$)/i.test(inputRaw);
@@ -100,6 +140,7 @@
       }
     </script>
 
+    <!-- Service Worker -->
     <script>
       async function regsw() {
         await navigator.serviceWorker.register("/static/uv-sw.js", {
@@ -111,19 +152,12 @@
 
     <script>
       const code = [
-        "ArrowUp",
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowLeft",
-        "ArrowRight",
-        "b",
-        "a",
-        "Enter",
+        "ArrowUp","ArrowUp","ArrowDown","ArrowDown",
+        "ArrowLeft","ArrowRight","ArrowLeft","ArrowRight",
+        "b","a","Enter"
       ];
       let currentKeyIndex = 0;
+
       document.addEventListener("keydown", (event) => {
         if (event.key === code[currentKeyIndex]) {
           currentKeyIndex++;
