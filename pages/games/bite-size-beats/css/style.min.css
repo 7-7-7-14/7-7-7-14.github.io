@@ -34,16 +34,20 @@
 #trace p:last-child{
     border-bottom:1px solid red
 }
-body,html{
-    margin:0;
-    padding:0;
-    height:100%;
-    width:100%;
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
-    font-family:NeutraText-Book,script;
-    font-size:16px;                                                          
-    background-color:#fafafa;
-    -webkit-text-size-adjust:100%
+    font-family: NeutraText-Book, script;
+    font-size: 16px;
+    background-color: #fafafa;
+    -webkit-text-size-adjust: 100%;
+
+    display: flex;             /* use flexbox */
+    justify-content: center;   /* horizontal centering */
+    align-items: center;       /* vertical centering */
 }
 #wrapper{
     position:absolute;
