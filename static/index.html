@@ -78,7 +78,7 @@
 
        for (const word of lowerInput.split(/[^a-z0-9.]+/)) {
          if (blockedTerms.has(word)) {
-            window.location.href = "/pages/blocked.html";
+            window.location.href = "/pages/apps-frame?url=/pages/blocked";
             return;
          }
        }
