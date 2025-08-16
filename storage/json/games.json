@@ -133,7 +133,7 @@
   },
     {
     "url": "/pages/games-frame?url=/pages/games/clusterrush/",
-    "img": "/pages/images/clusterrush.png",
+    "img": "/pages/images/cluster-rush.png",
     "alt": "Cluster Rush",
     "title": "Cluster Rush"
   },
@@ -168,7 +168,7 @@
     "title": "Cut The Rope - Holiday Gift"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/cut-the-rope-ttr/",
+    "url": "/pages/games-frame?url=/pages/games/cut-time-travel/",
     "img": "/pages/images/ctr-ttr.png",
     "alt": "Cut The Rope - Time Travel",
     "title": "Cut The Rope - Time Travel"
@@ -222,13 +222,13 @@
     "title": "Drift Boss"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/drifthunters/",
+    "url": "/pages/games-frame?url=/pages/games/drift-hunters/",
     "img": "/pages/images/drifthunters.png",
     "alt": "Drift Hunters",
     "title": "Drift Hunters"
   },
   {
-    "url": "/pages/games-frame?url=/pages/games/drivemad/",
+    "url": "/pages/games-frame?url=/pages/games/drive-mad/",
     "img": "/pages/images/drivemad.png",
     "alt": "Drive Mad",
     "title": "Drive Mad"
@@ -292,6 +292,12 @@
     "img": "/pages/images/fp3.jpg",
     "alt": "Fancy Pants 3",
     "title": "Fancy Pants 3"
+  },
+  {
+    "url": "/pages/games-frame?url=/pages/games/fridaynightfunkin/",
+    "img": "/pages/images/fnf.jpg",
+    "alt": "Friday Night Funkin",
+    "title": "Friday Night Funkin"
   },
   {
     "url": "/pages/games-frame?url=/pages/games/getaway-shootout/",
@@ -520,6 +526,12 @@
     "img": "/pages/images/soccerrandom.jfif",
     "alt": "Soccer Random",
     "title": "Soccer Random"
+  },
+  {
+    "url": "/pages/games-frame?url=/pages/games/spacebarclicker/",
+    "img": "/pages/images/spacebar.png",
+    "alt": "Spacebar Clicker",
+    "title": "Spacebar Clicker"
   },
   {
     "url": "/pages/games-frame?url=/pages/games/speed-stars/",
