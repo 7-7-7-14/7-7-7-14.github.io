@@ -11,6 +11,12 @@
     "alt": "Thirty Dollar Website",
     "title": "Thirty Dollar Website"
   },
+  {
+  "url": "/pages/apps-frame?url=/pages/youtube/",
+  "img": "/pages/apps/images/youtube.png",
+  "alt": "Youtube - API",
+  "title": "Youtube - API"
+},
 {
   "url": "/static/embed?p=https://inv.nadeko.net/",
   "img": "/pages/apps/images/invid.png",
