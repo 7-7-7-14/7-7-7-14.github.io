@@ -12,6 +12,7 @@ const phrases = [
     { type: "image", width: '35%', src: `/storage/images/splash3.png` },
     { type: "image", width: '40%', src: `/storage/images/splash4.gif` },
     { type: "image", width: '99%', src: `/storage/images/splash5.gif` },
+    { type: "image", width: '99%', src: `/storage/images/splash6.png` },
     `i accidentally muted the teacher`,
     `who remembers when i had like 4 games 😭`,
     `window._mssdk.cacheOpts[aid] has not bee initialized yet!!!!`,
