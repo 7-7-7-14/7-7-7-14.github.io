@@ -11,14 +11,16 @@
         height: 100%;
         width: 100%;
         display: flex;
-        justify-content: center; /* horizontal centering */
-        align-items: center;     /* vertical centering */
-        overflow: hidden;        /* remove scrollbars */
-        background: #000;        /* optional background */
+        justify-content: center; /* center horizontally */
+        align-items: center;     /* center vertically */
+        overflow: hidden;
+        background: #000;
       }
       #player {
-        width: 100vw;   /* full viewport width */
-        height: 100vh;  /* full viewport height */
+        max-width: 100vw;   /* scale down if too wide */
+        max-height: 100vh;  /* scale down if too tall */
+        width: auto;        /* keep aspect ratio */
+        height: auto;       /* keep aspect ratio */
       }
     </style>
   </head>
