@@ -318,7 +318,7 @@ const phrases = [
     `you forgot a closing tag again`,
     `imagine using: {hostname} and your ip is: {ip} and your battery is at: {battery}`,
     `trapped in a <span>`,
-    `you’ve logged on {hostname}`,
+    `you’ve logged on: {hostname} at: {time}`,
     `your battery is at {battery}`,
     `imagine if your battery was at {battery}`,
     `100+ GAMES, why do you ask for more!`,
