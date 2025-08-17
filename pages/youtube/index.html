@@ -68,11 +68,11 @@ input[type="text"]::placeholder { color: #888; }
 <body>
 
 <div class="player-container">
-  <iframe id="youtube-frame" src="https://big-up.netlify.app" allowfullscreen></iframe>
+  <iframe id="youtube-frame" src="https://big-up.netlify.app/static/" allowfullscreen></iframe>
   <div class="video-info" id="video-desc">Currently watching: nexus 🥳</div>
 
   <div class="input-group">
-    <input type="text" id="search-input" placeholder="Enter video ID/URL or search keywords">
+    <input type="text" id="search-input" autocomplete="off" placeholder="Enter video ID/URL or search keywords">
     <button onclick="handleInput()">Go</button>
   </div>
 
@@ -138,3 +138,4 @@ document.getElementById('search-input').addEventListener('keydown', e => { if(e.
 
 </body>
 </html>
+
