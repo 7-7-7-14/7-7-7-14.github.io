@@ -16,7 +16,8 @@ html, body {
   color: #fff;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* prevent cutoff on small screens */
+  overflow: hidden; /* start hidden, JS will toggle */
 }
 
 body::-webkit-scrollbar { width: 12px; }
@@ -24,45 +25,91 @@ body::-webkit-scrollbar-track { background: #1e1e1e; border-radius: 6px; }
 body::-webkit-scrollbar-thumb { background-color: #888; border-radius: 6px; border: 3px solid #1e1e1e; }
 
 .player-container {
-  width: 100%; max-width: 900px;
-  display: flex; flex-direction: column; gap: 15px;
-  padding: 20px; box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 iframe {
-  width: 100%; aspect-ratio: 16/9;
-  border: none; border-radius: 12px; background: #000;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 12px;
+  background: #000;
 }
 
 .video-info {
-  font-size: 1.2rem; font-weight: 600;
-  padding: 10px 15px; background: #1e1e1e; border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 10px 15px;
+  background: #1e1e1e;
+  border-radius: 8px;
   text-align: center;
+  word-wrap: break-word;
 }
 
 button {
-  padding: 10px 20px; border-radius: 8px;
-  border: none; background: #ff3b3f; color: #fff;
-  font-weight: 600; cursor: pointer; transition: 0.2s;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #ff3b3f;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
 }
 button:hover { background: #ff6166; }
 
-.input-group { display: flex; gap: 10px; margin-top: 10px; }
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap; /* allows wrapping on small screens */
+}
 input[type="text"] {
-  flex: 1; padding: 10px 15px;
-  border-radius: 8px; border: 1px solid #333;
-  background: #1e1e1e; color: #fff; font-size: 1rem;
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 1rem;
+  min-width: 0; /* prevents overflow */
 }
 input[type="text"]::placeholder { color: #888; }
 
 .video-result {
-  display: flex; gap: 10px; align-items: center;
-  padding: 10px; background: #1e1e1e; border-radius: 8px;
-  cursor: pointer; transition: 0.2s;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
   margin-top: 8px;
 }
 .video-result:hover { background: #2a2a2a; }
 .video-result img { width: 120px; border-radius: 6px; }
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .video-info {
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+  button {
+    flex: 1;
+    padding: 10px;
+  }
+  .video-result img {
+    width: 90px;
+  }
+}
 </style>
 </head>
 <body>
@@ -113,6 +160,7 @@ async function handleInput() {
   if(videoID) {
     loadVideo(videoID);
     document.getElementById('search-results').innerHTML = '';
+    document.body.style.overflow = "hidden"; // hide scrollbar again
     return;
   }
 
@@ -121,6 +169,10 @@ async function handleInput() {
   const data = await res.json();
   const resultsDiv = document.getElementById('search-results');
   resultsDiv.innerHTML = '';
+  
+  // show scrollbars if results exist
+  if(data.items.length > 0) document.body.style.overflow = "auto";
+
   data.items.forEach(item => {
     const vid = item.id.videoId;
     const title = item.snippet.title;
@@ -128,7 +180,11 @@ async function handleInput() {
     const div = document.createElement('div');
     div.className = 'video-result';
     div.innerHTML = `<img src="${thumb}" alt="${title}"><span>${title}</span>`;
-    div.onclick = () => { loadVideo(vid); resultsDiv.innerHTML = ''; };
+    div.onclick = () => { 
+      loadVideo(vid); 
+      resultsDiv.innerHTML = ''; 
+      document.body.style.overflow = "hidden"; 
+    };
     resultsDiv.appendChild(div);
   });
 }
@@ -138,4 +194,3 @@ document.getElementById('search-input').addEventListener('keydown', e => { if(e.
 
 </body>
 </html>
-
