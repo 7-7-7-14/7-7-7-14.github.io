@@ -147,9 +147,9 @@ async function fetchVideoTitle(videoID) {
 
 async function loadVideo(videoID) {
   document.getElementById('youtube-frame').src = `https://www.youtube-nocookie.com/embed/${videoID}`;
-  document.getElementById('video-desc').innerText = `Currently watching: Loading...`;
+  document.getElementById('video-desc').innerText = `currently watching: loading...`;
   const title = await fetchVideoTitle(videoID);
-  document.getElementById('video-desc').innerText = `Currently watching: ${title}`;
+  document.getElementById('video-desc').innerText = `currently watching: ${title}`;
 }
 
 async function handleInput() {
@@ -194,3 +194,4 @@ document.getElementById('search-input').addEventListener('keydown', e => { if(e.
 
 </body>
 </html>
+
