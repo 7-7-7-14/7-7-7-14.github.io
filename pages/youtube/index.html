@@ -116,7 +116,7 @@ input[type="text"]::placeholder { color: #888; }
 
 <div class="player-container">
   <iframe id="youtube-frame" src="https://big-up.netlify.app/pages/youtube/html.html" allowfullscreen></iframe>
-  <div class="video-info" id="video-desc">currently watching: nexus 🥳</div>
+  <div class="video-info" id="video-desc">Currently watching: nexus 🥳</div>
 
   <div class="input-group">
     <input type="text" id="search-input" autocomplete="off" placeholder="Enter video ID/URL or search keywords">
@@ -147,9 +147,9 @@ async function fetchVideoTitle(videoID) {
 
 async function loadVideo(videoID) {
   document.getElementById('youtube-frame').src = `https://www.youtube-nocookie.com/embed/${videoID}`;
-  document.getElementById('video-desc').innerText = `currently watching: loading...`;
+  document.getElementById('video-desc').innerText = `Currently watching: loading...`;
   const title = await fetchVideoTitle(videoID);
-  document.getElementById('video-desc').innerText = `currently watching: ${title}`;
+  document.getElementById('video-desc').innerText = `Currently watching: ${title}`;
 }
 
 async function handleInput() {
@@ -164,13 +164,11 @@ async function handleInput() {
     return;
   }
 
-  // Otherwise treat input as search keywords
   const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(input)}&key=${API_KEY}`);
   const data = await res.json();
   const resultsDiv = document.getElementById('search-results');
   resultsDiv.innerHTML = '';
   
-  // show scrollbars if results exist
   if(data.items.length > 0) document.body.style.overflow = "auto";
 
   data.items.forEach(item => {
@@ -194,4 +192,3 @@ document.getElementById('search-input').addEventListener('keydown', e => { if(e.
 
 </body>
 </html>
-
