@@ -600,6 +600,18 @@
     "title": "Tanuki Sunset"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/theimpossiblequiz/",
+    "img": "/pages/images/tiq.png",
+    "alt": "The Impossible Quiz",
+    "title": "The Impossible Quiz"
+  },
+  {
+    "url": "/pages/games-frame?url=/pages/games/theimpossiblequiz2/",
+    "img": "/pages/images/tiq2.png",
+    "alt": "The Impossible Quiz 2",
+    "title": "The Impossible Quiz 2"
+  },
+  {
     "url": "/static/embed?p=https://quirkylock.netlify.app/",
     "img": "/pages/images/quirky.png",
     "alt": "The Password Game",
