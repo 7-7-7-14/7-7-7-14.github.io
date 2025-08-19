@@ -7,6 +7,7 @@ const phrases = [
     `hi gng`,
     `gng follow my tt tiktok.com/@joel.has.gyatt`,
     `iframe 0 nexus 1 👌`,
+    `gng if you pay me 10p ill add smth to my site 👌`,
     { type: "image", width: '40%', src: `/storage/images/splash1.jpeg` },
     { type: "image", width: '60%', src: `/storage/images/splash2.gif` },
     { type: "image", width: '35%', src: `/storage/images/splash3.png` },
