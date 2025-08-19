@@ -1,0 +1,406 @@
+{
+	"song": {
+		"events": [
+			[
+				1200,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				10800,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				20400,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				25200,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				29587.5,
+				[
+					[
+						"duo section",
+						"bf zoom",
+						""
+					]
+				]
+			],
+			[
+				29700,
+				[
+					[
+						"duo section",
+						"together",
+						""
+					]
+				]
+			],
+			[
+				29887.5,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				30000,
+				[
+					[
+						"duo section",
+						"bf zoom",
+						""
+					]
+				]
+			],
+			[
+				34687.5,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				39600,
+				[
+					[
+						"duo section",
+						"goose zoom",
+						""
+					]
+				]
+			],
+			[
+				43687.5,
+				[
+					[
+						"duo section",
+						"together",
+						""
+					]
+				]
+			],
+			[
+				44400,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				48000,
+				[
+					[
+						"duo section",
+						"gooseb zoom",
+						""
+					]
+				]
+			],
+			[
+				49200,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				54000,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				58800,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				61200,
+				[
+					[
+						"duo section",
+						"bf zoom",
+						""
+					]
+				]
+			],
+			[
+				63600,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				64800,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				65887.5,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				66900,
+				[
+					[
+						"duo section",
+						"together",
+						""
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				73087.5,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				75600,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				77887.5,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				82800,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				85200,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				87600,
+				[
+					[
+						"duo section",
+						"gooseb",
+						""
+					]
+				]
+			],
+			[
+				88087.5,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				88500,
+				[
+					[
+						"duo section",
+						"together",
+						""
+					]
+				]
+			],
+			[
+				92400,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				97200,
+				[
+					[
+						"duo section",
+						"bfzoom",
+						""
+					]
+				]
+			],
+			[
+				97500,
+				[
+					[
+						"duo section",
+						"together",
+						""
+					]
+				]
+			],
+			[
+				97687.5,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				97987.5,
+				[
+					[
+						"duo section",
+						"together",
+						""
+					]
+				]
+			],
+			[
+				98100,
+				[
+					[
+						"duo section",
+						"bfzoom",
+						""
+					]
+				]
+			],
+			[
+				98400,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				102000,
+				[
+					[
+						"duo section",
+						"goose",
+						""
+					]
+				]
+			],
+			[
+				111600,
+				[
+					[
+						"duo section",
+						"bf",
+						""
+					]
+				]
+			],
+			[
+				121200,
+				[
+					[
+						"duo section",
+						"start",
+						""
+					]
+				]
+			]
+		]
+	}
+}
