@@ -147,7 +147,7 @@ async function fetchVideoTitle(videoID) {
 
 async function loadVideo(videoID) {
   document.getElementById('youtube-frame').src = `https://www.youtube-nocookie.com/embed/${videoID}`;
-  document.getElementById('video-desc').innerText = `Currently watching: loading...`;
+  document.getElementById('video-desc').innerText = `Currently watching: Loading...`;
   const title = await fetchVideoTitle(videoID);
   document.getElementById('video-desc').innerText = `Currently watching: ${title}`;
 }
@@ -164,11 +164,13 @@ async function handleInput() {
     return;
   }
 
+  // Otherwise treat input as search keywords
   const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(input)}&key=${API_KEY}`);
   const data = await res.json();
   const resultsDiv = document.getElementById('search-results');
   resultsDiv.innerHTML = '';
   
+  // show scrollbars if results exist
   if(data.items.length > 0) document.body.style.overflow = "auto";
 
   data.items.forEach(item => {
