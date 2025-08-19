@@ -6,6 +6,7 @@ const phrases = [
     `im in your walls`,
     `hi gng`,
     `if shes seven it's gonna feel like heaven 😙`,
+    `the younger the berry the sweeter the cherry 😙`,
     `gng follow my tt tiktok.com/@joel.has.gyatt`,
     `iframe 0 nexus 1 👌`,
     `gng if you pay me 10p ill add smth to my site 👌`,
