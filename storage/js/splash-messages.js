@@ -5,6 +5,7 @@ const phrases = [
     `{hostname} certified banger 💯`,
     `im in your walls`,
     `hi gng`,
+    `if shes seven it's gonna feel like heaven 😙`,
     `gng follow my tt tiktok.com/@joel.has.gyatt`,
     `iframe 0 nexus 1 👌`,
     `gng if you pay me 10p ill add smth to my site 👌`,
