@@ -7,6 +7,7 @@ const phrases = [
     `hi gng`,
     `if shes seven it's gonna feel like heaven 😙`,
     `the younger the berry the sweeter the cherry 😙`,
+    `if she aint 10 or below i aint cracking at all 👍`,
     `the quicker the snack, the thicker the stack 😙`,
     `gng follow my tt tiktok.com/@joel.has.gyatt`,
     `iframe 0 nexus 1 👌`,
