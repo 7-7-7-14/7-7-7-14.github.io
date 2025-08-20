@@ -181,13 +181,13 @@
   },
   {
     "url": "/pages/games-frame?url=/pages/games/dadish/",
-    "img": "/pages/images/dadish.png",
+    "img": "/pages/images/dadish.avif",
     "alt": "Dadish",
     "title": "Dadish"
   },
   {
     "url": "/pages/games-frame?url=/pages/games/dadish2/",
-    "img": "/pages/images/dadish2.avif",
+    "img": "/pages/images/dadish2.png",
     "alt": "Dadish 2",
     "title": "Dadish 2"
   },
