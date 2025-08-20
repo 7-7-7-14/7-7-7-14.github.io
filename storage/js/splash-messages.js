@@ -239,7 +239,6 @@ const phrases = [
     `school wifi speed: 0.01 kb/s`,
     `i’m just a splash message`,
     `TypeError: Failed to construct 'URL': Invalid URL`,
-    `self.__uv$config = { - this is how you search up stuff`,
     `my code compiles on the first try 🥳`,
     `console.log('hello world')`,
     `i have no idea what i'm doing`,
