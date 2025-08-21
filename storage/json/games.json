@@ -324,6 +324,12 @@
     "title": "Getaway Shootout"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/incredibox/",
+    "img": "/pages/images/incredibox.png",
+    "alt": "Incredibox",
+    "title": "Incredibox"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/jetpack-joyride/",
     "img": "/pages/images/jetpack.png",
     "alt": "Jetpack Joyride",
