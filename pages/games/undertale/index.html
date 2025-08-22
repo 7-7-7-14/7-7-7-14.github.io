@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@main/undertale/"> 
+    <base href="./"> 
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -88,21 +88,26 @@
       }
 
       /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-      canvas.emscripten {
-        display: none;
-        background-color: black;
-        position: flex;
-        transition: opacity 5s ease-in;
-        -webkit-transition: opacity 5s ease-in;
-        opacity: 0;
-        filter: blur(0) grayscale(0);
-        image-rendering: optimizeSpeed;             /* Older versions of FF          */
-        image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
-        image-rendering: -webkit-optimize-contrast; /* Safari                        */
-        image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
-        image-rendering: pixelated;                 /* Awesome future-browsers       */
-        -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
-      }
+canvas.emscripten {
+  display: none;
+  background-color: black;
+  position: absolute;          /* instead of 'flex' */
+  top: 50%;                    /* center vertically */
+  left: 50%;                   /* center horizontally */
+  transform: translate(-50%, -50%);
+  transition: opacity 5s ease-in;
+  -webkit-transition: opacity 5s ease-in;
+  opacity: 0;
+  filter: blur(0) grayscale(0);
+  image-rendering: optimizeSpeed;             /* Older versions of FF          */
+  image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+  image-rendering: -webkit-optimize-contrast; /* Safari                        */
+  image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+  image-rendering: pixelated;                 /* Awesome future-browsers       */
+  -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+  max-width: 100vw;            /* prevent overspill */
+  max-height: 100vh;
+}
 
       canvas.active {
         animation-name: fadeIn;
