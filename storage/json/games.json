@@ -12,6 +12,12 @@
     "title": "Among Us"
   },
   {
+    "url": "/pages/games-frame?url=/pages/games/angry-birds-showdown/",
+    "img": "/pages/images/abshowdown.png",
+    "alt": "Angry Birds Showdown",
+    "title": "Angry Birds Showdown"
+  },
+  {
     "url": "/pages/games-frame?url=/pages/games/angrybirds/",
     "img": "/pages/images/angrybirds.webp",
     "alt": "Angry Birds",
