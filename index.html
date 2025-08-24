@@ -372,8 +372,8 @@ function closeTab(event) {
 
 function internal(url) {
   try {
-    if (url.startsWith('nexus://games-frame')) {
-      const path = url.replace('nexus://', '/pages/');
+    if (url.startsWith('nexus-games://')) {
+      const path = url.replace('nexus-games://', '/pages/games/');
       return () => setIframe(path, 'Games');
     }
     if (url.startsWith('nexus://apps-frame')) {
