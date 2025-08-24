@@ -383,7 +383,7 @@ function internal(url) {
     switch (url) {
       case 'nexus://new-tab': return () => setIframe('/static/?upd=', 'New Tab');
       case 'nexus://settings': return () => setIframe('/pages/prox/settings?upd=', 'Settings');
-      case 'nexus://games': return () => setIframe('/pages/games?upd=', 'Games');
+      case 'nexus-games://': return () => setIframe('/pages/games?upd=', 'Games');
       case 'nexus://media': return () => setIframe('/pages/heartive?upd=', 'Media');
       case 'nexus://apps': return () => setIframe('/pages/apps?upd=', 'Apps');
       case 'nexus://partners': return () => setIframe('/pages/partners?upd=', 'Partners');
