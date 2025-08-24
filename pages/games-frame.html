@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta property="og:title" content="US4 | Iframe2">
-    <meta property="og:description" content="Fullscreen embed for US4">
+    <meta property="og:description" content="Fullscreen embed for Nexus">
     <meta property="og:image" content="/storage/images/logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -143,6 +143,20 @@ function saveData() {
 </script>
 <script src="/storage/js/settings.js"></script>
     <script type="text/javascript" src="/storage/js/cheese-algorithm.js"></script>
+
+  <script>
+  const iframe = document.getElementById('game-frame');
+
+  // Focus iframe when clicked
+  iframe.addEventListener('click', () => {
+    iframe.focus();
+  });
+
+  // Optional: automatically focus on page load
+  window.addEventListener('load', () => {
+    iframe.focus();
+  });
+</script>
 
 <!-- Ultraviolet -->
     <script src="/static/uv/uv.bundle.js" defer></script>
