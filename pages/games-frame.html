@@ -60,11 +60,27 @@
     </div>
 </div>-->
 
-<div class="container">
+<div class="container" id="iframe-container">
     <div class="content">
-        <iframe id="game-frame" class="game-iframe" allowfullscreen></iframe>
+        <iframe id="game-frame" class="game-iframe" allowfullscreen tabindex="0"></iframe>
     </div>
 </div>
+
+<script>
+const iframe = document.getElementById('game-frame');
+const container = document.getElementById('iframe-container');
+
+// Make iframe focusable and refocus on clicks anywhere in container
+iframe.tabIndex = 0;
+
+iframe.addEventListener('click', () => iframe.focus());
+
+// If user clicks anywhere in the container outside iframe, focus iframe
+container.addEventListener('click', () => iframe.focus());
+
+// Focus iframe on load
+window.addEventListener('load', () => iframe.focus());
+</script>
 
 <script>
 function getUrlParameter(name) {
