@@ -82,7 +82,7 @@ const phrases = [
     `hey all nexus users`,
     `https://youtube.com/watch?v=dQw4w9WgXcQ`,
     `whoa is this a splash text`,
-    `this is ur ip: {ip}, if u dont believe me, hit ctrl + shift + i and click on console`,
+    `this is ur ip: {ip}, if u dont believe me, hit ctrl + shift + j`,
     `teacher gave us too much homework 😭`,
     `downloading your passwords...`,
     `the wifi went out... again 💀`,
