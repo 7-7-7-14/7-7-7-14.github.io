@@ -7,6 +7,7 @@ const phrases = [
     `hi gng`,
     `get a load of this guy 😂🫵`,
     `good boy`,
+    `if blocked use: nexus-is.onthewifi.com`,
     `if shes seven it's gonna feel like heaven 😙`,
     `the younger the berry the sweeter the cherry 😙`,
     `if she aint 10 or below i aint cracking at all 👍`,
