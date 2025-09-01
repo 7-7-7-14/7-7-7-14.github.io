@@ -5,6 +5,7 @@ const phrases = [
     `{hostname} certified banger 💯`,
     `im in your walls`,
     `hi gng`,
+    `get a load of this guy 😂🫵`,
     `good boy`,
     `if shes seven it's gonna feel like heaven 😙`,
     `the younger the berry the sweeter the cherry 😙`,
