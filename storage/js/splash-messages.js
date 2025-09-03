@@ -6,6 +6,7 @@ const phrases = [
     `im in your walls`,
     `hi gng`,
     `get a load of this guy 😂🫵`,
+    `sussy blud 😂🫱🫱`,
     `good boy`,
     `if blocked use: nexus-is.onthewifi.com`,
     `if shes seven it's gonna feel like heaven 😙`,
