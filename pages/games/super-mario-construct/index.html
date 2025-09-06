@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,16 +47,16 @@ if (location.protocol.substr(0, 4) === "file")
 	<script src="scripts/main.js" type="module"></script>
 	<script src="scripts/register-sw.js" type="module"></script>
 	<script>
-		window.addEventListener("keydown", function(e) {
-			// These are the space and arrow key codes
-			if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-				e.preventDefault();
-			}
-		}, false);
-		document.addEventListener("wheel", function(event){
-			// Prevent mouse scrolling
-			event.preventDefault();
-		}, { passive: false });
-	</script>
+        window.addEventListener("keydown", function(e) {
+            // These are the space and arrow key codes
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+        document.addEventListener("wheel", function(event){
+            // Prevent mouse scrolling
+            event.preventDefault();
+        }, { passive: false });
+    </script>
 </body> 
 </html>
