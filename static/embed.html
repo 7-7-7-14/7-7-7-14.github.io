@@ -1,38 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Force title + favicon -->
-    <title>Home</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png">
-
+    <title>Loading Screen</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap">
     <link rel="stylesheet" href="../storage/css/static-embed.css">
-
-    <script>
-      // Function to always enforce title + favicon
-      function forceBranding() {
-        document.title = "Home";
-
-        // Remove old favicons
-        document.querySelectorAll("link[rel~='icon']").forEach(el => el.remove());
-
-        // Add your favicon
-        const link = document.createElement("link");
-        link.rel = "icon";
-        link.href = "https://raw.githubusercontent.com/voucan/voucan.github.io/refs/heads/main/googleclassroom.png";
-        document.head.appendChild(link);
-      }
-
-      // Run immediately
-      document.addEventListener("DOMContentLoaded", forceBranding);
-
-      // Watch for changes (sites like YouTube constantly rewrite the title)
-      const observer = new MutationObserver(forceBranding);
-      observer.observe(document.documentElement, { subtree: true, childList: true });
-    </script>
 </head>
 <body>
 
