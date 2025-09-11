@@ -178,7 +178,7 @@ const phrases = [
     `you can play fh5 on gfn!`,
     `have you heard the rumor about the pencil, nevermind its pointless 🥀😭`,
     `tried to make a belt of watches, it was a waist of time 😭🥀`,
-    `i dont even know what to out here anymore`,
+    `i dont even know what to put here anymore`,
     `subscribe to zboychad!`,
     `cruz was here..`,
     `we all know who has a chopped chin`,
