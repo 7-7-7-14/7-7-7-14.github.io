@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>AI Chatbot</title>
   <style>
     * {
       box-sizing: border-box;
@@ -39,7 +39,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Custom dark scrollbar */
     #messages::-webkit-scrollbar {
       width: 8px;
     }
@@ -108,7 +107,6 @@
       background: #005fcc;
     }
 
-    /* Typing animation "..." */
     .typing {
       display: inline-block;
       width: 30px;
@@ -146,7 +144,10 @@
   </div>
 
   <script>
-    const API_KEY = "AIzaSyAcIEZrvBiDi-g_XBRPH6Bp9y6PWo-MZ1M";
+    const API_KEY = "AIzaSyAcIEZrvBiDi-g_XBRPH6Bp9y6PWo-MZ1M"; // free api btw
+
+    let conversation = [];
+
     async function sendMessage() {
       const input = document.getElementById("input");
       const text = input.value.trim();
@@ -154,8 +155,8 @@
       input.value = "";
 
       addMessage(text, "user");
+      conversation.push({ role: "user", parts: [{ text }] });
 
-      // Add typing animation placeholder
       const typingEl = document.createElement("div");
       typingEl.className = "message bot";
       typingEl.innerHTML = '<div class="typing"><span>.</span><span>.</span><span>.</span></div>';
@@ -167,18 +168,17 @@
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: text }] }]
-          })
+          body: JSON.stringify({ contents: conversation })
         }
       );
 
       const data = await response.json();
       const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Error: No reply";
 
-      // Remove typing animation
       typingEl.remove();
       addMessage(botReply, "bot");
+
+      conversation.push({ role: "model", parts: [{ text: botReply }] });
     }
 
     function addMessage(text, cls) {
@@ -189,7 +189,6 @@
       document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
     }
 
-    // Press Enter to send
     document.getElementById("input").addEventListener("keypress", function(e) {
       if (e.key === "Enter") {
         sendMessage();
