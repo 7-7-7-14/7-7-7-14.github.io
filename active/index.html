@@ -1,438 +1,180 @@
 <!DOCTYPE html>
+<!--
+  
+
+██╗    ██╗   ██╗
+██║    ██║   ██║
+██║    ██║   ██║
+██║    ╚██╗ ██╔╝
+███████╗╚████╔╝ 
+╚══════╝ ╚═══╝  
+                
+                        
+
+By LupineVault.com
+All images and code are owned by LupineVault (lupinevault.com) and associated developers.
+© 2025 LupineVault and all associated developers.
+
+UV Static 2.0
+-
+Developed by technonyte0
+-->
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eclipse Browser V.2.1.2 - Ultimate Streaming Experience</title>
-    <link rel="icon" type="image/x-icon" href="https://7-7-7-15.github.io/assets/logo/logo.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- UV Core Scripts - PRESERVED -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eclipse</title>
+     <link rel="icon" href="https://7-7-7-15.github.io/assets/logo/logo.png" type="image/x-icon">
     <script src="check.js" defer></script>
     <script defer src="scripts/lstimer.js"></script>
+
+    <link rel="stylesheet" href="style/global.css" />
+    <link rel="stylesheet" href="style/browser.css" />
+    
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.2.nomodule.min.js"
+    ></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="scripts/tabs.mjs" type="module" defer></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/gh/tf7software/Font-Awesome-pro-cdn@main/js/all.js"></script>
     <style>
-        /* Base styles - same as original */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
-            color: #e0e0e0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* HOMEPAGE DASHBOARD */
-        .homepage-dashboard {
-            margin-left: 320px; /* Sidebar width */
-            padding: 40px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-        
-        .welcome-section {
-            text-align: center;
-        }
-        
-        .welcome-title {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4a90e2, #357abd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-        
-        .welcome-subtitle {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .quick-access-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .quick-access-item {
-            background: rgba(37, 37, 37, 0.7);
-            border: 1px solid #444;
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .quick-access-item:hover {
-            background: rgba(74, 144, 226, 0.1);
-            border-color: #4a90e2;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
-        }
-        
-        .quick-icon {
-            font-size: 3rem;
-            color: #4a90e2;
-            margin-bottom: 15px;
-        }
-        
-        .quick-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-        
-        .quick-url {
-            font-size: 0.85rem;
-            color: #888;
-        }
-        
-        /* UV CONTENT AREA */
-        .uv-featured {
-            background: rgba(17, 17, 17, 0.8);
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid #333;
-        }
-        
-        .uv-featured h2 {
-            color: #4a90e2;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        
-        /* ORIGINAL SIDEBAR STYLES - VERTICAL TABS */
-        .sidebar-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 320px;
-            height: 100vh;
-            background: rgba(17, 17, 17, 0.98);
-            border-right: 2px solid #252525;
-            backdrop-filter: blur(30px);
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .browser-header {
-            padding: 25px 20px;
-            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(17, 17, 17, 0.8) 100%);
-            border-bottom: 1px solid #252525;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        #controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        #controls button {
-            padding: 12px 16px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: linear-gradient(135deg, #333 0%, #444 100%);
-            color: #e0e0e0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .home-btn {
-            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%) !important;
-            border-color: #4a90e2 !important;
-            color: white !important;
-            padding: 14px 20px !important;
-            font-weight: 600 !important;
-        }
-        
-        #url-form {
-            display: flex;
-            gap: 10px;
-        }
-        
-        #url-input {
-            flex: 1;
-            padding: 14px 18px;
-            border-radius: 10px;
-            border: 2px solid #333;
-            background: rgba(17, 17, 17, 0.8);
-            color: #e0e0e0;
-            font-size: 1rem;
-        }
-        
-        #url-input:focus {
-            outline: none;
-            border-color: #4a90e2;
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-        }
-        
-        .go-button {
-            padding: 14px 18px;
-            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-        }
-        
-        /* VERTICAL TABS */
-        #tab-list {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .tab-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 20px;
-            background: rgba(37, 37, 37, 0.7);
-            border: 2px solid transparent;
-            border-left: 4px solid transparent;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #e0e0e0;
-            font-weight: 500;
-        }
-        
-        .tab-item:hover,
-        .tab-item.active {
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(53, 122, 189, 0.2));
-            border-left-color: #4a90e2;
-            color: #4a90e2;
-        }
-        
-        .tab-favicon {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            background: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-shrink: 0;
-        }
-        
-        .tab-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .tab-title {
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .new-tab-item {
-            margin-top: 16px;
-            padding: 16px 20px;
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(53, 122, 189, 0.1));
-            border: 2px dashed rgba(74, 144, 226, 0.3);
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4a90e2;
-            font-size: 1.2rem;
-        }
-        
-        /* Logo */
-        .eclipse-logo {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10000;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(53, 122, 189, 0.1) 100%);
-            border: 1px solid rgba(74, 144, 226, 0.2);
-            border-radius: 16px;
-        }
-        
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .logo-text {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-            background: linear-gradient(135deg, #4a90e2, #357abd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+      body {padding: 0;margin: 0;}
     </style>
-</head>
-
-<body>
-    <!-- Logo -->
-    <div class="eclipse-logo">
-        <div class="logo-container">
-            <div class="logo-icon"><i class="fas fa-eclipse"></i></div>
-            <div>
-                <div class="logo-text">ECLIPSE</div>
-                <div style="font-size: 0.75rem; color: #888;">V.2.1.2</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ORIGINAL UV AREAS -->
-    <div id="nav"></div>
-    <div id="main-content">
-        <!-- HOMEPAGE DASHBOARD -->
-        <div class="homepage-dashboard">
-            <div class="welcome-section">
-                <h1 class="welcome-title">Welcome to Eclipse</h1>
-                <p class="welcome-subtitle">Your ultimate streaming browser experience with UV integration</p>
-            </div>
-            
-            <div class="quick-access-grid">
-                <div class="quick-access-item" onclick="document.getElementById('url-input').value='netflix.com'; document.getElementById('url-form').dispatchEvent(new Event('submit'));">
-                    <div class="quick-icon"><i class="fab fa-netflix"></i></div>
-                    <div class="quick-title">Netflix</div>
-                    <div class="quick-url">netflix.com</div>
-                </div>
-                <div class="quick-access-item" onclick="document.getElementById('url-input').value='youtube.com'; document.getElementById('url-form').dispatchEvent(new Event('submit'));">
-                    <div class="quick-icon"><i class="fab fa-youtube"></i></div>
-                    <div class="quick-title">YouTube</div>
-                    <div class="quick-url">youtube.com</div>
-                </div>
-                <div class="quick-access-item" onclick="document.getElementById('url-input').value='hulu.com'; document.getElementById('url-form').dispatchEvent(new Event('submit'));">
-                    <div class="quick-icon"><i class="fas fa-play"></i></div>
-                    <div class="quick-title">Hulu</div>
-                    <div class="quick-url">hulu.com</div>
-                </div>
-                <div class="quick-access-item" onclick="document.getElementById('url-input').value='disneyplus.com'; document.getElementById('url-form').dispatchEvent(new Event('submit'));">
-                    <div class="quick-icon"><i class="fas fa-magic"></i></div>
-                    <div class="quick-title">Disney+</div>
-                    <div class="quick-url">disneyplus.com</div>
-                </div>
-            </div>
-            
-            <div class="uv-featured">
-                <h2>Featured Streaming</h2>
-                <!-- UV content loads here via uv.bundle.js -->
-                <div id="uv-player-container"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ORIGINAL VERTICAL TAB SIDEBAR -->
-    <div class="sidebar-container">
-        <div class="browser-header">
-            <div id="controls">
-                <button class="home-btn" onclick="window.location.reload()">
-                    <i class="fas fa-home"></i> Home
-                </button>
-                <button id="page-back"><i class="fas fa-arrow-left"></i></button>
-                <button id="page-forward"><i class="fas fa-arrow-right"></i></button>
-                <button id="page-refresh"><i class="fas fa-sync-alt"></i></button>
-            </div>
-            
-            <!-- ORIGINAL URL FORM - UV HANDLING -->
-            <form id="url-form">
-                <input type="text" id="url-input" placeholder="Search or enter website..." autocomplete="off" />
-                <button type="submit" class="go-button">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </form>
-        </div>
-        
-        <div id="tab-list">
-            <div class="tab-item active" data-tab-id="1">
-                <div class="tab-favicon"><i class="fas fa-home"></i></div>
-                <div class="tab-info">
-                    <div class="tab-title">Eclipse Homepage</div>
-                </div>
-                <button class="tab-close" style="background:none;border:none;color:#666;margin-left:auto;"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="new-tab-item" id="new-tab-btn">
-                <i class="fas fa-plus"></i> New Tab
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Wait for UV scripts to load, then integrate
-        document.addEventListener('DOMContentLoaded', function() {
-            // Quick access buttons trigger ORIGINAL URL form
-            document.querySelectorAll('.quick-access-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const url = item.querySelector('.quick-url').textContent;
-                    const urlInput = document.getElementById('url-input');
-                    const urlForm = document.getElementById('url-form');
-                    
-                    if (urlInput && urlForm) {
-                        urlInput.value = url;
-                        urlForm.dispatchEvent(new Event('submit'));
-                    }
-                });
-            });
-            
-            // New tab button
-            document.getElementById('new-tab-btn').addEventListener('click', () => {
-                document.getElementById('url-input').value = '';
-                document.getElementById('url-form').dispatchEvent(new Event('submit'));
-            });
-        });
-
-        // UV integration - let original scripts handle everything
-        window.addEventListener('load', () => {
-            // Trigger UV initialization if needed
-            if (window.uv && window.uv.init) {
-                window.uv.init();
-            }
-        });
+      window.onload = function () {
+        if (!localStorage.getItem("discordAlertShown")) {
+          alert("Join our discord .gg/redlv for bonuses, updates, links, and more!");
+          localStorage.setItem("discordAlertShown", "true");
+        }
+      };
     </script>
-</body>
+  </head>
+
+  <body>
+    <div id="small-screen-overlay">
+      UV Static 2.0 doesn't support smaller screens. Please use UV Static 2.0 on a larger screen.
+    </div>
+
+
+  <div id="nav"></div>
+  <div id="main-content"></div>
+
+
+    <div id="tab-view" class=""></div>
+    <div class="sidebar-container">
+      <header>
+        <div class="page-data">
+          <span id="controls">
+            <button onclick="window.location.href='/'">
+              <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+              <svg
+   width="38.454208mm"
+   height="24.726074mm"
+   viewBox="0 0 38.454208 24.726074"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-145.0951,-136.5279)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.9681px;font-family:'Dallas Print Shop';-inkscape-font-specification:'Dallas Print Shop';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#5a32e3;fill-opacity:1;stroke-width:2.74734"
+       x="142.33917"
+       y="161.25397"
+       id="text2"><tspan
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Krungthep;-inkscape-font-specification:Krungthep;fill:#5a32e3;fill-opacity:1;stroke-width:2.74734"
+         x="142.33917"
+         y="161.25397">v2</tspan></text>
+  </g>
+</svg>
+
+           
+
+              <p class="tooltip">Home</p>
+            </button>
+            <!-- <p class="logo-name">RED Browse</p> -->
+            <span>
+              <button id="page-back">
+                <ion-icon
+                  name="arrow-back-outline"
+                  class="icon hover-focus1"
+                ></ion-icon>
+                <p class="tooltip">Back</p>
+              </button>
+              <button id="page-forward">
+                <ion-icon
+                  name="arrow-forward-outline"
+                  class="icon hover-focus1"
+                ></ion-icon>
+                <p class="tooltip">Forward</p>
+              </button>
+              <button id="page-refresh">
+                <ion-icon
+                  name="refresh-outline"
+                  class="icon hover-focus1"
+                ></ion-icon>
+                <p class="tooltip">Refresh</p>
+              </button>
+              <button id="options-btn">
+                <ion-icon
+                  name="menu-outline"
+                  class="icon hover-focus1"
+                ></ion-icon>
+                <p class="tooltip">Menu</p>
+              </button>
+            </span>
+          </span>
+          <form id="url-form">
+            <input
+              type="text"
+              id="url-input"
+              onfocus="this.setSelectionRange(0, this.value.length)"
+              class="hover-focus2"
+              placeholder="Search or enter URL"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+            />
+          </form>
+          <button id="new-tab" class="hover-focus2">
+            <ion-icon name="add-outline" class="icon"></ion-icon>
+            <span>New Tab</span>
+          </button>
+        </div>
+        <div id="tab-list"></div>
+      </header>
+    </div>
+
+    <div id="menu-overlay">
+      <div class="option" id="devtools-option">Developer Tools</div>
+      <div class="option" id="abc-option">Open in about:blank</div>
+      <div class="option" id="git-option">GitHub</div>
+    </div>
+    <script>
+      const optionsBtn = document.getElementById("options-btn");
+      const overlay = document.getElementById("menu-overlay");
+      optionsBtn.addEventListener("click", () => {
+        overlay.classList.toggle("active");
+      });
+    </script>
+  </body>
 </html>
