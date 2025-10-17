@@ -1,180 +1,907 @@
 <!DOCTYPE html>
-<!--
-  
-
-██╗    ██╗   ██╗
-██║    ██║   ██║
-██║    ██║   ██║
-██║    ╚██╗ ██╔╝
-███████╗╚████╔╝ 
-╚══════╝ ╚═══╝  
-                
-                        
-
-By LupineVault.com
-All images and code are owned by LupineVault (lupinevault.com) and associated developers.
-© 2025 LupineVault and all associated developers.
-
-UV Static 2.0
--
-Developed by technonyte0
--->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eclipse</title>
-     <link rel="icon" href="https://7-7-7-15.github.io/assets/logo/logo.png" type="image/x-icon">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclipse Browser V.2.1.2 - Ultimate Streaming Experience</title>
+    <link rel="icon" type="image/x-icon" href="https://7-7-7-15.github.io/assets/logo/logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- UV Core Scripts - Preserved Functionality -->
     <script src="check.js" defer></script>
     <script defer src="scripts/lstimer.js"></script>
-
-    <link rel="stylesheet" href="style/global.css" />
-    <link rel="stylesheet" href="style/browser.css" />
-    
-
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.2.nomodule.min.js"
-    ></script>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-
     <script src="uv/uv.bundle.js" defer></script>
     <script src="uv/uv.config.js" defer></script>
     <script src="scripts/tabs.mjs" type="module" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/gh/tf7software/Font-Awesome-pro-cdn@main/js/all.js"></script>
+    
     <style>
-      body {padding: 0;margin: 0;}
-    </style>
-    <script>
-      window.onload = function () {
-        if (!localStorage.getItem("discordAlertShown")) {
-          alert("Join our discord .gg/redlv for bonuses, updates, links, and more!");
-          localStorage.setItem("discordAlertShown", "true");
+        /* ==========================================================================
+           ECLIPSE BROWSER V.2.1.2 - VERTICAL BROWSER TABS
+           ========================================================================== */
+        
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
         }
-      };
-    </script>
-  </head>
+        
+        *::selection {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* ==========================================================================
+           LOGO SYSTEM (Top Right)
+           ========================================================================== */
+        .eclipse-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 4px 12px rgba(74, 144, 226, 0.3));
+        }
+        
+        .eclipse-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+            filter: drop-shadow(0 8px 25px rgba(74, 144, 226, 0.5));
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(53, 122, 189, 0.1) 100%);
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(74, 144, 226, 0.15);
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 3s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .version-badge {
+            font-size: 0.75rem;
+            color: #888;
+            background: rgba(74, 144, 226, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+        
+        /* ==========================================================================
+           THEME SYSTEM
+           ========================================================================== */
+        body.theme-dark .sidebar-container { background: rgba(17, 17, 17, 0.98); border-right-color: #252525; }
+        body.theme-dark .tab-item { background: rgba(37, 37, 37, 0.7); border-color: #333; color: #e0e0e0; }
+        body.theme-dark .tab-item.active { background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(53, 122, 189, 0.2)); border-color: #4a90e2; }
+        
+        body.theme-sunset .sidebar-container { background: rgba(244, 67, 54, 0.95); border-right-color: #e53935; }
+        body.theme-sunset .tab-item { background: rgba(239, 83, 80, 0.4); border-color: #ef5350; color: #fff8e1; }
+        body.theme-sunset .tab-item.active { background: linear-gradient(135deg, rgba(255, 235, 59, 0.3), rgba(255, 193, 7, 0.3)); border-color: #ffeb3b; }
+        
+        /* More theme variations */
+        body.theme-blue-sunset .sidebar-container { background: rgba(33, 150, 243, 0.95); border-right-color: #1976d2; }
+        body.theme-gray .sidebar-container { background: rgba(66, 66, 66, 0.95); border-right-color: #424242; }
+        body.theme-midnight .sidebar-container { background: rgba(25, 25, 112, 0.95); border-right-color: #1a237e; }
+        
+        /* ==========================================================================
+           VERTICAL BROWSER SIDEBAR
+           ========================================================================== */
+        .sidebar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 100vh;
+            background: rgba(17, 17, 17, 0.98);
+            border-right: 2px solid #252525;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Header/Toolbar Section */
+        .browser-header {
+            padding: 25px 20px;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border-bottom: 1px solid #252525;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        #controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        #controls button {
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: linear-gradient(135deg, #333 0%, #444 100%);
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            min-width: 50px;
+            justify-content: center;
+        }
+        
+        #controls button:hover {
+            background: linear-gradient(135deg, #444 0%, #555 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%) !important;
+            border-color: #4a90e2 !important;
+            color: white !important;
+            padding: 14px 20px !important;
+            font-weight: 600 !important;
+        }
+        
+        .home-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2a5f99 100%) !important;
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4) !important;
+        }
+        
+        #url-form {
+            position: relative;
+            display: flex;
+            gap: 10px;
+        }
+        
+        #url-input {
+            flex: 1;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 2px solid #333;
+            background: rgba(17, 17, 17, 0.8);
+            color: #e0e0e0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        #url-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+        
+        .go-button {
+            padding: 14px 18px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .go-button:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2a5f99 100%);
+            transform: translateY(-2px);
+        }
+        
+        /* ==========================================================================
+           VERTICAL TAB LIST - BROWSER STYLE
+           ========================================================================== */
+        #tab-list {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .tab-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(37, 37, 37, 0.7);
+            border: 2px solid transparent;
+            border-left: 4px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #e0e0e0;
+            font-weight: 500;
+            overflow: hidden;
+            min-height: 64px;
+        }
+        
+        .tab-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #4a90e2, #357abd);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .tab-item:hover::before,
+        .tab-item.active::before {
+            transform: scaleX(1);
+        }
+        
+        .tab-item:hover {
+            background: rgba(74, 144, 226, 0.1);
+            border-left-color: #4a90e2;
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tab-item.active {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(53, 122, 189, 0.2));
+            border-left-color: #4a90e2;
+            border-right-color: rgba(74, 144, 226, 0.1);
+            color: #4a90e2;
+            box-shadow: 0 4px 25px rgba(74, 144, 226, 0.2);
+            transform: translateX(8px);
+        }
+        
+        .tab-favicon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-favicon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .tab-item:hover .tab-favicon::before,
+        .tab-item.active .tab-favicon::before {
+            left: 100%;
+        }
+        
+        .tab-item.active .tab-favicon {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            box-shadow: 0 0 12px rgba(74, 144, 226, 0.4);
+        }
+        
+        .tab-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .tab-title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+        
+        .tab-url {
+            font-size: 0.8rem;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .tab-item:hover .tab-url,
+        .tab-item.active .tab-url {
+            opacity: 1;
+        }
+        
+        .tab-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            margin-left: auto;
+        }
+        
+        .tab-item:hover .tab-controls,
+        .tab-item.active .tab-controls {
+            opacity: 1;
+        }
+        
+        .tab-audio-indicator {
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: audioPulse 1.5s infinite;
+            flex-shrink: 0;
+        }
+        
+        @keyframes audioPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.3); }
+        }
+        
+        .tab-item.audio-playing .tab-audio-indicator { display: block; }
+        
+        .tab-close {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .tab-close:hover {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            transform: scale(1.1);
+        }
+        
+        .tab-item.active .tab-close:hover {
+            background: rgba(231, 76, 60, 0.3);
+        }
+        
+        /* New Tab Button in Vertical List */
+        .new-tab-item {
+            margin-top: 16px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(53, 122, 189, 0.1));
+            border: 2px dashed rgba(74, 144, 226, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a90e2;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .new-tab-item:hover {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(53, 122, 189, 0.2));
+            border-color: #4a90e2;
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(74, 144, 226, 0.2);
+        }
+        
+        .new-tab-item i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .new-tab-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* ==========================================================================
+           CUSTOM SCROLLBAR FOR TABS
+           ========================================================================== */
+        #tab-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #tab-list::-webkit-scrollbar-track {
+            background: rgba(37, 37, 37, 0.5);
+            border-radius: 3px;
+        }
+        
+        #tab-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            border-radius: 3px;
+        }
+        
+        #tab-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #357abd, #2a5f99);
+        }
+        
+        /* ==========================================================================
+           MAIN CONTENT
+           ========================================================================== */
+        #main-content, #tab-view, #nav {
+            margin-left: 320px;
+            padding: 0;
+            min-height: 100vh;
+            background: transparent;
+        }
+        
+        .browser-content {
+            width: 100%;
+            height: 100vh;
+            border: none;
+            background: white;
+        }
+        
+        /* ==========================================================================
+           TOOLTIPS
+           ========================================================================== */
+        .tooltip {
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.95);
+            color: #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 1000;
+            margin-right: 10px;
+            border: 1px solid #333;
+        }
+        
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-left-color: rgba(0, 0, 0, 0.95);
+        }
+        
+        .tab-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* ==========================================================================
+           MENU OVERLAY
+           ========================================================================== */
+        #menu-overlay {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: rgba(17, 17, 17, 0.98);
+            border-left: 2px solid #252525;
+            backdrop-filter: blur(30px);
+            z-index: 1001;
+            transition: right 0.4s ease;
+            padding: 30px;
+        }
+        
+        #menu-overlay.active { right: 0; }
+        
+        .option {
+            padding: 18px 22px;
+            background: rgba(37, 37, 37, 0.6);
+            border-radius: 12px;
+            border: 1px solid #252525;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .option:hover {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(53, 122, 189, 0.2));
+            border-color: #4a90e2;
+            transform: translateX(5px);
+        }
+        
+        /* ==========================================================================
+           RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .sidebar-container { width: 280px; }
+            #main-content, #tab-view { margin-left: 280px; }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-container {
+                width: 100%;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .sidebar-container.open { transform: translateX(0); }
+            #main-content, #tab-view { margin-left: 0; }
+            .tab-item { padding: 12px 16px; min-height: 56px; }
+        }
+        
+        /* ==========================================================================
+           ANIMATIONS
+           ========================================================================== */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .tab-item { animation: slideInLeft 0.4s ease; }
+        
+        /* Small screen overlay */
+        #small-screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+    </style>
+</head>
 
-  <body>
-    <div id="small-screen-overlay">
-      UV Static 2.0 doesn't support smaller screens. Please use UV Static 2.0 on a larger screen.
-    </div>
-
-
-  <div id="nav"></div>
-  <div id="main-content"></div>
-
-
-    <div id="tab-view" class=""></div>
-    <div class="sidebar-container">
-      <header>
-        <div class="page-data">
-          <span id="controls">
-            <button onclick="window.location.href='/'">
-              <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-              <svg
-   width="38.454208mm"
-   height="24.726074mm"
-   viewBox="0 0 38.454208 24.726074"
-   version="1.1"
-   id="svg1"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <g
-     id="layer1"
-     transform="translate(-145.0951,-136.5279)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.9681px;font-family:'Dallas Print Shop';-inkscape-font-specification:'Dallas Print Shop';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#5a32e3;fill-opacity:1;stroke-width:2.74734"
-       x="142.33917"
-       y="161.25397"
-       id="text2"><tspan
-         id="tspan1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Krungthep;-inkscape-font-specification:Krungthep;fill:#5a32e3;fill-opacity:1;stroke-width:2.74734"
-         x="142.33917"
-         y="161.25397">v2</tspan></text>
-  </g>
-</svg>
-
-           
-
-              <p class="tooltip">Home</p>
-            </button>
-            <!-- <p class="logo-name">RED Browse</p> -->
-            <span>
-              <button id="page-back">
-                <ion-icon
-                  name="arrow-back-outline"
-                  class="icon hover-focus1"
-                ></ion-icon>
-                <p class="tooltip">Back</p>
-              </button>
-              <button id="page-forward">
-                <ion-icon
-                  name="arrow-forward-outline"
-                  class="icon hover-focus1"
-                ></ion-icon>
-                <p class="tooltip">Forward</p>
-              </button>
-              <button id="page-refresh">
-                <ion-icon
-                  name="refresh-outline"
-                  class="icon hover-focus1"
-                ></ion-icon>
-                <p class="tooltip">Refresh</p>
-              </button>
-              <button id="options-btn">
-                <ion-icon
-                  name="menu-outline"
-                  class="icon hover-focus1"
-                ></ion-icon>
-                <p class="tooltip">Menu</p>
-              </button>
-            </span>
-          </span>
-          <form id="url-form">
-            <input
-              type="text"
-              id="url-input"
-              onfocus="this.setSelectionRange(0, this.value.length)"
-              class="hover-focus2"
-              placeholder="Search or enter URL"
-              autocomplete="off"
-              autocorrect="off"
-              spellcheck="false"
-            />
-          </form>
-          <button id="new-tab" class="hover-focus2">
-            <ion-icon name="add-outline" class="icon"></ion-icon>
-            <span>New Tab</span>
-          </button>
+<body class="theme-dark">
+    <!-- Logo Top Right -->
+    <div class="eclipse-logo" onclick="document.getElementById('settingsModal')?.classList.add('active')">
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fas fa-eclipse"></i></div>
+            <div>
+                <div class="logo-text">ECLIPSE</div>
+                <div class="version-badge">V.2.1.2</div>
+            </div>
         </div>
-        <div id="tab-list"></div>
-      </header>
     </div>
 
-    <div id="menu-overlay">
-      <div class="option" id="devtools-option">Developer Tools</div>
-      <div class="option" id="abc-option">Open in about:blank</div>
-      <div class="option" id="git-option">GitHub</div>
+    <!-- UV Content Areas -->
+    <div id="nav"></div>
+    <div id="main-content">
+        <iframe id="browser-frame" class="browser-content" src="about:blank"></iframe>
     </div>
+
+    <!-- Vertical Browser Sidebar -->
+    <div class="sidebar-container">
+        <!-- Browser Header -->
+        <div class="browser-header">
+            <div id="controls">
+                <button class="home-btn" onclick="window.location.href='/'">
+                    <i class="fas fa-home"></i> Home
+                    <div class="tooltip">Dashboard</div>
+                </button>
+                <button id="page-back"><i class="fas fa-arrow-left"></i><div class="tooltip">Back</div></button>
+                <button id="page-forward"><i class="fas fa-arrow-right"></i><div class="tooltip">Forward</div></button>
+                <button id="page-refresh"><i class="fas fa-sync-alt"></i><div class="tooltip">Refresh</div></button>
+                <button id="options-btn"><i class="fas fa-ellipsis-v"></i><div class="tooltip">Menu</div></button>
+            </div>
+            
+            <form id="url-form">
+                <input type="text" id="url-input" placeholder="Enter URL or search..." autocomplete="off" />
+                <button type="submit" class="go-button">
+                    <i class="fas fa-arrow-right"></i> Go
+                </button>
+            </form>
+        </div>
+        
+        <!-- Vertical Tab List -->
+        <div id="tab-list">
+            <!-- Dynamic tabs populated by JavaScript -->
+            <div class="tab-item active" data-tab-id="1">
+                <div class="tab-favicon"><i class="fas fa-globe"></i></div>
+                <div class="tab-info">
+                    <div class="tab-title">New Tab</div>
+                    <div class="tab-url">about:blank</div>
+                </div>
+                <div class="tab-controls">
+                    <div class="tab-audio-indicator" style="display: none;"></div>
+                    <button class="tab-close" title="Close Tab (Ctrl+W)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- New Tab Button -->
+            <div class="new-tab-item" id="new-tab-btn">
+                <div>
+                    <i class="fas fa-plus"></i>
+                    <div class="new-tab-text">New Tab<br><small>(Ctrl+T)</small></div>
+                </div>
+                <div class="tooltip">Create New Tab</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div id="menu-overlay">
+        <div class="option" id="devtools-option">
+            <i class="fas fa-bug"></i>
+            <span>Developer Tools</span>
+        </div>
+        <div class="option" id="theme-option">
+            <i class="fas fa-palette"></i>
+            <span>Change Theme (Ctrl+Shift+T)</span>
+        </div>
+        <div class="option" style="justify-content: center; margin-top: 20px;">
+            <button onclick="window.location.reload()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); border: none; border-radius: 10px; color: white; font-weight: 600;">
+                <i class="fas fa-redo"></i> Restart Eclipse
+            </button>
+        </div>
+    </div>
+
     <script>
-      const optionsBtn = document.getElementById("options-btn");
-      const overlay = document.getElementById("menu-overlay");
-      optionsBtn.addEventListener("click", () => {
-        overlay.classList.toggle("active");
-      });
+        document.addEventListener('DOMContentLoaded', function() {
+            let tabCounter = 1;
+            const tabList = document.getElementById('tab-list');
+            const urlForm = document.getElementById('url-form');
+            const urlInput = document.getElementById('url-input');
+            const newTabBtn = document.getElementById('new-tab-btn');
+            const browserFrame = document.getElementById('browser-frame');
+            
+            function createTab(url = 'about:blank', title = 'New Tab', faviconUrl = null) {
+                const tabId = ++tabCounter;
+                const tabElement = document.createElement('div');
+                tabElement.className = 'tab-item';
+                tabElement.dataset.tabId = tabId;
+                tabElement.innerHTML = `
+                    <div class="tab-favicon">${faviconUrl ? `<img src="${faviconUrl}" alt="Favicon">` : '<i class="fas fa-globe"></i>'}</div>
+                    <div class="tab-info">
+                        <div class="tab-title">${title}</div>
+                        <div class="tab-url">${url}</div>
+                    </div>
+                    <div class="tab-controls">
+                        <div class="tab-audio-indicator" style="display: none;"></div>
+                        <button class="tab-close" title="Close Tab">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                // Insert before new tab button
+                tabList.insertBefore(tabElement, newTabBtn);
+                
+                // Event listeners
+                tabElement.addEventListener('click', (e) => {
+                    if (!e.target.closest('.tab-close')) {
+                        switchToTab(tabId);
+                    }
+                });
+                
+                tabElement.querySelector('.tab-close').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeTab(tabId);
+                });
+                
+                // Switch to new tab
+                switchToTab(tabId);
+                
+                if (url !== 'about:blank') {
+                    browserFrame.src = url;
+                }
+                
+                return tabId;
+            }
+            
+            function switchToTab(tabId) {
+                document.querySelectorAll('.tab-item').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                const activeTab = document.querySelector(`[data-tab-id="${tabId}"]`);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                    activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Update URL input
+                    const url = activeTab.querySelector('.tab-url').textContent;
+                    urlInput.value = url;
+                    
+                    // Load tab content
+                    browserFrame.src = url;
+                }
+            }
+            
+            function closeTab(tabId) {
+                const tab = document.querySelector(`[data-tab-id="${tabId}"]`);
+                if (tab) {
+                    tab.remove();
+                    
+                    if (tab.classList.contains('active')) {
+                        const prevTab = tab.previousElementSibling;
+                        if (prevTab && prevTab.classList.contains('tab-item')) {
+                            switchToTab(parseInt(prevTab.dataset.tabId));
+                        } else if (tabList.children.length === 1) { // Only new tab button left
+                            createTab();
+                        }
+                    }
+                }
+            }
+            
+            // Form submission
+            urlForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const url = urlInput.value.trim();
+                if (url) {
+                    const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+                    const activeTab = document.querySelector('.tab-item.active');
+                    if (activeTab) {
+                        activeTab.querySelector('.tab-url').textContent = fullUrl;
+                        activeTab.querySelector('.tab-title').textContent = url;
+                        browserFrame.src = fullUrl;
+                    }
+                }
+            });
+            
+            // New tab button
+            newTabBtn.addEventListener('click', () => createTab());
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 't') {
+                    e.preventDefault();
+                    createTab();
+                }
+                if (e.ctrlKey && e.key === 'w') {
+                    e.preventDefault();
+                    const activeTab = document.querySelector('.tab-item.active');
+                    if (activeTab) closeTab(parseInt(activeTab.dataset.tabId));
+                }
+                if (e.ctrlKey && e.key === '1') e.preventDefault(), switchToTab(1);
+                if (e.ctrlKey && e.shiftKey && e.key === 't') {
+                    e.preventDefault();
+                    // Theme toggle would go here
+                }
+            });
+            
+            // Menu toggle
+            document.getElementById('options-btn').addEventListener('click', () => {
+                document.getElementById('menu-overlay').classList.toggle('active');
+            });
+            
+            // Screen size check
+            function checkScreenSize() {
+                const overlay = document.getElementById('small-screen-overlay') || 
+                    document.createElement('div');
+                overlay.id = 'small-screen-overlay';
+                if (!overlay.parentElement) document.body.appendChild(overlay);
+                
+                if (window.innerWidth < 1024) {
+                    overlay.style.display = 'flex';
+                    overlay.innerHTML = `
+                        <div style="text-align: center; padding: 40px; background: rgba(17,17,17,0.95); border-radius: 16px;">
+                            <i class="fas fa-desktop" style="font-size: 3rem; color: #4a90e2; margin-bottom: 20px;"></i>
+                            <h3>Eclipse Browser</h3>
+                            <p>Optimized for desktop</p>
+                        </div>
+                    `;
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+            
+            window.addEventListener('resize', checkScreenSize);
+            checkScreenSize();
+            
+            // Discord alert
+            if (!localStorage.getItem('discordAlertShown')) {
+                setTimeout(() => {
+                    alert('🌟 Join Eclipse Discord for updates & premium features!');
+                    localStorage.setItem('discordAlertShown', 'true');
+                }, 1000);
+            }
+        });
+
+        // UV Integration
+        window.eclipseTabs = {
+            createTab: (url, title, favicon) => createTab(url, title, favicon),
+            switchToTab: (id) => switchToTab(id),
+            closeTab: (id) => closeTab(id)
+        };
     </script>
-  </body>
+</body>
 </html>
